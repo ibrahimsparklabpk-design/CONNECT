@@ -1,0 +1,84 @@
+﻿body {
+    font-family: Arial, sans-serif; /* Set a default font for the page */
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center; /* Center the form vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f4f4f4; /* Light background color */
+    margin-top: 120px;
+}
+
+.account-details-form {
+    display: flex;
+    flex-direction: column; /* Arrange fields in a column */
+    width: 100%; /* Increased width of the form to 90% */
+    
+    max-width: 1000px; /* Maximum width for the form */
+    margin: auto; /* Center the form horizontally */
+    padding: 30px; /* Add padding */
+    border: 1px solid #ccc; /* Add a border*/
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background color */
+}
+
+.account-fields {
+    display: flex; /* Display fields side by side */
+    justify-content: space-between; /* Space between fields */
+    margin-bottom: 15px; /* Space between field groups */
+}
+
+.account-field {
+    width: 48%; /* Set each field to occupy 48% of the width */
+    position: relative; /* Position relative for absolute positioning of toggle */
+}
+
+label {
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Bold label */
+}
+
+input {
+    width: 100%; /* Full width input */
+    padding: 10px; /* Padding inside input */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 3px; /* Rounded corners for inputs */
+}
+
+.toggle-password {
+    position: absolute; /* Position the icon absolutely */
+    right: 10px; /* Distance from the right */
+    top: 70%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 12px; /* Size of the icon */
+}
+
+button {
+    padding: 10px; /* Padding inside button */
+   
+   
+   
+  
+   
+   
+    width: 48%;
+    height: 100%;
+    margin-top: 25px;
+
+    background-color: #262626;;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 100px;
+    font-family: "Karla", Sans-serif;
+
+
+
+}
+
+button:hover {
+    background-color: #000000; /* Darker green on hover */
+}

@@ -1,0 +1,13 @@
+First commad
+composer require maatwebsite/excel:^3.1.35 --with-all-dependencies
+
+
+
+then
+php artisan make:import DirectoryImport --model=Directory_table
+
+
+
+connect767
+
+connect767/app/Imports/DirectoryImport.php

@@ -1,0 +1,1509 @@
+/* Hamburger Styles */
+
+.hamburger {
+    display: none;
+    /* Desktop view mein hidden hoga */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.auth-links a {
+    margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+/* Jab "active" class add ho to sidebar dikhai de */
+
+/* Hamburger icon ko center karna (mobile pe) */
+.Dashboardhamburger {
+    display: block;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    /* Mobile pe display karna */
+}
+
+
+
+
+.dash-main-heading {
+
+
+    background-image: url(../images/dash-bg-logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 350px;
+    width: 600px;
+    padding-top: 100px;
+    margin-left: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .form-container{
+        width:100%;
+        padding: 0px 30px 0px 30px;
+    }
+    .prd-sub-btn{
+    padding: 15px 30px 15px 30px;
+}
+.article{
+    width:100%;
+}
+.related-products{
+    
+    
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pro-discrpt{
+    padding:5px;
+} 
+
+  .auth-links {
+        margin-right: 8px;
+    }
+
+    .auth-links a {
+        padding: 9px 16px;
+        font-size: 12px;
+    }
+
+    .stay-connected-heading {
+        padding-top: 30px;
+    }
+
+
+    /* Home Page Responsive */
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .logo img {
+        width: 100px;
+        margin-left: 0px;
+    }
+
+    /* header sessin */
+    .hamburger {
+        display: block;
+
+    }
+
+    .nav-links {
+
+        display: flex;
+        gap: 10px;
+    }
+
+
+
+    .nav-links {
+        display: none;
+
+        flex-direction: column;
+        position: absolute;
+        top: 121px;
+        right: 0;
+        background-color: #ffffff;
+        width: 100%;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+        z-index: 2;
+        width: 70%;
+        align-items: center;
+    }
+
+    .nav-links li {
+        text-align: right;
+        margin: 10px 0;
+        padding-right: 10px;
+    }
+
+
+
+
+    .form-box {
+        padding: 10px;
+        width:100%!important;
+    }
+
+    .two-inputs {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .two-inputs input {
+        width: 100%;
+    }
+
+    .custom-contact-form {
+        display: flex;
+        flex-direction: column;
+
+      
+
+    }
+
+    .custom-form-group {
+        width: 100%;
+    }
+
+    /* .two-inputs {
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+    } */
+
+    .footerInput,
+    .footerMessage {
+        width: 100%;
+
+        padding: 10px;
+
+        font-size: 14px;
+
+        border: 1px solid black
+    }
+
+    .footerMessage {
+        height: 100px;
+
+        resize: none;
+
+    }
+
+    .custom-submit-btn {
+        width: 50%;
+        border-radius:100px!important;
+        padding: 10px;
+        margin-left: 0px;
+        font-size: 16px;
+        background-color: #000000;
+
+        color: white;
+
+        border: none;
+        border-radius: 5px;
+
+        cursor: pointer;
+    }
+
+    .custom-submit-btn:hover {
+        background-color: #5e6061;
+
+    }
+
+
+    .custom-submit-btn:hover {
+        background-color: #0056b3;
+
+    }
+
+    /* end header session */
+
+
+
+    /* hero session */
+
+    .banner {
+        padding: 30px 15px;
+        height: 600px;
+
+    }
+
+    .banner-content h1 {
+        font-size: 1.5rem;
+
+    }
+
+    .banner-content p {
+        font-size: 0.9rem;
+
+    }
+
+    .search-container {
+        max-width: 300px;
+
+    }
+
+    .search-input,
+    .search-button {
+        font-size: 0.9rem;
+
+        padding: 8px;
+
+    }
+
+    /* end hero session */
+
+    /* under hero boxes session */
+    .boxes-section {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 10px;
+    }
+
+    .box {
+        flex: 1 1 100%;
+
+    }
+
+    .box h2 {
+        font-size: 1.2rem;
+
+    }
+
+    .box-btn {
+        font-size: 0.9rem;
+
+        padding: 8px 16px;
+    }
+
+    /* end under hero boxes session */
+
+    /* two boxes session  */
+
+    .flex-boxes-section {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 30px 15px;
+
+    }
+
+    .flex-box {
+        flex: 1 1 100%;
+
+        max-width: 100%;
+        padding: 15px;
+
+    }
+
+    .flex-box h2 {
+        font-size: 30px;
+
+        margin-bottom: 20px;
+    }
+
+    .flex-box ul li {
+        font-size: 16px;
+
+    }
+
+    .flex-btn {
+        font-size: 16px;
+
+        padding: 10px 20px;
+    }
+
+    /* end two boxes session */
+
+
+    /* Advertise with Us */
+
+
+    .boxes-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .left-box,
+    .right-box {
+        max-width: 100%;
+    }
+
+
+    .nested-boxes {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .nested-box {
+        max-width: 100%;
+    }
+
+
+    .section-heading {
+        font-size: 30px;
+    }
+
+
+    .nested-box h3 {
+        font-size: 20px;
+    }
+
+
+    .nested-box p {
+        font-size: 14px;
+    }
+
+    .nested-box li {
+        font-size: 14px;
+    }
+
+    /* End Advertise with Us */
+
+
+    /* footer session */
+
+
+    .footer-container {
+        flex-direction: column;
+        /* align-items: center; */
+        text-align: center;
+    }
+
+    /* Form Box Styling */
+    .form-box {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .custom-contact-form {
+        width: 100%;
+    }
+
+  
+    /* Quick Links */
+    .footer-quick-links,
+    .footer-services,
+    .footer-info {
+        flex: 1;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .footer-heading {
+        font-size: 20px;
+    }
+
+    .footer-links-list li,
+    .footer-info-list li {
+        font-size: 16px;
+    }
+
+    /* Social Media Icons */
+    .footer-social-media-icons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .social-icon {
+        margin: 5px;
+    }
+
+    .social-icon img {
+        width: 25px;
+        height: 25px;
+    }
+
+    /* end footer session */
+
+
+    /* Directory page Responsive */
+    
+    .stay-connected-heading p1{
+        font-size:35px;
+    }
+    
+    .stay-connected-heading p2 {
+        font-size: 20px;
+       letter-spacing: 0px;
+    }
+
+    .toggle-btn {
+        width: 60%;
+        margin-bottom: 10px;
+    }
+
+    .search-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .select-field,
+    .text-input {
+        margin-bottom: 5px;
+
+    }
+
+    .search-btn {
+        display: block;
+    }
+
+    .search-category-fields {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+
+    }
+
+
+    .directory-body {
+        width: 100%;
+        /* Take up more width on smaller screens */
+        padding: 15px;
+    }
+
+   
+
+    .toggle-btn {
+        width: 100%;
+        /* Full width for mobile */
+    }
+
+    .search-category-fields {
+        gap: 15px;
+        /* Increase spacing between fields */
+    }
+
+    .select-field,
+    .text-input {
+        width: 100%;
+        /* Full width for mobile */
+    }
+
+    .search-btn {
+        width: 100%;
+        /* Full width for mobile */
+        margin-top: 20px;
+        /* Ensure proper spacing from fields */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 15px;
+        /* Add space below sidebar */
+    }
+
+    .sidebarimg {
+        width: 100%;
+        /* Full width of the container */
+        height: auto;
+        /* Maintains aspect ratio */
+    }
+
+    .rate-section,
+    .location {
+        margin-bottom: 15px;
+        /* Add space between elements */
+    }
+
+    .main-content {
+        width: 100%;
+        /* Main content also takes full width */
+    }
+
+
+
+    .company {
+        flex-direction: column;
+        /* Vertically stack karna */
+        align-items: center;
+        /* Sabko center align karna */
+        text-align: center;
+        /* Text ko bhi center karna */
+    }
+
+    .company-logo {
+        margin-bottom: 20px;
+        /* Image aur baaki info ke beech space */
+    }
+
+    .company-info h3 {
+        font-size: 1.5em;
+        /* Business name ko thoda bada karna */
+        margin-bottom: 10px;
+    }
+
+    .company-info a {
+        font-size: 1em;
+        color: #007BFF;
+        margin-top: 5px;
+    }
+
+    .company-category,
+    .company-info a {
+        font-size: 0.9em;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .company-reviews {
+        margin-top: 20px;
+    }
+
+    .most-relevant {
+        font-size: 0.9em;
+        margin-top: 20px;
+    }
+
+    .review-link {
+        padding: 10px 20px;
+        background-color: #000000;
+        color: white !important;
+        text-decoration: none;
+        border-radius: 5px;
+        
+        margin-left: 0px !important;
+    }
+
+    .review-link:hover {
+        background-color: #525455;
+    }
+
+    /* .trust-score img {
+        display: block;
+        width: 20%;
+    } */
+    .trust-score {
+        flex-direction: column;
+        /* Stack the image and text vertically on smaller screens */
+        align-items: flex-start;
+        /* Align the items to the left */
+        gap: 5px;
+        /* Adjust the gap between image and text */
+        margin-left: 30px;
+    }
+
+    .trust-score img {
+        width: 80px;
+        /* Optionally, reduce the image size on mobile */
+    }
+
+    .company-category {
+        display: flex;
+        flex-direction: column;
+
+
+
+    }
+
+    .icon-text-row {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: baseline;
+                justify-content: center;
+
+   
+        /* Mobile view mein har row ko full width dena */
+        justify-content: flex-start;
+        /* Text ko left align karna */
+    }
+
+    .icon-text-row svg {
+        margin-bottom: 5px;
+        /* SVG icon ke neeche space dena */
+    }
+
+
+
+
+
+
+    /* shop page responsive */
+    .main-both-sec {
+        flex-direction: column;
+        /* Stack the sections vertically */
+    }
+
+    .cat-sec {
+
+      width:100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        /* Add some space below categories */
+    }
+
+    .category-list {
+        list-style: none;
+        /* Remove default list styling */
+     
+        /* Make the list items appear in a row */
+        justify-content: center;
+        /* Center align the list items */
+        padding: 0;
+        margin: 0;
+        gap: 1rem;
+        /* Add space between items */
+        border: 1px solid #0000005e;
+    }
+
+
+    .prod-sec {
+        max-width: 100%;
+    }
+
+
+
+    .container_product {
+        display: flex;
+        flex-direction: column;
+        /* Stack all products in rows */
+        gap: 1rem;
+        /* Add space between rows */
+        width: 100%;
+        /* Full width for the container */
+    }
+
+    .article_product {
+        display: flex;
+        flex-direction: column;
+        /* Stack product details vertically */
+        align-items: center;
+        /* Center align items horizontally */
+        padding: 1rem;
+        border: 1px solid #0000005e;
+        border-radius: 10px;
+        /* Add border for visual separation */
+        border-radius: 5px;
+        /* Rounded corners */
+        background-color: #f9f9f9;
+        /* Light background color */
+        transition: box-shadow 0.3s;
+        /* Smooth hover effect */
+    }
+
+    .article_product:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow on hover */
+    }
+
+    .article_product img {
+        width: 150px;
+        /* Fixed width for the product image */
+        height: auto;
+        /* Maintain aspect ratio */
+        object-fit: cover;
+        /* Ensure image is cropped properly if needed */
+        margin-bottom: 1rem;
+        /* Add space below the image */
+    }
+
+    .article-l {
+        margin-bottom: 0.5rem;
+        /* Space below the title */
+        font-size: 1.2rem;
+        /* Slightly larger font for the title */
+        font-weight: bold;
+        text-align: center;
+        /* Center align title */
+    }
+
+    .article-p {
+        margin-bottom: 1rem;
+        /* Space below the price */
+        font-size: 1rem;
+        /* Regular font size for price */
+        color: #333;
+        /* Darker text for better visibility */
+        text-align: center;
+        /* Center align price */
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1rem;
+        /* Add padding for the button */
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        /* Remove underline */
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+    }
+
+    .btn-primary:disabled {
+        background-color: #ddd;
+        /* Gray background for disabled buttons */
+        color: #aaa;
+        /* Light gray text for disabled buttons */
+        cursor: not-allowed;
+    }
+
+
+
+    /* readmore page responsive */
+    /* .pageheader {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ph-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ph-info-details,
+    .ph-info-image {
+        width: 100%;
+    }
+
+    .readmore-content {
+        flex-direction: column;
+    }
+
+    .readmore-left,
+    .readmore-right {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+
+    .review-stars img {
+        height: 20px;
+    }
+
+    .review-description {
+        font-size: 14px;
+    }
+
+    .review-title {
+        font-size: 16px;
+    }
+    
+
+
+
+} */
+
+    /* pageheader */
+
+    .pageheader {
+        flex-direction: column;
+        /* Stack elements vertically */
+        padding: 15px;
+        gap: 200px;
+        align-items: center;
+        margin-bottom:295px;
+        
+
+
+    }
+
+    .user-url {
+        padding: 20px 20px;
+        margin-left: -9px;
+        margin-top: -24px;
+    }
+
+    .ph-info-btn {
+        width: 100%;
+        display: flex;
+
+    }
+
+    .verified-company {
+        width: 226px;
+        margin-left: -25px;
+
+    }
+
+
+    .ph-info {
+        flex-direction: column;
+        /* Stack image and details */
+        text-align: center;
+        gap: 10px;
+    }
+
+    .ph-info-image div {
+        width: 170px;
+        height: 170px;
+
+    }
+
+    .ph-info-image {
+        flex: none;
+        width: 170px;
+        height: 170px;
+        /* Center the image */
+    }
+
+    .ph-info-details {
+        text-align: center;
+        /* Center align details */
+    }
+
+    .ph-heading {
+        font-size: 30px;
+        /* Smaller heading */
+    }
+
+    .ph-rating {
+        font-size: 20px;
+    }
+
+    .ph-stars img {
+        width: 15px;
+        height: 15px;
+        /* Smaller stars */
+    }
+
+    .ph-info-btn {
+        text-align: center;
+        /* Center align button */
+        margin-top: 15px;
+    }
+
+    .verified-company {
+        font-size: 0.8rem;
+    }
+
+    .ph-info-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        /* Reduced gap for smaller screens */
+    }
+
+    .detail-row {
+        display: flex;
+        flex-direction: column;
+        /* Stack data vertically */
+        width: 100%;
+        /* Full width for each row */
+    }
+
+    .detail-row span,
+    .detail-row p {
+
+        /* Align text properly */
+    }
+
+    /* end pageheader */
+    .readmore-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+        
+        
+        
+    }
+
+    .readmore-right,
+    .readmore-left {
+        width: 100%;
+        
+    }
+
+    .readmore-right h3,
+    .readmore-left h3,
+    .readmore-right p,
+    .readmore-left p {
+         
+        /* text-align: center; */
+        /* Optional: Adjust alignment for better readability */
+        
+    }
+
+
+    .custom-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .share-popup {
+        position: absolute;
+        display: flex;
+        gap: 10px;
+        left: 0px;
+        top: 58px;
+        flex-direction: column;
+
+    }
+    
+    .share-button {
+        width:35%;
+}
+
+    .readmore-upper,
+    .readmore-lower {
+        margin-bottom: 44px;
+
+    }
+
+    .readmore-upper {
+        padding: 0px
+    }
+
+    .readmore-left {
+        margin-top: 20px;
+
+
+    }
+
+    .custom-footer {
+        padding: 0px;
+    }
+
+    .login-box {
+        width: 90%;
+    }
+
+    .reg-form-heading {
+        font-size: 25px;
+    }
+
+    .reg-form-content {
+        display: block;
+        padding: 5px 5px;
+
+    }
+
+    .reg-form-container {
+        padding: 15px;
+    }
+
+
+
+
+    /* vendor dashboard */
+
+
+    .leftside-menu {
+        position: absolute;
+        top: 0;
+        left: -250px;
+        /* Sidebar ko left side se hide karna */
+        width: 250px;
+        height: 100%;
+        background-color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .leftside-menu.active {
+        left: 0;
+        /* Active hone par sidebar ko dikhana */
+    }
+
+    .leftside-menu.open {
+        transform: translateX(0);
+    }
+
+    .content-page {
+        margin-left: 0;
+    }
+
+    .Dashboardhamburger {
+        display: block;
+    }
+
+    .container-fluid {
+        padding: 15px;
+    }
+
+    /* Adjust the header */
+    .page-title-box {
+        padding: 10px;
+    }
+
+
+    /* Adjust the dashboard heading */
+    .Dash-main-heading {
+        background-image: url(./assets/images/dash-bg-logo.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        height: 350px;
+        width: 100%;
+        padding-top: 100px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    /* Adjust content for smaller screens */
+    .dash-detail {
+        padding: 20px;
+    }
+
+    /* Sidebar Toggle */
+    .side-nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .side-nav-item {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+
+    .leftside-menu {
+        display: none;
+        /* Initially hidden */
+        position: fixed;
+        /* To stay fixed on mobile */
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        /* Adjust according to your design */
+        background: #333;
+        /* Sidebar color */
+        z-index: 1000;
+        transition: transform 0.3s ease;
+        /* Animation */
+    }
+
+    .leftside-menu.active {
+        display: block;
+        /* Show sidebar when 'active' class is added */
+        transform: translateX(0);
+        /* Slide into view */
+    }
+
+    .Dashboardhamburger {
+        display: block;
+        /* Make the hamburger visible */
+        font-size: 30px;
+        /* Adjust size */
+        cursor: pointer;
+        z-index: 1001;
+        /* Make sure it is clickable above the menu */
+    }
+
+
+.search-text-field{
+    padding: 20px;
+    display:block;
+    margin-left: -27px;
+}
+.description-box{
+    height: 53px;
+}
+
+
+    /* end vender dashboard */
+        .description-box p{
+    font-size: 19px;
+}
+
+/*Single page product*/
+  
+  
+  
+   .main-product-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .product-section,
+    .content-section {
+        padding: 5px;
+        width:100%;
+        text-align: center;
+    }
+
+    #product-image,
+    #product-image1 {
+        max-width: 100%;
+    }
+
+    .price-div {
+        flex-direction: column;
+        align-items: center;
+    }
+    .view-all-btn1{
+        width:90%;
+    }
+
+    .quantity-div {
+        justify-content: center;
+    }
+
+    .filter-section {
+        text-align: center;
+    }
+
+    .size-btn,
+    .color-option {
+        display: inline-block;
+        width: auto;
+        margin: 5px auto;
+    }
+    
+    
+    /*about us */
+    
+    .service-item{
+        display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+        
+    }
+    .service-item h2{
+        font-size: 35px!important;
+    }
+  .about-des{
+      padding:5px!important;
+  }
+  .management-row{
+      display: flex;
+    flex-direction: column;
+  }
+  .management-col-img{
+      width:100%!important;
+  }
+  .management-col-des{
+      width:100%!important;
+  }
+  .about-heading {
+      font-size: 35px;
+  }
+  .management-col-heading {
+      font-size: 35px!important;
+      
+  }
+  .management-col-img img{
+      width: 100%!important;
+  } 
+  .service-item .service-image img{
+      width: 100%!important;
+  }
+  
+  
+  
+  /*Read more page*/
+  
+  .business-details-header{
+     display: flex;
+    flex-direction: column;
+    padding-top: 80px!important;
+  }
+  
+  .business-profile-img{
+      width: 100px!important;
+    height: 100px!important;
+  }
+  .business-letter{
+      font-size: 90px!important;
+  }
+  
+  .business-heading{
+      font-size:30px!important;
+      text-align: center;
+  } 
+  .business-n-col{
+      display: flex!important;
+    gap: 8px!important;
+    justify-content: center!important;
+    align-items: center!important;
+    margin-top: 14px!important;
+  }
+  .business-rating{
+      font-size:20px!important;
+     text-align: center;
+  } 
+  .business-verified-company{
+      display: flex;
+    justify-content: center;
+  } 
+  .business-verified-company i {
+      font-size: 20px!important;
+  }
+  .business-wesite p a {
+      font-size:15px!important;
+  }
+  .stars{
+      display: flex;
+    justify-content: center;
+  }
+  
+  .bussiness-mai-caed{
+      padding:0px!important;;
+      display: flex!important;;
+    flex-direction: column!important;
+    justify-content: center!important;
+      
+  } 
+  .share-button{
+          width: 33%!important;
+  }
+  
+  .right-card {
+      width:100%!important;;
+  }
+  .row-inner{
+      display: flex!important;
+    flex-direction: column!important;
+  } 
+  .col1-business-detail{
+      width:100%!important;;
+  }
+  .row-bussiness-heading h1{
+      font-size:30px!important;
+  }
+  .col2-business-detail{
+      width:100%!important;
+  }
+  
+  .left-card{
+      width:100%!important;
+      margin-top: 0px!important;
+  }
+  .business-details-header, .bussiness-mai-caed{
+          z-index: 0!important;
+  }
+  
+  
+  
+  
+  /*Services page*/
+  .hero-section{
+    height: 200px!important;
+  }
+  .about-heading{
+          font-size: 35px!important;
+  } 
+  
+  
+  
+  
+  
+  /*custome page*/
+  
+  
+  .main-section{
+     display: flex!important;
+    flex-direction: column!important;
+        height:1200px!important;;
+
+  }
+  .left-section{
+      width:100%!important;
+  }
+  .right-section{
+      width:100%!important;
+  }
+  #selected-shirt{
+          width: 250px;
+  }
+  .item-display{
+      position: relative!important;
+    top: 20px!important;
+  }
+  .flex-form{
+          width: 100%!important;
+     margin-left: 0px!important;
+    padding: 5px 20px 5px 20px!important;
+  }
+  .form-column{
+      width: 100%!important;
+  }
+  .team-form-container{
+      margin-left: 0px!important;
+  }
+  
+  .login-btn {
+          border-radius: 23px!important;
+  }
+  .business-details-header::before{
+          background-size: 360px!important;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*user dashboard*/
+  
+            .wrapper{
+                 flex-direction: column;
+            }
+
+            .leftside-menu {
+                width: 100%;
+                order: 2;
+            }
+
+            .content-page {
+                order: 1;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-group {
+                flex: 1 1 100%;
+            }
+
+            .leftside-menu a {
+                text-align: center;
+                padding: 15px;
+            }
+
+            .logo img {
+                height: 80px;
+            }
+            .form-btn{
+                width: 40%!important;
+            }
+            
+            
+             .leftside-menu {
+        transform: translateX(-100%)!important;;
+    }
+
+    .leftside-menu.open {
+        transform: translateX(0)!important;;
+    }
+
+    .dashboard-hamburger {
+        display: block!important;;
+    }
+  /*user dashboard end*/
+  
+  
+
+
+}
+
+
+
+
+
+/*for tab*/
+
+@media screen and (max-width: 820px){
+    
+    /*header*/
+    .logo img {
+       margin-left: 17px;
+        margin-right: 10px;
+        
+    }
+    .auth-links a {
+        padding: 8px 15px;
+    }
+    .nav-links{
+        gap: 26px;
+        
+    }
+    .auth-links{
+        margin:0px;
+    }
+     /*end header*/
+     
+     /*Home page*/
+     
+     .textwidth{
+        width: 701px;
+     }
+     .directory-body{
+         padding-bottom:288px;
+     }
+     .stay-connected-heading{
+        padding-top: 251px;
+
+     }
+     .custom-submit-btn{
+        width: 60%;
+
+     }
+     /*End Home Page*/
+     
+     /*readmore*/
+     .bussiness-mai-caed{
+        padding: 10px 25px 10px 25px!important;
+     } 
+     .right-card{
+        padding: 5px!important;
+
+     }
+     .business-box{
+     overflow-wrap: anywhere;
+
+         
+     }
+    /*end readmore*/
+    .share-button {
+        width: 28%!important;
+    }
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 820px) and (max-height: 1180px) {
+    .footer-quick-links {
+        
+    }
+}

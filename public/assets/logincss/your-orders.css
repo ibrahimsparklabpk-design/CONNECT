@@ -1,0 +1,36 @@
+﻿.orders-bar {
+    margin-top: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f4f4f4; /* Light grey background */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Spacing below the bar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.orders-info {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Darker text color */
+}
+
+.browse-products {
+    margin-left: auto; /* Pushes the button to the right end */
+}
+
+.browse-btn {
+    padding: 15px 30px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.browse-btn:hover {
+    background-color: #636363; /* Darker blue on hover */
+}

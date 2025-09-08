@@ -1,0 +1,32 @@
+[07-Aug-2025 02:37:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/services.php on line 18
+[07-Aug-2025 02:37:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/app.php on line 16
+[07-Aug-2025 02:41:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/mail.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/mail.php on line 16
+[07-Aug-2025 02:42:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/cache.php on line 18
+[07-Aug-2025 02:42:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/filesystems.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/filesystems.php on line 16
+[07-Aug-2025 02:42:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function resource_path() in /home/connect5/public_html/config/view.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/view.php on line 17
+[12-Aug-2025 17:07:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/database.php on line 18
+[30-Aug-2025 12:32:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/connect5/public_html/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/config/services.php on line 18

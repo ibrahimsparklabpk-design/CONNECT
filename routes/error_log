@@ -1,0 +1,4 @@
+[07-Aug-2025 02:40:09 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/connect5/public_html/routes/api.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/connect5/public_html/routes/api.php on line 17
