@@ -1,0 +1,91 @@
+﻿.directory-form {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Add margin at the bottom of each field for spacing */
+}
+
+.full-width {
+    flex: 1;
+}
+
+.form-group:nth-child(1) {
+    flex: 1.5; /* For wider fields */
+}
+
+.form-group:nth-child(2), .form-group:nth-child(3) {
+    flex: 1; /* For smaller fields */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: none;
+    background-color: #292929;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    background-color: #000000;
+}
+
+
+.form-btn {
+    font-family: "Karla", Sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    fill: #FFFFFF;
+    color: #FFFFFF;
+    background-color: #292929;
+    border-radius: 23px 23px 23px 23px;
+    padding: 10px 30px 10px 30px;
+    width: 20%;
+    border: none;
+    margin-top: 15px;
+}
+
+
+.form-btn:hover {
+    background-color: #000000; /* Darker green on hover */
+}

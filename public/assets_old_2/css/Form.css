@@ -1,0 +1,186 @@
+/* General Styling */
+
+
+.iti {
+    width: 100%;
+
+}
+
+.Experience {
+    margin-top: 20px;
+}
+
+/* Form Container */
+.reg-form-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px 30px;
+    background: linear-gradient(315deg, #E4F1EE 3%, #E5E4F0 38%, #DBEBEB 68%, #E5ECF1 98%);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid #00000021;
+    box-shadow: 0px 0px 16px 0px #00000026;
+    margin-top: -195px;
+}
+
+/* .form-container:hover {
+    transform: scale(1.02);
+} */
+
+
+/* Form Content Layout */
+.reg-form-content {
+    display: flex;
+    gap: 20px;
+}
+
+.reg-form-column {
+    flex: 1;
+}
+
+
+
+
+
+
+.reg-form-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #444;
+    margin-bottom: 30px;
+   font-family: "Karla", sans-serif;
+    font-weight: 800;
+}
+
+
+/* Form Labels and Inputs */
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-family: "Karla", sans-serif;
+}
+
+
+
+
+.reg-input {
+    width: 90%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border: 1.5px solid #444444;
+    border-radius: 8px;
+       background-color: #f9f9f938;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+   font-family: "Karla", sans-serif;
+}
+
+
+ 
+
+
+.reg-textarea {
+    resize: none;
+    height: auto;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+font-family: "Karla", sans-serif;
+ background-color: #f9f9f938;
+ 
+
+
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: none;
+background-color: #f9f9f959;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+  font-family: "Karla", sans-serif;
+        width: 41%;
+      border: 1.5px solid #444444;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+
+.reg-textarea::placeholder {
+    color: #aaa;
+    font-size: 12px;
+}
+
+#lab{
+     font-family: "Karla", sans-serif;
+}
+
+/* Submit Button */
+.reg-submit-btn-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reg-submit-btn {
+    width: 97%;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+  background-color: black;
+    border: none;
+    border-radius: 23px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Karla", serif;
+    margin-top: 10px;
+    width: 41%;
+    border: 1.5px solid #444444;
+}
+
+/*.reg-submit-btn:hover {*/
+/*    background-color: #000000;*/
+/*    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);*/
+/*}*/
+
+.reg-select {
+    width: 89%;
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+    border: 1.5px solid #444444;
+    border-radius: 8px;
+   background-color: #f9f9f938;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+  font-family: "Karla", sans-serif;
+}
+
+
+
+
+
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .form-content {
+        flex-direction: column;
+    }
+}

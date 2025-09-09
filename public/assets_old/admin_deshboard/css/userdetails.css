@@ -1,0 +1,77 @@
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .modern-table {
+            width: 100%;
+            max-width: 1200px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+        }
+        .modern-table thead {
+            background-color: #343a40;
+            color: white;
+        }
+        .modern-table th, .modern-table td {
+            padding: 20px;
+            text-align: left;
+            font-size: 16px;
+        }
+        .modern-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .modern-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        .modern-table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+        th {
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        td {
+            font-weight: 300;
+            color: #555;
+        }
+        .delete-btn {
+            padding: 8px 12px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        /* Responsive for mobile */
+        @media (max-width: 768px) {
+            .modern-table th, .modern-table td {
+                padding: 15px;
+                font-size: 14px;
+            }
+            .modern-table {
+                width: 100%;
+            }
+        }
+        /* Responsive for small devices */
+        @media (max-width: 576px) {
+            .modern-table th, .modern-table td {
+                padding: 10px;
+                font-size: 12px;
+            }
+            .modern-table {
+                width: 100%;
+            }
+        }
+
+

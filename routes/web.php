@@ -1,24 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReadMore;
 use App\Http\Controllers\register;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AccountDetails;
 use App\Http\Controllers\AddToCart;
-use App\Http\Controllers\DirectoryController;
 use App\Http\Controllers\OrderShow;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\vendorData;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountDetails;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
-
-
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\vendorData;
-use App\Http\Controllers\ReadMore;
-use App\Http\Controllers\TwoFactorAuthentication;
+use App\Http\Controllers\ProductController;
+
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DirectoryController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\your_order_controller;
+use App\Http\Controllers\TwoFactorAuthentication;
+use App\Http\Controllers\backend\SoccerController;
 
 
 /*
@@ -47,6 +48,18 @@ Route::get('/create-symlink', function () {
 });
 
 
+route::prefix('v2')->group(function()
+{
+    Route::prefix('backend')->group(function()
+    {
+        Route::prefix('soccer')->group(function(){
+            Route::controller(SoccerController::class)->name('soccer.')->group(function(){
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+            });
+        });
+    });
+});
 
 
 

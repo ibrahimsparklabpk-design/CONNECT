@@ -19,7 +19,7 @@ body {
     position: relative;
 }
 
-.sidebar {
+.dir-sidebar {
     width: 100%;
     background-color: #fff;
     padding: 20px;
@@ -69,14 +69,14 @@ background: linear-gradient(315deg, #E4F1EE 3%, #E5E4F0 38%, #DBEBEB 68%, #E5ECF
 
 
 
-.sidebar h3 {
+.dir-sidebar h3 {
     font-size: 1.4em;
     margin-bottom: 15px;
 }
 
-.sidebar button,
-.sidebar input,
-.sidebar select {
+.dir-sidebar button,
+.dir-sidebar input,
+.dir-sidebar select {
     width: 95%;
     padding: 10px;
     margin-bottom: 10px;
@@ -89,8 +89,8 @@ background: linear-gradient(315deg, #E4F1EE 3%, #E5E4F0 38%, #DBEBEB 68%, #E5ECF
     font-weight: 400;
 }
 
-.sidebar button:hover,
-.sidebar select:hover {
+.dir-sidebar button:hover,
+.dir-sidebar select:hover {
     background-color: #f1f1f1;
     border-color: #aaa;
 }
@@ -152,13 +152,27 @@ background: linear-gradient(315deg, #E4F1EE 3%, #E5E4F0 38%, #DBEBEB 68%, #E5ECF
      border: 1px solid black;
 }
 
-.company-logo img {
-    width: 100%;
-    /* Adjusted size to match image */
-    height: 80px;
-    object-fit: contain;
-    margin-right: 20px;
-}
+.profile-image {
+        width: 100px; /* Fix size */
+        height: 100px;
+        object-fit: cover; /* Ensures full image is visible */
+        border-radius: 50%; /* Makes it circular */
+        border: 2px solid #ddd; /* Optional: Light border */
+    }
+
+    .placeholder {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #d0d3cc;
+        border-radius: 50%;
+        font-size: 40px;
+        color: red;
+        font-weight: bold;
+    }
+
 
 .company-info {
     flex-grow: 1;
@@ -186,7 +200,7 @@ background: linear-gradient(315deg, #E4F1EE 3%, #E5E4F0 38%, #DBEBEB 68%, #E5ECF
 
 .company-info p {
     margin: 5px 0;
-    font-size: 18px;
+    font-size: 20px;
     color: #000000;
 }
 

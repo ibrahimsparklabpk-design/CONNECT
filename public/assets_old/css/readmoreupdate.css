@@ -1,0 +1,1620 @@
+.button-container {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+  padding: 20px;
+
+
+}
+
+.placeholder {
+  cursor: pointer !important;
+}
+
+/* Button styling */
+.addPostButton {
+  display: inline-block;
+  padding: 11px 30px;
+
+  background-color: #000000;
+  /* Button ka color */
+  color: #fff;
+
+  text-decoration: none;
+
+  border-radius: 50px;
+
+  font-size: 18px;
+
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-family: "Karla", Sans-serif;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+
+/* profile button */
+
+/* Style for the profile button */
+.profile-btn {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn i {
+  margin-right: 8px;
+  /* Space between the icon and text */
+}
+
+/* Style for the dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Initially hide the dropdown menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+/* Style for the dropdown links */
+.dropdown-content li {
+  list-style: none;
+  padding: 8px 16px;
+}
+
+.dropdown-content li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content li a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show dropdown when profile button is hovered */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* end profile button */
+
+
+/* Footer Section */
+
+
+.custom-footer {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 40px 10px 0px 10px;
+  border-top: 1px solid rgb(173, 170, 170);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Space between columns */
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  /* Ensures the columns are not too narrow */
+  text-align: center;
+  /* Centers content inside each column */
+  padding: 20px;
+}
+
+.footer-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: rgb(0, 0, 0);
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-links-list,
+.footer-info-list {
+  list-style: none;
+  padding: 0;
+  /* margin-bottom: 50px; */
+  color: rgb(0, 0, 0);
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-links-list li,
+.footer-info-list li {
+  margin-bottom: 30px;
+}
+
+.footer-links-list li a,
+.footer-info-list li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-links-list li a:hover,
+.footer-info-list li a:hover {
+  color: #353434;
+}
+
+.footer-social-media-icons {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.social-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+
+.footer-copyright {
+  text-align: center;
+
+  color: black;
+
+  /* padding: 20px 0; */
+
+  background-color: #f2f2f2;
+  /* border-top: 1px solid rgb(163, 161, 161); */
+  border-top: 1px solid gray;
+
+}
+
+
+
+
+/* Center the form container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  margin: 0;
+}
+
+/* Styling the form box */
+.form-box {
+  background-color: #f9f9f9;
+  padding: 0px 30px;
+  border-radius: 10px;
+
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px #0000001a;
+
+}
+
+
+.custom-form-group {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+
+.custom-contact-form input,
+.custom-contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #897f7f;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  margin-top: 5px;
+  border-radius: 23px;
+}
+
+/* Make the inputs smaller in height */
+.custom-contact-form input,
+.custom-contact-form textarea {
+  height: 34px;
+  border-radius: 23px;
+
+}
+
+
+.custom-contact-form textarea {
+  resize: vertical;
+  height: 43px;
+
+}
+
+
+.custom-submit-btn {
+  width: 40%;
+  padding: 12px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border-radius: 23px;
+}
+
+.custom-submit-btn:hover {
+  background-color: #333;
+}
+
+
+.two-inputs {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 10px;
+
+}
+
+
+.two-inputs input {
+  width: 48%;
+
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #897f7f;
+  border-radius: 23px;
+}
+
+.two-inputs input:last-child {
+  margin-right: 0;
+}
+
+
+
+
+
+/* Footer end  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  display: flex;
+  height: 100vh;
+
+}
+
+
+
+/* Style for the login button */
+
+.auth-links {
+  /* display: flex;
+  flex-direction: column; */
+  align-items: center;
+  gap: 10px;
+  margin-right: 50px;
+}
+
+.auth-links a {
+  text-decoration: none;
+
+  padding: 10px 20px;
+
+  margin: 10px;
+
+  display: inline-block;
+
+  font-size: 18px;
+
+  color: white;
+
+  background-color: black;
+
+  border-radius: 23px;
+
+  transition: background-color 0.3s ease;
+  font-family: "Karla", Sans-serif
+}
+
+.auth-links a:hover {
+  background-color: #333;
+
+}
+
+/* end login button */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  background-color: #ffffff;
+
+  font-family: "Karla", Sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  /* border: 1px solid; */
+  border-bottom: 1px solid #00000021;
+}
+
+.logo img {
+  width: 100px;
+  /* Adjust as per your logo size */
+  margin-left: 100px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin-right: 130px;
+
+
+
+  font-family: "Karla", Sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+
+}
+
+.nav-links li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nav-links li a:hover {
+  /* color: #ffcc00; */
+  text-decoration: underline;
+}
+
+/* .login-btn {
+  padding: 15px 50px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 100px;
+  font-family: "Karla", Sans-serif;
+} */
+
+
+
+
+/* Style for the register button */
+.signup-btn {
+  background-color: #000000;
+
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border: none;
+
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+/* Style for the icon */
+.signup-btn .icon {
+  margin-right: 10px;
+
+  font-size: 20px;
+
+  color: black;
+
+}
+
+/* Hover effect for the Sign Up button */
+.signup-btn:hover {
+  background-color: #828583;
+  /* Darker green on hover */
+}
+
+
+/* FOOTER CSS STARTS FROM HERE */
+
+
+
+
+
+/* Footer Section */
+
+
+.footerFormHeading {
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-bottom: 30px;
+  margin-left: 83px;
+
+}
+
+.custom-footer {
+  background-color: #ffffff;
+  color: #fff;
+  border-top: 1px solid #00000038;
+
+  padding: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* First Div: Logo and Summary */
+.footer-logo-summary {
+  flex: 1;
+  max-width: 300px;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-summary {
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* General Styling for All Divs */
+.footer-heading {
+  margin-bottom: 15px;
+
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/* Links List */
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.footer-links-list a {
+  text-decoration: none;
+
+  font-family: "Karla", Sans-serif;
+  font-size: 18px;
+  /* font-weight: 500; */
+  color: #000000;
+}
+
+.footer-links-list a:hover {
+  text-decoration: underline;
+}
+
+/* Fourth Div: Information */
+.footer-info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-info-list li {
+  margin-bottom: 10px;
+
+  color: #000000;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-info-list a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-info-list a:hover {
+  color: #000000;
+}
+
+/* Social Media Icons with New Class */
+.footer-social-media-icons {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-icon img {
+  width: 30px;
+  /* Set the size of the icons */
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover img {
+  transform: scale(1.1);
+  /* Slight zoom on hover */
+}
+
+.box .no {
+  color: #6ec1e400;
+  font-family: "Karla", Sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  -webkit-text-stroke-width: 1px;
+  stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  stroke: #000;
+}
+
+/* Copyright Section */
+.footer-copyright {
+  border-top: 1px solid gray;
+  background-color: white;
+}
+
+.footer-copyright p {
+  text-align: center;
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-weight: 400;
+  margin-top: 10px;
+  font-size: 15px;
+  padding-bottom: 20px;
+
+}
+
+/* FOOTER CSS ENDS HERE */
+
+
+
+
+
+
+
+
+/* Main Section Starts */
+
+body {
+  background-color: #fdfae9;
+  /* Change this to any color you like */
+  margin: 0;
+  /* Removes any default margin */
+  height: 100vh;
+  /* Ensures the body fills the viewport height */
+}
+
+.pageheader {
+
+  display: flex;
+  width: 100%;
+  height: 250px;
+  background-color: white;
+}
+
+
+
+.ph-info {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  height: 250px;
+  padding-left: 40px;
+  padding-top: 30px;
+  padding-bottom: 18px;
+
+}
+
+
+.ph-info-btn {
+
+  width: 30%;
+  height: 100px;
+
+  margin-top: 100px;
+  margin-left: 70px;
+
+
+}
+
+.verified-company {
+  width: 360px;
+
+  height: 50px;
+
+  background-color: #b1f2d0;
+  color: rgb(0, 0, 0);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+}
+
+.verified-company p {
+  font-size: 20px;
+  font-family: "Karla", Sans-serif;
+  margin: 20px;
+
+}
+
+
+/* 
+.ph-info-image {
+  width: 210px;
+  
+  height: 210px;
+  margin-right: 20px;
+  border-radius: 100%;
+  background-color: rgb(165, 165, 165);
+  transition: transform 0.3s ease;
+
+}
+
+.ph-info-image div {
+  width: 210px;
+  height: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d0d3cc;
+  border-radius: 50%;
+  
+
+
+
+} */
+
+
+.ph-info-image {
+  width: 210px;
+  height: 210px;
+  margin-right: 20px;
+  border-radius: 100%;
+  /* Makes the div a circle */
+  background-color: rgb(165, 165, 165);
+  overflow: hidden;
+  /* Ensures content stays inside the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.ph-info-image img {
+  width: 100%;
+  /* Makes the image fill the container */
+  height: 100%;
+  object-fit: cover;
+  /* Ensures the image covers the circle proportionally */
+  border-radius: 100%;
+  /* Ensures the image is round */
+}
+
+.ph-info-image .placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  /* Placeholder is also circular */
+}
+
+.ph-info-image .placeholder span {
+  font-size: 60px;
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.ph-info-image:hover {
+  transform: scale(1.1);
+  /* Thoda bada hoga hover pe */
+}
+
+.ph-picture {
+  width: 100%;
+
+  height: 100px;
+  border-radius: 100%;
+  border: 1px solid rgb(165, 165, 165);
+
+}
+
+.ph-info-details {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.ph-heading {
+  font-size: 50px;
+  margin: 0;
+  font-family: "Karla", Sans-serif !important;
+  font-weight: 800;
+}
+
+.ph-rating {
+  font-size: 30px;
+  font-weight: 600;
+  color: #666;
+  margin-top: 5px;
+  font-family: "Karla", Sans-serif;
+  margin-bottom: -4px;
+}
+
+.ph-stars {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+
+
+.star-icon {
+  width: 37px;
+  height: 43px;
+  margin-right: 2px;
+}
+
+.readmore-btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.readmore-btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+.readmore-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: #fcfbf3;
+
+}
+
+.readmore-left {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.readmore-right {
+  width: 70%;
+
+  background-color: #f0f0f0;
+  /* Optional styling */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border: 1px solid #00000045;
+}
+
+.readmore-upper {
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.readmore-upper,
+.readmore-lower {
+  height: auto;
+
+  margin-bottom: 20px;
+  /* Space between upper and lower div */
+
+
+
+}
+
+.readmore-heading {
+  font-family: "Karla", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+
+
+.user-url {
+
+  padding: 20px 20px;
+  border: 1px solid #00000045;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: "Karla", sans-serif;
+  font-size: 20px;
+}
+
+.user-url:hover {
+  background-color: #000000;
+  border: 1px solid #00000045;
+  color: #00b7ff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.30);
+  border-radius: 8px;
+
+
+}
+
+.user-url:hover {
+  background-color: #E7F0FF;
+}
+
+.review-box {
+  border: 1px solid #00000045;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: space-around;
+  padding: 10px;
+
+}
+
+.review-heading h1 {
+  font-family: "Karla", sans-serif;
+  font-family: "Karla", sans-serif;
+  font-size: 22px;
+  /* margin-right: 261px; */
+}
+
+.main-company-box {
+  width: 68.5%;
+  padding-left: 50px;
+  margin-top: -60px
+}
+
+.company-box {
+  padding: 20px;
+  padding-bottom: 50px;
+  /* border: 1px solid rgb(223, 223, 223); */
+  border: 1px solid #00000045;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.moreDetailImg {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 15px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Shadow effect */
+  display: block;
+  margin-top: 13px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moreDetailImg:hover {
+  transform: scale(1.05);
+  /* Slight zoom effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  /* Enhanced shadow on hover */
+}
+
+.company-box p {
+
+  font-family: "Karla", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 
+.list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+
+
+
+}
+
+
+.info-box {
+  background-color: #f9f9f9;
+
+  padding: 15px;
+
+  border-radius: 8px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.info-box .list {
+  flex: 1 1 50%;
+
+  max-width: calc(50% - 10px);
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+
+} */
+
+
+
+/* Social button styling */
+/* .social-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0px 10px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+ 
+}
+
+.social-button span {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Karla", sans-serif !important;
+}
+
+.social-button:hover {
+  background-color: #e9ecef;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.social-button img.icon {
+  width: 40px;
+  height: 40px;
+}
+
+
+.social-button:nth-child(1) {
+  border-color: #3b579d;
+  color: #ffffff;
+  background-color: #3b579d;
+}
+
+.social-button:nth-child(2) {
+  border-color: #020612;
+ 
+  color: #ffffff;
+  background-color: #020612;
+}
+
+.social-button:nth-child(3) {
+  
+
+  color: #ffffff;
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  padding: 3px 10px;
+}
+ */
+
+/* share button */
+
+.custom-box1 {
+  position: relative;
+}
+
+.share-button {
+  width: 15%;
+  padding: 5px;
+  font-size: 18px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 23px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.share-button:hover {
+  background-color: #2d2e2e;
+}
+
+.share-popup {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  left: 180px;
+  top: 10px;
+  pointer-events: none;
+}
+
+.share-popup .social-button {
+  display: flex;
+  gap: 10px;
+  /* justify-content: center; */
+  align-items: center;
+
+  font-size: 14px;
+  font-family: "Karla", sans-serif !important;
+
+  color: #fff;
+  border-radius: 23px;
+
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.5s, transform 0.5s;
+  width: 130px;
+
+  height: 40px;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  padding: 0px 10px;
+
+}
+
+.facebook {
+  background-color: #3b579d;
+}
+
+.twitter {
+  background-color: #000000;
+}
+
+.instagram {
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+.whatsapp {
+  background-color: #2ab318;
+}
+
+.share-popup .social-button img {
+  width: 20px;
+  /* Icon size chhota */
+  height: 20px;
+}
+
+.share-popup.show .social-button {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.share-popup.show .social-button:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.share-popup.show .social-button:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.share-popup.show .social-button:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.share-popup.show .social-button:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+/* end share button */
+
+
+.custom-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  background-color: #fff;
+  max-width: 100%;
+  margin-bottom: 10px;
+  gap: 15px;
+}
+
+/* Column styling */
+.column {
+  flex: 1;
+  /* flex: 1 1 calc(50% - 20px); */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* text-align: center; */
+  /* gap: 10px; */
+  overflow: hidden;
+
+}
+
+/* Icon and heading styling */
+.icon-heading {
+  display: flex;
+  /* align-items: center; */
+  gap: 10px;
+
+  color: #333;
+}
+
+.icon-heading h3 {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Karla", sans-serif !important;
+}
+
+.icon-heading i {
+  font-size: 17px;
+  color: #000000;
+}
+
+/* Description box styling */
+.description-box {
+  padding: 0px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 43px;
+
+
+}
+
+.GoodsServices {
+  padding: 0px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100%;
+  word-wrap: break-word;
+  /* Lambi lines ko tod kar agle line pe le jaye */
+  overflow-wrap: break-word;
+  /* Alternate option, support ke liye */
+
+
+}
+
+.GoodsServices p {
+  font-size: 21px;
+  font-weight: 700;
+  color: black;
+  font-family: "Karla", sans-serif !important;
+  margin-top: 5px;
+
+
+}
+
+.description-box p {
+  font-size: 21px;
+  font-weight: 700;
+  color: black;
+  font-family: "Karla", sans-serif !important;
+  margin-top: 5px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.list p,
+.list i {
+  transition: transform 0.3s ease;
+
+
+}
+
+.list:hover p,
+.list:hover i {
+  transform: translateY(-5px);
+ 
+  color: black;
+  font-weight: bold;
+} */
+
+
+/* .list p {
+
+  font-size: 19px;
+  font-family: "Karla", sans-serif !important;
+  font-weight: 400;
+  font-weight: bold;
+
+
+} */
+
+
+.info-box .list i {
+  flex-shrink: 0;
+  /* Prevents the icon from shrinking */
+  font-size: 20px;
+  /* Adjusts icon size */
+  color: #555;
+  /* Optional: Sets icon color */
+}
+
+.info-box .list p {
+  margin: 0;
+  /* Removes default margin */
+  flex: 1;
+  /* Makes the text take the remaining space */
+  line-height: 1.5;
+  /* Improves readability */
+  font-size: 19px;
+  font-family: "Karla", sans-serif !important;
+  font-weight: bold;
+
+}
+
+
+.review-user-name-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+}
+
+.review-user-dp img {
+  width: 40px;
+  border-radius: 100%;
+  border: 1px solid rgb(202, 202, 202);
+}
+
+
+
+
+
+
+/* Basic styling for the review card */
+.review-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reviewer-initial {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.reviewer-name p {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.review-title p {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.review-time p {
+  font-size: 12px;
+  color: gray;
+  font-weight: 500;
+  float: right;
+  margin-top: -30px;
+}
+
+.review-description p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.review-experience-date p {
+  font-size: 12px;
+  color: gray;
+  margin-top: 8px;
+}
+
+.divider {
+  border: 1px solid #00000045;
+  margin: 8px 0;
+}
+
+
+.reviewer-name {
+  font-size: 22px;
+  font-family: "Karla", sans-serif;
+  font-weight: 600;
+}
+
+.review-title {
+  font-size: 18px;
+  font-family: "Karla", sans-serif;
+  font-weight: 600;
+}
+
+
+.review-description p {
+
+  font-size: 16px;
+  font-family: "Karla", sans-serif;
+  font-weight: 400;
+}
+
+.review-experience-date {
+  font-size: 14px;
+  font-family: "Karla", sans-serif;
+  font-weight: 400;
+}
+
+
+
+.company-social-icons {
+  display: flex;
+  gap: 10px;
+  /* Spacing between icons */
+}
+
+.company-social-icons .social-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Main Section Ends */
+
+
+
+/* display comment form */
+.commentBtn {
+  background-color: #000000 !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commentBtn:hover {
+  background-color: #5e6061 !important;
+  transform: scale(1.05);
+
+}
+
+#review-form {
+  display: block;
+
+  transition: none;
+
+  border: 1px solid #00000045;
+  border-radius: 10px;
+  box-shadow: 0px 0px 16px 0px #00000026;
+  padding: 20px;
+  height: auto;
+
+  max-width: 100%;
+
+  overflow: hidden;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+  height: 678px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+
+
+
+.comment_form {
+  /* padding: 20px; */
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  border: 1px solid #e5e5dd;
+  width: 100%;
+  /* Make the form take full width of the container */
+  box-sizing: border-box;
+  /* Prevent padding from breaking the layout */
+}
+
+/* Adjusting inner elements for proper alignment */
+#review-form input,
+#review-form textarea,
+#review-form button {
+  width: 100%;
+
+  max-width: 100%;
+
+  margin-bottom: 15px;
+
+  box-sizing: border-box;
+  border: 1px solid #00000038;
+
+}
+
+#review-form button {
+  width: 100%;
+
+  max-width: 100%;
+
+  margin-bottom: 15px;
+
+  box-sizing: border-box;
+  border: 1px solid #00000038;
+  border-radius: 50px;
+
+}
+
+.star-rating {
+  direction: rtl;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  position: relative;
+  width: 100%;
+  /* Align stars to the full width of the container */
+}
+
+.star-rating label {
+  color: #ccc;
+  /* Default star color */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  /* Smooth transition for hover */
+}
+
+.star-rating input:checked~label {
+  color: #ffcc00;
+  /* Color when the star is selected */
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+  color: #ffcc00;
+  /* Color when hovering over a star */
+}
+
+.star-rating input {
+  display: none;
+  /* Hide the radio buttons */
+}
+
+
+
+/* end display comment form */

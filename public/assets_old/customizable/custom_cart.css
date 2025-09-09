@@ -1,0 +1,431 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #ffffff;
+
+  font-family: "Karla", Sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  /* border: 1px solid; */
+}
+
+.logo img {
+  width: 80px; /* Adjust as per your logo size */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nav-links li a:hover {
+  /* color: #ffcc00; */
+  text-decoration: underline;
+}
+
+.login-btn {
+  padding: 15px 50px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 100px;
+  font-family: "Karla", Sans-serif;
+}
+
+
+
+
+
+
+
+
+/* FOOTER CSS STARTS FROM HERE */
+
+/* Footer Section */
+.custom-footer {
+  background-color: #ffffff;
+  color: #fff;
+  /* padding: 40px 20px; */
+
+  padding: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* First Div: Logo and Summary */
+.footer-logo-summary {
+  flex: 1;
+  max-width: 300px;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-summary {
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* General Styling for All Divs */
+.footer-heading {
+  margin-bottom: 15px;
+
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/* Links List */
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-list li {
+  margin-bottom: 10px;
+  line-height: 30px;
+}
+
+.footer-links-list a {
+  text-decoration: none;
+
+  font-family: "Karla", Sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.footer-links-list a:hover {
+  text-decoration: underline;
+}
+
+/* Fourth Div: Information */
+.footer-info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-info-list li {
+  margin-bottom: 10px;
+
+  color: #000000;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-info-list a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Karla", Sans-serif;
+}
+
+.footer-info-list a:hover {
+  color: #000000;
+}
+
+/* Social Media Icons with New Class */
+.footer-social-media-icons {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-icon img {
+  width: 30px; /* Set the size of the icons */
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover img {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.box .no {
+  color: #6ec1e400;
+  font-family: "Karla", Sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  -webkit-text-stroke-width: 1px;
+  stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  stroke: #000;
+}
+
+/* Copyright Section */
+.footer-copyright {
+  border-top: 1px solid gray;
+}
+
+.footer-copyright p {
+  text-align: center;
+  color: #000000;
+  font-family: "Karla", Sans-serif;
+  font-weight: 400;
+  margin-top: 10px;
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+
+/* FOOTER CSS ENDS HERE */
+
+/*================================  */
+
+
+
+
+/* Body Section CSS */
+
+.cart-heading p{
+  text-align: center;
+    font-family: Oswald, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #202223;
+    line-height: 1.2;
+    font-size: 30px;
+    margin-top: 60px;
+}
+
+
+.p-list-headings{
+
+  display: flex; 
+  
+  border-bottom: 1px solid #e2e2e2;
+  width: 99%;
+  padding: 5px;
+  
+}
+
+
+.f-p-h{
+  width: 70%;
+  font-family: Oswald, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6d7175;
+}
+
+
+.p-h{
+  width: 10%;
+  
+  font-family: Oswald, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6d7175;
+}
+
+
+.content-area{
+
+  display: flex;
+  width: 99%;
+
+}
+
+.product-info{
+  width: 49%;
+   display: flex;
+}
+
+
+
+.img-div{
+
+ 
+  width: 30%;
+  text-align: center;
+  padding-top: 30px;
+
+}
+
+
+.info-div{
+
+  width: 70%;
+}
+
+.info-div .info-h{
+
+  font-family: Oswald, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #000203;
+}
+
+
+.info-div p{
+  font-family: Oswald, sans-serif;
+  font-size: 14px;
+  color: #6d7175;
+  line-height: 0.3;
+}
+
+
+
+
+
+.product-data{
+  width: 49%;
+ 
+
+}
+
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+  margin: 20px auto;
+  gap: 20px;
+  padding-left: 150px;
+  font-family: Arial, sans-serif;
+}
+
+.price, .total {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6d7175;
+  font-weight: 500;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quantity input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 16px;
+  
+}
+
+.remove {
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+.pay-area{
+  
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.p-note-div{
+  
+  width: 30%;
+}
+
+
+#order-note{
+width: 300px;
+height: 60px;
+  
+}
+
+
+.check-div{
+  
+  width: 23%;
+}
+
+
+.total-p{
+
+
+  font-family: Oswald, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #202223;
+  line-height: 1.2;
+  font-size: 30px;
+
+}
+
+.cart-policy{
+  font-family: Oswald, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6d7175;
+}
+
+.check-out-btn{
+  background: #000;
+  border: 1.5px solid #000000;
+  color: #fff;
+  font-size: 17px;
+  border-radius: 3px;
+  transition: background-color .1s, color .1s, border-color .1s, opacity .1s;
+  font-family: Oswald, sans-serif;
+  font-weight: 400;
+  padding: 10px 60px;
+  margin-left: 75px; 
+    
+}
+
+
+.check-out-btn:hover{
+  
+  background-color:#202223 ;
+}
+
+.note-heading{
+  font-family: Oswald, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #6d7175;
+}

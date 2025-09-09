@@ -1,0 +1,347 @@
+/* Basic styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f7f2;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #00000027;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.sidebar {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    margin-top: 77px;
+    box-sizing: border-box;
+}
+
+.searchByCategory {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: "Karla", Sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+.sidebarimg {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebarimg:hover {
+    transform: scale(1.05);
+    /* Slight zoom-in effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+}
+
+
+
+.sidebar h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.sidebar button,
+.sidebar input,
+.sidebar select {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+    border-radius: 23px;
+    background-color: #f9f9f9;
+    transition: all 0.3s;
+    font-family: "Karla", Sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.sidebar button:hover,
+.sidebar select:hover {
+    background-color: #f1f1f1;
+    border-color: #aaa;
+}
+
+/* Main Content Styling */
+.main-content {
+    width: 75%;
+    padding: 20px;
+}
+
+.sorting {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.sorting p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.sorting select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.company-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+
+
+/* Company List Styling */
+.company {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.company:hover {
+    border-color: #cfcfcf;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.company-logo img {
+    width: 100%;
+    /* Adjusted size to match image */
+    height: 80px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.company-info {
+    flex-grow: 1;
+    padding-right: 20px;
+    /* Space between the info and reviews */
+}
+
+.company-info h3 {
+    margin: 0;
+    font-size: 25px;
+    color: #333;
+}
+
+.company-info a {
+    color: #0073e6;
+    /* Link color for company website */
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.company-info a:hover {
+    text-decoration: underline;
+}
+
+.company-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.company-info .trust-score {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.company-info .trust-score span {
+    margin-left: 10px;
+    color: #2a9d8f;
+    font-weight: bold;
+}
+
+.company-reviews {
+    text-align: right;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.company-reviews .review-count {
+    color: #777;
+}
+
+.company-reviews .review-link {
+
+
+    color: #ffffff;
+    text-decoration: none;
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 23px;
+}
+
+.company-reviews .review-link:hover {
+    text-decoration: underline;
+}
+
+/* Additional styling for category icons */
+.company-category {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 10px;
+}
+
+.company-category img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Most Relevant Badge */
+.most-relevant {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    font-size: 0.75em;
+    color: #555;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+/* Styling for Company Status */
+.company-status {
+    margin-top: 20px;
+}
+
+.company-status h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.company-status label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #333;
+    gap: 70px;
+    font-family: "Karla", Sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.company-status input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+
+
+/* Styling for Rate Section */
+/* Styling for Rate Section */
+.rate-section {
+    margin-top: 20px;
+}
+
+.rate-section h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-family: "Karla", Sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.rate-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* Smaller gap between buttons */
+    flex-wrap: nowrap;
+    /* Prevents buttons from wrapping to the next line */
+}
+
+.rate-buttons button {
+    padding: 5px 0px;
+    /* Makes buttons smaller */
+    font-size: 0.9em;
+    /* Reduces font size */
+    border: 1px solid #000000;
+    border-radius: 23px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+
+
+    font-family: "Karla", Sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.rate-buttons button:hover {
+    background-color: #727272;
+    color: #fff;
+
+
+}
+
+
+.c-btn {
+
+    text-align: left;
+}
+
+.c-btn:hover {
+
+
+    background-color: #727272 !important;
+    border: 1px solid #727272;
+    color: #fff;
+}

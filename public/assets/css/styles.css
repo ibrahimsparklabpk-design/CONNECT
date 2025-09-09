@@ -1070,3 +1070,42 @@
     max-width: 100%;
     /* Ensures the image scales properly on different screen sizes */
 }
+
+#colorpickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px; /* vertical and horizontal gap */
+  max-width: 320px;
+  margin: 15px auto;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+#colorpickers label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f7f7f7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  user-select: none;
+  flex: 1 1 140px; /* responsive width */
+  transition: background-color 0.3s ease;
+}
+
+#colorpickers label:hover {
+  background: #eaeaea;
+}
+
+#colorpickers input[type="color"] {
+  border: none;
+  width: 40px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}

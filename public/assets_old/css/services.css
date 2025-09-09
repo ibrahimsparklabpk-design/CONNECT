@@ -1,0 +1,30 @@
+.hero-section {
+    background-image: url('assets/images/hero-background.jpg');
+    /* Background Image */
+    background-size: cover;
+    /* Ensure the image covers the entire section */
+    background-position: center;
+    /* Center the background image */
+    height: 400px;
+    /* Set the height of the hero section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px 0;
+}
+
+.hero-content {
+    z-index: 1;
+    /* Ensures content stays on top of the background image */
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+}
