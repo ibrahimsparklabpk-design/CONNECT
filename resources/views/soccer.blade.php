@@ -1147,8 +1147,7 @@
                 </select>
             </div>
 
-            <!-- Left Column -->
-            <div class="form-column">
+           
 
 
 

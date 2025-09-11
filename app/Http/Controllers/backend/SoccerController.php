@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\sdk\Soccer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +13,7 @@ class SoccerController extends Controller
 
 
    public function index(){
-         return view('backend.layout.master');
+         return view('backend.soccer.index');
    }
 
 public function store(Request $request)
@@ -108,7 +109,7 @@ $soccer->save();
 
 
     return redirect()
-        ->route('soccers.index') 
+        ->route('soccer.index') 
         ->with('success', 'Soccer record created successfully!');
 }
 
