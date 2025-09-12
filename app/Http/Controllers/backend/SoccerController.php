@@ -12,8 +12,12 @@ class SoccerController extends Controller
   
 
 
-   public function index(){
+   public function soccer(){
          return view('backend.static.soccer');
+   }
+
+    public function circket(){
+         return view('backend.static.circket');
    }
 
 public function store(Request $request)

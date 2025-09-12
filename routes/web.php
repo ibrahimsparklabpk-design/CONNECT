@@ -55,7 +55,8 @@ Route::prefix('v2')->group(function () {
         // SoccerController Routes
         Route::prefix('static')->group(function () {
             Route::controller(SoccerController::class)->name('static.')->group(function () {
-                Route::get('index', 'index')->name('index');   // /v2/backend/soccer/index
+                Route::get('soccer', 'soccer')->name('index');   // /v2/backend/soccer/index
+                 Route::get('circket', 'circket')->name('index');   // /v2/backend/soccer/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
             });
         });
