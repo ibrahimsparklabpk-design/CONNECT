@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\your_order_controller;
 use App\Http\Controllers\TwoFactorAuthentication;
 use App\Http\Controllers\backend\SoccerController;
+use App\Http\Controllers\backend\CustomeUniformController;
 
 
 /*
@@ -48,16 +49,25 @@ Route::get('/create-symlink', function () {
 });
 
 
-route::prefix('v2')->group(function()
-{
-    Route::prefix('backend')->group(function()
-    {
-        Route::prefix('soccer')->group(function(){
-            Route::controller(SoccerController::class)->name('soccer.')->group(function(){
-                Route::get('index', 'index')->name('index');
-                Route::post('store', 'store')->name('store');
+Route::prefix('v2')->group(function () {
+    Route::prefix('backend')->group(function () {
+
+        // SoccerController Routes
+        Route::prefix('static')->group(function () {
+            Route::controller(SoccerController::class)->name('static.')->group(function () {
+                Route::get('index', 'index')->name('index');   // /v2/backend/soccer/index
+                Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
             });
         });
+
+        // CustomeUniformController Routes
+        Route::prefix('custome')->group(function () {
+            Route::controller(CustomeUniformController::class)->name('custome.')->group(function () {
+                Route::get('index', 'index')->name('index');   // /v2/backend/custome/index
+                Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
+            });
+        });
+
     });
 });
 

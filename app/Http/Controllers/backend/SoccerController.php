@@ -13,7 +13,7 @@ class SoccerController extends Controller
 
 
    public function index(){
-         return view('backend.soccer.index');
+         return view('backend.static.soccer');
    }
 
 public function store(Request $request)
@@ -109,7 +109,7 @@ $soccer->save();
 
 
     return redirect()
-        ->route('soccer.index') 
+        ->route('static.index') 
         ->with('success', 'Soccer record created successfully!');
 }
 
