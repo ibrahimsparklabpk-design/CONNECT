@@ -23,6 +23,7 @@ class SoccerController extends Controller
 public function store(Request $request)
 {
 
+    
     $validator = Validator::make($request->all(), [
         // Basic Kit
         'fit_type' => ['required', 'in:men,women,youth'],
@@ -107,6 +108,14 @@ $soccer->guide_shirt_size = $request->guide_shirt_size;
 $soccer->guide_pant_size = $request->guide_pant_size;
 $soccer->guide_sleeves_length = $request->guide_sleeves_length;
 $soccer->guide_quantity = $request->guide_quantity;
+if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('soccer/images'), $filename);
+
+        // Save relative path to DB
+        $soccer->image = 'soccer/images/' . $filename;
+    }
 
 //  Save record
 $soccer->save();
@@ -120,5 +129,3 @@ $soccer->save();
 
    
 }
-
-

@@ -626,6 +626,8 @@ class ComposerStaticInitb1fa3b9ec3172f08e7936fd9e05c0532
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ReadMore' => __DIR__ . '/../..' . '/app/Http/Controllers/ReadMore.php',
         'App\\Http\\Controllers\\TwoFactorAuthentication' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoFactorAuthentication.php',
+        'App\\Http\\Controllers\\backend\\CustomeUniformController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/CustomeUniformController.php',
+        'App\\Http\\Controllers\\backend\\SoccerController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/SoccerController.php',
         'App\\Http\\Controllers\\register' => __DIR__ . '/../..' . '/app/Http/Controllers/register.php',
         'App\\Http\\Controllers\\vendorData' => __DIR__ . '/../..' . '/app/Http/Controllers/vendorData.php',
         'App\\Http\\Controllers\\your_controller' => __DIR__ . '/../..' . '/app/Http/Controllers/your_controller.php',

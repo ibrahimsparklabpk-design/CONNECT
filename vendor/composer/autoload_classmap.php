@@ -23,6 +23,8 @@ return array(
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\ReadMore' => $baseDir . '/app/Http/Controllers/ReadMore.php',
     'App\\Http\\Controllers\\TwoFactorAuthentication' => $baseDir . '/app/Http/Controllers/TwoFactorAuthentication.php',
+    'App\\Http\\Controllers\\backend\\CustomeUniformController' => $baseDir . '/app/Http/Controllers/backend/CustomeUniformController.php',
+    'App\\Http\\Controllers\\backend\\SoccerController' => $baseDir . '/app/Http/Controllers/backend/SoccerController.php',
     'App\\Http\\Controllers\\register' => $baseDir . '/app/Http/Controllers/register.php',
     'App\\Http\\Controllers\\vendorData' => $baseDir . '/app/Http/Controllers/vendorData.php',
     'App\\Http\\Controllers\\your_controller' => $baseDir . '/app/Http/Controllers/your_controller.php',
