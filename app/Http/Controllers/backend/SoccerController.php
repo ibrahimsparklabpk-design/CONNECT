@@ -108,14 +108,37 @@ $soccer->guide_shirt_size = $request->guide_shirt_size;
 $soccer->guide_pant_size = $request->guide_pant_size;
 $soccer->guide_sleeves_length = $request->guide_sleeves_length;
 $soccer->guide_quantity = $request->guide_quantity;
-if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('soccer/images'), $filename);
 
-        // Save relative path to DB
-        $soccer->image = 'soccer/images/' . $filename;
+
+
+ if ($request->filled('selected_shirt')) {
+        // Folder jahan images save hongi
+        $destination = public_path('selected-shirts');
+        if (!file_exists($destination)) {
+            mkdir($destination, 0777, true); // folder agar na ho to bana do
+        }
+
+        // Original image ka path
+        $originalPath = public_path(str_replace(url('/'), '', $request->selected_shirt));
+        $filename = time().'_'.basename($originalPath);
+
+        // Image copy kar do new folder me
+        copy($originalPath, $destination.'/'.$filename);
+
+        // Database me path save karo
+        $soccer->image = 'selected-shirts/'.$filename;
+
+        $soccer->save();
+
+        return redirect()->back()->with('success', 'Shirt saved successfully!');
+    } else {
+        return redirect()->back()
+            ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
+            ->withInput();
     }
+
+
+
 
 //  Save record
 $soccer->save();

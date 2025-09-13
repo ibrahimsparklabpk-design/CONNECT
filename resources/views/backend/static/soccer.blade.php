@@ -134,31 +134,42 @@
  </div>
  </div>
 
+ <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+     @csrf
  <!-- Items List -->
- <div class="items-list">
+ <div class="items-list" style="height: 36rem;">
      <!-- Shirts Tab -->
      <div class="tabcontent" id="Shirts">
-         <img src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/FRONTPNG.png') }}')" alt="Shirt 1" />
-         <img src="{{ asset('assets/soccer-shirts/shirt4.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt4.png') }}')" alt="Shirt 4" />
-         <img src="{{ asset('assets/soccer-shirts/shirt5.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt5.png') }}')" alt="Shirt 5" />
-         <img src="{{ asset('assets/soccer-shirts/shirt6.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt6.png') }}')" alt="Shirt 6" />
-         <img src="{{ asset('assets/soccer-shirts/shirt7.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt7.png') }}')" alt="Shirt 7" />
-         <img src="{{ asset('assets/soccer-shirts/shirt8.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt8.png') }}')" alt="Shirt 8" />
-         <img src="{{ asset('assets/soccer-shirts/shirt9.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt9.png') }}')" alt="Shirt 9" />
-         <img src="{{ asset('assets/soccer-shirts/shirt10.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt10.png') }}')" alt="Shirt 10" />
-         <img src="{{ asset('assets/soccer-shirts/shirt11.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt11.png') }}')" alt="Shirt 11" />
-         <img src="{{ asset('assets/soccer-shirts/shirt12.png') }}" class="shirt"
-             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt12.png') }}')" alt="Shirt 12" />
-     </div>
+            <img src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/FRONTPNG.png') }}')" alt="Shirt 1" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt4.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt4.png') }}')" alt="Shirt 4" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt5.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt5.png') }}')" alt="Shirt 5" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt6.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt6.png') }}')" alt="Shirt 6" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt7.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt7.png') }}')" alt="Shirt 7" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt8.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt8.png') }}')" alt="Shirt 8" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt9.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt9.png') }}')" alt="Shirt 9" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt10.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt10.png') }}')" alt="Shirt 10" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt11.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt11.png') }}')" alt="Shirt 11" width="100"/>
+
+            <img src="{{ asset('assets/soccer-shirts/shirt12.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt12.png') }}')" alt="Shirt 12" width="100"/>
+        </div>
 
      <!-- Logos Tab -->
      {{-- <div class="tabcontent" id="Logos" style="display: none">
@@ -251,14 +262,22 @@
  </div>
 
  <!-- Right Section -->
- <div class="right-section">
-     <div class="item-display" style="position: relative;">
-         <div id="text-display" style="position: absolute; z-index: 5;"></div>
-         <img id="selected-shirt" src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" alt="Selected Shirt" />
-         <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay" style="display: none;" />
+<div class="right-section">
+    <div class="item-display" style="position: relative;">
+        <div id="text-display" style="position: absolute; z-index: 5;"></div>
+        <!-- Base shirt hamesha dikh rahi hai -->
+        <img id="selected-shirt" src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" alt="Selected Shirt" />
+        <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay" style="display: none;" />
+    </div>
 
-     </div>
- </div>
+    <!-- Hidden input to store selected shirt path for database -->
+   
+    
+    <!-- Optional: Preview of selected shirt -->
+    <div id="shirtPreview" style="margin-top: 10px;"></div>
+</div>
+
+
  </div>
 
  <!-- MAIN SECTION ENDS HERE -->
@@ -279,8 +298,7 @@
  @endif
 
  <!-- FORM SECTION STARTS FROM HERE -->
- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
-     @csrf
+ 
      <div class="head-box">
          <p class="mainheading">CUSTOM SOCCER KIT</p>
          <div class="m-pr">
@@ -701,12 +719,15 @@
          </div>
 
      </div>
-     <div class="form-column">
-         <div class="form-group" id="">
-             <label for="image">Image</label>
-             <input type="file" name="image" class="form-control">
-         </div>
-     </div>
+    <div class="form-column">
+
+    <input type="hidden" name="selected_shirt" id="selectedShirtInput">
+
+
+
+
+</div>
+
      <div class="btn_box">
          <button type="submit" class="addtocart_btn">Add to cart</button>
      </div>
