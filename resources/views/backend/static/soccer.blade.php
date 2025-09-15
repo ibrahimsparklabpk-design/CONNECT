@@ -218,7 +218,7 @@
              <h1>Soccer</h1>
          </div>
          <div class="cat-col">
-             <a href="cricket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
+             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
              <h1>Cricket</h1>
          </div>
          <div class="cat-col">
