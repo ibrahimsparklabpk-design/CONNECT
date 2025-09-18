@@ -458,6 +458,7 @@
                          <th>Shirt Size</th>
                          <th>short Size</th>
                          <th>Quantity</th>
+                         {{-- <th>Guide Price</th> --}}
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -489,6 +490,10 @@
                          <td>
                              <input type="number" name="quantity" class="form-control" placeholder="0" min="1" required>
                          </td>
+                          {{-- <td>
+                                <input type="number" name="guide_price" class="form-control" placeholder="0" min="0"
+                                    style="padding: 9px">
+                            </td> --}}
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
                                  style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
@@ -501,7 +506,7 @@
 
              <!-- Add Row Button -->
              <button type="button" class="btn btn-primary" id="addRowBtn"
-                 style="    margin-top: 2rem; padding: 1rem; background: black; color: white;border-radius: 1rem;">+ Add
+                 style="margin-top: 2rem; padding: 1rem; background: black; color: white;border-radius: 1rem;">+ Add
                  Row</button>
          </div>
      </div>

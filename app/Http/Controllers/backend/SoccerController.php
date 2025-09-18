@@ -10,7 +10,13 @@ use Illuminate\Support\Facades\Validator;
 class SoccerController extends Controller
 {
   
+public function view()
+    {
+        $soccer = Soccer::orderby('id')->get();
+        session(['soccer' => $soccer]);
 
+        return view('backend.static.view', ['soccer' => session('soccer')]);
+    }
 
    public function soccer(){
          return view('backend.static.soccer');
@@ -59,7 +65,8 @@ public function store(Request $request)
         'guide_shirt_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
         'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
         'guide_sleeves_length' => ['required', 'in:short,long'],
-        'guide_quantity' => ['required', 'integer', 'min:1'],
+        'guide_price' => ['required', 'integer', 'min:1'],
+          // 'price' => ['required', 'numeric', 'min:0'],
     ]);
 
  
@@ -70,7 +77,8 @@ public function store(Request $request)
             ->withInput(); 
     }
 
-
+// $guidPrice = $request->guide_price;
+// $guideQuantity = $request->guide_quantity;
     $soccer = new Soccer();
 
 //  Basic Kit
@@ -87,6 +95,7 @@ $soccer->number = $request->number;
 $soccer->shirt_size = $request->shirt_size;
 $soccer->sleeves_length = $request->sleeves_length;
 $soccer->quantity = $request->quantity;
+// $soccer->guide_price = $guideQuantity * $guidPrice;
 
 //  Goalkeeper Requirements
 $soccer->goalkeeper_kit = $request->goalkeeper_kit;
