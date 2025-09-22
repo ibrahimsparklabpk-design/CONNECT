@@ -23,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\ReadMore' => $baseDir . '/app/Http/Controllers/ReadMore.php',
     'App\\Http\\Controllers\\TwoFactorAuthentication' => $baseDir . '/app/Http/Controllers/TwoFactorAuthentication.php',
+    'App\\Http\\Controllers\\backend\\CartController' => $baseDir . '/app/Http/Controllers/backend/CartController.php',
     'App\\Http\\Controllers\\backend\\CheckoutController' => $baseDir . '/app/Http/Controllers/backend/CheckoutController.php',
     'App\\Http\\Controllers\\backend\\CustomeUniformController' => $baseDir . '/app/Http/Controllers/backend/CustomeUniformController.php',
     'App\\Http\\Controllers\\backend\\OrderController' => $baseDir . '/app/Http/Controllers/backend/OrderController.php',

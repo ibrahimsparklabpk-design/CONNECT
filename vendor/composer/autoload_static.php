@@ -626,6 +626,7 @@ class ComposerStaticInitb1fa3b9ec3172f08e7936fd9e05c0532
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ReadMore' => __DIR__ . '/../..' . '/app/Http/Controllers/ReadMore.php',
         'App\\Http\\Controllers\\TwoFactorAuthentication' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoFactorAuthentication.php',
+        'App\\Http\\Controllers\\backend\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/CartController.php',
         'App\\Http\\Controllers\\backend\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/CheckoutController.php',
         'App\\Http\\Controllers\\backend\\CustomeUniformController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/CustomeUniformController.php',
         'App\\Http\\Controllers\\backend\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/OrderController.php',

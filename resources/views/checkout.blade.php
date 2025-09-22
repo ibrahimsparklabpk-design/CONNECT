@@ -85,7 +85,7 @@
 
 <!-- Main Section Starts-->
 
-<form id="payment-form" action="{{ route('create-payment-intent') }}" method="POST">
+<form id="payment-form" action="{{ route('order.store') }}" method="POST">
     @csrf
     <!-- Contact Section -->
     <h2>Contact</h2>
@@ -111,13 +111,13 @@
 
     <div class="name-fields">
         <div class="field">
-            <label for="first-name">First name</label>
-            <input type="text" id="first-name" name="first-name" required>
+            <label for="first_name">First name</label>
+            <input type="text" id="first-name" name="first_name" required>
         </div>
 
         <div class="field">
-            <label for="last-name">Last name</label>
-            <input type="text" id="last-name" name="last-name" required>
+            <label for="last_name">Last name</label>
+            <input type="text" id="last-name" name="last_name" required>
         </div>
     </div>
 
@@ -142,8 +142,8 @@
         </div>
 
         <div class="field">
-            <label for="zip">ZIP code</label>
-            <input type="text" id="zip" name="zip-code" required>
+            <label for="zip_code">ZIP code</label>
+            <input type="text" id="zip" name="zip_code" required>
         </div>
     </div>
 
@@ -155,8 +155,8 @@
     <p>All transactions are secure and encrypted.</p>
 
     <!-- Account Holder Name -->
-    <label for="Account-Holder-Name">Account Holder Name</label>
-    <input type="text" id="Account-Holder-Name" name="Account-Holder-Name" placeholder="" required>
+    <label for="account_holder_name">Account Holder Name</label>
+    <input type="text" id="Account-Holder-Name" name="account_holder_name" placeholder="">
 
     <!-- Card Element for Stripe -->
     <label for="card-element">Credit Card / Debit Card</label>
@@ -166,52 +166,52 @@
     <div id="card-errors" role="alert"></div>
 
     <div>
-        <input type="checkbox" id="Billing address same as Delivery address " name="billing-same" checked>
-        <label for="billing-same">Use shipping address as billing address</label>
+        <input type="checkbox" id="Billing address same as Delivery address " name="billing_same" checked>
+        <label for="billing_same">Use shipping address as billing address</label>
     </div>
 
     <!-- Billing Address Section -->
     <h2>Billing Address</h2>
     <div class="name-fields">
         <div class="field">
-            <label for="billing-first-name">First name</label>
-            <input type="text" id="billing-first-name" name="billing-first-name" required>
+            <label for="billing_first_name">First name</label>
+            <input type="text" id="billing-first-name" name="billing_first_name">
         </div>
 
         <div class="field">
-            <label for="billing-last-name">Last name</label>
-            <input type="text" id="billing-last-name" name="billing-last-name" required>
+            <label for="billing_last_name">Last name</label>
+            <input type="text" id="billing-last-name" name="billing_last_name">
         </div>
     </div>
 
-    <label for="billing-company">Company (optional)</label>
-    <input type="text" id="billing-company" name="billing-company">
+    <label for="billing_company">Company (optional)</label>
+    <input type="text" id="billing-company" name="billing_company">
 
-    <label for="billing-address">Address</label>
-    <input type="text" id="billing-address" name="billing-address" required>
+    <label for="billing_address">Address</label>
+    <input type="text" id="billing-address" name="billing_address">
 
-    <label for="billing-apartment">Apartment, suite, etc. (optional)</label>
-    <input type="text" id="billing-apartment" name="billing-apartment">
+    <label for="billing_apartment">Apartment, suite, etc. (optional)</label>
+    <input type="text" id="billing-apartment" name="billing_apartment">
 
     <div class="location-fields">
         <div class="field">
-            <label for="billing-city">City</label>
-            <input type="text" id="billing-city" name="billing-city" required>
+            <label for="billing_city">City</label>
+            <input type="text" id="billing-city" name="billing_city" >
         </div>
 
         <div class="field">
-            <label for="billing-state">State</label>
-            <input type="text" id="billing-state" name="billing-state" required>
+            <label for="billing_state">State</label>
+            <input type="text" id="billing-state" name="billing_state" >
         </div>
 
         <div class="field">
-            <label for="billing-zip">ZIP code</label>
-            <input type="text" id="billing-zip" name="billing-zip" required>
+            <label for="billing_zip">ZIP code</label>
+            <input type="text" id="billing-zip" name="billing_zip" >
         </div>
     </div>
 
-    <label for="billing-phone">Phone (optional)</label>
-    <input type="tel" id="billing-phone" name="billing-phone">
+    <label for="billing_phone">Phone (optional)</label>
+    <input type="tel" id="billing-phone" name="billing_phone">
 
     <!-- Save Info Section -->
     <div>
@@ -335,13 +335,6 @@
 
 
 <!-- Main Section Ends-->
-
-
-
-
-
-
-
 
 <!-- FOOTER STARTS FORM HERE -->
 
