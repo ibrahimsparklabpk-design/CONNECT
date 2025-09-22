@@ -72,11 +72,6 @@
                                     <input type="color" id="color-trouser" value="#ffffff" />
                                 </label>
 
-                                <label class="color-picker-label" for="color-shocks">
-                                    <span style="width: 120px; font-weight: 500;">Shocks Color:</span>
-                                    <input type="color" id="color-shocks" value="#ffffff" />
-                                </label>
-
                                 <label class="color-picker-label" for="color-artboard">
                                     <span style="width: 120px; font-weight: 500;">Pattern Color:</span>
                                     <input type="color" id="color-artboard" value="#ffffff" />
@@ -301,21 +296,21 @@
                 </div>
 
                 <!-- Right Section -->
-                <div class="right-section" style="flex-grow: 1; text-align: center;">
-                    <img id="shirt-collar" src="{{ asset('/') }}assets/both/collor.png" style="display: none"
-                        alt="collar" />
-                    <img id="shirt-body" src="{{ asset('/') }}assets/both/Shirt Design.png" style="display: none" alt="body" />
-                    <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/Shoulder.png" style="display: none"
-                        alt="sleeve" />
-                    <img id="shirt-trouser" src="{{ asset('/') }}assets/both/pent back.png" style="display: none"
-                        alt="trouser" />
-                    <img id="shirt-shocks" src="{{ asset('/') }}assets/both/Socks.png" style="display: none"
-                        alt="shocks" />
-                    <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none"
-                        alt="shoes" />
+              <div class="right-section" style="flex-grow: 1; text-align: center;">
+                    <!-- Base hidden images -->
+                    <img id="shirt-collar" src="{{ asset('/') }}assets/both/collor.png" style="display: none" alt="collar" />
+                    <img id="shirt-body" src="{{ asset('/') }}assets/both/seperate mouckup.png" style="display: none" alt="body" />
+                    <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/sleves final.png" style="display: none" alt="sleeve" />
+                    <img id="shirt-trouser" src="{{ asset('/') }}assets/both/pent.png" style="display: none" alt="trouser" />
+                    <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none" alt="shoes" />
 
+                    <!-- Canvas jisme final design render hoga -->
                     <canvas id="shirt-canvas"></canvas>
+
+                    <!-- Hidden input jo selected shirt ka path rakhega -->
+                    <input type="hidden" id="selectedShirtInput" name="selected_shirt">
                 </div>
+
             </div>
         </div>
     </div>
@@ -492,6 +487,7 @@
                             <th>Shirt Size</th>
                             <th>short Size</th>
                             <th>Quantity</th>
+                            {{-- <th>Price</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -526,6 +522,10 @@
                                 <input type="number" name="quantity" class="form-control" placeholder="0" min="1"
                                     style="padding: 9px">
                             </td>
+                            {{-- <td>
+                                <input type="number" name="price" class="form-control" placeholder="0" min="0"
+                                    style="padding: 9px">
+                            </td> --}}
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
                                     style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
@@ -767,6 +767,7 @@
 
 @endsection
 
+
 @section("script")
 <!--custome-uniform-->
 <script>
@@ -787,7 +788,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 // =================== CANVAS INIT ===================
 let canvas, ctx;
-let collarImage, bodyImage, sleeveImage, trouserImage, shoesImage;
 
 // LOGO & PATTERN
 let selectedLogo = null, logoX=300, logoY=200, logoScale=1, logoAngle=0;
@@ -812,9 +812,9 @@ function initCanvas(){
     bodyImage = document.getElementById("shirt-body");
     sleeveImage = document.getElementById("shirt-sleeve");
     trouserImage = document.getElementById("shirt-trouser");
-    shoesImage = document.getElementById("shirt-shoes");
 
-    const imgs = [collarImage, bodyImage, sleeveImage, trouserImage, shoesImage];
+
+    const imgs = [collarImage, bodyImage, sleeveImage, trouserImage];
     let loaded = 0;
     imgs.forEach(img => {
         if(img.complete) loaded++;
@@ -868,6 +868,12 @@ function initCanvas(){
 }
 
 // =================== HELPER FUNCTIONS ===================
+function isInsideHandle(px, py, objX, objY, w, h, handleSize=12){
+    const handleX = objX + w/2;
+    const handleY = objY + h/2;
+    return Math.hypot(px-handleX, py-handleY) <= handleSize;
+}
+
 function rotatePoint(px, py, cx, cy, angle){
     const s = Math.sin(-angle), c = Math.cos(-angle);
     px -= cx; py -= cy;
@@ -893,7 +899,7 @@ function startAction(e){
         const relX = e.offsetX - item.x;
         const relY = e.offsetY - item.y;
 
-        // DELETE ICON
+        // DELETE ICON (top-center)
         const iconX = 0;
         const iconY = -h/2 - 20;
         if(Math.hypot(relX-iconX, relY-iconY) <= 12){
@@ -908,7 +914,7 @@ function startAction(e){
             return;
         }
 
-        // RESIZE HANDLE
+        // RESIZE HANDLE (bottom-right)
         const handleX = w/2;
         const handleY = h/2;
         if(Math.hypot(relX-handleX, relY-handleY) <= 8){
@@ -920,7 +926,7 @@ function startAction(e){
             return;
         }
 
-        // DRAG
+        // DRAG (inside object)
         if(relX >= -w/2 && relX <= w/2 && relY >= -h/2 && relY <= h/2){
             currentAction="move";
             activeSelection=item.type;
@@ -951,6 +957,41 @@ function performAction(e){
         if(activeSelection==="text" && isTextResizing) textScale=Math.max(0.2,textScale+dx*0.005);
         dragStart={x:e.offsetX,y:e.offsetY}; drawKit();
     }
+}
+
+function endAction(){ 
+    isDragging=false; isResizing=false; isTextDragging=false; isTextResizing=false; currentAction=null; 
+}
+
+// =================== SELECTION BOXES ===================
+function drawSelections(){
+    const items = [
+        {type:"logo", img:selectedLogo, x:logoX, y:logoY, getSize:getLogoSize, angle:logoAngle},
+        {type:"pattern", img:selectedPattern, x:patternX, y:patternY, getSize:getPatternSize, angle:patternAngle},
+        {type:"text", img:selectedText, x:textX, y:textY, getSize:getTextSize, angle:textAngle}
+    ];
+
+    items.forEach(item=>{
+        if(item.img || item.type==="text"){
+            const {w,h}=item.getSize();
+            ctx.save();
+            ctx.translate(item.x,item.y);
+            if(item.type!=="text") ctx.rotate(item.angle);
+            ctx.strokeStyle="rgba(0,0,0,0.6)";
+            ctx.strokeRect(-w/2,-h/2,w,h);
+
+            // DELETE ICON (top-center)
+            ctx.fillStyle="orange";
+            ctx.beginPath(); ctx.arc(0,-h/2-20,12,0,Math.PI*2); ctx.fill();
+            ctx.drawImage(recycleBin,-12,-h/2-32,24,24);
+
+            // RESIZE HANDLE (bottom-right)
+            ctx.fillStyle="blue";
+            ctx.beginPath(); ctx.arc(w/2,h/2,8,0,Math.PI*2); ctx.fill();
+
+            ctx.restore();
+        }
+    });
 }
 
 function endAction(){ 
@@ -1060,6 +1101,7 @@ function drawKit(){
     const collarC=createColoredCanvas(collarImage,colors.collar,TARGET_W,TARGET_H);
     const trouserC=createColoredCanvas(trouserImage,colors.trouser,TARGET_W,TARGET_H);
 
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.drawImage(trouserC,0,0); 
     ctx.drawImage(bodyC,0,0); 
@@ -1070,8 +1112,30 @@ function drawKit(){
     drawLogoMasked(); 
     drawPlayerText(); 
 
-    const shW=shoesImage.naturalWidth*scale, shH=shoesImage.naturalHeight*scale; 
-    ctx.drawImage(shoesImage,0,0,shW,shH);
+
+
+    drawSelections();
+}
+
+// =================== SELECTION BOXES ===================
+function drawSelections(){
+    const items = [
+        {obj:"pattern", img:selectedPattern, x:patternX, y:patternY, getSize:getPatternSize},
+        {obj:"logo", img:selectedLogo, x:logoX, y:logoY, getSize:getLogoSize},
+        {obj:"text", img:selectedText, x:textX, y:textY, getSize:getTextSize}
+    ];
+
+    items.forEach(item=>{
+        if(item.img && activeSelection===item.obj){
+            const {w,h}=item.getSize();
+            ctx.save(); ctx.translate(item.x,item.y);
+            if(item.obj!=="text") ctx.rotate(item.obj==="logo"?logoAngle:patternAngle);
+            ctx.strokeStyle="rgba(0,0,0,0.6)"; ctx.strokeRect(-w/2,-h/2,w,h);
+            ctx.fillStyle="orange"; ctx.beginPath(); ctx.arc(w/2,h/2,8,0,Math.PI*2); ctx.fill();
+            ctx.drawImage(recycleBin,-12,-h/2-32,24,24);
+            ctx.restore();
+        }
+    });
 }
 
 // =================== COLOR PICKERS ===================
@@ -1114,11 +1178,13 @@ document.getElementById("upload-logo").addEventListener("change", function(e){
 
     const reader = new FileReader();
     reader.onload = function(event){
+        // Wrapper div for image + delete button
         const wrap = document.createElement("div");
         wrap.style.position = "relative";
         wrap.style.width = "80px";
         wrap.style.height = "80px";
 
+        // Uploaded logo image
         const img = document.createElement("img");
         img.src = event.target.result;
         img.style.width = "100%";
@@ -1129,6 +1195,7 @@ document.getElementById("upload-logo").addEventListener("change", function(e){
         img.style.borderRadius = "8px";
         wrap.appendChild(img);
 
+        // Delete button
         const del = document.createElement("span");
         del.innerHTML = "&times;";
         del.style.position = "absolute";
@@ -1144,9 +1211,10 @@ document.getElementById("upload-logo").addEventListener("change", function(e){
         del.style.borderRadius = "50%";
         del.style.cursor = "pointer";
         del.style.fontWeight = "bold";
-        del.onclick = () => wrap.remove();
+        del.onclick = () => wrap.remove(); // Remove this logo from preview
         wrap.appendChild(del);
 
+        // Click on image → add to kit
         img.onclick = () => {
             const logo = new Image();
             logo.src = img.src;
@@ -1165,6 +1233,7 @@ document.getElementById("upload-logo").addEventListener("change", function(e){
     };
     reader.readAsDataURL(file);
 
+    // Reset input for uploading same file again
     e.target.value = "";
 });
 
@@ -1254,4 +1323,11 @@ document.getElementById("upload-patterns").addEventListener("change", function(e
     console.log("Selected Shirt Path:", imagePath); // Debugging
 }
 </script>
+
+    <!-- FOOTER STARTS FORM HERE -->
+
+    @include('component.footer')
+
+    <!-- FOOTER ENDS HERE -->
+
 @endsection

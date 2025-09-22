@@ -21,7 +21,7 @@ use App\Http\Controllers\your_order_controller;
 use App\Http\Controllers\TwoFactorAuthentication;
 use App\Http\Controllers\backend\SoccerController;
 use App\Http\Controllers\backend\CustomeUniformController;
-
+use App\Http\Controllers\backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +69,14 @@ Route::prefix('v2')->group(function () {
                 Route::get('soccer', 'soccer')->name('index');   // /v2/backend/custome/index
                  Route::get('circket', 'circket')->name('circket');   // /v2/backend/custome/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
+            });
+        });
+
+         Route::prefix('order')->group(function () {
+            Route::controller(OrderController::class)->name('order.')->group(function () {
+                Route::get('create', 'create')->name('create');   // /v2/backend/custome/index
+                Route::post('store', 'store')->name('store');   // /v2/backend/custome/index
+
             });
         });
 
