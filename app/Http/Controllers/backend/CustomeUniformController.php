@@ -10,9 +10,14 @@ use Illuminate\Http\Request;
 
 class CustomeUniformController extends Controller
 {
-    public function index()
+    public function soccer()
     {
-        return view('backend.custome.index');
+        return view('backend.custome.soccer');
+    }
+
+     public function circket()
+    {
+        return view('backend.custome.circket');
     }
 
 

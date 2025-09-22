@@ -20,6 +20,14 @@ class SoccerController extends Controller
          return view('backend.static.circket');
    }
 
+   public function Basketball(){
+         return view('backend.static.basketball');
+   }
+
+    public function goalKeeper(){
+         return view('backend.static.goalKeeper');
+   }
+
 public function store(Request $request)
 {
 

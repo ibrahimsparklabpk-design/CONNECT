@@ -228,6 +228,7 @@
      </div>
      <div class="cat-row">
          <div class="cat-col">
+            <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
              <h1>Goal Keeper</h1>
          </div>
          <div class="cat-col">

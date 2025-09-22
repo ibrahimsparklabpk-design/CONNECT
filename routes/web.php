@@ -56,7 +56,9 @@ Route::prefix('v2')->group(function () {
         Route::prefix('static')->group(function () {
             Route::controller(SoccerController::class)->name('static.')->group(function () {
                 Route::get('soccer', 'soccer')->name('index');   // /v2/backend/soccer/index
-                 Route::get('circket', 'circket')->name('circket');   // /v2/backend/soccer/index
+                 Route::get('circket', 'circket')->name('circket');   // /v2/backend/circeket/index
+                 Route::get('basketball', 'basketball')->name('basketball');   // /v2/backend/Basketball/index
+                   Route::get('goalKeeper', 'goalKeeper')->name('goalKeeper');   // /v2/backend/Basketball/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
             });
         });
@@ -64,7 +66,8 @@ Route::prefix('v2')->group(function () {
         // CustomeUniformController Routes
         Route::prefix('custome')->group(function () {
             Route::controller(CustomeUniformController::class)->name('custome.')->group(function () {
-                Route::get('index', 'index')->name('index');   // /v2/backend/custome/index
+                Route::get('soccer', 'soccer')->name('index');   // /v2/backend/custome/index
+                 Route::get('circket', 'circket')->name('circket');   // /v2/backend/custome/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
             });
         });
