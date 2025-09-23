@@ -491,10 +491,7 @@
                          <td>
                              <input type="number" name="quantity" class="form-control" placeholder="0" min="1" required>
                          </td>
-                          {{-- <td>
-                                <input type="number" name="guide_price" class="form-control" placeholder="0" min="0"
-                                    style="padding: 9px">
-                            </td> --}}
+                          
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
                                  style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">

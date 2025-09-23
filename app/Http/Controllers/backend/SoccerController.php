@@ -62,15 +62,15 @@ class SoccerController extends Controller
             'staff_collar_type' => ['required', 'in:v-neck,round-neck,polo-style'],
             'staff_sleeves_length' => ['required', 'in:short,long,both'],
 
-            // Staff Size Guide
-            'guide_name' => ['required', 'string', 'max:255'],
-            'guide_number' => ['required', 'integer'],
-            'guide_shirt_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-            'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-            'guide_sleeves_length' => ['required', 'in:short,long'],
-            // 'guide_price' => ['required', 'integer', 'min:1'],
-            // 'price' => ['required', 'numeric', 'min:0'],
-        ]);
+        // Staff Size Guide
+        'guide_name' => ['required', 'string', 'max:255'],
+        'guide_number' => ['required', 'integer'],
+        'guide_shirt_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
+        'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
+        'guide_sleeves_length' => ['required', 'in:short,long'],
+        'guide_price' => ['required', 'integer', 'min:1'],
+          // 'price' => ['required', 'numeric', 'min:0'],
+    ]);
 
 
         if ($validator->fails()) {
