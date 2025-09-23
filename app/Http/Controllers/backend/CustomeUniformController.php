@@ -25,7 +25,8 @@ class CustomeUniformController extends Controller
 
     public function view()
     {
-        $customeUniform = CustomUniform::orderby('id')->get();
+
+        $customeUniform = session('custom_uniform_cart', []);
         session(['customeUniform' => $customeUniform]);
 
         return view('backend.custome.view', ['customeUniform' => session('customeUniform')]);
@@ -65,7 +66,7 @@ class CustomeUniformController extends Controller
             'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
             'guide_sleeves_length' => ['required', 'in:short,long'],
             'guide_quantity' => ['required', 'integer', 'min:1'],
-            // 'price' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
         ]);
 
         if ($validator->fails()) {
@@ -73,6 +74,19 @@ class CustomeUniformController extends Controller
         }
         // $price = $request->price;
         // $quantity = $request->quantity;
+
+        // custom image
+        $image = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('custom/images'), $image);
+
+         // custom pattern
+        $pattern = time() . '.' . request()->pattern->getClientOriginalExtension();
+        request()->pattern->move(public_path('custom/pattern'), $pattern);
+
+        // custom logo
+        $logo = time() . '.' . request()->logo->getClientOriginalExtension();
+        request()->logo->move(public_path('custom/logo'), $logo);
+        
         $customeUniform = new CustomUniform();
 
         $customeUniform->fit_type = $request->fit_type;
@@ -87,7 +101,6 @@ class CustomeUniformController extends Controller
         $customeUniform->shirt_size = $request->shirt_size;
         $customeUniform->sleeves_length = $request->sleeves_length;
         $customeUniform->quantity = $request->quantity;
-        // $customeUniform->price = $price * $quantity;
 
         $customeUniform->goalkeeper_kit = $request->goalkeeper_kit;
         $customeUniform->goalkeeper_jersey_design = $request->goalkeeper_jersey_design;
@@ -106,50 +119,67 @@ class CustomeUniformController extends Controller
         $customeUniform->guide_pant_size = $request->guide_pant_size;
         $customeUniform->guide_sleeves_length = $request->guide_sleeves_length;
         $customeUniform->guide_quantity = $request->guide_quantity;
-
+        $customeUniform->image = $image;
+        $customeUniform->pattern = $pattern;
+        $customeUniform->logo = $logo;
         $customeUniform->save();
+
+        // 3. Store in session (cart)
         $cart = session()->get('custom_uniform_cart', []);
 
-        $item = [
+        $cart[] = [
+            'image' => $image,
             'fit_type' => $customeUniform->fit_type,
             'kit_type' => $customeUniform->kit_type,
             'collar_type' => $customeUniform->collar_type,
             'team_logo' => $customeUniform->team_logo,
             'outfield_players_socks' => $customeUniform->outfield_players_socks,
             'inside_shirt_collar' => $customeUniform->inside_shirt_collar,
-
             'name' => $customeUniform->name,
             'number' => $customeUniform->number,
             'shirt_size' => $customeUniform->shirt_size,
             'sleeves_length' => $customeUniform->sleeves_length,
             'quantity' => $customeUniform->quantity,
-
             'goalkeeper_kit' => $customeUniform->goalkeeper_kit,
             'goalkeeper_jersey_design' => $customeUniform->goalkeeper_jersey_design,
             'goalkeeper_sleeves' => $customeUniform->goalkeeper_sleeves,
             'jersey_color' => $customeUniform->jersey_color,
-
             'staff_other' => $customeUniform->staff_other,
             'staff_fit_type' => $customeUniform->staff_fit_type,
             'staff_kit_type' => $customeUniform->staff_kit_type,
             'staff_collar_type' => $customeUniform->staff_collar_type,
             'staff_sleeves_length' => $customeUniform->staff_sleeves_length,
-
             'guide_name' => $customeUniform->guide_name,
             'guide_number' => $customeUniform->guide_number,
             'guide_shirt_size' => $customeUniform->guide_shirt_size,
             'guide_pant_size' => $customeUniform->guide_pant_size,
             'guide_sleeves_length' => $customeUniform->guide_sleeves_length,
             'guide_quantity' => $customeUniform->guide_quantity,
+            'created_at' => $customeUniform->created_at->format('d M Y h:i A'),
         ];
-
-        $cart[] = $item;
-
 
         session(['custom_uniform_cart' => $cart]);
 
         return redirect()
-            ->route('custome.index')
+            ->route('custome.view')
             ->with('success', 'Record created successfully');
     }
+
+     public function clearCart()
+    {
+        session()->forget('custom_uniform_cart');
+        return redirect()->back()->with('success', 'Cart cleared successfully.');
+    }
+
+    public function remove($index)
+{
+    $cart = session()->get('custom_uniform_cart', []);
+
+    if (isset($cart[$index])) {
+        unset($cart[$index]);
+        session()->put('custom_uniform_cart', array_values($cart)); // Reindex array
+    }
+
+    return redirect()->back()->with('success', 'Item removed from cart.');
+}
 }

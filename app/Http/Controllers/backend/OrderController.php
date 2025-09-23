@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\sdk\Order;
 use Illuminate\Http\Request;
+use App\Models\sdk\CustomUniform;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,8 +16,10 @@ class OrderController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
+            'news_offers' => 'required',
             'country' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -39,7 +42,6 @@ class OrderController extends Controller
         }
 
         $order = new Order();
-
         $order->email = $request->email;
         $order->news_offers = $request->news_offers;
         $order->country = $request->country;
@@ -52,11 +54,8 @@ class OrderController extends Controller
         $order->state = $request->state;
         $order->zip_code = $request->zip_code;
         $order->phone = $request->phone;
-
         $order->account_holder_name = $request->account_holder_name;
-
         $order->billing_same = $request->billing_same;
-
         $order->billing_first_name = $request->billing_first_name;
         $order->billing_last_name = $request->billing_last_name;
         $order->billing_company = $request->billing_company;
@@ -66,9 +65,11 @@ class OrderController extends Controller
         $order->billing_state = $request->billing_state;
         $order->billing_zip = $request->billing_zip;
         $order->billing_phone = $request->billing_phone;
-
         $order->save();
 
         return redirect()->back()->with('success', 'Order placed successfully!');
     }
 }
+
+
+ 
