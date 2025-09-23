@@ -140,50 +140,50 @@
  <div class="items-list" style="height: 36rem;">
      <!-- Shirts Tab -->
      <div class="tabcontent" id="Shirts">
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-1.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-1.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-1.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-1.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-2.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-2.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-2.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-2.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-3.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-3.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-3.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-3.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-4.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-4.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-4.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-4.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-5.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-5.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-5.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-5.png') }}')" alt="Shirt 1" width="100"/>
                 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-6.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-6.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-6.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-6.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-7.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-7.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-7.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-7.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-8.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-8.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-8.png') }}" class="shirt"
+                 onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-8.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-9.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-9.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-9.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-9.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-10.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-10.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-10.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-10.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-11.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-11.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-11.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-11.png') }}')" alt="Shirt 1" width="100"/>
 
-             <img src="{{ asset('assets/cricket-kit/cricket-kit-12.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-12.png') }}')" alt="Shirt 1" width="100"/>
+             <img src="{{ asset('assets/basketball-kit/basketball-kit-12.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-12.png') }}')" alt="Shirt 1" width="100"/>
 
-             <img src="{{ asset('assets/cricket-kit/cricket-kit-13.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-13.png') }}')" alt="Shirt 1" width="100"/>
+             <img src="{{ asset('assets/basketball-kit/basketball-kit-13.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-13.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-14.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-14.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-14.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-14.png') }}')" alt="Shirt 1" width="100"/>
 
-            <img src="{{ asset('assets/cricket-kit/cricket-kit-15.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-15.png') }}')" alt="Shirt 1" width="100"/>
+            <img src="{{ asset('assets/basketball-kit/basketball-kit-15.png') }}" class="shirt"
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-15.png') }}')" alt="Shirt 1" width="100"/>
 
 
            
@@ -289,7 +289,7 @@
     <div class="item-display" style="position: relative;">
         <div id="text-display" style="position: absolute; z-index: 5;"></div>
         <!-- Base shirt hamesha dikh rahi hai -->
-        <img id="selected-shirt" src="{{ asset('assets/cricket-kit/cricket-kit-1.png') }}" alt="Selected Shirt" />
+        <img id="selected-shirt" src="{{ asset('assets/basketball-kit/basketball-kit-1.png') }}" alt="Selected Shirt" />
         <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay" style="display: none;" />
     </div>
 

@@ -10,6 +10,19 @@ use Illuminate\Http\Request;
 
 class CustomeUniformController extends Controller
 {
+
+      public function soccer()
+    {
+        return view('backend.custome.soccer');
+    }
+
+      public function circket()
+    {
+        return view('backend.custome.circket');
+    }
+
+
+
     public function view()
     {
 
@@ -18,11 +31,6 @@ class CustomeUniformController extends Controller
 
         return view('backend.custome.view', ['customeUniform' => session('customeUniform')]);
     }
-    public function index()
-    {
-        return view('backend.custome.index');
-    }
-
 
     public function store(Request $request)
     {

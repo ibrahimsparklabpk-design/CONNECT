@@ -122,7 +122,6 @@ class SoccerController extends Controller
         $soccer->guide_quantity = $request->guide_quantity;
 
 
-
         if ($request->filled('selected_shirt')) {
             // Folder jahan images save hongi
             $destination = public_path('selected-shirts');
