@@ -1365,22 +1365,7 @@ document.getElementById("upload-patterns").addEventListener("change", function(e
 
 
 
-<script>
-    // Jab user shirt select kare
-   function selectShirt(imagePath) {
-    // Hidden input update
-    const hiddenInput = document.getElementById("selectedShirtInput");
-    hiddenInput.value = imagePath;
 
-    // Right section me base shirt image replace karo
-    const shirtImg = document.getElementById("selected-shirt");
-    if (shirtImg) {
-        shirtImg.src = imagePath;
-    }
-
-    console.log("Selected Shirt Path:", imagePath); // Debugging
-}
-</script>
 
     <!-- FOOTER STARTS FORM HERE -->
 

@@ -73,7 +73,7 @@ public function store(Request $request)
         'guide_shirt_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
         'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
         'guide_sleeves_length' => ['required', 'in:short,long'],
-        'guide_price' => ['required', 'integer', 'min:1'],
+       
           // 'price' => ['required', 'numeric', 'min:0'],
     ]);
 
