@@ -70,7 +70,7 @@ Route::prefix('v2')->group(function () {
         Route::prefix('custome')->group(function () {
             Route::controller(CustomeUniformController::class)->name('custome.')->group(function () {
                 Route::get('soccer', 'soccer')->name('index');   // /v2/backend/custome/index
-                 Route::get('circket', 'circket')->name('circket');   // /v2/backend/custome/index
+                Route::get('circket', 'circket')->name('circket');   // /v2/backend/custome/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
                 Route::post('cart/clear', 'clearCart')->name('cart.clear');  // /v2/backend/custome/store
                 Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  // /v2/backend/custome/store
