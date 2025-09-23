@@ -67,18 +67,18 @@ class CustomeUniformController extends Controller
         // $price = $request->price;
         // $quantity = $request->quantity;
 
-        // custom image
-        $image = time() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('custom/images'), $image);
+        // // custom image
+        // $image = time() . '.' . request()->image->getClientOriginalExtension();
+        // request()->image->move(public_path('custom/images'), $image);
 
-         // custom pattern
-        $pattern = time() . '.' . request()->pattern->getClientOriginalExtension();
-        request()->pattern->move(public_path('custom/pattern'), $pattern);
+        // // custom pattern
+        // $pattern = time() . '.' . request()->pattern->getClientOriginalExtension();
+        // request()->pattern->move(public_path('custom/pattern'), $pattern);
 
-        // custom logo
-        $logo = time() . '.' . request()->logo->getClientOriginalExtension();
-        request()->logo->move(public_path('custom/logo'), $logo);
-        
+        // // custom logo
+        // $logo = time() . '.' . request()->logo->getClientOriginalExtension();
+        // request()->logo->move(public_path('custom/logo'), $logo);
+
         $customeUniform = new CustomUniform();
 
         $customeUniform->fit_type = $request->fit_type;
@@ -111,16 +111,44 @@ class CustomeUniformController extends Controller
         $customeUniform->guide_pant_size = $request->guide_pant_size;
         $customeUniform->guide_sleeves_length = $request->guide_sleeves_length;
         $customeUniform->guide_quantity = $request->guide_quantity;
-        $customeUniform->image = $image;
-        $customeUniform->pattern = $pattern;
-        $customeUniform->logo = $logo;
+     
         $customeUniform->save();
+
+
+        // image task 
+
+        
+        if ($request->filled('choose_image')) {
+            // Folder jahan images save hongi
+            $destination = public_path('selected-shirts');
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true); // folder agar na ho to bana do
+            }
+
+            // Original image ka path
+            $originalPath = public_path(str_replace(url('/'), '', $request->choose_image));
+            $filename = time() . '_' . basename($originalPath);
+
+            // Image copy kar do new folder me
+            copy($originalPath, $destination . '/' . $filename);
+
+            // Database me path save karo
+            $customeUniform->image = 'selected-shirts/' . $filename;
+
+            $customeUniform->save();
+
+            return redirect()->back()->with('success', 'Shirt saved successfully!');
+        } else {
+            return redirect()->back()
+                ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
+                ->withInput();
+        }
 
         // 3. Store in session (cart)
         $cart = session()->get('custom_uniform_cart', []);
 
         $cart[] = [
-            'image' => $image,
+           
             'fit_type' => $customeUniform->fit_type,
             'kit_type' => $customeUniform->kit_type,
             'collar_type' => $customeUniform->collar_type,
@@ -157,21 +185,21 @@ class CustomeUniformController extends Controller
             ->with('success', 'Record created successfully');
     }
 
-     public function clearCart()
+    public function clearCart()
     {
         session()->forget('custom_uniform_cart');
         return redirect()->back()->with('success', 'Cart cleared successfully.');
     }
 
     public function remove($index)
-{
-    $cart = session()->get('custom_uniform_cart', []);
+    {
+        $cart = session()->get('custom_uniform_cart', []);
 
-    if (isset($cart[$index])) {
-        unset($cart[$index]);
-        session()->put('custom_uniform_cart', array_values($cart)); // Reindex array
+        if (isset($cart[$index])) {
+            unset($cart[$index]);
+            session()->put('custom_uniform_cart', array_values($cart)); // Reindex array
+        }
+
+        return redirect()->back()->with('success', 'Item removed from cart.');
     }
-
-    return redirect()->back()->with('success', 'Item removed from cart.');
-}
 }

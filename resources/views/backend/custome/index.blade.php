@@ -356,12 +356,12 @@
             <div class="head-box">
                 <p class="mainheading">CUSTOM SOCCER KIT</p>
 
-                {{-- <div class="m-pr">
+                <div class="m-pr">
                     <p class="s-pr">$39.00</p>
                     <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price -->
                     <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
                     <p class="str-r">5 reviews</p>
-                </div> --}}
+                </div>
             </div>
             {{-- ================== Basic Kit ================== --}}
 
@@ -814,15 +814,15 @@
             </div>
             <div>
                 <label for="image">Image</label>
-                <input type="file" name="image" class="form-control" style="padding: 9px">
+                <input type="hidden" name="choose_image" class="form-control" style="padding: 9px">
             </div>
             <div>
                 <label for="image">Pattern</label>
-                <input type="file" name="pattern" class="form-control" style="padding: 9px">
+                <input type="hidden" name="pattern" class="form-control" style="padding: 9px">
             </div>
             <div>
                 <label for="image">Logo</label>
-                <input type="file" name="logo" class="form-control" style="padding: 9px">
+                <input type="hidden" name="logo" class="form-control" style="padding: 9px">
             </div>
             <div class="btn_box">
                 <button type="submit" class="addtocart_btn">Add to cart</button>
