@@ -112,6 +112,82 @@
                 margin-top: -11rem;
             }
         }
+
+        <!-- logo code starts here -->
+        .logos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 100%;   /* ✅ horizontal scroll prevent */
+    overflow: hidden;  /* ✅ koi scrollbar na aaye */
+}
+
+.logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.logo-item img.logo {
+    width: 100%;
+    max-width: 80px;   /* ✅ image auto resize */
+    max-height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.logo-item .btn {
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+
+.upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background 0.3s ease;
+    cursor: pointer;   /* 👈 yeh line zaroori hai */
+}
+
+.upload-btn:hover {
+    background: #333;
+}
+
+.upload-btn i {
+    font-size: 16px;
+}
+
+
+.delete-btn {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
     </style>
 
 

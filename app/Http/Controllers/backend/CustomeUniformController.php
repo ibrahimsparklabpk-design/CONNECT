@@ -11,12 +11,13 @@ use Illuminate\Http\Request;
 class CustomeUniformController extends Controller
 {
 
-      public function soccer()
+    public function soccer()
     {
-        return view('backend.custome.soccer');
+        $customImage = CustomUniform::orderBy('id')->get();
+        return view('backend.custome.soccer', compact('customImage'));
     }
 
-      public function circket()
+    public function circket()
     {
         return view('backend.custome.circket');
     }
@@ -34,6 +35,7 @@ class CustomeUniformController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
 
             'fit_type' => ['required', 'in:men,women,youth'],
@@ -80,12 +82,12 @@ class CustomeUniformController extends Controller
         // request()->image->move(public_path('custom/images'), $image);
 
         // // custom pattern
-        // $pattern = time() . '.' . request()->pattern->getClientOriginalExtension();
-        // request()->pattern->move(public_path('custom/pattern'), $pattern);
+        $pattern = time() . '.' . request()->pattern->getClientOriginalExtension();
+        request()->pattern->move(public_path('custom/pattern'), $pattern);
 
-        // // custom logo
-        // $logo = time() . '.' . request()->logo->getClientOriginalExtension();
-        // request()->logo->move(public_path('custom/logo'), $logo);
+        // custom logo
+        $logo = time() . '.' . request()->logo->getClientOriginalExtension();
+        request()->logo->move(public_path('custom/logo'), $logo);
 
         $customeUniform = new CustomUniform();
 
@@ -119,30 +121,34 @@ class CustomeUniformController extends Controller
         $customeUniform->guide_pant_size = $request->guide_pant_size;
         $customeUniform->guide_sleeves_length = $request->guide_sleeves_length;
         $customeUniform->guide_quantity = $request->guide_quantity;
-     
+        $customeUniform->logo = $logo;
+        $customeUniform->pattern = $pattern;
+
         $customeUniform->save();
 
 
-        // image task 
-
-        
-        if ($request->filled('choose_image')) {
+        if ($request->filled('selected_shirt')) {
             // Folder jahan images save hongi
-            $destination = public_path('selected-shirts');
+            $destination = public_path('custom-shirts');
             if (!file_exists($destination)) {
-                mkdir($destination, 0777, true); // folder agar na ho to bana do
+                mkdir($destination, 0777, true);
             }
 
-            // Original image ka path
-            $originalPath = public_path(str_replace(url('/'), '', $request->choose_image));
-            $filename = time() . '_' . basename($originalPath);
+            // Base64 image string nikaalo
+            $imageData = $request->selected_shirt;
 
-            // Image copy kar do new folder me
-            copy($originalPath, $destination . '/' . $filename);
+            // Agar "data:image/png;base64," shuruat me ho to use hatao
+            $imageData = str_replace('data:image/png;base64,', '', $imageData);
+            $imageData = str_replace(' ', '+', $imageData);
 
-            // Database me path save karo
-            $customeUniform->image = 'selected-shirts/' . $filename;
+            // Unique file name
+            $filename = time() . '_shirt.png';
 
+            // File save karo
+            file_put_contents($destination . '/' . $filename, base64_decode($imageData));
+
+            // Database me sirf relative path save karo
+            $customeUniform->image = 'custom-shirts/' . $filename;
             $customeUniform->save();
 
             return redirect()->back()->with('success', 'Shirt saved successfully!');
@@ -151,12 +157,11 @@ class CustomeUniformController extends Controller
                 ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
                 ->withInput();
         }
-
         // 3. Store in session (cart)
         $cart = session()->get('custom_uniform_cart', []);
 
         $cart[] = [
-           
+
             'fit_type' => $customeUniform->fit_type,
             'kit_type' => $customeUniform->kit_type,
             'collar_type' => $customeUniform->collar_type,
@@ -209,5 +214,13 @@ class CustomeUniformController extends Controller
         }
 
         return redirect()->back()->with('success', 'Item removed from cart.');
+    }
+
+    public function destroy($id)
+    {
+        $uniform = CustomUniform::findOrFail($id);
+        $uniform->delete();
+
+        return redirect()->route('custome.index')->with('success', 'logo deleted successfully!');
     }
 }

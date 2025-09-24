@@ -15,141 +15,159 @@
             </ul>
         </div>
     @endif
-    <form id="payment-form" action="{{ route('order.store') }}" method="POST">
-        @csrf
+<form id="payment-form" action="{{ route('order.store') }}" method="POST">
+    @csrf
 
-        <div class="">
-            <label>Email</label>
-            <input type="email" name="email" value="{{ old('email') }}" class="form-control">
-        </div>
+    <div>
+        <label>Email</label>
+        <input type="email" name="email" value="{{ old('email') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <input type="checkbox" id="news-offers" name="news_offers" value="1"
-                {{ old('news_offers') ? 'checked' : '' }}>
-            <label for="news-offers">Email me with news and offers</label>
+    <div>
+        <input type="checkbox" id="news-offers" name="news_offers" value="1" {{ old('news_offers') ? 'checked' : '' }}>
+        <label for="news-offers">Email me with news and offers</label>
+    </div>
 
-        </div>
+    <div>
+        <label>Country</label>
+        <input type="text" name="country" value="{{ old('country') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>Country</label>
-            <input type="text" name="country" value="{{ old('country') }}" class="form-control">
-        </div>
+    <div>
+        <label>First Name</label>
+        <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>First Name</label>
-            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control">
-        </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>Last Name</label>
-            <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control">
-        </div>
+    <div>
+        <label>Company</label>
+        <input type="text" name="company" value="{{ old('company') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Company</label>
-            <input type="text" name="company" value="{{ old('company') }}" class="form-control">
-        </div>
+    <div>
+        <label>Address</label>
+        <input type="text" name="address" value="{{ old('address') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>Address</label>
-            <input type="text" name="address" value="{{ old('address') }}" class="form-control">
-        </div>
+    <div>
+        <label>Apartment</label>
+        <input type="text" name="apartment" value="{{ old('apartment') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Apartment</label>
-            <input type="text" name="apartment" value="{{ old('apartment') }}" class="form-control">
-        </div>
+    <div>
+        <label>City</label>
+        <input type="text" name="city" value="{{ old('city') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>City</label>
-            <input type="text" name="city" value="{{ old('city') }}" class="form-control">
-        </div>
+    <div>
+        <label>State</label>
+        <input type="text" name="state" value="{{ old('state') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>State</label>
-            <input type="text" name="state" value="{{ old('state') }}" class="form-control">
-        </div>
-        <!-- Payment Section -->
-        <h2>Payment</h2>
-        <p>All transactions are secure and encrypted.</p>
+    <!-- Payment Section -->
+    <h2>Payment</h2>
+    <p>All transactions are secure and encrypted.</p>
 
-        <!-- Account Holder Name -->
-        <label for="Account-Holder-Name">Account Holder Name</label>
-        <input type="text" id="Account-Holder-Name" name="Account-Holder-Name" placeholder="" required>
+    <div>
+        <label for="account_holder_name">Account Holder Name</label>
+        <!-- NOTE: single field name "account_holder_name" - use this name in controller too -->
+        <input type="text" id="account_holder_name" name="account_holder_name" value="{{ old('account_holder_name') }}" class="form-control" required>
+    </div>
+<label for="amount">Enter Amount (USD)</label>
+<input type="number" name="amount" min="1" required>
 
-        <!-- Card Element for Stripe -->
-        <label for="card-element">Credit Card / Debit Card</label>
-        <div id="card-element"></div> <!-- Stripe will insert the card input here -->
+    <!-- Single Card Element placeholder -->
+     {{-- <div>
+        <label>Card Number</label>
+        <input type="text" id="card_number" class="form-control" placeholder="4242 4242 4242 4242" required>
+    </div>
 
-        <!-- Error Message -->
-        <div id="card-errors" role="alert"></div>
-        <div class="">
-            <label>Zip Code</label>
-            <input type="text" name="zip_code" value="{{ old('zip_code') }}" class="form-control">
-        </div>
+    <div>
+        <label>Expiry Month</label>
+        <input type="text" id="exp_month" class="form-control" placeholder="12" required>
+    </div>
 
-        <div class="">
-            <label>Phone</label>
-            <input type="text" name="phone" value="{{ old('phone') }}" class="form-control">
-        </div>
+    <div>
+        <label>Expiry Year</label>
+        <input type="text" id="exp_year" class="form-control" placeholder="34" required>
+    </div>
 
-        <div class="">
-            <label>Account Holder Name</label>
-            <input type="text" name="account_holder_name" value="{{ old('account_holder_name') }}" class="form-control">
-        </div>
+    <div>
+        <label>CVC</label>
+        <input type="text" id="cvc" class="form-control" placeholder="123" required>
+    </div> --}}
 
-        <div class="">
-            <label>Billing Same</label>
-            <input type="checkbox" name="billing_same" value="1" {{ old('billing_same') ? 'checked' : '' }}>
-        </div>
+    <!-- Hidden field for Stripe token -->
+    {{-- <input type="hidden" name="stripeToken" id="stripeToken"> --}}
+    <!-- rest of billing fields -->
+    <div>
+        <label>Zip Code</label>
+        <input type="text" name="zip_code" value="{{ old('zip_code') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing First Name</label>
-            <input type="text" name="billing_first_name" value="{{ old('billing_first_name') }}" class="form-control">
-        </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" required>
+    </div>
 
-        <div class="">
-            <label>Billing Last Name</label>
-            <input type="text" name="billing_last_name" value="{{ old('billing_last_name') }}" class="form-control">
-        </div>
+    <div>
+    <label>Billing Same</label>
+    <input type="hidden" name="billing_same" value="0"> <!-- always submit -->
+    <input type="checkbox" name="billing_same" value="1" {{ old('billing_same') ? 'checked' : '' }}>
+</div>
 
-        <div class="">
-            <label>Billing Company</label>
-            <input type="text" name="billing_company" value="{{ old('billing_company') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing First Name</label>
+        <input type="text" name="billing_first_name" value="{{ old('billing_first_name') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing Address</label>
-            <input type="text" name="billing_address" value="{{ old('billing_address') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing Last Name</label>
+        <input type="text" name="billing_last_name" value="{{ old('billing_last_name') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing Apartment</label>
-            <input type="text" name="billing_apartment" value="{{ old('billing_apartment') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing Company</label>
+        <input type="text" name="billing_company" value="{{ old('billing_company') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing City</label>
-            <input type="text" name="billing_city" value="{{ old('billing_city') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing Address</label>
+        <input type="text" name="billing_address" value="{{ old('billing_address') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing State</label>
-            <input type="text" name="billing_state" value="{{ old('billing_state') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing Apartment</label>
+        <input type="text" name="billing_apartment" value="{{ old('billing_apartment') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing Zip</label>
-            <input type="text" name="billing_zip" value="{{ old('billing_zip') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing City</label>
+        <input type="text" name="billing_city" value="{{ old('billing_city') }}" class="form-control">
+    </div>
 
-        <div class="">
-            <label>Billing Phone</label>
-            <input type="text" name="billing_phone" value="{{ old('billing_phone') }}" class="form-control">
-        </div>
+    <div>
+        <label>Billing State</label>
+        <input type="text" name="billing_state" value="{{ old('billing_state') }}" class="form-control">
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div>
+        <label>Billing Zip</label>
+        <input type="text" name="billing_zip" value="{{ old('billing_zip') }}" class="form-control">
+    </div>
+
+    <div>
+        <label>Billing Phone</label>
+        <input type="text" name="billing_phone" value="{{ old('billing_phone') }}" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
 
 
 
@@ -262,8 +280,9 @@
     <div class="footer-copyright">
         <p>&copy; Copyright 2024 NY Creative Studio All Rights Reserved</p>
     </div>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
+    {{-- <script src="https://js.stripe.com/v3/"></script> --}}
+    
+{{-- <script>
         var stripe = Stripe("{{ env('STRIPE_KEY') }}");
         var elements = stripe.elements();
         var cardElement = elements.create('card');
@@ -360,5 +379,62 @@
                     document.querySelector('button').disabled = false;
                 });
         });
-    </script>
+    </script> --}}
+
+    <script src="https://js.stripe.com/v3/"></script>
+<!-- include stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    // Replace with your publishable key from .env
+    const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+    const elements = stripe.elements();
+
+    const style = {
+        base: {
+            fontSize: '16px',
+            color: '#32325d',
+            '::placeholder': { color: '#aab7c4' },
+        }
+    };
+
+    // create & mount single card element
+    const card = elements.create('card', { style: style });
+    card.mount('#card-element');
+
+    // display realtime errors
+    card.on('change', function(event) {
+        const displayError = document.getElementById('card-errors');
+        displayError.textContent = event.error ? event.error.message : '';
+    });
+
+    // handle form submit -> create token -> append hidden input -> submit
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // optional: disable submit button here to prevent double submit
+
+        const accountHolderName = document.getElementById('account_holder_name').value || '';
+        const { token, error } = await stripe.createToken(card, {
+            name: accountHolderName
+        });
+
+        if (error) {
+            // show error and re-enable submit if disabled
+            document.getElementById('card-errors').textContent = error.message;
+        } else {
+            // append token to form and submit
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            form.submit();
+        }
+    });
+</script>
+
+
 @endsection
