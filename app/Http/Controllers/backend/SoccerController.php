@@ -54,7 +54,7 @@ class SoccerController extends Controller
             'guide_pant_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
             'guide_sleeves_length' => ['required', 'in:short,long'],
 
-            // 'price' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
         ]);
 
 

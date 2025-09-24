@@ -19,7 +19,6 @@ class OrderController extends Controller
         // dd($request->all());
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'news_offers' => 'required',
             'country' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -43,7 +42,6 @@ class OrderController extends Controller
 
         $order = new Order();
         $order->email = $request->email;
-        $order->news_offers = $request->news_offers;
         $order->country = $request->country;
         $order->first_name = $request->first_name;
         $order->last_name = $request->last_name;
@@ -67,7 +65,28 @@ class OrderController extends Controller
         $order->billing_phone = $request->billing_phone;
         $order->save();
 
-        return redirect()->back()->with('success', 'Order placed successfully!');
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET')); 
+$amount = $request->amount * 100; // cents
+$session = \Stripe\Checkout\Session::create([
+    'payment_method_types' => ['card'],
+    'line_items' => [[
+        'price_data' => [
+            'currency' => 'usd',
+            'product_data' => [
+                'name' => 'Custom Payment',
+            ],
+            'unit_amount' => $amount,
+        ],
+        'quantity' => 1,
+    ]],
+    'mode' => 'payment',
+    'customer_email' => $request->email,
+    'success_url' => route('order.create', ['session_id' => '{CHECKOUT_SESSION_ID}']),
+    'cancel_url' => route('order.create'),
+]);
+return redirect($session->url);
+
     }
 }
 
