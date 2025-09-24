@@ -14,9 +14,10 @@ class AddColumnsToCustomUniformsTable extends Migration
     public function up()
     {
         Schema::table('custom_uniforms', function (Blueprint $table) {
-        $table->string('image')->nullable();
-        $table->string('logo')->nullable();
-        $table->string('pattern')->nullable();
+           $table->string('image')->nullable()->after('guide_quantity');
+            $table->string('logo')->nullable()->after('image');
+            $table->string('pattern')->nullable()->after('logo');
+
         });
     }
 

@@ -1,7 +1,117 @@
 @extends('backend.layout.master')
+
+
 @section('main-content')
 
-    <!-- Navbar Ends -->
+    <style>
+        /* Container for the form */
+#payment-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form headings */
+#payment-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+/* Labels */
+#payment-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Inputs */
+#payment-form input[type="text"],
+#payment-form input[type="email"],
+#payment-form input[type="number"],
+#payment-form input[type="checkbox"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Checkbox styling */
+#payment-form input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* Input focus effect */
+#payment-form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Button styling */
+#payment-form button {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Button hover */
+#payment-form button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Error messages */
+.alert {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Card element styling */
+#card-element {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Card error message */
+#card-errors {
+    color: #cc0000;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #payment-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+    </style>
 
 
 
