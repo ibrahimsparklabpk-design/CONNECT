@@ -63,7 +63,6 @@ Route::prefix('v2')->group(function () {
                 Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
                  Route::post('cart/clear', 'clearCart')->name('cart.clear');  // /v2/backend/custome/store
                 Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  // /v2/backend/custome/store
-                
             });
         });
 
@@ -74,6 +73,8 @@ Route::prefix('v2')->group(function () {
                 Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
                 Route::post('cart/clear', 'clearCart')->name('cart.clear');  // /v2/backend/custome/store
                 Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  // /v2/backend/custome/store
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+ 
             });
         });
 
