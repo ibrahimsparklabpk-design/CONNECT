@@ -132,7 +132,7 @@ class SoccerController extends Controller
             $customeUniform->image = 'selected-shirts/' . $filename;
             $customeUniform->save();
 
-            return redirect()->back()->with('success', 'Shirt saved successfully!');
+            return redirect()->route('static.view')->with('success', 'Shirt saved successfully!');
         } else {
             return redirect()->back()
                 ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
@@ -161,7 +161,7 @@ class SoccerController extends Controller
 
 
         return redirect()
-            ->route('static.index')
+            ->route('static.view')
             ->with('success', 'Soccer record created successfully!');
     }
 
