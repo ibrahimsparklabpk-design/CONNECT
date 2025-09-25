@@ -534,6 +534,8 @@
                                 <th>Shirt Size</th>
                                 <th>short Size</th>
                                 <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -565,9 +567,15 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" name="quantity" class="form-control" placeholder="0"
-                                        min="1" style="padding: 9px">
-                                </td>
+    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="0" min="1" style="padding: 9px">
+</td>
+<td>
+    <input type="number" id="price" name="price" class="form-control" placeholder="0" min="1" style="padding: 9px">
+</td>
+<td>
+    <input type="text" id="total" class="form-control" readonly style="padding: 9px; font-weight:bold;">
+</td>
+
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
                                         style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
@@ -748,7 +756,9 @@
                                 <th>Shirt Size</th>
                                 <th>Pant Size</th>
                                 <th>guide Sleeves Length</th>
-                                <th>Quantity</th>
+                                <th>Guide Quantity</th>
+                                <th>Guide Price</th>
+                                 <th>Guide Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -787,10 +797,20 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td>
-                                    <input type="number" name="guide_quantity" class="form-control" placeholder="0"
-                                        min="1" style="padding: 9px">
-                                </td>
+<td>
+    <input type="number" id="guide_quantity" name="guide_quantity"
+        class="form-control" placeholder="0" min="1" style="padding: 9px">
+</td>
+<td>
+    <input type="number" id="guide_price" name="guide_price"
+        class="form-control" placeholder="0" min="1" style="padding: 9px">
+</td>
+<td>
+    <input type="text" id="guide_total" name="guide_total"
+        class="form-control" readonly style="padding:9px; font-weight:bold;">
+</td>
+
+
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm remove-player-row"
                                         title="Remove Row"
@@ -1636,6 +1656,41 @@
 
 
 
+// custom soccer price works starts here 
+
+<script>
+    const qty = document.getElementById("quantity");
+    const price = document.getElementById("price");
+    const total = document.getElementById("total");
+
+    function updateTotal() {
+        let q = parseInt(qty.value) || 0;
+        let p = parseInt(price.value) || 0;
+        total.value = q * p;
+    }
+
+    qty.addEventListener("input", updateTotal);
+    price.addEventListener("input", updateTotal);
+</script>
+// custom soccer guided price works starts here 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const qty = document.getElementById("guide_quantity");
+        const price = document.getElementById("guide_price");
+        const total = document.getElementById("guide_total");
+
+        function updateTotal() {
+            let q = parseInt(qty.value) || 0;
+            let p = parseFloat(price.value) || 0;
+
+            total.value = q * p; // 👈 qty × price = total
+        }
+
+        // dono input pe listener
+        qty.addEventListener("input", updateTotal);
+        price.addEventListener("input", updateTotal);
+    });
+</script>
 
 
     <!-- FOOTER STARTS FORM HERE -->

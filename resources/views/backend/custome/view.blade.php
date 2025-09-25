@@ -26,7 +26,7 @@
                                     <th>Sleeves</th>
                                     <th>Player Name</th>
                                     <th>Number</th>
-                                    <th>Qty</th>
+                                    <th>Price</th>
                                     <th>Goalkeeper Kit</th>
                                     <th>Staff Option</th>
                                     <th>Created At</th>
@@ -53,7 +53,11 @@
                                         <td>{{ ucfirst($item['sleeves_length']) }}</td>
                                         <td>{{ $item['name'] }}</td>
                                         <td>{{ $item['number'] }}</td>
-                                        <td>{{ $item['quantity'] }}</td>
+
+                                        {{-- Sirf total show karna --}}
+                                        <td><strong>${{ number_format(($item['total'] ?? 0) + ($item['guide_total'] ?? 0), 2) }}</strong>
+                                        </td>
+
                                         <td>{{ ucfirst($item['goalkeeper_kit']) }}</td>
                                         <td>{{ ucfirst($item['staff_other']) }}</td>
                                         <td>
@@ -70,9 +74,10 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="11" class="text-center">No cart items found.</td>
+                                        <td colspan="12" class="text-center">No cart items found.</td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
 
@@ -88,7 +93,7 @@
                 <!-- ✅ Checkout Button -->
                 <!-- ✅ Checkout Button - Properly Centered -->
                 <div style="display: flex; justify-content: center; padding-bottom: 50px; padding-top: 50px;">
-                    <a href="{{ route('checkout') }}" class="addtocart_btn">
+                    <a href="{{ route('custom-order.create') }}" class="addtocart_btn">
                         Proceed to Checkout
                     </a>
                 </div>

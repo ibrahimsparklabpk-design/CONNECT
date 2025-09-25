@@ -589,6 +589,41 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".quantity-input").forEach(input => {
         input.addEventListener("input", calculateTotals);
     });
+
+
+
+</script>
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const qty = document.getElementById("guide_quantity");
+        const price = document.getElementById("guide_price");
+        const total = document.getElementById("guide_total");
+
+        let unitPrice = 0; // 👈 yahan base unit price store hoga (jo user pehli daalega)
+
+        // Jab user manual price dale
+        price.addEventListener("input", function () {
+            unitPrice = parseFloat(price.value) || 0; // base price save karo
+            calculate();
+        });
+
+        // Jab quantity change ho
+        qty.addEventListener("input", calculate);
+
+        function calculate() {
+            let q = parseInt(qty.value) || 0;
+
+            // price = unitPrice × qty
+            let calculatedPrice = unitPrice * q;
+            price.value = calculatedPrice;
+
+            // total bhi wahi hoga
+            total.value = calculatedPrice;
+        }
+    });
 </script>
 @yield('script');
 

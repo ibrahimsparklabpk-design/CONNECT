@@ -23,6 +23,7 @@ use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\TwoFactorAuthentication;
 use App\Http\Controllers\backend\SoccerController;
 use App\Http\Controllers\backend\CheckoutController;
+use App\Http\Controllers\backend\CustomorderController;
 use App\Http\Controllers\backend\CustomeUniformController;
 
 /*
@@ -56,12 +57,13 @@ Route::prefix('v2')->group(function () {
 
         Route::prefix('static')->group(function () {
             Route::controller(SoccerController::class)->name('static.')->group(function () {
-                 Route::get('soccer', 'soccer')->name('index');   // /v2/backend/soccer/index
-                    Route::get('circket', 'circket')->name('circket');   // /v2/backend/circeket/index
-                    Route::get('basketball', 'basketball')->name('basketball');   // /v2/backend/Basketball/index
-                   Route::get('goalKeeper', 'goalKeeper')->name('goalKeeper');   // /v2/backend/Basketball/index
-                    Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
-                    Route::post('cart/clear', 'clearCart')->name('cart.clear');                Route::delete('/cart/remove/{index}', 'removeFromCart')->name('cart.remove');  // /v2/backend/custome/store
+                Route::get('soccer', 'soccer')->name('index');   // /v2/backend/soccer/index
+                Route::get('circket', 'circket')->name('circket');   // /v2/backend/circeket/index
+                Route::get('basketball', 'basketball')->name('basketball');   // /v2/backend/Basketball/index
+                Route::get('goalKeeper', 'goalKeeper')->name('goalKeeper');   // /v2/backend/Basketball/index
+                Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
+                Route::post('cart/clear', 'clearCart')->name('cart.clear');
+                Route::delete('/cart/remove/{index}', 'removeFromCart')->name('cart.remove');  // /v2/backend/custome/store
                 Route::get('view', 'view')->name('view');   // /v2/backend/custome/index
 
             });
@@ -84,6 +86,13 @@ Route::prefix('v2')->group(function () {
             Route::controller(OrderController::class)->name('order.')->group(function () {
                 Route::get('create', 'create')->name('create');   // /v2/backend/custome/index
                 Route::post('store', 'store')->name('store');   // /v2/backend/custome/index
+            });
+        });
+
+        Route::prefix('custom-order')->group(function () {
+            Route::controller(CustomorderController::class)->name('custom-order.')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::post('store', 'store')->name('store');
             });
         });
 

@@ -137,6 +137,7 @@
  <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
      @csrf
  <!-- Items List -->
+ 
  <div class="items-list" style="height: 36rem;">
      <!-- Shirts Tab -->
      <div class="tabcontent" id="Shirts">
@@ -679,8 +680,8 @@
                          <th>Shirt Size</th>
                          <th>Pant Size</th>
                          <th>guide Sleeves Length</th>
-                         <th>Quantity</th>
-                         
+                         <th>Guide Quantity</th>
+                         <th>Guide Price</th>
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -719,10 +720,18 @@
                                  @endforeach
                              </select>
                          </td>
-                         <td>
-                             <input type="number" name="guide_quantity" class="form-control" placeholder="0" min="1"
-                                 required>
-                         </td>
+<td>
+    <input type="number" id="guide_quantity" name="guide_quantity" 
+        class="form-control" placeholder="0" min="1" required>
+</td>
+<td>
+    <input type="number" id="guide_price" name="guide_price" 
+        class="form-control" placeholder="0" min="1" required>
+</td>
+<td>
+    <input type="text" id="guide_total" name="guide_total" 
+        class="form-control" readonly style="font-weight:bold;">
+</td>
                           
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-player-row" title="Remove Row"
