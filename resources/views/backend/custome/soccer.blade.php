@@ -185,23 +185,9 @@
                                             style="padding: 10px 20px; background: #000; color: #fff; border-radius: 8px; cursor: pointer; font-weight: 500;">
                                             <i class="fa fa-upload"></i> Upload Your Logo
                                         </label>
-                                        <input type="file" name="logo">
+                                      
                                     </div>
-                                    <div class="logos-container">
-                                        @foreach ($customImage as $logo)
-                                            @if (!empty($logo->logo) && file_exists(public_path('custom/logo/' . $logo->logo)))
-                                                <div class="logo-item">
-                                                    <img src="{{ asset('custom/logo/' . $logo->logo) }}" class="logo"
-                                                        alt="User Logo">
-
-                                                    <a href="{{ route('custome.destroy', $logo->id) }}"
-                                                        class="btn delete-btn" onclick="return confirm('Are you sure?')">
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
+                                   
 
                                     <!-- Uploaded Logos Preview -->
                                     <div id="uploaded-logos" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -217,23 +203,9 @@
                                             style="padding: 10px 20px; background: #000; color: #fff; border-radius: 8px; cursor: pointer; font-weight: 500;">
                                             <i class="fa fa-upload"></i> Upload Your Pattern
                                         </label>
-                                        <input type="file" name="pattern" />
+                                        
                                     </div>
-                                    <div class="logos-container">
-                                         @foreach ($customImage as $pattern)
-                                            @if (!empty($pattern->pattern) && file_exists(public_path('custom/logo/' . $logo->logo)))
-                                                <div class="logo-item">
-                                                    <img src="{{ asset('custom/pattern/' . $pattern->pattern) }}" class="logo"
-                                                        alt="User Logo">
-
-                                                    <a href="{{ route('custome.destroy', $pattern->id) }}"
-                                                        class="btn delete-btn" onclick="return confirm('Are you sure?')">
-                                                        Delete
-                                                    </a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-</div>
+                                   
                                     <!-- Uploaded Patterns Preview -->
                                     <div id="uploaded-pattern" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
                                 </div>
@@ -838,19 +810,23 @@
                 </div>
             </div>
             <div>
-                <label for="image">Image</label>
                 <input type="hidden" name="selected_shirt" id="selectedShirtInput">
             </div>
-            {{-- <div>
-                <label for="image">Pattern</label>
-                <input type="hidden" name="pattern" class="form-control" id style="padding: 9px">
-            </div> --}}
+           <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; margin-left: 6rem; justify-content: center; margin-top:2rem">
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <label for="logo" style="margin-bottom: 5px; font-weight: 500;">Upload Logo (This will appear on the shirt)</label>
+        <input type="file" name="logo" id="logo" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">
+    </div>
 
-            {{-- <div>
-                <label for="upload-logo">Logo</label>
-                <input type="file" id="upload-logo" name="logo">
-                <input type="hidden" name="uploaded_logo" id="uploadedLogoInput">
-            </div> --}}
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <label for="pattern" style="margin-bottom: 5px; font-weight: 500;">Upload Pattern (This will appear on the shirt)</label>
+        <input type="file" name="pattern"  style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;"/>
+    </div>
+</div>
+
+
+              
+          
 
             <div id="uploaded-logos"></div>
 
@@ -858,6 +834,7 @@
             <div id="uploaded-logos" style="display:flex;gap:10px;"></div>
 
             <input type="file" id="upload-logo" accept="image/*" style="display:none;">
+            <input type="file" id="upload-patterns" accept="image/*" style="display:none;">
 
 
             <div class="btn_box">
@@ -1474,35 +1451,53 @@
 
         // =================== SAVE DESIGN ===================
         function saveDesign() {
-            drawKit();
-            const dataURL = canvas.toDataURL("image/png");
-            const left = document.getElementById("saved-designs");
-            if (!left) return;
-            const wrap = document.createElement("div");
-            wrap.style.position = "relative";
-            wrap.style.display = "inline-block";
-            wrap.style.margin = "5px";
-            const img = document.createElement("img");
-            img.src = dataURL;
-            img.style.width = "100px";
-            img.style.display = "block";
-            const del = document.createElement("span");
-            del.innerHTML = "&times;";
-            del.style.position = "absolute";
-            del.style.top = "0";
-            del.style.right = "0";
-            del.style.background = "red";
-            del.style.color = "#fff";
-            del.style.cursor = "pointer";
-            del.style.display = "none";
-            wrap.addEventListener("mouseenter", () => del.style.display = "block");
-            wrap.addEventListener("mouseleave", () => del.style.display = "none");
-            del.onclick = () => wrap.remove();
-            wrap.appendChild(img);
-            wrap.appendChild(del);
-            left.appendChild(wrap);
-            openTab("capture");
-        }
+    drawKit();
+    const dataURL = canvas.toDataURL("image/png");
+    const left = document.getElementById("saved-designs");
+    if (!left) return;
+
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.display = "inline-block";
+    wrap.style.margin = "5px";
+
+    const img = document.createElement("img");
+    img.src = dataURL;
+    img.style.width = "100px";
+    img.style.display = "block";
+
+    const del = document.createElement("span");
+    del.innerHTML = "&times;";
+    del.style.position = "absolute";
+    del.style.top = "0";
+    del.style.right = "0";
+    del.style.background = "red";
+    del.style.color = "#fff";
+    del.style.cursor = "pointer";
+    del.style.display = "none";
+
+    wrap.addEventListener("mouseenter", () => del.style.display = "block");
+    wrap.addEventListener("mouseleave", () => del.style.display = "none");
+    del.onclick = () => wrap.remove();
+
+    wrap.appendChild(img);
+    wrap.appendChild(del);
+    left.appendChild(wrap);
+
+    // ✅ Hidden input for form submission
+    let hiddenInput = document.getElementById("selected_shirt_input");
+    if(!hiddenInput){
+        hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "selected_shirt";
+        hiddenInput.id = "selected_shirt_input";
+        document.querySelector("form").appendChild(hiddenInput);
+    }
+    hiddenInput.value = dataURL; // Base64 image assign
+
+    openTab("capture");
+}
+
 
         const uploadedContainer = document.getElementById("uploaded-logos");
 
@@ -1641,22 +1636,7 @@
 
 
 
-    <script>
-        // Jab user shirt select kare
-        function selectShirt(imagePath) {
-            // Hidden input update
-            const hiddenInput = document.getElementById("selectedShirtInput");
-            hiddenInput.value = imagePath;
 
-            // Right section me base shirt image replace karo
-            const shirtImg = document.getElementById("selected-shirt");
-            if (shirtImg) {
-                shirtImg.src = imagePath;
-            }
-
-            console.log("Selected Shirt Path:", imagePath); // Debugging
-        }
-    </script>
 
     <!-- FOOTER STARTS FORM HERE -->
 

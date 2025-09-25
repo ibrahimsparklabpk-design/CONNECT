@@ -48,6 +48,7 @@ class CreateOrdersTable extends Migration
         $table->string('billing_state')->nullable();
         $table->string('billing_zip')->nullable();
         $table->string('billing_phone')->nullable();
+        
 
         // Additional
         $table->boolean('save_info')->default(false);

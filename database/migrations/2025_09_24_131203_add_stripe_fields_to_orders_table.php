@@ -22,7 +22,6 @@ class AddStripeFieldsToOrdersTable extends Migration
         // Payment info
         $table->integer('amount')->nullable()->after('stripe_customer_id'); // in cents
         $table->string('currency', 10)->default('usd')->after('amount');
-        $table->string('payment_status')->default('pending')->after('currency');
         $table->string('receipt_url')->nullable()->after('payment_status');
         });
     }
