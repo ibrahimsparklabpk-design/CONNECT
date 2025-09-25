@@ -110,7 +110,7 @@
         padding: 1.5rem;
         margin: 1rem;
     }
-}
+}   
     </style>
 
 
