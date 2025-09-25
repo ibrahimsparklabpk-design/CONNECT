@@ -459,6 +459,7 @@
                          <th>Shirt Size</th>
                          <th>short Size</th>
                          <th>Quantity</th>
+                         <th>Price</th>
                          {{-- <th>Guide Price</th> --}}
                          <th>Action</th>
                      </tr>
@@ -487,11 +488,27 @@
                                  <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
                                  @endforeach
                              </select>
-                         </td>
-                         <td>
-                             <input type="number" name="quantity" class="form-control" placeholder="0" min="1" required>
-                         </td>
-                          
+<td>
+    <input type="number" 
+           name="quantity" 
+           id="quantity" 
+           class="form-control" 
+           placeholder="0" 
+           min="0" 
+           value="1" 
+           required>
+</td>
+<td>
+    <input type="number" 
+           name="price" 
+           id="price" 
+           class="form-control" 
+           placeholder="0" 
+           min="0" 
+           required>
+</td>
+
+
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
                                  style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
@@ -663,6 +680,7 @@
                          <th>Pant Size</th>
                          <th>guide Sleeves Length</th>
                          <th>Quantity</th>
+                         
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -705,6 +723,7 @@
                              <input type="number" name="guide_quantity" class="form-control" placeholder="0" min="1"
                                  required>
                          </td>
+                          
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-player-row" title="Remove Row"
                                  style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">

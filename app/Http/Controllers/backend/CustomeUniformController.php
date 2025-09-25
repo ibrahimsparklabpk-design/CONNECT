@@ -194,7 +194,7 @@ class CustomeUniformController extends Controller
         session(['custom_uniform_cart' => $cart]);
 
         return redirect()
-            ->route('custome.view')
+            ->route('custome.soccer')
             ->with('success', 'Record created successfully');
     }
 

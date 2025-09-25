@@ -187,9 +187,9 @@
         <!-- NOTE: single field name "account_holder_name" - use this name in controller too -->
         <input type="text" id="account_holder_name" name="account_holder_name" value="{{ old('account_holder_name') }}" class="form-control" required>
     </div>
-<label for="amount">Enter Amount (USD)</label>
-<input type="number" name="amount" min="1" required>
-
+{{-- <label for="amount">Amount</label> --}}
+ <input type="hidden" name="amount" class="form-control" 
+               value="{{ session('total_amount') }}" readonly>
     <!-- Single Card Element placeholder -->
      {{-- <div>
         <label>Card Number</label>
