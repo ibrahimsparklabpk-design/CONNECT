@@ -61,8 +61,7 @@ Route::prefix('v2')->group(function () {
                  Route::get('basketball', 'basketball')->name('basketball');   // /v2/backend/Basketball/index
                    Route::get('goalKeeper', 'goalKeeper')->name('goalKeeper');   // /v2/backend/Basketball/index
                 Route::post('store', 'store')->name('store');  // /v2/backend/soccer/store
-                 Route::post('cart/clear', 'clearCart')->name('cart.clear');  // /v2/backend/custome/store
-                Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  // /v2/backend/custome/store
+Route::post('cart/clear', 'clearCart')->name('cart.clear');                Route::delete('/cart/remove/{index}', 'removeFromCart')->name('cart.remove');  // /v2/backend/custome/store
                 Route::get('view', 'view')->name('view');   // /v2/backend/custome/index
 
             });

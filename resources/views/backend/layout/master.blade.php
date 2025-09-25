@@ -509,5 +509,86 @@
 }
 </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let quantityInput = document.getElementById("quantity");
+    let priceInput = document.getElementById("price");
+
+    let unitPrice = 0;
+
+    // Jab user price dale → unit price set ho jaye
+    priceInput.addEventListener("input", function () {
+        let qty = parseInt(quantityInput.value) || 0;
+
+        if (qty > 0) {
+            unitPrice = parseFloat(this.value) / qty;
+        } else {
+            unitPrice = parseFloat(this.value) || 0;
+        }
+    });
+
+    // Jab quantity change ho → price update karo
+    quantityInput.addEventListener("input", function () {
+        let qty = parseInt(this.value) || 0;
+
+        if (qty === 0) {
+            priceInput.value = 0;
+        } else {
+            priceInput.value = (unitPrice * qty).toFixed(2);
+        }
+    });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Sabhi quantity inputs select karo
+    document.querySelectorAll(".quantity-input").forEach(function (input) {
+        input.addEventListener("input", function () {
+            let qty = parseInt(this.value) || 1; 
+            let unitPrice = parseFloat(this.getAttribute("data-price")) || 0;
+
+            // Row ke andar total-price cell dhundo
+            let totalCell = this.closest("tr").querySelector(".total-price");
+
+            // Total price update karo
+            totalCell.textContent = (unitPrice * qty).toFixed(2);
+        });
+    });
+});
+</script>
+
+
+{{-- ✅ JavaScript for auto update --}}
+<script>
+    function calculateTotals() {
+        let grandTotal = 0;
+
+        document.querySelectorAll("#playersTable tbody tr").forEach(row => {
+            let qtyInput = row.querySelector(".quantity-input");
+            let rowTotalEl = row.querySelector(".row-total");
+
+            if (qtyInput && rowTotalEl) {
+                let qty = parseInt(qtyInput.value) || 0;
+                let unitPrice = parseFloat(qtyInput.dataset.price) || 0;
+                let rowTotal = qty * unitPrice;
+
+                rowTotalEl.textContent = rowTotal; // update row total
+                grandTotal += rowTotal;
+            }
+        });
+
+        document.getElementById("grandTotal").textContent = grandTotal;
+    }
+
+    // Run once on page load
+    calculateTotals();
+
+    // Recalculate on quantity change
+    document.querySelectorAll(".quantity-input").forEach(input => {
+        input.addEventListener("input", calculateTotals);
+    });
+</script>
 @yield('script');
 

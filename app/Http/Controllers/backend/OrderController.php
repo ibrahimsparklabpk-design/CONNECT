@@ -11,9 +11,21 @@ use Illuminate\Support\Facades\Validator;
 class OrderController extends Controller
 {
 
-    public function create(){
-        return view('backend.checkout.create');
+  public function create()
+{
+    $cart = session()->get('soccer_cart', []);
+    $total = 0;
+
+    foreach ($cart as $item) {
+        $total += ($item['price'] ?? 0); // total price
     }
+
+    // total ko session me save kar do
+    session(['total_amount' => $total]);
+
+    return view('backend.checkout.create', compact('total'));
+}
+
     public function store(Request $request)
     {
         // dd($request->all());
@@ -63,32 +75,29 @@ class OrderController extends Controller
         $order->billing_state = $request->billing_state;
         $order->billing_zip = $request->billing_zip;
         $order->billing_phone = $request->billing_phone;
+    $order->amount = $request->amount; // jo checkout form se aaya
         $order->save();
 
 
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET')); 
-$amount = $request->amount * 100; // cents
-$session = \Stripe\Checkout\Session::create([
-    'payment_method_types' => ['card'],
-    'line_items' => [[
-        'price_data' => [
-            'currency' => 'usd',
-            'product_data' => [
-                'name' => 'Custom Payment',
-            ],
-            'unit_amount' => $amount,
-        ],
-        'quantity' => 1,
-    ]],
-    'mode' => 'payment',
-    'customer_email' => $request->email,
-    'success_url' => route('order.create', ['session_id' => '{CHECKOUT_SESSION_ID}']),
-    'cancel_url' => route('order.create'),
-]);
-return redirect($session->url);
-
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $amount = $request->amount * 100; // cents
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => 'Custom Payment',
+                    ],
+                    'unit_amount' => $amount ,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'customer_email' => $request->email,
+            'success_url' => route('order.create', ['session_id' => '{CHECKOUT_SESSION_ID}']),
+            'cancel_url' => route('order.create'),
+        ]);
+        return redirect($session->url);
     }
 }
-
-
- 
