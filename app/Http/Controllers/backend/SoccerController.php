@@ -141,6 +141,9 @@ if ($request->filled('selected_shirt')) {
 
         //  Save record
         $soccer->save();
+
+            $total = $request->quantity * $request->price;
+$guideTotal = $request->guide_quantity * $request->guide_price;
         $item = [
     'fit_type' => $soccer->fit_type,
     'kit_type' => $soccer->kit_type,
@@ -153,7 +156,9 @@ if ($request->filled('selected_shirt')) {
     'shirt_size' => $soccer->shirt_size,
     'sleeves_length' => $soccer->sleeves_length,
     'quantity' => $soccer->quantity,
-      'price' => $soccer->price,
+    'price' => $soccer->price,
+    'guide_price' => $soccer->guide_price,
+    'staff_price' => $soccer->staff_price,
     'goalkeeper_kit' => $soccer->goalkeeper_kit,
     'goalkeeper_jersey_design' => $soccer->goalkeeper_jersey_design,
     'goalkeeper_sleeves' => $soccer->goalkeeper_sleeves,
@@ -169,8 +174,11 @@ if ($request->filled('selected_shirt')) {
     'guide_pant_size' => $soccer->guide_pant_size,
     'guide_sleeves_length' => $soccer->guide_sleeves_length,
     'guide_quantity' => $soccer->guide_quantity,
+    'guide_price' => $soccer->guide_price,
     'image' => $soccer->image ?? null,
     'created_at' => now()->format('Y-m-d H:i:s'),
+    'total' => $total,
+    'guide_total' => $guideTotal,
 ];
 
 $cart = session()->get('soccer_cart', []);
