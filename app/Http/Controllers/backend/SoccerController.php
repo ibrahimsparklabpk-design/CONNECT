@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Validator;
 class SoccerController extends Controller
 {
 
-    public function view()
-    {
-        $soccer = session('soccer_cart', []);
-        session(['soccer' => $soccer]);
-    
-        return view('backend.static.view', ['soccer' => session('soccer')]);
-    }
-    
+public function view()
+{
+    // Cookie se cart nikaal lo (agar cookie empty ho to [] return karega)
+    $soccer = json_decode(request()->cookie('soccer_cart', '[]'), true);
+
+    return view('backend.static.view', ['soccer' => $soccer]);
+}
+
+
 
     public function soccer()
     {
@@ -79,8 +80,8 @@ class SoccerController extends Controller
                 ->withInput();
         }
 
-       
-        
+
+
         $soccer = new Soccer();
 
         //  Basic Kit
@@ -120,31 +121,30 @@ class SoccerController extends Controller
         $soccer->guide_sleeves_length = $request->guide_sleeves_length;
         $soccer->guide_quantity = $request->guide_quantity;
 
-if ($request->filled('selected_shirt')) {
-    // Folder jahan images save hongi
-    $destination = public_path('selected-shirts');
-    if (!file_exists($destination)) {
-        mkdir($destination, 0777, true);
-    }
+        if ($request->filled('selected_shirt')) {
+            // Folder jahan images save hongi
+            $destination = public_path('selected-shirts');
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true);
+            }
 
-    $originalPath = public_path(str_replace(url('/'), '', $request->selected_shirt));
-    $filename = time() . '_' . basename($originalPath);
+            $originalPath = public_path(str_replace(url('/'), '', $request->selected_shirt));
+            $filename = time() . '_' . basename($originalPath);
 
-    copy($originalPath, $destination . '/' . $filename);
+            copy($originalPath, $destination . '/' . $filename);
 
-    $soccer->image = 'selected-shirts/' . $filename;
-} else {
-    return redirect()->back()
-        ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
-        ->withInput();
-}
+            $soccer->image = 'selected-shirts/' . $filename;
+        } else {
+            return redirect()->back()
+                ->withErrors(['selected_shirt' => 'Please select a shirt before submitting.'])
+                ->withInput();
+        }
 
         //  Save record
         $soccer->save();
 
-            $total = $request->quantity * $request->price;
-$guideTotal = $request->guide_quantity * $request->guide_price;
-        $item = [
+        $total = $request->quantity * $request->price;
+       $item = [
     'fit_type' => $soccer->fit_type,
     'kit_type' => $soccer->kit_type,
     'collar_type' => $soccer->collar_type,
@@ -157,7 +157,6 @@ $guideTotal = $request->guide_quantity * $request->guide_price;
     'sleeves_length' => $soccer->sleeves_length,
     'quantity' => $soccer->quantity,
     'price' => $soccer->price,
-    'guide_price' => $soccer->guide_price,
     'staff_price' => $soccer->staff_price,
     'goalkeeper_kit' => $soccer->goalkeeper_kit,
     'goalkeeper_jersey_design' => $soccer->goalkeeper_jersey_design,
@@ -174,40 +173,50 @@ $guideTotal = $request->guide_quantity * $request->guide_price;
     'guide_pant_size' => $soccer->guide_pant_size,
     'guide_sleeves_length' => $soccer->guide_sleeves_length,
     'guide_quantity' => $soccer->guide_quantity,
-    'guide_price' => $soccer->guide_price,
     'image' => $soccer->image ?? null,
     'created_at' => now()->format('Y-m-d H:i:s'),
     'total' => $total,
-    'guide_total' => $guideTotal,
 ];
 
-$cart = session()->get('soccer_cart', []);
-$cart[] = $item;
-session(['soccer_cart' => $cart]);
+$cart = json_decode(request()->cookie('soccer_cart', '[]'), true);
 
-// ✅ Redirect
-return redirect()->route('static.view')->with('success', 'Record saved and added to session.');
+$cart[] = $item;
+
+cookie()->queue('soccer_cart', json_encode($cart), 60 * 24 * 365);
+
+
+        return redirect()->route('static.view')->with('success', 'Record saved and added to session.');
     }
 
-  public function removeFromCart($index)
+   public function removeFromCart(Request $request, $index)
 {
-    $cart = session()->get('soccer_cart', []);
+    // 🔹 Cookie se cart uthao (agar na mile to empty array)
+    $cart = json_decode($request->cookie('soccer_cart', '[]'), true);
 
     if (isset($cart[$index])) {
-        unset($cart[$index]); // sirf usi index ka item delete karega
+        unset($cart[$index]); // sirf us index ka item delete hoga
         $cart = array_values($cart); // indexes reset karne ke liye
-        session(['soccer_cart' => $cart]);
     }
 
-    return redirect()->back()->with('success', 'Item removed successfully.');
+    // 🔹 Cookie update karo
+    return redirect()->back()
+        ->with('success', 'Item removed successfully.')
+        ->cookie('soccer_cart', json_encode($cart), 60 * 24 * 7); 
+        // 7 din ke liye cookie save (aap duration apne hisaab se change kar sakte ho)
 }
 
-    public function clearCart()
-{
-    // poora cart clear karne ke liye session key hata do
-    session()->forget('soccer_cart');
 
-    return redirect()->back()->with('success', 'Cart cleared successfully.');
+   public function clearCart()
+{
+    // cart ko empty array bana do
+    $cart = [];
+
+    // cookie ko 0 minutes (ya negative) time dekar expire kara do
+    $cookie = cookie('soccer_cart', json_encode($cart), -1);
+
+    return redirect()->back()
+        ->with('success', 'Cart cleared successfully.')
+        ->withCookie($cookie);
 }
 
 }

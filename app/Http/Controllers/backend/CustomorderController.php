@@ -23,9 +23,8 @@ class CustomorderController extends Controller
     }
 
     // ✅ Checkout form submit (DB + Stripe)
-    public function store(Request $request)
+ public function store(Request $request)
     {
-        // 🔹 Validation
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'country' => 'required|string|max:255',
@@ -38,31 +37,40 @@ class CustomorderController extends Controller
             'phone' => 'required|string|max:20',
             'account_holder_name' => 'required|string|max:255',
 
-            // billing agar "same" na ho
-            'billing_first_name' => 'required_if:billing_same,false|string|max:255',
-            'billing_last_name' => 'required_if:billing_same,false|string|max:255',
-            'billing_address' => 'required_if:billing_same,false|string|max:255',
-            'billing_city' => 'required_if:billing_same,false|string|max:255',
-            'billing_state' => 'required_if:billing_same,false|string|max:255',
-            'billing_zip' => 'required_if:billing_same,false|string|max:255',
+            // billing same agar unchecked hai tab ye required
+            'billing_first_name' => 'required_if:billing_same,0|string|max:255',
+            'billing_last_name'  => 'required_if:billing_same,0|string|max:255',
+            'billing_address'    => 'required_if:billing_same,0|string|max:255',
+            'billing_city'       => 'required_if:billing_same,0|string|max:255',
+            'billing_state'      => 'required_if:billing_same,0|string|max:255',
+            'billing_zip'        => 'required_if:billing_same,0|string|max:255',
         ]);
 
         if ($validator->fails()) {
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // 🔹 Session cart se total calculate
-        $customeCart = session()->get('custom_uniform_cart', []);
+       
+         $customeCart = json_decode(request()->cookie('soccer_cart', '[]'), true);
+
         $total = 0;
         foreach ($customeCart as $item) {
             $total += ($item['total'] ?? 0) + ($item['guide_total'] ?? 0);
         }
 
+        // Agar cart khali hai ya total 0 hai
         if ($total <= 0) {
             return redirect()->back()->with('error', 'Cart is empty, please add items.');
         }
 
-        // 🔹 Save Order in DB
+        // Agar cart khali hai ya total 0 hai
+        if ($total <= 0) {
+            return redirect()->back()->with('error', 'Cart is empty, please add items.');
+        }
+
+
+        // ✅ Order save karo
         $order = new CustomOrder();
         $order->email = $request->email;
         $order->country = $request->country;
@@ -76,9 +84,7 @@ class CustomorderController extends Controller
         $order->zip_code = $request->zip_code;
         $order->phone = $request->phone;
         $order->account_holder_name = $request->account_holder_name;
-
-        // billing info
-        $order->billing_same = $request->billing_same ?? true;
+        $order->billing_same = $request->billing_same;
         $order->billing_first_name = $request->billing_first_name;
         $order->billing_last_name = $request->billing_last_name;
         $order->billing_company = $request->billing_company;
@@ -88,13 +94,10 @@ class CustomorderController extends Controller
         $order->billing_state = $request->billing_state;
         $order->billing_zip = $request->billing_zip;
         $order->billing_phone = $request->billing_phone;
-
-        $order->amount = $total;
-        $order->currency = "usd";
-        $order->payment_status = "pending";
+        $order->amount = $total; // ✅ ab soccer cart ka total save hoga
         $order->save();
 
-        // 🔹 Stripe Checkout
+        // ✅ Stripe checkout
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $amount = $total * 100; // cents
 
@@ -104,7 +107,7 @@ class CustomorderController extends Controller
                 'price_data' => [
                     'currency' => 'usd',
                     'product_data' => [
-                        'name' => 'Custom Uniform Order',
+                        'name' => 'Soccer Order Payment',
                     ],
                     'unit_amount' => $amount,
                 ],
@@ -115,11 +118,8 @@ class CustomorderController extends Controller
             'success_url' => route('custome.view', ['session_id' => '{CHECKOUT_SESSION_ID}']),
             'cancel_url' => route('custome.view'),
         ]);
- session()->forget('custom_uniform_cart');
-        // stripe session id db me save
-        $order->stripe_session_id = $session->id;
-        $order->save();
 
-        return redirect($session->url);
+        return redirect()->away($session->url);
     }
+
 }

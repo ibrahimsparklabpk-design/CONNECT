@@ -185,9 +185,9 @@
                                             style="padding: 10px 20px; background: #000; color: #fff; border-radius: 8px; cursor: pointer; font-weight: 500;">
                                             <i class="fa fa-upload"></i> Upload Your Logo
                                         </label>
-                                      
+
                                     </div>
-                                   
+
 
                                     <!-- Uploaded Logos Preview -->
                                     <div id="uploaded-logos" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -203,9 +203,9 @@
                                             style="padding: 10px 20px; background: #000; color: #fff; border-radius: 8px; cursor: pointer; font-weight: 500;">
                                             <i class="fa fa-upload"></i> Upload Your Pattern
                                         </label>
-                                        
+
                                     </div>
-                                   
+
                                     <!-- Uploaded Patterns Preview -->
                                     <div id="uploaded-pattern" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
                                 </div>
@@ -213,7 +213,7 @@
 
                                 <div class="tabcontent" id="Patterns" style="display: none">
                                     <div class="pattern-container">
-                                        
+
                                         <img src="{{ asset('/') }}assets/soccer-shirts/pattern2.png" class="Patterns"
                                             onclick="selectPattern('{{ asset('/') }}assets/soccer-shirts/pattern2.png')"
                                             alt="Pattern 2" />
@@ -358,8 +358,9 @@
                 <p class="mainheading">CUSTOM SOCCER KIT</p>
 
                 <div class="m-pr">
-                    <p class="s-pr">$39.00</p>
-                    <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price -->
+                    <p class="s-pr" data-base="39.00">$39.00</p>
+            <input type="hidden" name="price" class="row-total">
+                    {{-- <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price --> --}}
                     <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
                     <p class="str-r">5 reviews</p>
                 </div>
@@ -370,15 +371,16 @@
                 {{-- Fit Type --}}
                 <div class="form-column">
                     <label for="sleeves_length">Sleeves Length</label>
-                    <select name="sleeves_length" id="sleeves_length"
-                        class="form-control @error('sleeves_length') is-invalid @enderror">
-                        <option value="">Select</option>
-                        @foreach (['short', 'long'] as $opt)
-                            <option value="{{ $opt }}" {{ old('sleeves_length') == $opt ? 'selected' : '' }}>
-                                {{ ucfirst($opt) }}
-                            </option>
-                        @endforeach
-                    </select>
+<select name="sleeves_length" id="sleeves_length"
+    class="form-control price-option @error('sleeves_length') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="short" {{ old('sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+    <option value="long" {{ old('sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
+    <option value="mix" {{ old('sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
+</select>
+@error('sleeves_length')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
                     <label for="fit_type">Fit Type</label>
                     <select name="fit_type" id="fit_type" class="form-control @error('fit_type') is-invalid @enderror">
                         <option value="">Select</option>
@@ -436,58 +438,48 @@
                 {{-- Team Logo --}}
                 <div class="form-column">
                     <label for="team_logo">Team Logo</label>
-                    <select name="team_logo" id="team_logo"
-                        class="form-control @error('team_logo') is-invalid @enderror">
-                        <option value="">Select</option>
-                        @foreach (['sublimated', 'embroidery'] as $opt)
-                            <option value="{{ $opt }}" {{ old('team_logo') == $opt ? 'selected' : '' }}>
-                                {{ ucfirst($opt) }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('team_logo')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+<select name="team_logo" id="team_logo"
+    class="form-control price-option @error('team_logo') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="sublimated" {{ old('team_logo') == 'sublimated' ? 'selected' : '' }}>Sublimated</option>
+    <option value="embroidery" {{ old('team_logo') == 'embroidery' ? 'selected' : '' }}>Embroidery (+$1.00/pr kit)</option>
+</select>
+@error('team_logo')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
 
 
 
                     {{-- Outfield Players Socks --}}
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="collar_type">Collar Type</label>
-                            <select name="collar_type" id="collar_type"
-                                class="form-control @error('collar_type') is-invalid @enderror">
-                                <option value="">Select</option>
-                                @foreach (['v-neck', 'round-neck', 'polo-style'] as $opt)
-                                    <option value="{{ $opt }}"
-                                        {{ old('collar_type') == $opt ? 'selected' : '' }}>
-                                        {{ ucfirst($opt) }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('collar_type')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+    <div class="form-group">
+<label for="collar_type">Collar Type</label>
+<select name="collar_type" id="collar_type"
+    class="form-control price-option @error('collar_type') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="v-neck" {{ old('collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+    <option value="round-neck" {{ old('collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
+    <option value="polo-style" {{ old('collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
+</select>
+@error('collar_type')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
+    </div>
+</div>
 
                     {{-- Inside Shirt Collar --}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inside_shirt_collar">Inside Shirt Collar</label>
-                            <select name="inside_shirt_collar" id="inside_shirt_collar"
-                                class="form-control @error('inside_shirt_collar') is-invalid @enderror">
-                                <option value="">Select</option>
-                                @foreach (['yes', 'no'] as $opt)
-                                    <option value="{{ $opt }}"
-                                        {{ old('inside_shirt_collar') == $opt ? 'selected' : '' }}>
-                                        {{ ucfirst($opt) }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('inside_shirt_collar')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+<select name="inside_shirt_collar" id="inside_shirt_collar"
+    class="form-control price-option @error('inside_shirt_collar') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="yes" {{ old('inside_shirt_collar') == 'yes' ? 'selected' : '' }}>Yes (+$2.00/pr kit)</option>
+    <option value="no" {{ old('inside_shirt_collar') == 'no' ? 'selected' : '' }}>No</option>
+</select>
+@error('inside_shirt_collar')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
                         </div>
                     </div>
                     <div class="col-md-6" id="socksColorWrapper" style="display: none;">
@@ -534,8 +526,8 @@
                                 <th>Shirt Size</th>
                                 <th>short Size</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Total</th>
+                                {{-- <th>Price</th> --}}
+                                {{-- <th>Total</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -567,14 +559,17 @@
                                     </select>
                                 </td>
                                 <td>
-    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="0" min="1" style="padding: 9px">
+                                <td>
+    <input type="number" 
+           name="quantity" 
+           class="form-control quantity-input" 
+           placeholder="0" 
+           min="1" 
+           value="1">
 </td>
-<td>
-    <input type="number" id="price" name="price" class="form-control" placeholder="0" min="1" style="padding: 9px">
-</td>
-<td>
-    <input type="text" id="total" class="form-control" readonly style="padding: 9px; font-weight:bold;">
-</td>
+                                {{-- <td>
+    <input type="hidden" name="price" class="row-total">
+</td> --}}
 
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
@@ -614,16 +609,14 @@
                 {{-- Hidden Goalkeeper Fields --}}
                 <div id="goalkeeper_fields" style="display: none; margin-left: 3rem;">
 
-                    <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <div class="form-group" style="flex: 1;">
-                            <label for="padded">Padded</label>
-                            <select name="padded" id="padded" class="form-control" style=" width: 21rem;">
-                                <option value="">Padded</option>
-                                <option value="Yes">Yes +$5</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-
+                    <div class="form-group" style="flex: 1;">
+    <label for="padded">Padded</label>
+    <select name="padded" id="padded" class="form-control price-option" style="width: 21rem;">
+        <option value="">Select</option>
+        <option value="yes" {{ old('padded') == 'yes' ? 'selected' : '' }}>Yes (+$5)</option>
+        <option value="no" {{ old('padded') == 'no' ? 'selected' : '' }}>No</option>
+    </select>
+</div>
                         <div class="form-group" style="flex: 1;">
                             <label for="goalkeeper_jersey_design">Jersey Design</label>
                             <select name="goalkeeper_jersey_design" id="goalkeeper_jersey_design" style=" width: 21rem;"
@@ -719,28 +712,28 @@
                                 {{-- <option value="loose">Youth</option> --}}
                             </select>
                         </div>
-                        <div class="form-group" id="">
-                            <label for="staff_sleeves_length">Staff Sleeves Length</label>
-                            <select id="" name="staff_sleeves_length">
-                                <option value="">Staff Sleeves Length</option>
-                                <option value="short">Short</option>
-                                <option value="long">Long</option>
-                                <option value="both">Both</option>
-                            </select>
-                        </div>
+                        <div class="form-group">
+    <label for="staff_sleeves_length">Staff Sleeves Length</label>
+    <select name="staff_sleeves_length" id="staff_sleeves_length" class="form-control price-option">
+        <option value="">Select</option>
+        <option value="short" {{ old('staff_sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+        <option value="long" {{ old('staff_sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
+        <option value="mix" {{ old('staff_sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
+    </select>
+</div>
                     </div>
 
                     <!-- Right Column -->
                     <div class="form-column">
-                        <div class="form-group" id="playersTable">
-                            <label for="staff_collar_type">Staff Collar Type</label>
-                            <select id="staff-collar-type" name="staff_collar_type">
-                                <option value="">Select Collar Type</option>
-                                <option value="round-neck">Round Neck</option>
-                                <option value="v-neck">V Neck</option>
-                                <option value="polo-style">Polo Style</option>
-                            </select>
-                        </div>
+                        <div class="form-group">
+    <label for="staff_collar_type">Staff Collar Type</label>
+    <select name="staff_collar_type" id="staff_collar_type" class="form-control price-option">
+        <option value="">Select</option>
+        <option value="v-neck" {{ old('staff_collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+        <option value="round-neck" {{ old('staff_collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
+        <option value="polo-style" {{ old('staff_collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
+    </select>
+</div>
                     </div>
 
 
@@ -757,8 +750,8 @@
                                 <th>Pant Size</th>
                                 <th>guide Sleeves Length</th>
                                 <th>Guide Quantity</th>
-                                <th>Guide Price</th>
-                                 <th>Guide Total</th>
+                                {{-- <th>Guide Price</th>
+                                <th>Guide Total</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -797,18 +790,18 @@
                                         @endforeach
                                     </select>
                                 </td>
-<td>
-    <input type="number" id="guide_quantity" name="guide_quantity"
-        class="form-control" placeholder="0" min="1" style="padding: 9px">
-</td>
-<td>
-    <input type="number" id="guide_price" name="guide_price"
-        class="form-control" placeholder="0" min="1" style="padding: 9px">
-</td>
-<td>
-    <input type="text" id="guide_total" name="guide_total"
-        class="form-control" readonly style="padding:9px; font-weight:bold;">
-</td>
+                                <td>
+                                    <input type="number" id="guide_quantity" name="guide_quantity" class="form-control"
+                                        placeholder="0" min="1" style="padding: 9px">
+                                </td>
+                                {{-- <td>
+                                    <input type="number" id="guide_price" name="guide_price" class="form-control"
+                                        placeholder="0" min="1" style="padding: 9px">
+                                </td>
+                                <td>
+                                    <input type="text" id="guide_total" name="guide_total" class="form-control"
+                                        readonly style="padding:9px; font-weight:bold;">
+                                </td> --}}
 
 
                                 <td class="text-center">
@@ -832,21 +825,26 @@
             <div>
                 <input type="hidden" name="selected_shirt" id="selectedShirtInput">
             </div>
-           <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; margin-left: 6rem; justify-content: center; margin-top:2rem">
-    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-        <label for="logo" style="margin-bottom: 5px; font-weight: 500;">Upload Logo (This will appear on the shirt)</label>
-        <input type="file" name="logo" id="logo" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">
-    </div>
+            <div
+                style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; margin-left: 6rem; justify-content: center; margin-top:2rem">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <label for="logo" style="margin-bottom: 5px; font-weight: 500;">Upload Logo (This will appear on
+                        the shirt)</label>
+                    <input type="file" name="logo" id="logo"
+                        style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">
+                </div>
 
-    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-        <label for="pattern" style="margin-bottom: 5px; font-weight: 500;">Upload Pattern (This will appear on the shirt)</label>
-        <input type="file" name="pattern"  style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;"/>
-    </div>
-</div>
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <label for="pattern" style="margin-bottom: 5px; font-weight: 500;">Upload Pattern (This will appear
+                        on the shirt)</label>
+                    <input type="file" name="pattern"
+                        style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;" />
+                </div>
+            </div>
 
 
-              
-          
+
+
 
             <div id="uploaded-logos"></div>
 
@@ -1471,52 +1469,52 @@
 
         // =================== SAVE DESIGN ===================
         function saveDesign() {
-    drawKit();
-    const dataURL = canvas.toDataURL("image/png");
-    const left = document.getElementById("saved-designs");
-    if (!left) return;
+            drawKit();
+            const dataURL = canvas.toDataURL("image/png");
+            const left = document.getElementById("saved-designs");
+            if (!left) return;
 
-    const wrap = document.createElement("div");
-    wrap.style.position = "relative";
-    wrap.style.display = "inline-block";
-    wrap.style.margin = "5px";
+            const wrap = document.createElement("div");
+            wrap.style.position = "relative";
+            wrap.style.display = "inline-block";
+            wrap.style.margin = "5px";
 
-    const img = document.createElement("img");
-    img.src = dataURL;
-    img.style.width = "100px";
-    img.style.display = "block";
+            const img = document.createElement("img");
+            img.src = dataURL;
+            img.style.width = "100px";
+            img.style.display = "block";
 
-    const del = document.createElement("span");
-    del.innerHTML = "&times;";
-    del.style.position = "absolute";
-    del.style.top = "0";
-    del.style.right = "0";
-    del.style.background = "red";
-    del.style.color = "#fff";
-    del.style.cursor = "pointer";
-    del.style.display = "none";
+            const del = document.createElement("span");
+            del.innerHTML = "&times;";
+            del.style.position = "absolute";
+            del.style.top = "0";
+            del.style.right = "0";
+            del.style.background = "red";
+            del.style.color = "#fff";
+            del.style.cursor = "pointer";
+            del.style.display = "none";
 
-    wrap.addEventListener("mouseenter", () => del.style.display = "block");
-    wrap.addEventListener("mouseleave", () => del.style.display = "none");
-    del.onclick = () => wrap.remove();
+            wrap.addEventListener("mouseenter", () => del.style.display = "block");
+            wrap.addEventListener("mouseleave", () => del.style.display = "none");
+            del.onclick = () => wrap.remove();
 
-    wrap.appendChild(img);
-    wrap.appendChild(del);
-    left.appendChild(wrap);
+            wrap.appendChild(img);
+            wrap.appendChild(del);
+            left.appendChild(wrap);
 
-    // ✅ Hidden input for form submission
-    let hiddenInput = document.getElementById("selected_shirt_input");
-    if(!hiddenInput){
-        hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "selected_shirt";
-        hiddenInput.id = "selected_shirt_input";
-        document.querySelector("form").appendChild(hiddenInput);
-    }
-    hiddenInput.value = dataURL; // Base64 image assign
+            // ✅ Hidden input for form submission
+            let hiddenInput = document.getElementById("selected_shirt_input");
+            if (!hiddenInput) {
+                hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "selected_shirt";
+                hiddenInput.id = "selected_shirt_input";
+                document.querySelector("form").appendChild(hiddenInput);
+            }
+            hiddenInput.value = dataURL; // Base64 image assign
 
-    openTab("capture");
-}
+            openTab("capture");
+        }
 
 
         const uploadedContainer = document.getElementById("uploaded-logos");
@@ -1656,44 +1654,139 @@
 
 
 
-// custom soccer price works starts here 
+    // custom soccer price works starts here
 
-<script>
-    const qty = document.getElementById("quantity");
-    const price = document.getElementById("price");
-    const total = document.getElementById("total");
+    {{-- <script>
+        function calculateTotals() {
+            document.querySelectorAll(".quantity-input").forEach(qtyInput => {
+                let row = qtyInput.closest("tr");
+                let priceInput = row.querySelector(".row-total");
 
-    function updateTotal() {
-        let q = parseInt(qty.value) || 0;
-        let p = parseInt(price.value) || 0;
-        total.value = q * p;
-    }
+                let qty = parseInt(qtyInput.value) || 1;
+                let unitPrice = parseFloat(qtyInput.dataset.price) || 39;
 
-    qty.addEventListener("input", updateTotal);
-    price.addEventListener("input", updateTotal);
-</script>
-// custom soccer guided price works starts here 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const qty = document.getElementById("guide_quantity");
-        const price = document.getElementById("guide_price");
-        const total = document.getElementById("guide_total");
+                let totalPrice = qty * unitPrice;
 
-        function updateTotal() {
-            let q = parseInt(qty.value) || 0;
-            let p = parseFloat(price.value) || 0;
-
-            total.value = q * p; // 👈 qty × price = total
+                priceInput.value = totalPrice.toFixed(2);
+            });
         }
 
-        // dono input pe listener
-        qty.addEventListener("input", updateTotal);
-        price.addEventListener("input", updateTotal);
-    });
-</script>
+        // Page load pe run
+        calculateTotals();
+
+        // Har quantity input pe listener
+        document.querySelectorAll(".quantity-input").forEach(input => {
+            input.addEventListener("input", calculateTotals);
+        });
+    </script> --}}
+    // custom soccer guided price works starts here
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const qty = document.getElementById("guide_quantity");
+            const price = document.getElementById("guide_price");
+            const total = document.getElementById("guide_total");
+
+            function updateTotal() {
+                let q = parseInt(qty.value) || 0;
+                let p = parseFloat(price.value) || 0;
+
+                total.value = q * p; // 👈 qty × price = total
+            }
+
+            // dono input pe listener
+            qty.addEventListener("input", updateTotal);
+            price.addEventListener("input", updateTotal);
+        });
+    </script> --}}
 
 
     <!-- FOOTER STARTS FORM HERE -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const priceElement = document.querySelector(".s-pr");
+    const hiddenInput = document.querySelector("input[name='price']");
+    const basePrice = parseFloat(priceElement.dataset.base);
+    const selects = document.querySelectorAll("select.price-option");
+
+    function updatePrice() {
+        let total = basePrice;
+
+        selects.forEach(select => {
+            const selectedText = select.options[select.selectedIndex]?.text || "";
+
+            // Regex: +$ ya + $ ke baad number capture kare
+            const match = selectedText.match(/\+ ?\$?(\d+(\.\d+)?)/);
+
+            if (match) {
+                total += parseFloat(match[1]);
+            }
+        });
+
+        // Screen pe update
+        priceElement.textContent = `$${total.toFixed(2)}`;
+
+        // Hidden input update
+        if (hiddenInput) {
+            hiddenInput.value = total.toFixed(2);
+        }
+    }
+
+    // Init on load
+    updatePrice();
+
+    // Event listeners
+    selects.forEach(select => {
+        select.addEventListener("change", updatePrice);
+    });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const priceElement = document.querySelector(".s-pr");
+    const hiddenInput = document.querySelector("input[name='price']");
+    const quantityInput = document.querySelector(".quantity-input");
+    const basePrice = parseFloat(priceElement.dataset.base);
+    const selects = document.querySelectorAll("select.price-option");
+
+    function updatePrice() {
+        let perPiecePrice = basePrice;
+
+        // Options ke prices add karo
+        selects.forEach(select => {
+            const selectedText = select.options[select.selectedIndex]?.text || "";
+            const match = selectedText.match(/\+ ?\$?(\d+(\.\d+)?)/);
+            if (match) {
+                perPiecePrice += parseFloat(match[1]);
+            }
+        });
+
+        // Quantity lo (default 1 agar empty hai)
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        // Total user ke liye
+        const total = perPiecePrice * quantity;
+
+        // Screen pe total dikhana
+        priceElement.textContent = `$${total.toFixed(2)}`;
+
+        // Hidden input me sirf per-piece price save karna
+        if (hiddenInput) {
+            hiddenInput.value = perPiecePrice.toFixed(2);
+        }
+    }
+
+    // Init
+    updatePrice();
+
+    // Event listeners
+    selects.forEach(select => {
+        select.addEventListener("change", updatePrice);
+    });
+    quantityInput.addEventListener("input", updatePrice);
+});
+</script>
+
 
     @include('component.footer')
 
