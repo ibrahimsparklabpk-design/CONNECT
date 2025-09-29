@@ -304,8 +304,9 @@
      <div class="head-box">
          <p class="mainheading">CUSTOM SOCCER KIT</p>
          <div class="m-pr">
-             <p class="s-pr">$39.00</p>
-             <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price -->
+             <p class="s-pr" data-base="39.00">$39.00</p>
+            <input type="hidden" name="price" class="row-total">
+             {{-- <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price --> --}}
              <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
              <p class="str-r">5 reviews</p>
          </div>
@@ -317,14 +318,12 @@
          <div class="form-column">
              <label for="sleeves_length">Sleeves Length</label>
              <select name="sleeves_length" id="sleeves_length"
-                 class="form-control @error('sleeves_length') is-invalid @enderror">
-                 <option value="">Select</option>
-                 @foreach(['short','long'] as $opt)
-                 <option value="{{ $opt }}" {{ old('sleeves_length')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
+    class="form-control price-option @error('sleeves_length') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="short" {{ old('sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+    <option value="long" {{ old('sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
+    <option value="mix" {{ old('sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
+</select>
              <label for="fit_type">Fit Type</label>
              <select name="fit_type" id="fit_type" class="form-control @error('fit_type') is-invalid @enderror">
                  <option value="">Select</option>
@@ -373,15 +372,15 @@
          {{-- Team Logo --}}
          <div class="form-column">
              <label for="team_logo">Team Logo</label>
-             <select name="team_logo" id="team_logo" class="form-control @error('team_logo') is-invalid @enderror">
-                 <option value="">Select</option>
-                 @foreach(['sublimated','embroidery'] as $opt)
-                 <option value="{{ $opt }}" {{ old('team_logo')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
-             @error('team_logo') <div class="invalid-feedback">{{ $message }}</div> @enderror
+             <select name="team_logo" id="team_logo"
+    class="form-control price-option @error('team_logo') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="sublimated" {{ old('team_logo') == 'sublimated' ? 'selected' : '' }}>Sublimated</option>
+    <option value="embroidery" {{ old('team_logo') == 'embroidery' ? 'selected' : '' }}>Embroidery (+$1.00/pr kit)</option>
+</select>
+@error('team_logo')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
 
 
 
@@ -390,15 +389,15 @@
                  <div class="form-group">
                      <label for="collar_type">Collar Type</label>
                      <select name="collar_type" id="collar_type"
-                         class="form-control @error('collar_type') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['v-neck','round-neck','polo-style'] as $opt)
-                         <option value="{{ $opt }}" {{ old('collar_type')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('collar_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    class="form-control price-option @error('collar_type') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="v-neck" {{ old('collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+    <option value="round-neck" {{ old('collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
+    <option value="polo-style" {{ old('collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
+</select>
+@error('collar_type')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
                  </div>
              </div>
 
@@ -407,15 +406,14 @@
                  <div class="form-group">
                      <label for="inside_shirt_collar">Inside Shirt Collar</label>
                      <select name="inside_shirt_collar" id="inside_shirt_collar"
-                         class="form-control @error('inside_shirt_collar') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['yes','no'] as $opt)
-                         <option value="{{ $opt }}" {{ old('inside_shirt_collar')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('inside_shirt_collar') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    class="form-control price-option @error('inside_shirt_collar') is-invalid @enderror">
+    <option value="">Select</option>
+    <option value="yes" {{ old('inside_shirt_collar') == 'yes' ? 'selected' : '' }}>Yes (+$2.00/pr kit)</option>
+    <option value="no" {{ old('inside_shirt_collar') == 'no' ? 'selected' : '' }}>No</option>
+</select>
+@error('inside_shirt_collar')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
                  </div>
              </div>
              <div class="col-md-6" id="socksColorWrapper" style="display: none;">
@@ -460,7 +458,7 @@
                          <th>Shirt Size</th>
                          <th>short Size</th>
                          <th>Quantity</th>
-                         <th>Price</th>
+                         {{-- <th>Price</th> --}}
                          {{-- <th>Guide Price</th> --}}
                          <th>Action</th>
                      </tr>
@@ -492,22 +490,19 @@
 <td>
     <input type="number" 
            name="quantity" 
-           id="quantity" 
-           class="form-control" 
+           class="form-control quantity-input" 
            placeholder="0" 
-           min="0" 
-           value="1" 
-           required>
+           min="1" 
+           value="1">
 </td>
-<td>
+{{-- <td>
     <input type="number" 
            name="price" 
-           id="price" 
-           class="form-control" 
-           placeholder="0" 
-           min="0" 
-           required>
-</td>
+           class="form-control row-total" 
+           readonly 
+           style="font-weight:bold;">
+</td> --}}
+
 
 
                          <td class="text-center">
@@ -550,11 +545,11 @@
              <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                  <div class="form-group" style="flex: 1;">
                      <label for="padded">Padded</label>
-                     <select name="padded" id="padded" class="form-control" style=" width: 21rem;">
-                         <option value="">Padded</option>
-                         <option value="Yes">Yes +$5</option>
-                         <option value="no">No</option>
-                     </select>
+                     <select name="padded" id="padded" class="form-control price-option" style="width: 21rem;">
+        <option value="">Select</option>
+        <option value="yes" {{ old('padded') == 'yes' ? 'selected' : '' }}>Yes (+$5)</option>
+        <option value="no" {{ old('padded') == 'no' ? 'selected' : '' }}>No</option>
+    </select>
                  </div>
 
                  <div class="form-group" style="flex: 1;">
@@ -645,12 +640,12 @@
                  </div>
                  <div class="form-group" id="">
                      <label for="staff_sleeves_length">Staff Sleeves Length</label>
-                     <select id="" name="staff_sleeves_length">
-                         <option value="">Staff Sleeves Length</option>
-                         <option value="short">Short</option>
-                         <option value="long">Long</option>
-                         <option value="both">Both</option>
-                     </select>
+                     <select name="staff_sleeves_length" id="staff_sleeves_length" class="form-control price-option">
+        <option value="">Select</option>
+        <option value="short" {{ old('staff_sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+        <option value="long" {{ old('staff_sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
+        <option value="mix" {{ old('staff_sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
+    </select>
                  </div>
              </div>
 
@@ -658,12 +653,12 @@
              <div class="form-column">
                  <div class="form-group" id="playersTable">
                      <label for="staff_collar_type">Staff Collar Type</label>
-                     <select id="staff-collar-type" name="staff_collar_type">
-                         <option value="">Select Collar Type</option>
-                         <option value="round-neck">Round Neck</option>
-                         <option value="v-neck">V Neck</option>
-                         <option value="polo-style">Polo Style</option>
-                     </select>
+                     <select name="staff_collar_type" id="staff_collar_type" class="form-control price-option">
+        <option value="">Select</option>
+        <option value="v-neck" {{ old('staff_collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+        <option value="round-neck" {{ old('staff_collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
+        <option value="polo-style" {{ old('staff_collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
+    </select>
                  </div>
              </div>
 
@@ -681,7 +676,7 @@
                          <th>Pant Size</th>
                          <th>guide Sleeves Length</th>
                          <th>Guide Quantity</th>
-                         <th>Guide Price</th>
+                         {{-- <th>Guide Price</th> --}}
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -724,14 +719,14 @@
     <input type="number" id="guide_quantity" name="guide_quantity" 
         class="form-control" placeholder="0" min="1" required>
 </td>
-<td>
+{{-- <td>
     <input type="number" id="guide_price" name="guide_price" 
         class="form-control" placeholder="0" min="1" required>
 </td>
 <td>
     <input type="text" id="guide_total" name="guide_total" 
         class="form-control" readonly style="font-weight:bold;">
-</td>
+</td> --}}
                           
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-player-row" title="Remove Row"

@@ -26,9 +26,11 @@ class CustomeUniformController extends Controller
 
     public function view()
 {
-    $customeUniform = session('custom_uniform_cart', []);
+    $customeUniform = json_decode(request()->cookie('custom_uniform_cart', '[]'), true);
+
     return view('backend.custome.view', compact('customeUniform'));
 }
+
 
     public function store(Request $request)
     {
@@ -37,15 +39,16 @@ class CustomeUniformController extends Controller
 
             'fit_type' => ['required', 'in:men,women,youth'],
             'kit_type' => ['required', 'in:full,shirt,both'],
-            'collar_type' => ['required', 'in:v-neck,round-neck,polo-style'],
-            'team_logo' => ['required', 'in:sublimated,embroidery'],
+            'collar_type' => 'required|in:v-neck,round-neck,polo-style',            
+            'team_logo' => 'required|in:sublimated,embroidery',
             'outfield_players_socks' => ['required', 'in:yes,no'],
-            'inside_shirt_collar' => ['required', 'in:yes,no'],
+            'inside_shirt_collar' => 'required|in:yes,no',
+            'padded' => 'nullable|in:yes,no',
 
             'name' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer'],
             'shirt_size' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-            'sleeves_length' => ['required', 'in:short,long'],
+            'sleeves_length' => 'required|in:short,long,mix',
             'quantity' => ['required', 'integer', 'min:1'],
 
             'goalkeeper_kit' => ['required', 'in:yes,no'],
@@ -56,8 +59,8 @@ class CustomeUniformController extends Controller
             'staff_other' => ['required', 'in:yes,no'],
             'staff_fit_type' => ['required', 'in:men,women'],
             'staff_kit_type' => ['required', 'in:full,shirt'],
-            'staff_collar_type' => ['required', 'in:v-neck,round-neck,polo-style'],
-            'staff_sleeves_length' => ['required', 'in:short,long,both'],
+            'staff_collar_type' => 'required|in:v-neck,round-neck,polo-style + $2.00/pr kit',
+            'staff_collar_type' => 'nullable|in:v-neck,round-neck,polo-style',
 
             'guide_name' => ['required', 'string', 'max:255'],
             'guide_number' => ['required', 'integer'],
@@ -109,7 +112,7 @@ class CustomeUniformController extends Controller
     $customeUniform->guide_pant_size = $request->guide_pant_size;
     $customeUniform->guide_sleeves_length = $request->guide_sleeves_length;
     $customeUniform->guide_quantity = $request->guide_quantity;
-    $customeUniform->guide_price = $request->guide_price;
+    // $customeUniform->guide_price = $request->guide_price;
     $customeUniform->logo = $logo;
     $customeUniform->pattern = $pattern;
     $customeUniform->save();
@@ -133,42 +136,44 @@ class CustomeUniformController extends Controller
 
 
     $total = $request->quantity * $request->price;
-$guideTotal = $request->guide_quantity * $request->guide_price;
-    // ✅ Session cart me save karo
-    $cart = session()->get('custom_uniform_cart', []);
-    $cart[] = [
-        'fit_type' => $customeUniform->fit_type,
-        'kit_type' => $customeUniform->kit_type,
-        'collar_type' => $customeUniform->collar_type,
-        'team_logo' => $customeUniform->team_logo,
-        'outfield_players_socks' => $customeUniform->outfield_players_socks,
-        'inside_shirt_collar' => $customeUniform->inside_shirt_collar,
-        'name' => $customeUniform->name,
-        'number' => $customeUniform->number,
-        'shirt_size' => $customeUniform->shirt_size,
-        'sleeves_length' => $customeUniform->sleeves_length,
-        'quantity' => $customeUniform->quantity,
-        'goalkeeper_kit' => $customeUniform->goalkeeper_kit,
-        'goalkeeper_jersey_design' => $customeUniform->goalkeeper_jersey_design,
-        'goalkeeper_sleeves' => $customeUniform->goalkeeper_sleeves,
-        'jersey_color' => $customeUniform->jersey_color,
-        'staff_other' => $customeUniform->staff_other,
-        'staff_fit_type' => $customeUniform->staff_fit_type,
-        'staff_kit_type' => $customeUniform->staff_kit_type,
-        'staff_collar_type' => $customeUniform->staff_collar_type,
-        'staff_sleeves_length' => $customeUniform->staff_sleeves_length,
-        'guide_name' => $customeUniform->guide_name,
-        'guide_number' => $customeUniform->guide_number,
-        'guide_shirt_size' => $customeUniform->guide_shirt_size,
-        'guide_pant_size' => $customeUniform->guide_pant_size,
-        'guide_sleeves_length' => $customeUniform->guide_sleeves_length,
-        'guide_quantity' => $customeUniform->guide_quantity,
-        'image' => $customeUniform->image ?? null,
-        'created_at' => $customeUniform->created_at->format('d M Y h:i A'),
-        'total' => $total,
-        'guide_total' => $guideTotal,
-    ];
-    session(['custom_uniform_cart' => $cart]);
+$cart = json_decode(request()->cookie('custom_uniform_cart', '[]'), true);
+
+$cart[] = [
+    'fit_type' => $customeUniform->fit_type,
+    'kit_type' => $customeUniform->kit_type,
+    'collar_type' => $customeUniform->collar_type,
+    'team_logo' => $customeUniform->team_logo,
+    'outfield_players_socks' => $customeUniform->outfield_players_socks,
+    'inside_shirt_collar' => $customeUniform->inside_shirt_collar,
+    'name' => $customeUniform->name,
+    'number' => $customeUniform->number,
+    'shirt_size' => $customeUniform->shirt_size,
+    'sleeves_length' => $customeUniform->sleeves_length,
+    'quantity' => $customeUniform->quantity,
+    'goalkeeper_kit' => $customeUniform->goalkeeper_kit,
+    'goalkeeper_jersey_design' => $customeUniform->goalkeeper_jersey_design,
+    'goalkeeper_sleeves' => $customeUniform->goalkeeper_sleeves,
+    'jersey_color' => $customeUniform->jersey_color,
+    'staff_other' => $customeUniform->staff_other,
+    'staff_fit_type' => $customeUniform->staff_fit_type,
+    'staff_kit_type' => $customeUniform->staff_kit_type,
+    'staff_collar_type' => $customeUniform->staff_collar_type,
+    'staff_sleeves_length' => $customeUniform->staff_sleeves_length,
+    'guide_name' => $customeUniform->guide_name,
+    'guide_number' => $customeUniform->guide_number,
+    'guide_shirt_size' => $customeUniform->guide_shirt_size,
+    'guide_pant_size' => $customeUniform->guide_pant_size,
+    'guide_sleeves_length' => $customeUniform->guide_sleeves_length,
+    'guide_quantity' => $customeUniform->guide_quantity,
+    'image' => $customeUniform->image ?? null,
+    'created_at' => $customeUniform->created_at->format('d M Y h:i A'),
+    'total' => $total,
+    // 'guide_total' => $guideTotal,
+];
+
+// Cookie me save karo (1 saal ke liye)
+cookie()->queue('custom_uniform_cart', json_encode($cart), 60 * 24 * 365);
+
 
     // ✅ Ab redirect karo view page pe
     return redirect()->route('custome.view')->with('success', 'Item added to cart!');

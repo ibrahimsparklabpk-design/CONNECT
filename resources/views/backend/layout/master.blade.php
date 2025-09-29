@@ -561,42 +561,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 {{-- ✅ JavaScript for auto update --}}
-<script>
+{{-- <script>
     function calculateTotals() {
-        let grandTotal = 0;
+        document.querySelectorAll(".quantity-input").forEach(qtyInput => {
+            let row = qtyInput.closest("tr");
+            let priceInput = row.querySelector(".row-total");
 
-        document.querySelectorAll("#playersTable tbody tr").forEach(row => {
-            let qtyInput = row.querySelector(".quantity-input");
-            let rowTotalEl = row.querySelector(".row-total");
+            let qty = parseInt(qtyInput.value) || 1;
+            let unitPrice = parseFloat(qtyInput.dataset.price) || 39;
 
-            if (qtyInput && rowTotalEl) {
-                let qty = parseInt(qtyInput.value) || 0;
-                let unitPrice = parseFloat(qtyInput.dataset.price) || 0;
-                let rowTotal = qty * unitPrice;
+            let totalPrice = qty * unitPrice;
 
-                rowTotalEl.textContent = rowTotal; // update row total
-                grandTotal += rowTotal;
-            }
+            priceInput.value = totalPrice.toFixed(2);
         });
-
-        document.getElementById("grandTotal").textContent = grandTotal;
     }
 
-    // Run once on page load
+    // Page load pe run
     calculateTotals();
 
-    // Recalculate on quantity change
+    // Har quantity input pe listener
     document.querySelectorAll(".quantity-input").forEach(input => {
         input.addEventListener("input", calculateTotals);
     });
+</script> --}}
 
 
 
-</script>
 
-
-
-    <script>
+    {{-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         const qty = document.getElementById("guide_quantity");
         const price = document.getElementById("guide_price");
@@ -624,6 +616,54 @@ document.addEventListener("DOMContentLoaded", function () {
             total.value = calculatedPrice;
         }
     });
+</script> --}}
+
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const priceElement = document.querySelector(".s-pr");
+    const hiddenInput = document.querySelector("input[name='price']");
+    const quantityInput = document.querySelector(".quantity-input");
+    const basePrice = parseFloat(priceElement.dataset.base);
+    const selects = document.querySelectorAll("select.price-option");
+
+    function updatePrice() {
+        let perPiecePrice = basePrice;
+
+        // Options ke prices add karo
+        selects.forEach(select => {
+            const selectedText = select.options[select.selectedIndex]?.text || "";
+            const match = selectedText.match(/\+ ?\$?(\d+(\.\d+)?)/);
+            if (match) {
+                perPiecePrice += parseFloat(match[1]);
+            }
+        });
+
+        // Quantity lo (default 1 agar empty hai)
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        // Total user ke liye
+        const total = perPiecePrice * quantity;
+
+        // Screen pe total dikhana
+        priceElement.textContent = `$${total.toFixed(2)}`;
+
+        // Hidden input me sirf per-piece price save karna
+        if (hiddenInput) {
+            hiddenInput.value = perPiecePrice.toFixed(2);
+        }
+    }
+
+    // Init
+    updatePrice();
+
+    // Event listeners
+    selects.forEach(select => {
+        select.addEventListener("change", updatePrice);
+    });
+    quantityInput.addEventListener("input", updatePrice);
+});
 </script>
 @yield('script');
 

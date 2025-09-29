@@ -14,6 +14,19 @@
                 <!-- 🧾 Table -->
                 <div class="team-form-container" style="padding-bottom: 40px;">
                     <div class="table-responsive">
+         <a href="{{ route('custome.index') }}" 
+   style="background-color: #000000; 
+          color: #fff; 
+          padding: 8px 18px; 
+          margin-bottom: 8px;
+          border-radius: 5px; 
+          text-decoration: none; 
+          font-weight: bold; 
+          transition: 0.3s; 
+          float: right;">
+    ← Back
+</a>
+
                         <table class="table table-bordered table-striped team-roster-table" id="playersTable"
                             style="width:100%">
                             <thead class="thead-dark">
