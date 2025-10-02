@@ -18,7 +18,7 @@ class RenameWorkNumberToBuildingNumberInDirectoryTable extends Migration
         $table->renameColumn('work_number', 'building_number');
         
         // Move the column after 'city' (this requires dropping and re-adding)
-        $table->string('building_number')->after('city')->change();
+        // $table->string('building_number')->after('city')->change();
         });
     }
 
