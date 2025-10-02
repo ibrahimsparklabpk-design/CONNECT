@@ -106,33 +106,37 @@
      <!-- Left Section -->
      <div class="left-section">
          <div class="icon-list">
-             <div class="icon" onclick="openTab('categories')">
+             <div class="icon" style="    width: 5rem;" onclick="openTab('categories')">
                  <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
-             </div>
-             <div class="icon" onclick="openTab('Shirts')">
+                <label for="categories" style="margin-left: -13px; font-size:14px">categories</label>
+                </div>
+
+             <div class="icon" style="    width: 5rem;" onclick="openTab('Shirts')">
                  <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
+                    <label for="categories" style=" font-size:14px">Shirts</label>
+                </div>
+
+             <div class="icon" style="    width: 5rem;">
+                 <a href="{{ route('custome.index') }}"><img src="{{ asset('assets/jpg shirt-01.png') }}" alt="custome-kit" class="tab-icon" width="50px" /></a>
+                 <label for="categories" style="margin-left: -13px; font-size:14px">custome kit</label>
              </div>
 
-             {{-- <div class="icon" onclick="openTab('Logos')">
-                <img src="{{ asset('assets/c-logo.png') }}" alt="Logos" class="tab-icon" width="50px" />
-         </div> --}}
+                        {{-- <div class="icon" onclick="openTab('Logos')">
+                            <img src="{{ asset('assets/c-logo.png') }}" alt="Logos" class="tab-icon" width="50px" />
+                    </div> --}}
 
-         {{-- <div class="icon" onclick="openTab('Text')">
-                <img src="{{ asset('assets/text.png') }}" alt="Text" class="tab-icon" width="50px" />
-     </div> --}}
+                    {{-- <div class="icon" onclick="openTab('Text')">
+                            <img src="{{ asset('assets/text.png') }}" alt="Text" class="tab-icon" width="50px" />
+                </div> --}}
 
-     {{-- <div class="icon" onclick="openTab('colorpicker')">
-                <img src="{{ asset('assets/colorbucketicon.png') }}" alt="Color Picker" class="tab-icon" width="50px"
-     />
- </div> --}}
- {{-- <div class="icon" onclick="openTab('Patterns')">
-                <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
- </div> --}}
-
- <div class="icon" onclick="captureFullRightSection()">
-     <img src="{{ asset('assets/savedesignicon.png') }}" alt="Save Design" class="tab-icon" width="50px" />
- </div>
- </div>
+                {{-- <div class="icon" onclick="openTab('colorpicker')">
+                            <img src="{{ asset('assets/colorbucketicon.png') }}" alt="Color Picker" class="tab-icon" width="50px"
+                />
+            </div> --}}
+            {{-- <div class="icon" onclick="openTab('Patterns')">
+                            <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
+            </div> --}}
+        </div>
 
  <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
      @csrf
