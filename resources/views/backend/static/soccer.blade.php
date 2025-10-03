@@ -4,180 +4,186 @@
 
 
 
- <style>
-.team-form-container {
-    margin-top: 20px;
-    overflow-x: auto;
-}
+     <style>
+         .team-form-container {
+             margin-top: 20px;
+             overflow-x: auto;
+         }
 
-.team-roster-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Poppins', sans-serif;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-}
+         .team-roster-table {
+             width: 100%;
+             border-collapse: collapse;
+             font-family: 'Poppins', sans-serif;
+             background: #fff;
+             border-radius: 10px;
+             overflow: hidden;
+             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+         }
 
-.team-roster-table thead {
-    background: #007bff;
-    color: #fff;
-    text-align: center;
-}
+         .team-roster-table thead {
+             background: #007bff;
+             color: #fff;
+             text-align: center;
+         }
 
-.team-roster-table th,
-.team-roster-table td {
-    padding: 12px 15px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-}
+         .team-roster-table th,
+         .team-roster-table td {
+             padding: 12px 15px;
+             text-align: center;
+             border-bottom: 1px solid #ddd;
+             vertical-align: middle;
+         }
 
-.team-roster-table tbody tr:nth-child(even) {
-    background: #f9f9f9;
-}
+         .team-roster-table tbody tr:nth-child(even) {
+             background: #f9f9f9;
+         }
 
-.team-roster-table tbody tr:hover {
-    background: #eef5ff;
-}
+         .team-roster-table tbody tr:hover {
+             background: #eef5ff;
+         }
 
-/* Input & Select Styling */
-.team-roster-table input[type="text"],
-.team-roster-table input[type="number"],
-.team-roster-table select {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease;
-}
+         /* Input & Select Styling */
+         .team-roster-table input[type="text"],
+         .team-roster-table input[type="number"],
+         .team-roster-table select {
+             width: 100%;
+             padding: 8px 10px;
+             border: 1px solid #ccc;
+             border-radius: 6px;
+             font-size: 14px;
+             outline: none;
+             transition: all 0.3s ease;
+         }
 
-.team-roster-table input:focus,
-.team-roster-table select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
+         .team-roster-table input:focus,
+         .team-roster-table select:focus {
+             border-color: #007bff;
+             box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+         }
 
-/* Responsive for mobile */
-@media (max-width: 768px) {
-    .team-roster-table thead {
-        display: none;
-    }
+         /* Responsive for mobile */
+         @media (max-width: 768px) {
+             .team-roster-table thead {
+                 display: none;
+             }
 
-    .team-roster-table,
-    .team-roster-table tbody,
-    .team-roster-table tr,
-    .team-roster-table td {
-        display: block;
-        width: 100%;
-    }
+             .team-roster-table,
+             .team-roster-table tbody,
+             .team-roster-table tr,
+             .team-roster-table td {
+                 display: block;
+                 width: 100%;
+             }
 
-    .team-roster-table tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-    }
+             .team-roster-table tr {
+                 margin-bottom: 15px;
+                 border: 1px solid #ddd;
+                 border-radius: 8px;
+                 padding: 10px;
+             }
 
-    .team-roster-table td {
-        text-align: left;
-        padding: 10px 5px;
-        border: none;
-    }
+             .team-roster-table td {
+                 text-align: left;
+                 padding: 10px 5px;
+                 border: none;
+             }
 
-    .team-roster-table td:before {
-        content: attr(data-label);
-        font-weight: 600;
-        display: block;
-        margin-bottom: 5px;
-        color: #007bff;
-    }
-}
- </style>
+             .team-roster-table td:before {
+                 content: attr(data-label);
+                 font-weight: 600;
+                 display: block;
+                 margin-bottom: 5px;
+                 color: #007bff;
+             }
+         }
+     </style>
 
 
 
- <!-- MAIN SECTION STARTS FROM HERE -->
+     <!-- MAIN SECTION STARTS FROM HERE -->
 
- <div class="main-section">
-     <!-- Left Section -->
-     <div class="left-section">
-         <div class="icon-list">
-             <div class="icon" style="    width: 5rem;" onclick="openTab('categories')">
-                 <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
-                <label for="categories" style="margin-left: -13px; font-size:14px">categories</label>
-                </div>
+     <div class="main-section">
+         <!-- Left Section -->
+         <div class="left-section">
+             <div class="icon-list">
+                 <div class="icon" onclick="openTab('categories')">
+                     <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
+                 </div>
+                 <div class="icon" onclick="openTab('Shirts')">
+                     <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
+                 </div>
 
-             <div class="icon" style="    width: 5rem;" onclick="openTab('Shirts')">
-                 <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
-                    <label for="categories" style=" font-size:14px">Shirts</label>
-                </div>
+                 {{-- <div class="icon" onclick="openTab('Logos')">
+                <img src="{{ asset('assets/c-logo.png') }}" alt="Logos" class="tab-icon" width="50px" />
+         </div> --}}
 
-             <div class="icon" style="    width: 5rem;">
-                 <a href="{{ route('custome.index') }}"><img src="{{ asset('assets/jpg shirt-01.png') }}" alt="custome-kit" class="tab-icon" width="50px" /></a>
-                 <label for="categories" style="margin-left: -13px; font-size:14px">custome kit</label>
+                 {{-- <div class="icon" onclick="openTab('Text')">
+                <img src="{{ asset('assets/text.png') }}" alt="Text" class="tab-icon" width="50px" />
+     </div> --}}
+
+                 {{-- <div class="icon" onclick="openTab('colorpicker')">
+                <img src="{{ asset('assets/colorbucketicon.png') }}" alt="Color Picker" class="tab-icon" width="50px"
+     />
+ </div> --}}
+                 {{-- <div class="icon" onclick="openTab('Patterns')">
+                <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
+ </div> --}}
+
+                 <div class="icon" onclick="captureFullRightSection()">
+                     <img src="{{ asset('assets/savedesignicon.png') }}" alt="Save Design" class="tab-icon"
+                         width="50px" />
+                 </div>
              </div>
 
-                        {{-- <div class="icon" onclick="openTab('Logos')">
-                            <img src="{{ asset('assets/c-logo.png') }}" alt="Logos" class="tab-icon" width="50px" />
-                    </div> --}}
+            
+                 <!-- Items List -->
 
-                    {{-- <div class="icon" onclick="openTab('Text')">
-                            <img src="{{ asset('assets/text.png') }}" alt="Text" class="tab-icon" width="50px" />
-                </div> --}}
+                 <div class="items-list" style="height: 36rem;">
+                     <!-- Shirts Tab -->
+                     <div class="tabcontent" id="Shirts">
+                         <img src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/FRONTPNG.png') }}')" alt="Shirt 1"
+                             width="100" />
 
-                {{-- <div class="icon" onclick="openTab('colorpicker')">
-                            <img src="{{ asset('assets/colorbucketicon.png') }}" alt="Color Picker" class="tab-icon" width="50px"
-                />
-            </div> --}}
-            {{-- <div class="icon" onclick="openTab('Patterns')">
-                            <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
-            </div> --}}
-        </div>
+                         <img src="{{ asset('assets/soccer-shirts/shirt4.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt4.png') }}')" alt="Shirt 4"
+                             width="100" />
 
- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
-     @csrf
- <!-- Items List -->
- 
- <div class="items-list" style="height: 36rem;">
-     <!-- Shirts Tab -->
-     <div class="tabcontent" id="Shirts">
-            <img src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/FRONTPNG.png') }}')" alt="Shirt 1" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt5.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt5.png') }}')" alt="Shirt 5"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt4.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt4.png') }}')" alt="Shirt 4" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt6.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt6.png') }}')" alt="Shirt 6"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt5.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt5.png') }}')" alt="Shirt 5" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt7.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt7.png') }}')" alt="Shirt 7"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt6.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt6.png') }}')" alt="Shirt 6" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt8.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt8.png') }}')" alt="Shirt 8"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt7.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt7.png') }}')" alt="Shirt 7" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt9.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt9.png') }}')" alt="Shirt 9"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt8.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt8.png') }}')" alt="Shirt 8" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt10.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt10.png') }}')" alt="Shirt 10"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt9.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt9.png') }}')" alt="Shirt 9" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt11.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt11.png') }}')" alt="Shirt 11"
+                             width="100" />
 
-            <img src="{{ asset('assets/soccer-shirts/shirt10.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt10.png') }}')" alt="Shirt 10" width="100"/>
+                         <img src="{{ asset('assets/soccer-shirts/shirt12.png') }}" class="shirt"
+                             onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt12.png') }}')" alt="Shirt 12"
+                             width="100" />
+                     </div>
 
-            <img src="{{ asset('assets/soccer-shirts/shirt11.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt11.png') }}')" alt="Shirt 11" width="100"/>
-
-            <img src="{{ asset('assets/soccer-shirts/shirt12.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt12.png') }}')" alt="Shirt 12" width="100"/>
-        </div>
-
-     <!-- Logos Tab -->
-     {{-- <div class="tabcontent" id="Logos" style="display: none">
+                     <!-- Logos Tab -->
+                     {{-- <div class="tabcontent" id="Logos" style="display: none">
                 @for ($i = 1; $i <= 18; $i++)
                     <img src="{{ asset('assets/Logos/p-logo' . $i . '.png') }}" class="logo"
      onclick="selectLogo('{{ asset('assets/Logos/p-logo' . $i . '.png') }}')"
@@ -185,8 +191,8 @@
      @endfor
  </div> --}}
 
- <!-- Text Tab -->
- {{-- <div class="tabcontent" id="Text" style="display: none">
+                     <!-- Text Tab -->
+                     {{-- <div class="tabcontent" id="Text" style="display: none">
                 <label for="custom-text">Enter Your Text</label>
                 <textarea id="custom-text" rows="4" cols="36"></textarea><br><br>
 
@@ -215,35 +221,35 @@
                 <button id="update-text" style="margin-top: 10px;">Update Text</button>
             </div> --}}
 
- <!-- Categories Tab -->
- <div class="tabcontent" id="categories" style="display: none">
-     <div class="cat-row">
-         <div class="cat-col">
-             <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
-             <h1>Soccer</h1>
-         </div>
-         <div class="cat-col">
-             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
-             <h1>Cricket</h1>
-         </div>
-         <div class="cat-col">
-             <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
-             <h1>Basketball</h1>
-         </div>
-     </div>
-     <div class="cat-row">
-         <div class="cat-col">
-            <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
-             <h1>Goal Keeper</h1>
-         </div>
-         <div class="cat-col">
-             <h1>Other / Staff / Management</h1>
-         </div>
-     </div>
- </div>
+                     <!-- Categories Tab -->
+                     <div class="tabcontent" id="categories" style="display: none">
+                         <div class="cat-row">
+                             <div class="cat-col">
+                                 <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
+                                 <h1>Soccer</h1>
+                             </div>
+                             <div class="cat-col">
+                                 <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
+                                 <h1>Cricket</h1>
+                             </div>
+                             <div class="cat-col">
+                                 <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
+                                 <h1>Basketball</h1>
+                             </div>
+                         </div>
+                         <div class="cat-row">
+                             <div class="cat-col">
+                                 <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                                 <h1>Goal Keeper</h1>
+                             </div>
+                             <div class="cat-col">
+                                 <h1>Other / Staff / Management</h1>
+                             </div>
+                         </div>
+                     </div>
 
- <!-- Color Picker -->
- {{-- <div class="tabcontent" id="colorpicker" style="display: none">
+                     <!-- Color Picker -->
+                     {{-- <div class="tabcontent" id="colorpicker" style="display: none">
                 <div class="picker-div">
                     <label for="color-picker">Choose Shirt Color:</label>
                     <input type="color" id="color-picker" onchange="updateShirtColor(this.value)">
@@ -254,8 +260,8 @@
                 </div>
             </div> --}}
 
- <!-- Patterns Tab -->
- {{-- <div class="tabcontent" id="Patterns" style="display: none;">
+                     <!-- Patterns Tab -->
+                     {{-- <div class="tabcontent" id="Patterns" style="display: none;">
                 <div class="pattern-options">
                     @for ($i = 1; $i <= 18; $i++)
                         <img src="{{ asset('assets/soccer-shirts/pattern' . $i . '.png') }}"
@@ -264,52 +270,54 @@
  @endfor
  </div>
  </div> --}}
- </div>
- </div>
+                 </div>
+         </div>
 
- <!-- Right Section -->
-<div class="right-section">
-    <div class="item-display" style="position: relative;">
-        <div id="text-display" style="position: absolute; z-index: 5;"></div>
-        <!-- Base shirt hamesha dikh rahi hai -->
-        <img id="selected-shirt" src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" alt="Selected Shirt" />
-        <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay" style="display: none;" />
-    </div>
+         <!-- Right Section -->
+         <div class="right-section">
+             <div class="item-display" style="position: relative;">
+                 <div id="text-display" style="position: absolute; z-index: 5;"></div>
+                 <!-- Base shirt hamesha dikh rahi hai -->
+                 <img id="selected-shirt" src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" alt="Selected Shirt" />
+                 <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay"
+                     style="display: none;" />
+             </div>
 
-    <!-- Hidden input to store selected shirt path for database -->
-   
-    
-    <!-- Optional: Preview of selected shirt -->
-    <div id="shirtPreview" style="margin-top: 10px;"></div>
-</div>
+             <!-- Hidden input to store selected shirt path for database -->
 
 
- </div>
+             <!-- Optional: Preview of selected shirt -->
+             <div id="shirtPreview" style="margin-top: 10px;"></div>
+         </div>
 
- <!-- MAIN SECTION ENDS HERE -->
 
+     </div>
 
-
+     <!-- MAIN SECTION ENDS HERE -->
 
 
 
- @if ($errors->any())
- <div class="alert alert-danger">
-     <ul>
-         @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-         @endforeach
-     </ul>
- </div>
- @endif
 
- <!-- FORM SECTION STARTS FROM HERE -->
- 
+
+
+     @if ($errors->any())
+         <div class="alert alert-danger">
+             <ul>
+                 @foreach ($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                 @endforeach
+             </ul>
+         </div>
+     @endif
+
+     <!-- FORM SECTION STARTS FROM HERE -->
+ <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
      <div class="head-box">
          <p class="mainheading">CUSTOM SOCCER KIT</p>
          <div class="m-pr">
              <p class="s-pr" data-base="39.00">$39.00</p>
-            <input type="hidden" name="price" class="row-total">
+             {{-- <input type="hidden" name="price" class="row-total"> --}}
              {{-- <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price --> --}}
              <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
              <p class="str-r">5 reviews</p>
@@ -322,22 +330,25 @@
          <div class="form-column">
              <label for="sleeves_length">Sleeves Length</label>
              <select name="sleeves_length" id="sleeves_length"
-    class="form-control price-option @error('sleeves_length') is-invalid @enderror">
-    <option value="">Select</option>
-    <option value="short" {{ old('sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
-    <option value="long" {{ old('sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
-    <option value="mix" {{ old('sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
-</select>
+                 class="form-control price-option @error('sleeves_length') is-invalid @enderror">
+                 <option value="">Select</option>
+                 <option value="short" {{ old('sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+                 <option value="long" {{ old('sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)
+                 </option>
+                 <option value="mix" {{ old('sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
+             </select>
              <label for="fit_type">Fit Type</label>
              <select name="fit_type" id="fit_type" class="form-control @error('fit_type') is-invalid @enderror">
                  <option value="">Select</option>
-                 @foreach(['men','women','youth'] as $opt)
-                 <option value="{{ $opt }}" {{ old('fit_type')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
+                 @foreach (['men', 'women', 'youth'] as $opt)
+                     <option value="{{ $opt }}" {{ old('fit_type') == $opt ? 'selected' : '' }}>
+                         {{ ucfirst($opt) }}
+                     </option>
                  @endforeach
              </select>
-             @error('fit_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
+             @error('fit_type')
+                 <div class="invalid-feedback">{{ $message }}</div>
+             @enderror
 
 
              {{-- Kit Type --}}
@@ -346,13 +357,15 @@
                      <label for="kit_type">Kit Type</label>
                      <select name="kit_type" id="kit_type" class="form-control @error('kit_type') is-invalid @enderror">
                          <option value="">Select</option>
-                         @foreach(['full','shirt','both'] as $opt)
-                         <option value="{{ $opt }}" {{ old('kit_type')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
+                         @foreach (['full', 'shirt', 'both'] as $opt)
+                             <option value="{{ $opt }}" {{ old('kit_type') == $opt ? 'selected' : '' }}>
+                                 {{ ucfirst($opt) }}
+                             </option>
                          @endforeach
                      </select>
-                     @error('kit_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('kit_type')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
 
@@ -363,13 +376,16 @@
                      <select name="outfield_players_socks" id="outfield_players_socks"
                          class="form-control @error('outfield_players_socks') is-invalid @enderror">
                          <option value="">Select</option>
-                         @foreach(['yes','no'] as $opt)
-                         <option value="{{ $opt }}" {{ old('outfield_players_socks')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
+                         @foreach (['yes', 'no'] as $opt)
+                             <option value="{{ $opt }}"
+                                 {{ old('outfield_players_socks') == $opt ? 'selected' : '' }}>
+                                 {{ ucfirst($opt) }}
+                             </option>
                          @endforeach
                      </select>
-                     @error('outfield_players_socks') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('outfield_players_socks')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
          </div>
@@ -377,14 +393,15 @@
          <div class="form-column">
              <label for="team_logo">Team Logo</label>
              <select name="team_logo" id="team_logo"
-    class="form-control price-option @error('team_logo') is-invalid @enderror">
-    <option value="">Select</option>
-    <option value="sublimated" {{ old('team_logo') == 'sublimated' ? 'selected' : '' }}>Sublimated</option>
-    <option value="embroidery" {{ old('team_logo') == 'embroidery' ? 'selected' : '' }}>Embroidery (+$1.00/pr kit)</option>
-</select>
-@error('team_logo')
-    <div class="invalid-feedback">{{ $message }}</div>
-@enderror
+                 class="form-control price-option @error('team_logo') is-invalid @enderror">
+                 <option value="">Select</option>
+                 <option value="sublimated" {{ old('team_logo') == 'sublimated' ? 'selected' : '' }}>Sublimated</option>
+                 <option value="embroidery" {{ old('team_logo') == 'embroidery' ? 'selected' : '' }}>Embroidery (+$1.00/pr
+                     kit)</option>
+             </select>
+             @error('team_logo')
+                 <div class="invalid-feedback">{{ $message }}</div>
+             @enderror
 
 
 
@@ -393,15 +410,17 @@
                  <div class="form-group">
                      <label for="collar_type">Collar Type</label>
                      <select name="collar_type" id="collar_type"
-    class="form-control price-option @error('collar_type') is-invalid @enderror">
-    <option value="">Select</option>
-    <option value="v-neck" {{ old('collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
-    <option value="round-neck" {{ old('collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
-    <option value="polo-style" {{ old('collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
-</select>
-@error('collar_type')
-    <div class="invalid-feedback">{{ $message }}</div>
-@enderror
+                         class="form-control price-option @error('collar_type') is-invalid @enderror">
+                         <option value="">Select</option>
+                         <option value="v-neck" {{ old('collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+                         <option value="round-neck" {{ old('collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck
+                         </option>
+                         <option value="polo-style" {{ old('collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style
+                             (+$2.00/pr kit)</option>
+                     </select>
+                     @error('collar_type')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
 
@@ -410,14 +429,15 @@
                  <div class="form-group">
                      <label for="inside_shirt_collar">Inside Shirt Collar</label>
                      <select name="inside_shirt_collar" id="inside_shirt_collar"
-    class="form-control price-option @error('inside_shirt_collar') is-invalid @enderror">
-    <option value="">Select</option>
-    <option value="yes" {{ old('inside_shirt_collar') == 'yes' ? 'selected' : '' }}>Yes (+$2.00/pr kit)</option>
-    <option value="no" {{ old('inside_shirt_collar') == 'no' ? 'selected' : '' }}>No</option>
-</select>
-@error('inside_shirt_collar')
-    <div class="invalid-feedback">{{ $message }}</div>
-@enderror
+                         class="form-control price-option @error('inside_shirt_collar') is-invalid @enderror">
+                         <option value="">Select</option>
+                         <option value="yes" {{ old('inside_shirt_collar') == 'yes' ? 'selected' : '' }}>Yes (+$2.00/pr
+                             kit)</option>
+                         <option value="no" {{ old('inside_shirt_collar') == 'no' ? 'selected' : '' }}>No</option>
+                     </select>
+                     @error('inside_shirt_collar')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
              <div class="col-md-6" id="socksColorWrapper" style="display: none;">
@@ -440,7 +460,9 @@
                          <option value="beige">Beige</option>
                          <option value="navy">Navy</option>
                      </select>
-                     @error('socks-color') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('socks-color')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
 
@@ -452,78 +474,53 @@
      <p class="size-guide"><i class="fa-solid fa-ruler"></i> Size Guide</p>
 
      <div class="team-form-container">
-         <!-- Table -->
-         <div class="team-form-container">
-             <table class="table table-bordered team-roster-table" id="playersTable">
-                 <thead>
-                     <tr>
-                         <th>Player Name</th>
-                         <th>Number</th>
-                         <th>Shirt Size</th>
-                         <th>short Size</th>
-                         <th>Quantity</th>
-                         {{-- <th>Price</th> --}}
-                         {{-- <th>Guide Price</th> --}}
-                         <th>Action</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <!-- First Row -->
-                     <tr>
-                         <td>
-                             <input type="text" name="name" class="form-control" placeholder="Enter name" required>
-                         </td>
-                         <td>
-                             <input type="number" name="number" class="form-control" placeholder="0" min="1" required>
-                         </td>
-                         <td>
-                             <select name="shirt_size" class="form-control" required>
-                                 <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-                         </td>
-                         <td class="hide-on-shirt-only">
-                             <select class="short-size" name="short_size" require>
-                                 <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-<td>
-    <input type="number" 
-           name="quantity" 
-           class="form-control quantity-input" 
-           placeholder="0" 
-           min="1" 
-           value="1">
-</td>
-{{-- <td>
-    <input type="number" 
-           name="price" 
-           class="form-control row-total" 
-           readonly 
-           style="font-weight:bold;">
-</td> --}}
+        <table class="table table-bordered team-roster-table" id="details-wrapper">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Number</th>
+                    <th>Shirt Size</th>
+                    <th>Short Size</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="detail-row">
+                <tr>
+                    <td><input type="text" name="player_name[]" class="form-control" placeholder="Enter name" required></td>
+                    <td><input type="number" name="player_number[]" class="form-control" placeholder="0" min="1" required></td>
+                    <td>
+                        <select name="player_shirt_size[]" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="player_short_size[]" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="player_quantity[]" class="form-control" value="1" min="1" required></td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm remove-player-row">✖</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-
-
-                         <td class="text-center">
-                             <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
-                                 style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
-                                 ✖
-                             </button>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-
-             <!-- Add Row Button -->
-             <button type="button" class="btn btn-primary" id="addRowBtn"
-                 style="margin-top: 2rem; padding: 1rem; background: black; color: white;border-radius: 1rem;">+ Add
-                 Row</button>
-         </div>
+        <button type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
+    </div>
      </div>
 
 
@@ -535,10 +532,10 @@
              <select id="goalkeeper_kit" name="goalkeeper_kit"
                  class="form-control @error('goalkeeper_kit') is-invalid @enderror" onchange="toggleGoalkeeperFields()">
                  <option value="">Select</option>
-                 @foreach(['yes','no'] as $opt)
-                 <option value="{{ $opt }}" {{ old('goalkeeper_kit')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
+                 @foreach (['yes', 'no'] as $opt)
+                     <option value="{{ $opt }}" {{ old('goalkeeper_kit') == $opt ? 'selected' : '' }}>
+                         {{ ucfirst($opt) }}
+                     </option>
                  @endforeach
              </select>
          </div>
@@ -550,10 +547,10 @@
                  <div class="form-group" style="flex: 1;">
                      <label for="padded">Padded</label>
                      <select name="padded" id="padded" class="form-control price-option" style="width: 21rem;">
-        <option value="">Select</option>
-        <option value="yes" {{ old('padded') == 'yes' ? 'selected' : '' }}>Yes (+$5)</option>
-        <option value="no" {{ old('padded') == 'no' ? 'selected' : '' }}>No</option>
-    </select>
+                         <option value="">Select</option>
+                         <option value="yes" {{ old('padded') == 'yes' ? 'selected' : '' }}>Yes (+$5)</option>
+                         <option value="no" {{ old('padded') == 'no' ? 'selected' : '' }}>No</option>
+                     </select>
                  </div>
 
                  <div class="form-group" style="flex: 1;">
@@ -561,13 +558,16 @@
                      <select name="goalkeeper_jersey_design" id="goalkeeper_jersey_design" style=" width: 21rem;"
                          class="form-control @error('goalkeeper_jersey_design') is-invalid @enderror">
                          <option value="">Select</option>
-                         @foreach(['same_as_player_uniform','custom_design'] as $opt)
-                         <option value="{{ $opt }}" {{ old('goalkeeper_jersey_design')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
+                         @foreach (['same_as_player_uniform', 'custom_design'] as $opt)
+                             <option value="{{ $opt }}"
+                                 {{ old('goalkeeper_jersey_design') == $opt ? 'selected' : '' }}>
+                                 {{ ucwords(str_replace('_', ' ', $opt)) }}
+                             </option>
                          @endforeach
                      </select>
-                     @error('goalkeeper_jersey_design') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('goalkeeper_jersey_design')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
 
@@ -577,13 +577,16 @@
                      <select name="goalkeeper_sleeves" id="goalkeeper_sleeves"
                          class="form-control @error('goalkeeper_sleeves') is-invalid @enderror">
                          <option value="">Select</option>
-                         @foreach(['long','short','padded_elbows'] as $opt)
-                         <option value="{{ $opt }}" {{ old('goalkeeper_sleeves')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
+                         @foreach (['long', 'short', 'padded_elbows'] as $opt)
+                             <option value="{{ $opt }}"
+                                 {{ old('goalkeeper_sleeves') == $opt ? 'selected' : '' }}>
+                                 {{ ucwords(str_replace('_', ' ', $opt)) }}
+                             </option>
                          @endforeach
                      </select>
-                     @error('goalkeeper_sleeves') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('goalkeeper_sleeves')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
 
                  <div class="form-group" style="flex: 1;">
@@ -591,13 +594,15 @@
                      <select name="jersey_color" id="jersey_color"
                          class="form-control @error('jersey_color') is-invalid @enderror">
                          <option value="">Select</option>
-                         @foreach(['same_as_top','same_as_pants','red','blue','black','white','other'] as $opt)
-                         <option value="{{ $opt }}" {{ old('jersey_color')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
+                         @foreach (['same_as_top', 'same_as_pants', 'red', 'blue', 'black', 'white', 'other'] as $opt)
+                             <option value="{{ $opt }}" {{ old('jersey_color') == $opt ? 'selected' : '' }}>
+                                 {{ ucwords(str_replace('_', ' ', $opt)) }}
+                             </option>
                          @endforeach
                      </select>
-                     @error('jersey_color') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                     @error('jersey_color')
+                         <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
                  </div>
              </div>
 
@@ -645,11 +650,14 @@
                  <div class="form-group" id="">
                      <label for="staff_sleeves_length">Staff Sleeves Length</label>
                      <select name="staff_sleeves_length" id="staff_sleeves_length" class="form-control price-option">
-        <option value="">Select</option>
-        <option value="short" {{ old('staff_sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
-        <option value="long" {{ old('staff_sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)</option>
-        <option value="mix" {{ old('staff_sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short</option>
-    </select>
+                         <option value="">Select</option>
+                         <option value="short" {{ old('staff_sleeves_length') == 'short' ? 'selected' : '' }}>Short
+                         </option>
+                         <option value="long" {{ old('staff_sleeves_length') == 'long' ? 'selected' : '' }}>Long
+                             (+$2.00/pr kit)</option>
+                         <option value="mix" {{ old('staff_sleeves_length') == 'mix' ? 'selected' : '' }}>Mix:
+                             Long/Short</option>
+                     </select>
                  </div>
              </div>
 
@@ -658,11 +666,14 @@
                  <div class="form-group" id="playersTable">
                      <label for="staff_collar_type">Staff Collar Type</label>
                      <select name="staff_collar_type" id="staff_collar_type" class="form-control price-option">
-        <option value="">Select</option>
-        <option value="v-neck" {{ old('staff_collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
-        <option value="round-neck" {{ old('staff_collar_type') == 'round-neck' ? 'selected' : '' }}>Round-Neck</option>
-        <option value="polo-style" {{ old('staff_collar_type') == 'polo-style' ? 'selected' : '' }}>Polo-Style (+$2.00/pr kit)</option>
-    </select>
+                         <option value="">Select</option>
+                         <option value="v-neck" {{ old('staff_collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck
+                         </option>
+                         <option value="round-neck" {{ old('staff_collar_type') == 'round-neck' ? 'selected' : '' }}>
+                             Round-Neck</option>
+                         <option value="polo-style" {{ old('staff_collar_type') == 'polo-style' ? 'selected' : '' }}>
+                             Polo-Style (+$2.00/pr kit)</option>
+                     </select>
                  </div>
              </div>
 
@@ -692,46 +703,38 @@
                                  required>
                          </td>
                          <td>
-                             <input type="number" name="guide_number" class="form-control" placeholder="0" min="1"
-                                 required>
+                             <input type="number" name="guide_number" class="form-control" placeholder="0"
+                                 min="1" required>
                          </td>
                          <td>
                              <select name="guide_shirt_size" class="form-control" required>
                                  <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
+                                 @foreach (['xs', 's', 'm', 'l', 'xl', '2xl', '3xl'] as $opt)
+                                     <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
                                  @endforeach
                              </select>
                          </td>
                          <td class="hide-on-shirt-only">
                              <select class="short-size" name="guide_pant_size" required>
                                  <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
+                                 @foreach (['xs', 's', 'm', 'l', 'xl', '2xl', '3xl'] as $opt)
+                                     <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
                                  @endforeach
                              </select>
                          </td>
                          <td class="hide-on-shirt-only">
                              <select class="short-size" name="guide_sleeves_length" required>
                                  <option value="">Select</option>
-                                 @foreach(['short','long'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
+                                 @foreach (['short', 'long'] as $opt)
+                                     <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
                                  @endforeach
                              </select>
                          </td>
-<td>
-    <input type="number" id="guide_quantity" name="guide_quantity" 
-        class="form-control" placeholder="0" min="1" required>
-</td>
-{{-- <td>
-    <input type="number" id="guide_price" name="guide_price" 
-        class="form-control" placeholder="0" min="1" required>
-</td>
-<td>
-    <input type="text" id="guide_total" name="guide_total" 
-        class="form-control" readonly style="font-weight:bold;">
-</td> --}}
-                          
+                         <td>
+                             <input type="number" id="guide_quantity" name="guide_quantity" class="form-control"
+                                 placeholder="0" min="1" required>
+                         </td>
+
                          <td class="text-center">
                              <button type="button" class="btn btn-danger btn-sm remove-player-row" title="Remove Row"
                                  style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">
@@ -749,18 +752,120 @@
          </div>
 
      </div>
-    <div class="form-column">
+     <div class="form-column">
 
-    <input type="hidden" name="selected_shirt" id="selectedShirtInput">
-
-
+         <input type="hidden" name="selected_shirt" id="selectedShirtInput">
 
 
-</div>
+
+
+     </div>
+
+     {{-- sponsor bulk image task starts here --}}
+     {{-- <div class="btn_box">
+         <input type="file" name="image[]" class="form-control" required multiple accept="image/*">
+     </div> --}}
+
      <div class="btn_box">
          <button type="submit" class="addtocart_btn">Add to cart</button>
      </div>
- </form>
+     </form>
 
+ <div class="btn_box">
+        <button type="submit" class="addtocart_btn">Add to cart</button>
+    </div>
+</form>
 
+<script>
+let playerRowCount = 1;
+
+// Player rows functionality with image upload
+document.getElementById('addPlayerRow').addEventListener('click', function() {
+    const tbody = document.querySelector('#details-wrapper tbody');
+    const newRow = document.createElement('tr');
+    const previewId = 'preview' + playerRowCount;
+    
+    newRow.innerHTML = `
+        <td><input type="text" name="player_name[]" class="form-control" placeholder="Enter name" required></td>
+        <td><input type="number" name="player_number[]" class="form-control" placeholder="0" min="1" required></td>
+        <td>
+            <select name="player_shirt_size[]" class="form-control" required>
+                <option value="">Select</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="2xl">2XL</option>
+                <option value="3xl">3XL</option>
+            </select>
+        </td>
+        <td>
+            <select name="player_short_size[]" class="form-control" required>
+                <option value="">Select</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="2xl">2XL</option>
+                <option value="3xl">3XL</option>
+            </select>
+        </td>
+        <td><input type="number" name="player_quantity[]" class="form-control" value="1" min="1" required></td>
+        
+        <td>
+            <button type="button" class="btn btn-danger btn-sm remove-player-row">✖</button>
+        </td>
+    `;
+    tbody.appendChild(newRow);
+    playerRowCount++;
+    
+    // Add event listener for the new file input
+    const newFileInput = newRow.querySelector('.player-photo');
+    newFileInput.addEventListener('change', handleImagePreview);
+});
+
+// Image preview handler
+function handleImagePreview(e) {
+    const file = e.target.files[0];
+    const previewId = e.target.getAttribute('data-preview');
+    const previewContainer = document.getElementById(previewId);
+    
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewContainer.innerHTML = `
+                <img src="${e.target.result}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;">
+                <br>
+                <small class="text-success">✓ Image selected</small>
+            `;
+            previewContainer.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(file);
+    } else {
+        previewContainer.innerHTML = '';
+        previewContainer.style.display = 'none';
+    }
+}
+
+// Add event listener to initial file input
+document.querySelector('.player-photo').addEventListener('change', handleImagePreview);
+
+// ... rest of your existing JavaScript ...
+</script>
+
+<style>
+.photo-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.player-photo {
+    font-size: 14px;
+    padding: 5px;
+}
+</style>
  @endsection

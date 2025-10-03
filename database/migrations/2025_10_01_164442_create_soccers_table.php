@@ -11,10 +11,10 @@ class CreateSoccersTable extends Migration
      *
      * @return void
      */
-    public function up()
+      public function up()
     {
         Schema::create('soccers', function (Blueprint $table) {
-            $table->id();
+           $table->id();
             $table->enum('fit_type', ['men', 'women', 'youth'])->default('men');
             $table->enum('kit_type', ['full', 'shirt', 'both'])->default('full'); 
             $table->enum('collar_type', ['v-neck', 'round-neck', 'polo-style'])->default('polo-style');            
@@ -24,11 +24,16 @@ class CreateSoccersTable extends Migration
 
 
             // size
-            $table->string('name', 255);
-            $table->integer('number');
-            $table->enum('shirt_size', ['xs', 's', 'm', 'l','xl','2xl', '3xl'])->default('s');
+
+            $table->string('name')->nullable();
+            $table->string('number')->nullable();
+            $table->string('shirt_size')->nullable();
+            $table->string('short_size')->nullable();
+            $table->string('quantity')->nullable();
+            // $table->string('price')->nullable();
+            
+           
             $table->enum('sleeves_length', ['short', 'long'])->default('long');
-            $table->integer('quantity');
 
             // Goal Keeper Requirements
            $table->enum('goalkeeper_kit', ['yes', 'no'])->default('no');
@@ -52,6 +57,8 @@ class CreateSoccersTable extends Migration
             $table->enum('guide_pant_size', ['xs', 's', 'm', 'l','xl','2xl', '3xl'])->default('s');
             $table->enum('guide_sleeves_length', ['short', 'long'])->default('long');
             $table->integer('guide_quantity');
+
+            $table->string('image', 255)->nullable();
            $table->timestamps();
         });
     }

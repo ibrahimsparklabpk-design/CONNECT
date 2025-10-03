@@ -113,81 +113,84 @@
             }
         }
 
-        <!-- logo code starts here -->
-        .logos-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 100%;   /* ✅ horizontal scroll prevent */
-    overflow: hidden;  /* ✅ koi scrollbar na aaye */
-}
+        < !-- logo code starts here -->.logos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            /* ✅ horizontal scroll prevent */
+            overflow: hidden;
+            /* ✅ koi scrollbar na aaye */
+        }
 
-.logo-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ddd;
-    padding: 8px;
-    border-radius: 8px;
-    background: #fff;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 8px;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-.logo-item img.logo {
-    width: 100%;
-    max-width: 80px;   /* ✅ image auto resize */
-    max-height: 80px;
-    object-fit: contain;
-    margin-bottom: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+        .logo-item img.logo {
+            width: 100%;
+            max-width: 80px;
+            /* ✅ image auto resize */
+            max-height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-.logo-item .btn {
-    padding: 4px 8px;
-    font-size: 13px;
-    border-radius: 4px;
-}
-
-
-.upload-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: #000;
-    color: #fff;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 14px;
-    transition: background 0.3s ease;
-    cursor: pointer;   /* 👈 yeh line zaroori hai */
-}
-
-.upload-btn:hover {
-    background: #333;
-}
-
-.upload-btn i {
-    font-size: 16px;
-}
+        .logo-item .btn {
+            padding: 4px 8px;
+            font-size: 13px;
+            border-radius: 4px;
+        }
 
 
-.delete-btn {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
+        .upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #000;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            /* 👈 yeh line zaroori hai */
+        }
+
+        .upload-btn:hover {
+            background: #333;
+        }
+
+        .upload-btn i {
+            font-size: 16px;
+        }
+
+
+        .delete-btn {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
     </style>
 
 
@@ -493,75 +496,75 @@
     </script>
 
     <script>
-    // Jab user shirt select kare
-   function selectShirt(imagePath) {
-    // Hidden input update
-    const hiddenInput = document.getElementById("selectedShirtInput");
-    hiddenInput.value = imagePath;
+        // Jab user shirt select kare
+        function selectShirt(imagePath) {
+            // Hidden input update
+            const hiddenInput = document.getElementById("selectedShirtInput");
+            hiddenInput.value = imagePath;
 
-    // Right section me base shirt image replace karo
-    const shirtImg = document.getElementById("selected-shirt");
-    if (shirtImg) {
-        shirtImg.src = imagePath;
-    }
+            // Right section me base shirt image replace karo
+            const shirtImg = document.getElementById("selected-shirt");
+            if (shirtImg) {
+                shirtImg.src = imagePath;
+            }
 
-    console.log("Selected Shirt Path:", imagePath); // Debugging
-}
-</script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    let quantityInput = document.getElementById("quantity");
-    let priceInput = document.getElementById("price");
-
-    let unitPrice = 0;
-
-    // Jab user price dale → unit price set ho jaye
-    priceInput.addEventListener("input", function () {
-        let qty = parseInt(quantityInput.value) || 0;
-
-        if (qty > 0) {
-            unitPrice = parseFloat(this.value) / qty;
-        } else {
-            unitPrice = parseFloat(this.value) || 0;
+            console.log("Selected Shirt Path:", imagePath); // Debugging
         }
-    });
+    </script>
 
-    // Jab quantity change ho → price update karo
-    quantityInput.addEventListener("input", function () {
-        let qty = parseInt(this.value) || 0;
 
-        if (qty === 0) {
-            priceInput.value = 0;
-        } else {
-            priceInput.value = (unitPrice * qty).toFixed(2);
-        }
-    });
-});
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let quantityInput = document.getElementById("quantity");
+            let priceInput = document.getElementById("price");
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Sabhi quantity inputs select karo
-    document.querySelectorAll(".quantity-input").forEach(function (input) {
-        input.addEventListener("input", function () {
-            let qty = parseInt(this.value) || 1; 
-            let unitPrice = parseFloat(this.getAttribute("data-price")) || 0;
+            let unitPrice = 0;
 
-            // Row ke andar total-price cell dhundo
-            let totalCell = this.closest("tr").querySelector(".total-price");
+            // Jab user price dale → unit price set ho jaye
+            priceInput.addEventListener("input", function() {
+                let qty = parseInt(quantityInput.value) || 0;
 
-            // Total price update karo
-            totalCell.textContent = (unitPrice * qty).toFixed(2);
+                if (qty > 0) {
+                    unitPrice = parseFloat(this.value) / qty;
+                } else {
+                    unitPrice = parseFloat(this.value) || 0;
+                }
+            });
+
+            // Jab quantity change ho → price update karo
+            quantityInput.addEventListener("input", function() {
+                let qty = parseInt(this.value) || 0;
+
+                if (qty === 0) {
+                    priceInput.value = 0;
+                } else {
+                    priceInput.value = (unitPrice * qty).toFixed(2);
+                }
+            });
         });
-    });
-});
-</script>
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sabhi quantity inputs select karo
+            document.querySelectorAll(".quantity-input").forEach(function(input) {
+                input.addEventListener("input", function() {
+                    let qty = parseInt(this.value) || 1;
+                    let unitPrice = parseFloat(this.getAttribute("data-price")) || 0;
+
+                    // Row ke andar total-price cell dhundo
+                    let totalCell = this.closest("tr").querySelector(".total-price");
+
+                    // Total price update karo
+                    totalCell.textContent = (unitPrice * qty).toFixed(2);
+                });
+            });
+        });
+    </script>
 
 
-{{-- ✅ JavaScript for auto update --}}
-{{-- <script>
+    {{-- ✅ JavaScript for auto update --}}
+    {{-- <script>
     function calculateTotals() {
         document.querySelectorAll(".quantity-input").forEach(qtyInput => {
             let row = qtyInput.closest("tr");
@@ -619,51 +622,72 @@ document.addEventListener("DOMContentLoaded", function () {
 </script> --}}
 
 
-</script>
+    </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const priceElement = document.querySelector(".s-pr");
-    const hiddenInput = document.querySelector("input[name='price']");
-    const quantityInput = document.querySelector(".quantity-input");
-    const basePrice = parseFloat(priceElement.dataset.base);
-    const selects = document.querySelectorAll("select.price-option");
+    const addRowBtn = document.getElementById("addRow");   // Add Row button
+    const wrapper   = document.getElementById("details-wrapper"); // Table body
 
-    function updatePrice() {
-        let perPiecePrice = basePrice;
+    // 👉 Add new row
+    addRowBtn.addEventListener("click", function () {
+        const newRow = document.createElement("tr");
+        newRow.classList.add("detail-row");
 
-        // Options ke prices add karo
-        selects.forEach(select => {
-            const selectedText = select.options[select.selectedIndex]?.text || "";
-            const match = selectedText.match(/\+ ?\$?(\d+(\.\d+)?)/);
-            if (match) {
-                perPiecePrice += parseFloat(match[1]);
-            }
-        });
+        newRow.innerHTML = `
+            <td>
+                <input type="text" name="name[]" class="form-control" placeholder="Enter name" required>
+            </td>
+            <td>
+                <input type="number" name="number[]" class="form-control" placeholder="0" min="1" required>
+            </td>
+            <td>
+                <select name="shirt_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="2xl">2XL</option>
+                    <option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <select name="short_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="2xl">2XL</option>
+                    <option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <input type="number" name="quantity[]" class="form-control" placeholder="0" min="1" value="1">
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
+                    style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">
+                    ✖
+                </button>
+            </td>
+        `;
 
-        // Quantity lo (default 1 agar empty hai)
-        const quantity = parseInt(quantityInput.value) || 1;
-
-        // Total user ke liye
-        const total = perPiecePrice * quantity;
-
-        // Screen pe total dikhana
-        priceElement.textContent = `$${total.toFixed(2)}`;
-
-        // Hidden input me sirf per-piece price save karna
-        if (hiddenInput) {
-            hiddenInput.value = perPiecePrice.toFixed(2);
-        }
-    }
-
-    // Init
-    updatePrice();
-
-    // Event listeners
-    selects.forEach(select => {
-        select.addEventListener("change", updatePrice);
+        wrapper.appendChild(newRow);
     });
-    quantityInput.addEventListener("input", updatePrice);
+
+    // 👉 Remove row
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("remove-row")) {
+            e.target.closest("tr").remove();
+        }
+    });
 });
 </script>
-@yield('script');
 
+
+
+
+    @yield('script');
