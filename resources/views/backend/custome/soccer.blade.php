@@ -1653,9 +1653,6 @@
     </script>
 
 
-
-    // custom soccer price works starts here
-
     {{-- <script>
         function calculateTotals() {
             document.querySelectorAll(".quantity-input").forEach(qtyInput => {
@@ -1679,7 +1676,6 @@
             input.addEventListener("input", calculateTotals);
         });
     </script> --}}
-    // custom soccer guided price works starts here
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const qty = document.getElementById("guide_quantity");

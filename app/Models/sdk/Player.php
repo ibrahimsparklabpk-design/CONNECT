@@ -5,16 +5,13 @@ namespace App\Models\sdk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomUniform extends Model
+class Player extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
 
-     protected $appends = ['total_price'];
-
-    public function getTotalPriceAttribute()
+     public function soccer()
     {
-        return $this->quantity * $this->price;
+        return $this->belongsTo(Soccer::class);
     }
 }

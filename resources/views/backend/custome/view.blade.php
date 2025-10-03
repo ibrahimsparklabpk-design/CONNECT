@@ -14,8 +14,8 @@
                 <!-- 🧾 Table -->
                 <div class="team-form-container" style="padding-bottom: 40px;">
                     <div class="table-responsive">
-         <a href="{{ route('custome.index') }}" 
-   style="background-color: #000000; 
+                        <a href="{{ route('custome.index') }}"
+                            style="background-color: #000000; 
           color: #fff; 
           padding: 8px 18px; 
           margin-bottom: 8px;
@@ -24,80 +24,39 @@
           font-weight: bold; 
           transition: 0.3s; 
           float: right;">
-    ← Back
-</a>
+                            ← Back
+                        </a>
 
-                        <table class="table table-bordered table-striped team-roster-table" id="playersTable"
-                            style="width:100%">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Image</th>
-                                    <th>Fit Type</th>
-                                    <th>Kit Type</th>
-                                    <th>Team Logo</th>
-                                    <th>Sleeves</th>
-                                    <th>Player Name</th>
-                                    <th>Number</th>
-                                    <th>Price</th>
-                                    <th>Goalkeeper Kit</th>
-                                    <th>Staff Option</th>
-                                    <th>Created At</th>
-                                    <th>Remove Item</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($customeUniform as $index => $item)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>
-                                            @if (!empty($item['image']))
-                                                <img src="{{ asset('custom/images/' . $item['image']) }}" width="50"
-                                                    alt="Uniform Image"
-                                                    onerror="this.src='{{ asset('images/no-image.png') }}'">
-                                            @else
-                                                N/A
-                                            @endif
-                                        </td>
+                        <h3>Cart Items</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Shirt Size</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($cart as $item)
+            <tr>
+                <td>{{ $item['name'] }}</td>
+                <td>{{ $item['number'] }}</td>
+                <td>{{ strtoupper($item['shirt_size']) }}</td>
+                <td>{{ $item['quantity'] }}</td>
+                <td>${{ number_format($item['total'], 2) }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 
-                                        <td>{{ ucfirst($item['fit_type']) }}</td>
-                                        <td>{{ ucfirst($item['kit_type']) }}</td>
-                                        <td>{{ ucfirst($item['team_logo']) }}</td>
-                                        <td>{{ ucfirst($item['sleeves_length']) }}</td>
-                                        <td>{{ $item['name'] }}</td>
-                                        <td>{{ $item['number'] }}</td>
+<h4>Grand Total: ${{ number_format($grandTotal, 2) }}</h4>
 
-                                        {{-- Sirf total show karna --}}
-                                        <td><strong>${{ number_format(($item['total'] ?? 0) + ($item['guide_total'] ?? 0), 2) }}</strong>
-                                        </td>
 
-                                        <td>{{ ucfirst($item['goalkeeper_kit']) }}</td>
-                                        <td>{{ ucfirst($item['staff_other']) }}</td>
-                                        <td>
-                                            {{ isset($item['created_at']) ? \Carbon\Carbon::parse($item['created_at'])->format('d M Y') : '--' }}
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('custome.cart.remove', $index) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">Remove Item</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="12" class="text-center">No cart items found.</td>
-                                    </tr>
-                                @endforelse
-
-                            </tbody>
-                        </table>
-
-                        <form action="{{ route('custome.cart.clear') }}" method="POST"
-                            onsubmit="return confirm('Are you sure you want to clear the cart?');">
+                        <form action="{{ route('custome.cart.clear') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Clear Cart</button>
+                            <button type="submit" class="btn btn-warning">Clear Cart</button>
                         </form>
 
                     </div>
@@ -106,11 +65,10 @@
                 <!-- ✅ Checkout Button -->
                 <!-- ✅ Checkout Button - Properly Centered -->
                 <div style="display: flex; justify-content: center; padding-bottom: 50px; padding-top: 50px;">
-                    <a href="{{ route('custom-order.create') }}" class="addtocart_btn">
-                        Proceed to Checkout
-                    </a>
-                </div>
-
+    <a href="{{ route('custom-order.create') }}" class="addtocart_btn">
+        Proceed to Checkout ( ${{ number_format($grandTotal, 2) }} )
+    </a>
+</div>
             </div>
         </div>
     </div>

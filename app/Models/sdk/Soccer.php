@@ -10,4 +10,12 @@ class Soccer extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    public function players() {
+    return $this->hasMany(Player::class);
+}
+    protected $casts = [
+    'bulk_data' => 'array',
+];
 }

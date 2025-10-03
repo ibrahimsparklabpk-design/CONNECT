@@ -475,46 +475,48 @@
 
      <div class="team-form-container">
          <!-- Table -->
-        <div class="team-form-container">
-        <table class="table table-bordered team-roster-table" id="details-wrapper">
-            <thead>
-                <tr>
-                    <th>Player Name</th>
-                    <th>Number</th>
-                    <th>Shirt Size</th>
-                    <th>Short Size</th>
-                    <th>Quantity</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody class="detail-row">
-                <tr >
-                    <td><input type="text" name="name[]" class="form-control" placeholder="Enter name"></td>
-                    <td><input type="number" name="number[]" class="form-control" placeholder="0" min="1"></td>
-                    <td>
-                        <select name="shirt_size[]" class="form-control">
-                            <option value="">Select</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="short_size[]" class="form-control">
-                            <option value="">Select</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                        </select>
-                    </td>
-                    <td><input type="number" name="quantity[]" class="form-control" value="1"></td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm remove-row">✖</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+         <div class="team-form-container">
+             <table class="table table-bordered team-roster-table">
+                 <thead>
+                     <tr>
+                         <th>Player Name</th>
+                         <th>Number</th>
+                         <th>Shirt Size</th>
+                         <th>Short Size</th>
+                         <th>Quantity</th>
+                         <th>Action</th>
+                     </tr>
+                 </thead>
+                 <tbody id="details-wrapper"> <!-- ✅ tbody id yahin use hoga -->
+                     <tr class="detail-row">
+                         <td><input type="text" name="name[]" class="form-control" placeholder="Enter name"></td>
+                         <td><input type="number" name="number[]" class="form-control" placeholder="0" min="1">
+                         </td>
+                         <td>
+                             <select name="shirt_size[]" class="form-control">
+                                 <option value="">Select</option>
+                                 <option value="s">S</option>
+                                 <option value="m">M</option>
+                             </select>
+                         </td>
+                         <td>
+                             <select name="short_size[]" class="form-control">
+                                 <option value="">Select</option>
+                                 <option value="s">S</option>
+                                 <option value="m">M</option>
+                             </select>
+                         </td>
+                         <td><input type="number" name="quantity[]" class="form-control" value="1"></td>
+                         <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+                     </tr>
+                 </tbody>
+             </table>
 
-        <button type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
-    </div>
+             <button type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
+
+
+             {{-- <button type="button" id="addRow" class="btn btn-primary">+ Add Row</button> --}}
+         </div>
      </div>
 
 
@@ -747,12 +749,7 @@
 
      </div>
      <div class="form-column">
-
          <input type="hidden" name="selected_shirt" id="selectedShirtInput">
-
-
-
-
      </div>
 
      {{-- sponsor bulk image task starts here --}}

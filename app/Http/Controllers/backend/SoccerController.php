@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Models\sdk\Soccer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\sdk\Player;
 use Illuminate\Support\Facades\Validator;
 
 class SoccerController extends Controller
@@ -23,7 +24,8 @@ class SoccerController extends Controller
 
     public function soccer()
     {
-        return view('backend.static.soccer');
+        $players = Player::all();
+        return view('backend.static.soccer', compact('players'));
     }
 
     public function circket()
@@ -33,8 +35,8 @@ class SoccerController extends Controller
 
     public function store(Request $request)
     {
-
-            $validator = Validator::make($request->all(), [
+          dd($request->all());
+        $validator = Validator::make($request->all(), [
 
             'fit_type' => ['required', 'in:men,women,youth'],
             'kit_type' => ['required', 'in:full,shirt,both'],
@@ -52,8 +54,8 @@ class SoccerController extends Controller
             'staff_other' => ['required', 'in:yes,no'],
             'staff_fit_type' => ['required', 'in:men,women'],
             'staff_kit_type' => ['required', 'in:full,shirt'],
-            'staff_collar_type' => 'required|in:v-neck,round-neck,polo-style + $2.00/pr kit',
-            'staff_collar_type' => 'nullable|in:v-neck,round-neck,polo-style',
+            'staff_collar_type' => 'required|in:v-neck,round-neck,polo-style',
+
 
             'guide_name' => ['required', 'string', 'max:255'],
             'guide_number' => ['required', 'integer'],
@@ -69,22 +71,7 @@ class SoccerController extends Controller
         }
 
 
-       $bulkData = [];
-
-if ($request->has('name') && is_array($request->name)) {
-    foreach ($request->name as $index => $playerName) {
-        if (!empty($playerName)) {
-            $bulkData[] = [
-                'name'        => $request->name[$index] ?? null,
-                'number'      => $request->number[$index] ?? null,
-                'shirt_size'  => $request->shirt_size[$index] ?? null,
-                'short_size'  => $request->short_size[$index] ?? null,
-                'quantity'    => $request->quantity[$index] ?? 1,
-            ];
-        }
-    }
-}
-
+    
 
         $soccer = new Soccer();
         $soccer->sleeves_length = $request->sleeves_length;
@@ -96,6 +83,7 @@ if ($request->has('name') && is_array($request->name)) {
         $soccer->inside_shirt_collar    = $request->inside_shirt_collar;
 
         // Goalkeeper, staff, guide info
+
         $soccer->goalkeeper_kit         = $request->goalkeeper_kit;
         $soccer->goalkeeper_jersey_design = $request->goalkeeper_jersey_design;
         $soccer->goalkeeper_sleeves     = $request->goalkeeper_sleeves;
@@ -113,9 +101,7 @@ if ($request->has('name') && is_array($request->name)) {
         $soccer->guide_pant_size         = $request->guide_pant_size;
         $soccer->guide_sleeves_length    = $request->guide_sleeves_length;
         $soccer->guide_quantity          = $request->guide_quantity;
-        $soccer->bulk_data           = json_encode($bulkData);
-
-
+        // $soccer->bulk_data  = $bulkData;
 
 
         if ($request->filled('selected_shirt')) {
@@ -139,6 +125,25 @@ if ($request->has('name') && is_array($request->name)) {
 
         $soccer->save();
 
+
+         // **Players save karna relation ke through**
+    $names = $request->input('name', []);
+    $numbers = $request->input('number', []);
+    $shirt_sizes = $request->input('shirt_size', []);
+    $short_sizes = $request->input('short_size', []);
+    $quantities = $request->input('quantity', []);
+
+    foreach ($names as $index => $name) {
+        if ($name) { // Empty row check
+            $soccer->players()->create([
+                'name'        => $name,
+                'number'      => $numbers[$index] ?? null,
+                'shirt_size'  => $shirt_sizes[$index] ?? null,
+                'short_size'  => $short_sizes[$index] ?? null,
+                'quantity'    => $quantities[$index] ?? 1,
+            ]);
+        }
+    }
         return redirect()->route('static.view')->with('success', 'Record saved and added to session.');
     }
 

@@ -21,6 +21,7 @@ use App\Http\Controllers\your_order_controller;
 use App\Http\Controllers\backend\CartController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\TwoFactorAuthentication;
+use App\Http\Controllers\backend\PlayerController;
 use App\Http\Controllers\backend\SoccerController;
 use App\Http\Controllers\backend\CheckoutController;
 use App\Http\Controllers\backend\CustomorderController;
@@ -66,6 +67,12 @@ Route::prefix('v2')->group(function () {
                 Route::delete('/cart/remove/{index}', 'removeFromCart')->name('cart.remove');  // /v2/backend/custome/store
                 Route::get('view', 'view')->name('view');   // /v2/backend/custome/index
 
+            });
+            Route::prefix('player')->group(function () {
+                Route::controller(PlayerController::class)->name('player.')->group(function () {
+                    Route::get('create', 'create')->name('create');   // /v2/backend/soccer/index
+                    Route::post('store', 'store')->name('store');
+                });
             });
         });
 

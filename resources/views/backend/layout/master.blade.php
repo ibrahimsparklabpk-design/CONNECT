@@ -623,7 +623,7 @@
 
 
     </script>
-<script>
+    <script>
 document.addEventListener("DOMContentLoaded", function () {
     const addRowBtn = document.getElementById("addRow");   // Add Row button
     const wrapper   = document.getElementById("details-wrapper"); // Table body
@@ -633,8 +633,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const newRow = document.createElement("tr");
         newRow.classList.add("detail-row");
 
-        newRow.innerHTML = `
-            <td>
+        newRow.innerHTML = ` <td>
                 <input type="text" name="name[]" class="form-control" placeholder="Enter name" required>
             </td>
             <td>
@@ -688,6 +687,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+    {{-- @yield('script') --}}
 
 
     @yield('script');

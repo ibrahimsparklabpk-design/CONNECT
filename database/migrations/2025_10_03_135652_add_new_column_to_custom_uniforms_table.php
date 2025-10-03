@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBulkDataToSoccersTable extends Migration
+class AddNewColumnToCustomUniformsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddBulkDataToSoccersTable extends Migration
      */
     public function up()
     {
-        Schema::table('soccers', function (Blueprint $table) {
-            $table->json('bulk_data')->nullable()->after('collar_type'); 
+        Schema::table('custom_uniforms', function (Blueprint $table) {
+             $table->string('logo')->nullable(); // 👈 apna column name yaha dalna
         });
     }
 
@@ -25,8 +25,8 @@ class AddBulkDataToSoccersTable extends Migration
      */
     public function down()
     {
-        Schema::table('soccers', function (Blueprint $table) {
-            $table->dropColumn('bulk_data');
+        Schema::table('custom_uniforms', function (Blueprint $table) {
+            $table->dropColumn('logo');
         });
     }
 }
