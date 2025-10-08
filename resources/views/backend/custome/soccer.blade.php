@@ -82,8 +82,12 @@
                                             <span style="width: 120px; font-weight: 500;">Shocks Color:</span>
                                             <input type="color" id="color-shocks" value="#ffffff" />
                                         </label>
+                                         <label class="color-picker-label" for="color-artboard">
+                                            <span style="width: 120px; font-weight: 500;">strip Color:</span>
+                                            <input type="color" id="color-stripe" value="#ffffff" />
+                                        </label>
 
-                                        <label class="color-picker-label" for="color-artboard">
+                                        <label class="color-picker-label" for="color-strip">
                                             <span style="width: 120px; font-weight: 500;">Pattern Color:</span>
                                             <input type="color" id="color-artboard" value="#ffffff" />
                                         </label>
@@ -396,20 +400,18 @@
 
                         <!-- Right Section -->
                         <div class="right-section" style="flex-grow: 1; text-align: center;">
-                            <img id="shirt-collar" src="{{ asset('/') }}assets/both/Collar.png" style="display: none"
-                                alt="collar" />
-                            <img id="shirt-body" src="{{ asset('/') }}assets/both/Shirt.png" style="display: none"
-                                alt="body" />
-                            <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/Sleves.png" style="display: none"
-                                alt="sleeve" />
-                            <img id="shirt-trouser" src="{{ asset('/') }}assets/both/Shorts.png"
-                                style="display: none" alt="trouser" />
-                            <img id="shirt-shocks" src="{{ asset('/') }}assets/both/Socks.png" style="display: none"
-                                alt="shocks" />
-                            <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none"
-                                alt="shoes" />
+                            <!-- Hidden images for canvas -->
+                            <img id="shirt-collar" src="{{ asset('/') }}assets/both/Collar.png" style="display: none" alt="collar" />
+                            <img id="shirt-body" src="{{ asset('/') }}assets/both/body.png" style="display: none" alt="body" />
+                            <img id="shirt-strip" src="{{ asset('/') }}assets/both/SHIRT STRIP.png" style="display: none" alt="strip" />
+                            <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/SLEVES.png" style="display: none" alt="sleeve" />
+                            <img id="shirt-sleeve-strip" src="{{ asset('/') }}assets/both/SLEVE STRIPS.png" style="display: none" alt="sleeve strip" />
+                            <img id="shirt-trouser" src="{{ asset('/') }}assets/both/Shorts.png" style="display: none" alt="trouser" />
+                            <img id="shirt-trouser-strip" src="{{ asset('/') }}assets/both/SHORT STRIPS.png" style="display: none" alt="trouser strip" />
+                            <img id="shirt-shocks" src="{{ asset('/') }}assets/both/Socks.png" style="display: none" alt="shocks" />
+                            <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none" alt="shoes" />
 
-                            <canvas id="shirt-canvas"></canvas>
+                            <canvas id="shirt-canvas" style="border: 1px solid #ccc; max-width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>

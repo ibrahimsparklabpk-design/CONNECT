@@ -49,50 +49,35 @@ public function store(Request $request)
         'goalkeeper_jersey_design' => ['required', 'in:same_as_player_uniform,custom_design'],
         'goalkeeper_sleeves' => ['required', 'in:long,short,padded_elbows'],
         'jersey_color' => ['required', 'in:same_as_top,same_as_pants,red,blue,black,white,other'],
+    public function store(Request $request)
+    {
 
-        'staff_other' => ['required', 'in:yes,no'],
-        'staff_fit_type' => ['required', 'in:men,women'],
-        'staff_kit_type' => ['required', 'in:full,shirt'],
-        'staff_collar_type' => ['required', 'in:v-neck,round-neck,polo-style'],
+      
 
-        // ================= PLAYERS =================
-        'name' => ['required', 'array'],
-        'name.*' => ['required', 'string', 'max:255'],
-        'number' => ['required', 'array'],
-        'number.*' => ['required', 'integer'],
-        'shirt_size' => ['required', 'array'],
-        'shirt_size.*' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-        'short_size' => ['nullable', 'array'],
-        'short_size.*' => ['nullable', 'in:xs,s,m,l,xl,2xl,3xl'],
-        'quantity' => ['required', 'array'],
-        'quantity.*' => ['required', 'integer', 'min:1'],
+            $validator = Validator::make($request->all(), [
 
-        // ✅ Players ke prices
-        'price' => ['array'],
-        'price.*' => ['nullable', 'numeric', 'min:0'],
-        'total' => ['array'],
-        'total.*' => ['nullable', 'numeric', 'min:0'],
+            'fit_type' => ['required', 'in:men,women,youth'],
+            'kit_type' => ['required', 'in:full,shirt,both'],
+            'collar_type' => 'required|in:v-neck,round-neck,polo-style',
+            'team_logo' => 'required|in:sublimated,embroidery',
+            'outfield_players_socks' => ['required', 'in:yes,no'],
+            'inside_shirt_collar' => 'required|in:yes,no',
+            'padded' => 'nullable|in:yes,no',
+            'sleeves_length' => 'required|in:short,long,mix',
+            'goalkeeper_kit' => ['required', 'in:yes,no'],
+            'goalkeeper_jersey_design' => ['required', 'in:same_as_player_uniform,custom_design'],
+            'goalkeeper_sleeves' => ['required', 'in:long,short,padded_elbows'],
+            'jersey_color' => ['required', 'in:same_as_top,same_as_pants,red,blue,black,white,other'],
 
-        // ================= GUIDE FIELDS =================
-        'guide_name' => ['required', 'array'],
-        'guide_name.*' => ['required', 'string', 'max:255'],
-        'guide_number' => ['required', 'array'],
-        'guide_number.*' => ['required', 'integer'],
-        'guide_shirt_size' => ['required', 'array'],
-        'guide_shirt_size.*' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-        'guide_pant_size' => ['required', 'array'],
-        'guide_pant_size.*' => ['required', 'in:xs,s,m,l,xl,2xl,3xl'],
-        'guide_sleeves_length' => ['required', 'array'],
-        'guide_sleeves_length.*' => ['required', 'in:short,long'],
-        'guide_quantity' => ['required', 'array'],
-        'guide_quantity.*' => ['required', 'integer', 'min:1'],
+            'staff_other' => ['required', 'in:yes,no'],
+            'staff_fit_type' => ['required', 'in:men,women'],
+            'staff_kit_type' => ['required', 'in:full,shirt'],
+            'staff_collar_type' => 'required|in:v-neck,round-neck,polo-style + $2.00/pr kit',
+            'staff_collar_type' => 'nullable|in:v-neck,round-neck,polo-style',
 
-        // ✅ Guides ke prices
-        'guide_price' => ['array'],
-        'guide_price.*' => ['nullable', 'numeric', 'min:0'],
-        'guide_total' => ['array'],
-        'guide_total.*' => ['nullable', 'numeric', 'min:0'],
-    ]);
+         
+            // 'price' => ['required', 'numeric', 'min:0'],
+        ]);
 
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput();

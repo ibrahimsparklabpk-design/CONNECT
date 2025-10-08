@@ -298,11 +298,11 @@
                 <!-- Right Section -->
               <div class="right-section" style="flex-grow: 1; text-align: center;">
                     <!-- Base hidden images -->
-                    <img id="shirt-collar" src="{{ asset('/') }}assets/both/collor.png" style="display: none" alt="collar" />
-                    <img id="shirt-body" src="{{ asset('/') }}assets/both/seperate mouckup.png" style="display: none" alt="body" />
-                    <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/sleves final.png" style="display: none" alt="sleeve" />
-                    <img id="shirt-trouser" src="{{ asset('/') }}assets/both/pent.png" style="display: none" alt="trouser" />
-                    <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none" alt="shoes" />
+                    <img id="shirt-collar" src="{{ asset('/') }}assets/circket/collor.png" style="display: none" alt="collar" />
+                    <img id="shirt-body" src="{{ asset('/') }}assets/circket/seperate mouckup.png" style="display: none" alt="body" />
+                    <img id="shirt-sleeve" src="{{ asset('/') }}assets/circket/sleves final.png" style="display: none" alt="sleeve" />
+                    <img id="shirt-trouser" src="{{ asset('/') }}assets/circket/pent.png" style="display: none" alt="trouser" />
+                    <img id="shirt-shoes" src="{{ asset('/') }}assets/circket/Shoes.png" style="display: none" alt="shoes" />
 
                     <!-- Canvas jisme final design render hoga -->
                     <canvas id="shirt-canvas"></canvas>
