@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/admin_deshboard/images/Logo767.png">
+
+    <!-- Theme Config Js -->
+    <script src="assets/admin_deshboard/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="assets/admin_deshboard/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="assets/css/create_product.css" rel="stylesheet" type="text/css" id="app-style" />
+    <!-- Icons css -->
+    <link href="assets/admin_deshboard/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- user-details css -->
+    <link rel="stylesheet" href="assets/admin_deshboard/css/userdetails.css">
+
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+
+
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu" style="background-color: #000;">
+
+            <!-- Brand Logo Light -->
+            <a href="#" class="logo logo-light">
+                <span class="logo-lg">
+                    <img src="assets/images/whitelogo2.png" alt="logo"
+                        style="height:120px; width: 120px; margin-top: 10px;">
+                </span>
+                <span class="logo-sm">
+                    <img src="./assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
+
+            <!-- Brand Logo Dark -->
+            <a href="#" class="logo logo-dark">
+                <span class="logo-lg">
+                    <img src="./assets/images/logo-dark.png" alt="dark logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
+
+            <!-- Sidebar -left -->
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+
+                    <li class="side-nav-title">Admin</li>
+
+                    <li class="side-nav-item">
+                        <a href="{{route('admin_dashboard')}}" class="side-nav-link">
+                            <i class="ri-dashboard-3-line"></i>
+                            <!-- <span class="badge bg-success float-end">9+</span> -->
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+
+
+
+
+                    <li class="side-nav-item">
+                        <a href="{{route('vendor_data')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>User Details</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="side-nav-item">
+                        <a href="{{route('admin_listing')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>Listing</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{route('custome_order')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>Custom Order</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{route('create_product')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>Add Product</span>
+                        </a>
+                    </li>
+
+
+
+
+
+
+
+
+                    <li class="side-nav-item">
+                        <a href="{{route('index')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>logout </span>
+                        </a>
+                    </li>
+
+
+
+
+
+
+
+
+                </ul>
+
+
+                <!--- End Sidemenu -->
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- ========== Left Sidebar End ========== -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="form-page">
+            <div class="form-container">
+
+
+                <form action="{{ route('create_product') }}" method="POST" enctype="multipart/form-data"
+                    class="product-form">
+                    @csrf
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Price:</label>
+                        <input type="number" step="0.01" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Quantity:</label>
+                        <input type="number" name="stock_quantity" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category (Optional):</label>
+                        <select name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                            <option value="Toddlers">Toddlers</option>
+                            <option value="Sweaters">Sweaters</option>
+                            <option value="Shirts">Shirts</option>
+                            <option value="Shoes">Shoes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image:</label>
+                        <input type="file" name="image" required>
+                    </div>
+
+
+
+                    <div id="variations-section">
+                        <h4>Color Variations</h4>
+                        <div class="variation-group">
+                            <label>Color:</label>
+                            <input type="text" name="colors[]" required>
+                            <br><br>
+
+
+                            <label>Size:</label>
+                            <select name="sizes[]" required>
+                                <option value="S">Small (S)</option>
+                                <option value="M">Medium (M)</option>
+                                <option value="L">Large (L)</option>
+                                <option value="XL">Extra Large (XL)</option>
+                                <option value="XXL">Double Extra Large (XXL)</option>
+                                <option value="XXXL">Triple Extra Large (XXXL)</option>
+                            </select>
+                            <br><br>
+
+                            <label>Stock Quantity:</label>
+                            <input type="number" name="variation_stock[]" min="0" required>
+                            <br><br>
+
+                            <label>Color Image:</label><br>
+                            <input type="file" name="color_images[]" required>
+
+                            <br><br>
+
+                            <button type="button" class="remove-variation">Remove</button>
+                            <br><br>
+                        </div>
+                    </div>
+
+                    <button type="button" id="add-variation">Add Variation</button>
+                    <br><br>
+                    <button type="submit" class="submit-btn">Save Product</button>
+                </form>
+
+                <script>
+                    document.getElementById('add-variation').addEventListener('click', function() {
+                        var variationSection = document.getElementById('variations-section');
+                        var newVariation = document.createElement('div');
+                        newVariation.classList.add('variation-group');
+                        newVariation.innerHTML = `
+                        <label>Color:</label>
+                        <input type="text" name="colors[]" required>
+                        <br><br>
+
+                        <label>Size:</label>
+                        <select name="sizes[]" required>
+                            <option value="S">Small (S)</option>
+                            <option value="M">Medium (M)</option>
+                            <option value="L">Large (L)</option>
+                            <option value="XL">Extra Large (XL)</option>
+                            <option value="XXL">Double Extra Large (XXL)</option>
+                            <option value="XXXL">Triple Extra Large (XXXL)</option>
+                        </select>
+                        <br><br>
+
+                        <label>Stock Quantity:</label>
+                        <input type="number" name="variation_stock[]" min="0" required>
+                        <br><br>
+
+                        <label>Color Image:</label><br>
+                        <input type="file" name="color_images[]" required>
+                        <br><br>
+
+                        <button type="button" class="remove-variation">Remove</button>
+                        <br><br>
+    `;
+                        variationSection.appendChild(newVariation);
+                    });
+
+                    document.addEventListener('click', function(e) {
+                        if (e.target.classList.contains('remove-variation')) {
+                            e.target.parentElement.remove();
+                        }
+                    });
+                </script>
+
+
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Theme Settings -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
+            <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
+                <h5 class="text-white m-0">Theme Settings</h5>
+                <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-0">
+                <div data-simplebar class="h-100">
+                    <div class="p-3">
+                        <h5 class="mb-3 fs-16 fw-bold">Color Scheme</h5>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-check form-switch card-switch mb-1">
+                                    <input class="form-check-input" type="checkbox" name="data-bs-theme"
+                                        id="layout-color-light" value="light">
+                                    <label class="form-check-label" for="layout-color-light">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-check form-switch card-switch mb-1">
+                                    <input class="form-check-input" type="checkbox" name="data-bs-theme"
+                                        id="layout-color-dark" value="dark">
+                                    <label class="form-check-label" for="layout-color-dark">
+                                        <img src="assets/images/layouts/dark.png" alt="" class="img-fluid">
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                            </div>
+                        </div>
+
+                        <div id="layout-width">
+                            <h5 class="my-3 fs-16 fw-bold">Layout Mode</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-layout-mode"
+                                            id="layout-mode-fluid" value="fluid">
+                                        <label class="form-check-label" for="layout-mode-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Fluid</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div id="layout-boxed">
+                                        <div class="form-check form-switch card-switch mb-1">
+                                            <input class="form-check-input" type="checkbox" name="data-layout-mode"
+                                                id="layout-mode-boxed" value="boxed">
+                                            <label class="form-check-label" for="layout-mode-boxed">
+                                                <img src="assets/images/layouts/boxed.png" alt="" class="img-fluid">
+                                            </label>
+                                        </div>
+                                        <h5 class="font-14 text-center text-muted mt-2">Boxed</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="my-3 fs-16 fw-bold">Topbar Color</h5>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-check form-switch card-switch mb-1">
+                                    <input class="form-check-input" type="checkbox" name="data-topbar-color"
+                                        id="topbar-color-light" value="light">
+                                    <label class="form-check-label" for="topbar-color-light">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-check form-switch card-switch mb-1">
+                                    <input class="form-check-input" type="checkbox" name="data-topbar-color"
+                                        id="topbar-color-dark" value="dark">
+                                    <label class="form-check-label" for="topbar-color-dark">
+                                        <img src="assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="my-3 fs-16 fw-bold">Menu Color</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-menu-color"
+                                            id="leftbar-color-light" value="light">
+                                        <label class="form-check-label" for="leftbar-color-light">
+                                            <img src="assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-menu-color"
+                                            id="leftbar-color-dark" value="dark">
+                                        <label class="form-check-label" for="leftbar-color-dark">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidebar-size">
+                            <h5 class="my-3 fs-16 fw-bold">Sidebar Size</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size"
+                                            id="leftbar-size-default" value="default">
+                                        <label class="form-check-label" for="leftbar-size-default">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Default</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size"
+                                            id="leftbar-size-compact" value="compact">
+                                        <label class="form-check-label" for="leftbar-size-compact">
+                                            <img src="assets/images/layouts/compact.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Compact</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size"
+                                            id="leftbar-size-small" value="condensed">
+                                        <label class="form-check-label" for="leftbar-size-small">
+                                            <img src="assets/images/layouts/sm.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
+                                </div>
+
+
+                                <div class="col-4">
+                                    <div class="form-check form-switch card-switch mb-1">
+                                        <input class="form-check-input" type="checkbox" name="data-sidenav-size"
+                                            id="leftbar-size-full" value="full">
+                                        <label class="form-check-label" for="leftbar-size-full">
+                                            <img src="assets/images/layouts/full.png" alt="" class="img-fluid">
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="layout-position">
+                            <h5 class="my-3 fs-16 fw-bold">Layout Position</h5>
+
+                            <div class="btn-group checkbox" role="group">
+                                <input type="radio" class="btn-check" name="data-layout-position"
+                                    id="layout-position-fixed" value="fixed">
+                                <label class="btn btn-soft-primary w-sm" for="layout-position-fixed">Fixed</label>
+
+                                <input type="radio" class="btn-check" name="data-layout-position"
+                                    id="layout-position-scrollable" value="scrollable">
+                                <label class="btn btn-soft-primary w-sm ms-0"
+                                    for="layout-position-scrollable">Scrollable</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="offcanvas-footer border-top p-3 text-center">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="" target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vendor js -->
+        <script src="assets/js/vendor.min.js"></script>
+
+        <!-- Chart.js js -->
+        <script src="assets/vendor/chart.js/chart.min.js"></script>
+
+        <!-- Chart.js Area Demo js -->
+        <script src="assets/js/pages/chartjs-area.init.js"></script>
+        <!-- Chart.js Bar Demo js -->
+        <script src="assets/js/pages/chartjs-bar.init.js"></script>
+        <!-- Chart.js Line Demo js -->
+        <script src="assets/js/pages/chartjs-line.init.js"></script>
+        <!-- Chart.js Other Demo js -->
+        <script src="assets/js/pages/chartjs-other.init.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/app.min.js"></script>
+
+</body>
+
+</html>

@@ -125,7 +125,7 @@
             </ul>
         </div>
     @endif
-<form id="payment-form" action="{{ route('order.store') }}" method="POST">
+<form id="payment-form" action="{{ route('custom-order.store') }}" method="POST">
     @csrf
 
     <div>
