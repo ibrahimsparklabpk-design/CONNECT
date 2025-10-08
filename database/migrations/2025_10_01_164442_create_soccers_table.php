@@ -51,14 +51,19 @@ class CreateSoccersTable extends Migration
 
            //  Staff Size Guide
 
-            $table->string('guide_name', 255);
-            $table->integer('guide_number');
-            $table->enum('guide_shirt_size', ['xs', 's', 'm', 'l','xl','2xl', '3xl'])->default('s');
-            $table->enum('guide_pant_size', ['xs', 's', 'm', 'l','xl','2xl', '3xl'])->default('s');
-            $table->enum('guide_sleeves_length', ['short', 'long'])->default('long');
-            $table->integer('guide_quantity');
+           $table->string('guide_sleeves_length')->nullable();
+            $table->string('guide_name')->nullable();
+            $table->string('guide_number')->nullable();
+            $table->string('guide_shirt_size')->nullable();
+            $table->string('guide_pant_size')->nullable();
+            $table->string('guide_quantity')->nullable();
+            $table->string('price')->nullable();
 
             $table->string('image', 255)->nullable();
+
+             // columns to send bulk data 
+            $table->json('bulk_data')->nullable();
+            $table->json('guide_bulk_data')->nullable();
            $table->timestamps();
         });
     }

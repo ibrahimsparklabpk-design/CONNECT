@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Controllers\\backend\\CustomeUniformController' => $baseDir . '/app/Http/Controllers/backend/CustomeUniformController.php',
     'App\\Http\\Controllers\\backend\\CustomorderController' => $baseDir . '/app/Http/Controllers/backend/CustomorderController.php',
     'App\\Http\\Controllers\\backend\\OrderController' => $baseDir . '/app/Http/Controllers/backend/OrderController.php',
+    'App\\Http\\Controllers\\backend\\PlayerController' => $baseDir . '/app/Http/Controllers/backend/PlayerController.php',
     'App\\Http\\Controllers\\backend\\SoccerController' => $baseDir . '/app/Http/Controllers/backend/SoccerController.php',
     'App\\Http\\Controllers\\register' => $baseDir . '/app/Http/Controllers/register.php',
     'App\\Http\\Controllers\\vendorData' => $baseDir . '/app/Http/Controllers/vendorData.php',

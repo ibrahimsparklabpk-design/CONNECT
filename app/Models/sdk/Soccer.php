@@ -12,9 +12,9 @@ class Soccer extends Model
     protected $guarded = [];
 
 
-    public function players() {
-    return $this->hasMany(Player::class);
-}
+//     public function players() {
+//     return $this->hasMany(Player::class);
+// }
     protected $casts = [
     'bulk_data' => 'array',
 ];

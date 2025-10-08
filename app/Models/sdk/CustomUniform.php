@@ -11,6 +11,11 @@ class CustomUniform extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+    'bulk_data' => 'array',
+    'guide_bulk_data' => 'array',
+];
+
      protected $appends = ['total_price'];
 
     public function getTotalPriceAttribute()
