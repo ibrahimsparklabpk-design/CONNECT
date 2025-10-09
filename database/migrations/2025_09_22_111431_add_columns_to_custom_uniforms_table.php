@@ -17,7 +17,6 @@ class AddColumnsToCustomUniformsTable extends Migration
            $table->string('image')->nullable()->after('guide_quantity');
             $table->string('logo')->nullable()->after('image');
             $table->string('pattern')->nullable()->after('logo');
-
         });
     }
 

@@ -47,7 +47,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($customeUniform as $index => $item)
+                                @forelse ($data as $index => $item)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>

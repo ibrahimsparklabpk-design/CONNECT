@@ -623,7 +623,7 @@
 
 
     </script>
-<script>
+    <script>
 document.addEventListener("DOMContentLoaded", function () {
     const addRowBtn = document.getElementById("addRow");   // Add Row button
     const wrapper   = document.getElementById("details-wrapper"); // Table body
@@ -633,8 +633,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const newRow = document.createElement("tr");
         newRow.classList.add("detail-row");
 
-        newRow.innerHTML = `
-            <td>
+        newRow.innerHTML = ` <td>
                 <input type="text" name="name[]" class="form-control" placeholder="Enter name" required>
             </td>
             <td>
@@ -686,8 +685,323 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+{{-- bulk guide data --}}
+ <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addRowBtn = document.getElementById("addRow"); // Add Row button
+            const wrapper = document.getElementById("details-wrapper"); // Table body
+
+            // 👉 Add new row
+            addRowBtn.addEventListener("click", function() {
+                const newRow = document.createElement("tr");
+                newRow.classList.add("detail-row");
+
+                newRow.innerHTML = ` <td>
+                <input type="text" name="name[]" class="form-control" placeholder="Enter name" required>
+            </td>
+            <td>
+                <input type="number" name="number[]" class="form-control" placeholder="0" min="1" required>
+            </td>
+            <td>
+                <select name="shirt_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="2xl">2XL</option>
+                    <option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <select name="short_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="2xl">2XL</option>
+                    <option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <input type="number" name="quantity[]" class="form-control" placeholder="0" min="1" value="1">
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
+                    style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">
+                    ✖
+                </button>
+            </td>
+        `;
+
+                wrapper.appendChild(newRow);
+            });
+
+            // 👉 Remove row
+            document.addEventListener("click", function(e) {
+                if (e.target.classList.contains("remove-row")) {
+                    e.target.closest("tr").remove();
+                }
+            });
+        });
+    </script>
+{{-- bulk guide data --}}
+
+{{-- <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const wrapper = document.getElementById("guide-details-wrapper");
+    const addGuideRowBtn = document.getElementById("addGuideRow");
+
+    // 🧮 Recalculate total for a single row
+    function updateRowTotal(row) {
+        const qty = parseFloat(row.querySelector(".guide-quantity")?.value) || 0;
+        const price = parseFloat(row.querySelector(".guide-price")?.value) || 0;
+        const total = qty * price;
+        row.querySelector(".guide-total").value = total.toFixed(2);
+        updateGrandTotal();
+    }
+
+    // 💰 Update Grand Total
+    function updateGrandTotal() {
+        let grand = 0;
+        document.querySelectorAll(".guide-total").forEach(input => {
+            grand += parseFloat(input.value) || 0;
+        });
+        document.getElementById("grandTotal").innerText = grand.toFixed(2);
+    }
+
+    // 🎯 Input listener for quantity and price changes
+    wrapper.addEventListener("input", function(e) {
+        if (e.target.classList.contains("guide-quantity") ||
+            e.target.classList.contains("guide-price")) {
+            updateRowTotal(e.target.closest("tr"));
+        }
+    });
+
+    // ➕ Add new row
+    addGuideRowBtn.addEventListener("click", function() {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td><input type="text" name="guide_name[]" class="form-control" placeholder="Enter name" required></td>
+            <td><input type="number" name="guide_number[]" class="form-control" placeholder="0" min="1" required></td>
+            <td>
+                <select name="guide_shirt_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option><option value="s">S</option><option value="m">M</option>
+                    <option value="l">L</option><option value="xl">XL</option><option value="2xl">2XL</option><option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <select name="guide_pant_size[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="xs">XS</option><option value="s">S</option><option value="m">M</option>
+                    <option value="l">L</option><option value="xl">XL</option><option value="2xl">2XL</option><option value="3xl">3XL</option>
+                </select>
+            </td>
+            <td>
+                <select name="guide_sleeves_length[]" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="short">SHORT</option>
+                    <option value="long">LONG</option>
+                </select>
+            </td>
+            <td><input type="number" name="guide_quantity[]" class="form-control guide-quantity" min="1" value="1"></td>
+            <td><input type="number" name="price[]" class="form-control guide-price" min="0" value="50"></td>
+            <td><input type="text" name="total[]" class="form-control guide-total" readonly value="50"></td>
+            <td class="text-center"><button type="button" class="btn btn-danger btn-sm remove-row" style="border-radius:6px;">✖</button></td>
+        `;
+        wrapper.appendChild(newRow);
+        updateGrandTotal();
+    });
+
+    // ❌ Remove row
+    wrapper.addEventListener("click", function(e) {
+        if (e.target.classList.contains("remove-row")) {
+            e.target.closest("tr").remove();
+            updateGrandTotal();
+        }
+    });
+});
+</script> --}}
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const BASE_PRICE = 39.00;
+
+    // =================== Helper ===================
+    function getExtrasTotal() {
+        let extraTotal = 0;
+        document.querySelectorAll(".price-option").forEach(select => {
+            const selectedText = select.options[select.selectedIndex]?.text || "";
+            const match = selectedText.match(/\+\$(\d+(\.\d+)?)/);
+            if (match) extraTotal += parseFloat(match[1]);
+        });
+        return extraTotal;
+    }
+
+    function updateGrandTotal() {
+        let grand = 0;
+        document.querySelectorAll(".player-total, .guide-total").forEach(input => {
+            grand += parseFloat(input.value) || 0;
+        });
+
+        // ✅ Add extras from main options
+        grand += getExtrasTotal();
+
+        document.getElementById("grandTotal").innerText = grand.toFixed(2);
+    }
+
+    // =================== Player Section ===================
+    const playerWrapper = document.getElementById("details-wrapper");
+    const addRow = document.getElementById("addRow");
+
+    if (playerWrapper && addRow) {
+        function updatePlayerRowTotal(row) {
+            const qty = parseFloat(row.querySelector(".player-quantity")?.value) || 0;
+            const total = qty * BASE_PRICE;
+            row.querySelector(".player-total").value = total.toFixed(2);
+            row.querySelector(".player-total-display").innerText = total.toFixed(2);
+            updateGrandTotal();
+        }
+
+        addRow.addEventListener("click", function() {
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="text" name="name[]" class="form-control" required></td>
+                <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
+                <td>
+                    <select name="shirt_size[]" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="short_size[]" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                    </select>
+                </td>
+                <td><input type="number" name="quantity[]" class="form-control player-quantity" min="1" value="1"></td>
+                <td style="display:none;">
+                    <input type="hidden" name="price[]" class="player-price" value="${BASE_PRICE}">
+                    <input type="hidden" name="total[]" class="player-total" value="${BASE_PRICE}">
+                    <span class="player-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
+                </td>
+                <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+            `;
+            playerWrapper.appendChild(newRow);
+            updateGrandTotal();
+        });
+
+        playerWrapper.addEventListener("input", function(e) {
+            if (e.target.classList.contains("player-quantity")) {
+                updatePlayerRowTotal(e.target.closest("tr"));
+            }
+        });
+
+        playerWrapper.addEventListener("click", function(e) {
+            if (e.target.classList.contains("remove-row")) {
+                e.target.closest("tr").remove();
+                updateGrandTotal();
+            }
+        });
+    }
+
+    // =================== Guide Section ===================
+    const guideWrapper = document.getElementById("guide-details-wrapper");
+    const addGuideRowBtn = document.getElementById("addGuideRow");
+
+    if (guideWrapper && addGuideRowBtn) {
+        function updateGuideRowTotal(row) {
+            const qtyInput = row.querySelector(".guide-quantity");
+            const totalInput = row.querySelector(".guide-total");
+            const displaySpan = row.querySelector(".guide-total-display");
+
+            if (!qtyInput || !totalInput) return;
+
+            const qty = parseFloat(qtyInput.value) || 0;
+            const total = qty * BASE_PRICE;
+
+            totalInput.value = total.toFixed(2);
+            if (displaySpan) displaySpan.innerText = total.toFixed(2);
+
+            updateGrandTotal();
+        }
+
+        addGuideRowBtn.addEventListener("click", function() {
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="text" name="guide_name[]" class="form-control" required></td>
+                <td><input type="number" name="guide_number[]" class="form-control" min="0" value="0" required></td>
+                <td>
+                    <select name="guide_shirt_size[]" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="guide_pant_size[]" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="guide_sleeves_length[]" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="short">SHORT</option>
+                        <option value="long">LONG</option>
+                    </select>
+                </td>
+                <td><input type="number" name="guide_quantity[]" class="form-control guide-quantity" min="0" value="0"></td>
+                <td style="display:none;">
+                    <input type="hidden" name="guide_price[]" class="guide-price" value="${BASE_PRICE}">
+                    <input type="hidden" name="guide_total[]" class="guide-total" value="${BASE_PRICE}">
+                    <span class="guide-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
+                </td>
+                <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+            `;
+            guideWrapper.appendChild(newRow);
+            updateGrandTotal();
+        });
+
+        guideWrapper.addEventListener("input", function(e) {
+            if (e.target.classList.contains("guide-quantity")) {
+                updateGuideRowTotal(e.target.closest("tr"));
+            }
+        });
+
+        guideWrapper.addEventListener("click", function(e) {
+            if (e.target.classList.contains("remove-row")) {
+                e.target.closest("tr").remove();
+                updateGrandTotal();
+            }
+        });
+    }
+
+    // =================== Extra Options Watch ===================
+    document.querySelectorAll(".price-option").forEach(select => {
+        select.addEventListener("change", updateGrandTotal);
+    });
+
+    // ✅ Initial call
+    updateGrandTotal();
+});
+</script>
 
 
+
+{{-- @yield('script') --}}
 
 
     @yield('script');
