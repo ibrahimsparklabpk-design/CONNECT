@@ -823,10 +823,7 @@
          </div>
      </form>
 
-     <div class="btn_box">
-         <button type="submit" class="addtocart_btn">Add to cart</button>
-     </div>
-     </form>
+  
 
      <script>
          let playerRowCount = 1;

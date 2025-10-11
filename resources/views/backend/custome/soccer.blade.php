@@ -383,29 +383,27 @@
                         </div>
 
                         <!-- Right Section -->
-                        <div class="right-section" style="flex-grow: 1; text-align: center;">
-                            <!-- Hidden images for canvas -->
-                            <img id="shirt-collar" src="{{ asset('/') }}assets/both/Collar.png" style="display: none"
-                                alt="collar" />
-                            <img id="shirt-body" src="{{ asset('/') }}assets/both/body.png" style="display: none"
-                                alt="body" />
-                            <img id="shirt-strip" src="{{ asset('/') }}assets/both/SHIRT STRIP.png"
-                                style="display: none" alt="strip" />
-                            <img id="shirt-sleeve" src="{{ asset('/') }}assets/both/SLEVES.png" style="display: none"
-                                alt="sleeve" />
-                            <img id="shirt-sleeve-strip" src="{{ asset('/') }}assets/both/SLEVE STRIPS.png"
-                                style="display: none" alt="sleeve strip" />
-                            <img id="shirt-trouser" src="{{ asset('/') }}assets/both/Shorts.png"
-                                style="display: none" alt="trouser" />
-                            <img id="shirt-trouser-strip" src="{{ asset('/') }}assets/both/SHORT STRIPS.png"
-                                style="display: none" alt="trouser strip" />
-                            <img id="shirt-shocks" src="{{ asset('/') }}assets/both/Socks.png" style="display: none"
-                                alt="shocks" />
-                            <img id="shirt-shoes" src="{{ asset('/') }}assets/both/Shoes.png" style="display: none"
-                                alt="shoes" />
-
+                       <div class="right-section" style="flex-grow: 1; text-align: center;">
+                         <!-- Hidden images for canvas -->
+                            <img id="shirt-collar" src="{{ asset('assets/both/Collar.png') }}" style="display: none" alt="collar" />
+                            <img id="shirt-body" src="{{ asset('assets/both/body.png') }}" style="display: none" alt="body" />
+                            <img id="shirt-strip" src="{{ asset('assets/both/SHIRT STRIP.png') }}" style="display: none" alt="strip" />
+                            
+                            <!-- CORRECTED: Sleves.png -->
+                            <img id="shirt-sleeve" src="{{ asset('assets/both/Sleves.png') }}" style="display: none" alt="sleeve" />
+                            
+                            <!-- CORRECTED: SLEVE STRIPS.png -->
+                            <img id="shirt-sleeve-strip" src="{{ asset('assets/both/SLEVE STRIPS.png') }}" style="display: none" alt="sleeve strip" />
+                            
+                            <img id="shirt-trouser" src="{{ asset('assets/both/Shorts.png') }}" style="display: none" alt="trouser" />
+                            <img id="shirt-trouser-strip" src="{{ asset('assets/both/SHORT STRIPS.png') }}" style="display: none" alt="trouser strip" />
+                            <img id="shirt-shocks" src="{{ asset('assets/both/Socks.png') }}" style="display: none" alt="shocks" />
+                            <img id="shirt-shoes" src="{{ asset('assets/both/Shoes.png') }}" style="display: none" alt="shoes" />
+                        
                             <canvas id="shirt-canvas" style="border: 1px solid #ccc; max-width: 100%;"></canvas>
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -589,67 +587,67 @@
 
             {{-- ================== Player Info ================== --}}
 
-            <p class="size-guide"><i class="fa-solid fa-ruler"></i> Size Guide</p>
+           <p class="size-guide" style="font-size: 18px; font-weight: 600; color: #002266; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; text-align: center;
+    justify-content: center; margin-top: 22px;">
+  <i class="fa-solid fa-ruler" style="color: #000436;"></i> Size Guide
+</p>
 
-            <div class="team-form-container">
-                <!-- Table -->
-                <div class="team-form-container">
-                    <table class="table table-bordered team-roster-table">
-                        <thead>
-                            <tr>
-                                <th>Player Name</th>
-                                <th>Number</th>
-                                <th>Shirt Size</th>
-                                <th>Short Size</th>
-                                <th>Quantity</th>
-                                {{-- <th>Total ($)</th> --}}
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="details-wrapper">
-                            <tr>
-                                <td><input type="text" name="name[]" class="form-control" required></td>
-                                <td><input type="number" name="number[]" class="form-control" min="1"
-                                        value="1" required></td>
-                                <td>
-                                    <select name="shirt_size[]" class="form-control" required>
-                                        <option value="">Select</option>
-                                        <option value="s">S</option>
-                                        <option value="m">M</option>
-                                        <option value="l">L</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="short_size[]" class="form-control" required>
-                                        <option value="">Select</option>
-                                        <option value="s">S</option>
-                                        <option value="m">M</option>
-                                        <option value="l">L</option>
-                                    </select>
-                                </td>
-                                <td><input type="number" name="quantity[]" class="form-control player-quantity"
-                                        min="0" value="0"></td>
+<div class="team-form-container" style="max-width: 900px; margin: 0 auto; background: #ededed1c;
+; padding: 20px 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
-                                <!-- Hidden fields for form -->
-                                <input type="hidden" name="price[]" class="player-price" value="39">
-                                <input type="hidden" name="total[]" class="player-total" value="39">
+  <table class="table table-bordered team-roster-table" style="width: 100%; border-collapse: collapse; background: #fff; text-align: center;">
+    <thead style="background: linear-gradient(45deg, #002266, #000436); color: white;">
+      <tr>
+        <th style="padding: 10px;">Player Name</th>
+        <th style="padding: 10px;">Number</th>
+        <th style="padding: 10px;">Shirt Size</th>
+        <th style="padding: 10px;">Short Size</th>
+        <th style="padding: 10px;">Quantity</th>
+        <th style="padding: 10px;">Action</th>
+      </tr>
+    </thead>
 
-                                <!-- Visible total display -->
-                                <td><span class="player-total-display" style="display:none;">39.00</span></td>
+    <tbody id="details-wrapper">
+      <tr>
+        <td><input type="text" name="name[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
+        <td><input type="number" name="number[]" class="form-control" min="1" value="1" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
+        <td>
+          <select name="shirt_size[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
+            <option value="">Select</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+        </td>
+        <td>
+          <select name="short_size[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
+            <option value="">Select</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+        </td>
+        <td><input type="number" name="quantity[]" class="form-control player-quantity" min="0" value="0" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
 
+        <input type="hidden" name="price[]" class="player-price" value="39">
+        <input type="hidden" name="total[]" class="player-total" value="39">
 
+        <td><button type="button" class="btn btn-danger btn-sm remove-row" style="background-color: #dc3545; border: none; padding: 5px 10px; border-radius: 6px; color: white;">✖</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-                                <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
-                </div>
-            </div>
+  <button type="button" id="addRow" class="btn btn-primary" style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;">
+    + Add Row
+  </button>
+</div>
 
-<div style="margin-top:1rem; text-align:center;">
-                     <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>
-                 </div>
+<div style="margin-top: 1rem; text-align: center; font-size: 18px;">
+  <strong>Grand Total: 
+    <span style="color: #002266;">$<span id="grandTotal">39.00</span></span>
+  </strong>
+</div>
+
             {{-- ================== Goalkeeper Requirements ================== --}}
            
     </div>
@@ -1958,38 +1956,49 @@ document.addEventListener("DOMContentLoaded", function() {
             updateGrandTotal();
         }
 
-        addRow.addEventListener("click", function() {
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><input type="text" name="name[]" class="form-control" required></td>
-                <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
-                <td>
-                    <select name="shirt_size[]" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="short_size[]" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                    </select>
-                </td>
-                <td><input type="number" name="quantity[]" class="form-control player-quantity" min="1" value="1"></td>
-                <td style="display:none;">
-                    <input type="hidden" name="price[]" class="player-price" value="${BASE_PRICE}">
-                    <input type="hidden" name="total[]" class="player-total" value="${BASE_PRICE}">
-                    <span class="player-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
-                </td>
-                <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
-            `;
-            playerWrapper.appendChild(newRow);
-            updateGrandTotal();
-        });
+       const addRow = document.getElementById("addRow");
+const playerWrapper = document.getElementById("details-wrapper");
+const BASE_PRICE = 39;
+
+if (addRow) {
+  // Remove any existing listeners first
+  addRow.replaceWith(addRow.cloneNode(true));
+  const newAddRow = document.getElementById("addRow");
+
+  newAddRow.addEventListener("click", function() {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td><input type="text" name="name[]" class="form-control" required></td>
+      <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
+      <td>
+        <select name="shirt_size[]" class="form-control" required>
+          <option value="">Select</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+        </select>
+      </td>
+      <td>
+        <select name="short_size[]" class="form-control" required>
+          <option value="">Select</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+        </select>
+      </td>
+      <td><input type="number" name="quantity[]" class="form-control player-quantity" min="1" value="1"></td>
+      <td style="display:none;">
+        <input type="hidden" name="price[]" class="player-price" value="${BASE_PRICE}">
+        <input type="hidden" name="total[]" class="player-total" value="${BASE_PRICE}">
+        <span class="player-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
+      </td>
+      <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+    `;
+
+    playerWrapper.appendChild(newRow);
+    updateGrandTotal();
+  });
+}
 
         playerWrapper.addEventListener("input", function(e) {
             if (e.target.classList.contains("player-quantity")) {
