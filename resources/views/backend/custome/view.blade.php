@@ -14,8 +14,8 @@
                 <!-- 🧾 Table -->
                 <div class="team-form-container" style="padding-bottom: 40px;">
                     <div class="table-responsive">
-         <a href="{{ route('custome.index') }}" 
-   style="background-color: #000000; 
+                        <a href="{{ route('custome.index') }}"
+                            style="background-color: #000000; 
           color: #fff; 
           padding: 8px 18px; 
           margin-bottom: 8px;
@@ -24,8 +24,8 @@
           font-weight: bold; 
           transition: 0.3s; 
           float: right;">
-    ← Back
-</a>
+                            ← Back
+                        </a>
 
                         <table class="table table-bordered table-striped team-roster-table" id="playersTable"
                             style="width:100%">
@@ -33,51 +33,52 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Image</th>
-                                    <th>Fit Type</th>
+                                    <th>Player Name</th>
                                     <th>Kit Type</th>
                                     <th>Team Logo</th>
-                                    <th>Sleeves</th>
-                                    <th>Player Name</th>
-                                    <th>Number</th>
                                     <th>Price</th>
-                                    <th>Goalkeeper Kit</th>
-                                    <th>Staff Option</th>
                                     <th>Created At</th>
                                     <th>Remove Item</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($data as $index => $item)
+                                @php $totalPrice = 0; @endphp
+                                @forelse ($sessionCart as $index => $item)
+                                    @php
+                                        // Agar bulk_data exist kare, playerPrice calculate karo
+                                        $playerPrice = 0;
+                                        if (!empty($item['bulk_data']) && is_array($item['bulk_data'])) {
+                                            foreach ($item['bulk_data'] as $player) {
+                                                $playerPrice += floatval($player['total'] ?? 0);
+                                            }
+                                        }
+
+                                        // Agar item me grand_total exist kare, use karo
+                                        $grandTotalItem = isset($item['grand_total'])
+                                            ? floatval($item['grand_total'])
+                                            : $playerPrice;
+                                        $totalPrice += $grandTotalItem;
+                                    @endphp
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>
                                             @if (!empty($item['image']))
-                                                <img src="{{ asset('custom/images/' . $item['image']) }}" width="50"
-                                                    alt="Uniform Image"
+                                                <img src="{{ asset($item['image']) }}" width="50" alt="Uniform Image"
                                                     onerror="this.src='{{ asset('images/no-image.png') }}'">
                                             @else
                                                 N/A
                                             @endif
                                         </td>
-
-                                        <td>{{ ucfirst($item['fit_type']) }}</td>
+                                        <td>{{ $item['name'] ?? 'N/A' }}</td>
                                         <td>{{ ucfirst($item['kit_type']) }}</td>
                                         <td>{{ ucfirst($item['team_logo']) }}</td>
-                                        <td>{{ ucfirst($item['sleeves_length']) }}</td>
-                                        <td>{{ $item['name'] }}</td>
-                                        <td>{{ $item['number'] }}</td>
-
-                                        {{-- Sirf total show karna --}}
-                                        <td><strong>${{ number_format(($item['total'] ?? 0) + ($item['guide_total'] ?? 0), 2) }}</strong>
-                                        </td>
-
-                                        <td>{{ ucfirst($item['goalkeeper_kit']) }}</td>
-                                        <td>{{ ucfirst($item['staff_other']) }}</td>
+                                        <td>{{ isset($item['sleeves_length']) ? ucfirst($item['sleeves_length']) : 'N/A' }}</td>
+                                        <!-- Use grand_total if available -->
                                         <td>
                                             {{ isset($item['created_at']) ? \Carbon\Carbon::parse($item['created_at'])->format('d M Y') : '--' }}
                                         </td>
                                         <td>
-                                            <form action="{{ route('custome.cart.remove', $index) }}" method="POST"
+                                            <form action="{{ route('custome.destroy', $index) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -87,24 +88,50 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="12" class="text-center">No cart items found.</td>
+                                        <td colspan="10" class="text-center">No cart items found.</td>
                                     </tr>
                                 @endforelse
-
                             </tbody>
-                        </table>
 
-                        <form action="{{ route('custome.cart.clear') }}" method="POST"
+                            <tfoot>
+                                <tr style="background-color: #000; color: #fff; font-weight: bold;">
+                                    <td colspan="7" class="text-end" style="padding: 12px; font-size: 16px;">
+                                        Over All Grand Total:
+                                    </td>
+                                    <td colspan="3" style="padding: 12px; font-size: 16px;">
+                                        ${{ number_format($totalPrice, 2) }}
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                        <div class="d-flex justify-content-center" style="padding-top: 10px">
+                            {{ $customeUniform->links() }}
+                        </div>
+
+                        <form action="{{ route('custome.cart.clear') }}" method="POST" style="padding-top: 10px"
                             onsubmit="return confirm('Are you sure you want to clear the cart?');">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Clear Cart</button>
+                            <button type="submit"
+                                style="
+        background-color: #000;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    "
+                                onmouseover="this.style.backgroundColor='#333'"
+                                onmouseout="this.style.backgroundColor='#000'">
+                                Clear Cart
+                            </button>
                         </form>
 
                     </div>
                 </div>
 
-                <!-- ✅ Checkout Button -->
-                <!-- ✅ Checkout Button - Properly Centered -->
                 <div style="display: flex; justify-content: center; padding-bottom: 50px; padding-top: 50px;">
                     <a href="{{ route('custom-order.create') }}" class="addtocart_btn">
                         Proceed to Checkout

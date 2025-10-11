@@ -188,8 +188,7 @@
         <input type="text" id="account_holder_name" name="account_holder_name" value="{{ old('account_holder_name') }}" class="form-control" required>
     </div>
 {{-- <label for="amount">Amount</label> --}}
- <input type="hidden" name="amount" class="form-control" 
-               value="{{ session('total_amount') }}" readonly>
+ <input type="hidden" name="total_amount" value="{{ $totalPrice }}">
     <!-- Single Card Element placeholder -->
      {{-- <div>
         <label>Card Number</label>
