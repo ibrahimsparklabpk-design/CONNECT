@@ -383,27 +383,36 @@
                         </div>
 
                         <!-- Right Section -->
-                       <div class="right-section" style="flex-grow: 1; text-align: center;">
-                         <!-- Hidden images for canvas -->
-                            <img id="shirt-collar" src="{{ asset('assets/both/Collar.png') }}" style="display: none" alt="collar" />
-                            <img id="shirt-body" src="{{ asset('assets/both/body.png') }}" style="display: none" alt="body" />
-                            <img id="shirt-strip" src="{{ asset('assets/both/SHIRT STRIP.png') }}" style="display: none" alt="strip" />
-                            
+                        <div class="right-section" style="flex-grow: 1; text-align: center;">
+                            <!-- Hidden images for canvas -->
+                            <img id="shirt-collar" src="{{ asset('assets/both/Collar.png') }}" style="display: none"
+                                alt="collar" />
+                            <img id="shirt-body" src="{{ asset('assets/both/body.png') }}" style="display: none"
+                                alt="body" />
+                            <img id="shirt-strip" src="{{ asset('assets/both/SHIRT STRIP.png') }}" style="display: none"
+                                alt="strip" />
+
                             <!-- CORRECTED: Sleves.png -->
-                            <img id="shirt-sleeve" src="{{ asset('assets/both/Sleves.png') }}" style="display: none" alt="sleeve" />
-                            
+                            <img id="shirt-sleeve" src="{{ asset('assets/both/Sleves.png') }}" style="display: none"
+                                alt="sleeve" />
+
                             <!-- CORRECTED: SLEVE STRIPS.png -->
-                            <img id="shirt-sleeve-strip" src="{{ asset('assets/both/SLEVE STRIPS.png') }}" style="display: none" alt="sleeve strip" />
-                            
-                            <img id="shirt-trouser" src="{{ asset('assets/both/Shorts.png') }}" style="display: none" alt="trouser" />
-                            <img id="shirt-trouser-strip" src="{{ asset('assets/both/SHORT STRIPS.png') }}" style="display: none" alt="trouser strip" />
-                            <img id="shirt-shocks" src="{{ asset('assets/both/Socks.png') }}" style="display: none" alt="shocks" />
-                            <img id="shirt-shoes" src="{{ asset('assets/both/Shoes.png') }}" style="display: none" alt="shoes" />
-                        
+                            <img id="shirt-sleeve-strip" src="{{ asset('assets/both/SLEVE STRIPS.png') }}"
+                                style="display: none" alt="sleeve strip" />
+
+                            <img id="shirt-trouser" src="{{ asset('assets/both/Shorts.png') }}" style="display: none"
+                                alt="trouser" />
+                            <img id="shirt-trouser-strip" src="{{ asset('assets/both/SHORT STRIPS.png') }}"
+                                style="display: none" alt="trouser strip" />
+                            <img id="shirt-shocks" src="{{ asset('assets/both/Socks.png') }}" style="display: none"
+                                alt="shocks" />
+                            <img id="shirt-shoes" src="{{ asset('assets/both/Shoes.png') }}" style="display: none"
+                                alt="shoes" />
+
                             <canvas id="shirt-canvas" style="border: 1px solid #ccc; max-width: 100%;"></canvas>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
@@ -587,118 +596,127 @@
 
             {{-- ================== Player Info ================== --}}
 
-           <p class="size-guide" style="font-size: 18px; font-weight: 600; color: #002266; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; text-align: center;
+            <p class="size-guide"
+                style="font-size: 18px; font-weight: 600; color: #002266; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; text-align: center;
     justify-content: center; margin-top: 22px;">
-  <i class="fa-solid fa-ruler" style="color: #000436;"></i> Size Guide
-</p>
+                <i class="fa-solid fa-ruler" style="color: #000436;"></i> Size Guide
+            </p>
 
-<div class="team-form-container" style="max-width: 900px; margin: 0 auto; background: #ededed1c;
+            <div class="team-form-container"
+                style="max-width: 900px; margin: 0 auto; background: #ededed1c;
 ; padding: 20px 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
-  <table class="table table-bordered team-roster-table" style="width: 100%; border-collapse: collapse; background: #fff; text-align: center;">
-    <thead style="background: linear-gradient(45deg, #002266, #000436); color: white;">
-      <tr>
-        <th style="padding: 10px;">Player Name</th>
-        <th style="padding: 10px;">Number</th>
-        <th style="padding: 10px;">Shirt Size</th>
-        <th style="padding: 10px;">Short Size</th>
-        <th style="padding: 10px;">Quantity</th>
-        <th style="padding: 10px;">Action</th>
-      </tr>
-    </thead>
+                <table class="table table-bordered team-roster-table"
+                    style="width: 100%; border-collapse: collapse; background: #fff; text-align: center;">
+                    <thead style="background: linear-gradient(45deg, #002266, #000436); color: white;">
+                        <tr>
+                            <th style="padding: 10px;">Player Name</th>
+                            <th style="padding: 10px;">Number</th>
+                            <th style="padding: 10px;">Shirt Size</th>
+                            <th style="padding: 10px;">Short Size</th>
+                            <th style="padding: 10px;">Quantity</th>
+                            <th style="padding: 10px;">Action</th>
+                        </tr>
+                    </thead>
 
-    <tbody id="details-wrapper">
-      <tr>
-        <td><input type="text" name="name[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
-        <td><input type="number" name="number[]" class="form-control" min="1" value="1" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
-        <td>
-          <select name="shirt_size[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
-            <option value="">Select</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-          </select>
-        </td>
-        <td>
-          <select name="short_size[]" class="form-control" required style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
-            <option value="">Select</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-          </select>
-        </td>
-        <td><input type="number" name="quantity[]" class="form-control player-quantity" min="0" value="0" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
+                    <tbody id="details-wrapper">
+                        <tr>
+                            <td><input type="text" name="name[]" class="form-control" required
+                                    style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
+                            <td><input type="number" name="number[]" class="form-control" min="1"
+                                    value="1" required
+                                    style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
+                            <td>
+                                <select name="shirt_size[]" class="form-control" required
+                                    style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
+                                    <option value="">Select</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="short_size[]" class="form-control" required
+                                    style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;">
+                                    <option value="">Select</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                </select>
+                            </td>
+                            <td><input type="number" name="quantity[]" class="form-control player-quantity"
+                                    min="0" value="0"
+                                    style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px;"></td>
 
-        <input type="hidden" name="price[]" class="player-price" value="39">
-        <input type="hidden" name="total[]" class="player-total" value="39">
+                            <input type="hidden" name="price[]" class="player-price" value="39">
+                            <input type="hidden" name="total[]" class="player-total" value="39">
 
-        <td><button type="button" class="btn btn-danger btn-sm remove-row" style="background-color: #dc3545; border: none; padding: 5px 10px; border-radius: 6px; color: white;">✖</button></td>
-      </tr>
-    </tbody>
-  </table>
+                            <td><button type="button" class="btn btn-danger btn-sm remove-row"
+                                    style="background-color: #dc3545; border: none; padding: 5px 10px; border-radius: 6px; color: white;">✖</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-  <button type="button" id="addRow" class="btn btn-primary" style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;">
-    + Add Row
-  </button>
-</div>
+                <button type="button" id="addRow" class="btn btn-primary"
+                    style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;">
+                    + Add Row
+                </button>
+            </div>
 
-<div style="margin-top: 1rem; text-align: center; font-size: 18px;">
-  <strong>Grand Total: 
-    <span style="color: #002266;">$<span id="grandTotal">39.00</span></span>
-  </strong>
-</div>
+            <div style="margin-top: 1rem; text-align: center; font-size: 18px;">
+                <strong>Grand Total:
+                    <span style="color: #002266;">$<span id="grandTotal">39.00</span></span>
+                </strong>
+            </div>
 
             {{-- ================== Goalkeeper Requirements ================== --}}
-           
+
     </div>
 
     <!-- Staff Section (Initially Hidden) -->
     <div id="staff-section" style="display: none; margin-top: 1rem;">
 
-        
-            <input type="hidden" name="selected_shirt" id="selectedShirtInput">
-        </div>
-        <div
-            style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; margin-left: 6rem; justify-content: center; margin-top:2rem">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <label for="logo" style="margin-bottom: 5px; font-weight: 500;">Upload Logo (This will appear on
-                    the shirt)</label>
-                <input type="file" name="logo" id="logo"
-                    style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">
-            </div>
 
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <label for="pattern" style="margin-bottom: 5px; font-weight: 500;">Upload Pattern (This will appear
-                    on the shirt)</label>
-                <input type="file" name="pattern"
-                    style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;" />
-            </div>
-        </div>
-
-
-
-
-
-        <div id="uploaded-logos"></div>
-
-        <!-- ✅ Logo preview area -->
-        <div id="uploaded-logos" style="display:flex;gap:10px;"></div>
-
-        <input type="file" id="upload-logo" accept="image/*" style="display:none;">
-        <input type="file" id="upload-patterns" accept="image/*" style="display:none;">
-
-
-        <div class="btn_box">
-            <button type="submit" class="addtocart_btn">Add to cart</button>
-        </div>
-
-        </form>
+        <input type="hidden" name="selected_shirt" id="selectedShirtInput">
     </div>
+    <div
+        style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; margin-left: 6rem; justify-content: center; margin-top:2rem">
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="logo" style="margin-bottom: 5px; font-weight: 500;">Upload Logo (This will appear on
+                the shirt)</label>
+            <input type="file" name="logo" id="logo"
+                style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;">
         </div>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="pattern" style="margin-bottom: 5px; font-weight: 500;">Upload Pattern (This will appear
+                on the shirt)</label>
+            <input type="file" name="pattern"
+                style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; cursor: pointer;" />
+        </div>
+    </div>
+
+    <div id="uploaded-logos"></div>
+
+    <!-- ✅ Logo preview area -->
+    <div id="uploaded-logos" style="display:flex;gap:10px;"></div>
+
+    <input type="file" id="upload-logo" accept="image/*" style="display:none;">
+    <input type="file" id="upload-patterns" accept="image/*" style="display:none;">
+
+
+    <div class="btn_box">
+        <button type="submit" class="addtocart_btn">Add to cart</button>
+    </div>
+
+    </form>
+    </div>
+    </div>
 
     {{-- ================== Staff Size Guide ================== --}}
 
-  
+
 
 
 @endsection
@@ -1917,57 +1935,57 @@
     {{-- custome code for  --}}
     <!-- ✅ SCRIPT after all HTML -->
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const BASE_PRICE = 39.00;
+        document.addEventListener("DOMContentLoaded", function() {
+            const BASE_PRICE = 39.00;
 
-    // =================== Helper ===================
-    function getExtrasTotal() {
-        let extraTotal = 0;
-        document.querySelectorAll(".price-option").forEach(select => {
-            const selectedText = select.options[select.selectedIndex]?.text || "";
-            const match = selectedText.match(/\+\$(\d+(\.\d+)?)/);
-            if (match) extraTotal += parseFloat(match[1]);
-        });
-        return extraTotal;
-    }
+            // =================== Helper ===================
+            function getExtrasTotal() {
+                let extraTotal = 0;
+                document.querySelectorAll(".price-option").forEach(select => {
+                    const selectedText = select.options[select.selectedIndex]?.text || "";
+                    const match = selectedText.match(/\+\$(\d+(\.\d+)?)/);
+                    if (match) extraTotal += parseFloat(match[1]);
+                });
+                return extraTotal;
+            }
 
-    function updateGrandTotal() {
-        let grand = 0;
-        document.querySelectorAll(".player-total, .guide-total").forEach(input => {
-            grand += parseFloat(input.value) || 0;
-        });
+            function updateGrandTotal() {
+                let grand = 0;
+                document.querySelectorAll(".player-total, .guide-total").forEach(input => {
+                    grand += parseFloat(input.value) || 0;
+                });
 
-        // ✅ Add extras from main options
-        grand += getExtrasTotal();
+                // ✅ Add extras from main options
+                grand += getExtrasTotal();
 
-        document.getElementById("grandTotal").innerText = grand.toFixed(2);
-    }
+                document.getElementById("grandTotal").innerText = grand.toFixed(2);
+            }
 
-    // =================== Player Section ===================
-    const playerWrapper = document.getElementById("details-wrapper");
-    const addRow = document.getElementById("addRow");
+            // =================== Player Section ===================
+            const playerWrapper = document.getElementById("details-wrapper");
+            const addRow = document.getElementById("addRow");
 
-    if (playerWrapper && addRow) {
-        function updatePlayerRowTotal(row) {
-            const qty = parseFloat(row.querySelector(".player-quantity")?.value) || 0;
-            const total = qty * BASE_PRICE;
-            row.querySelector(".player-total").value = total.toFixed(2);
-            row.querySelector(".player-total-display").innerText = total.toFixed(2);
-            updateGrandTotal();
-        }
+            if (playerWrapper && addRow) {
+                function updatePlayerRowTotal(row) {
+                    const qty = parseFloat(row.querySelector(".player-quantity")?.value) || 0;
+                    const total = qty * BASE_PRICE;
+                    row.querySelector(".player-total").value = total.toFixed(2);
+                    row.querySelector(".player-total-display").innerText = total.toFixed(2);
+                    updateGrandTotal();
+                }
 
-       const addRow = document.getElementById("addRow");
-const playerWrapper = document.getElementById("details-wrapper");
-const BASE_PRICE = 39;
+                const addRow = document.getElementById("addRow");
+                const playerWrapper = document.getElementById("details-wrapper");
+                const BASE_PRICE = 39;
 
-if (addRow) {
-  // Remove any existing listeners first
-  addRow.replaceWith(addRow.cloneNode(true));
-  const newAddRow = document.getElementById("addRow");
+                if (addRow) {
+                    // Remove any existing listeners first
+                    addRow.replaceWith(addRow.cloneNode(true));
+                    const newAddRow = document.getElementById("addRow");
 
-  newAddRow.addEventListener("click", function() {
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
+                    newAddRow.addEventListener("click", function() {
+                        const newRow = document.createElement("tr");
+                        newRow.innerHTML = `
       <td><input type="text" name="name[]" class="form-control" required></td>
       <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
       <td>
@@ -1995,49 +2013,49 @@ if (addRow) {
       <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
     `;
 
-    playerWrapper.appendChild(newRow);
-    updateGrandTotal();
-  });
-}
+                        playerWrapper.appendChild(newRow);
+                        updateGrandTotal();
+                    });
+                }
 
-        playerWrapper.addEventListener("input", function(e) {
-            if (e.target.classList.contains("player-quantity")) {
-                updatePlayerRowTotal(e.target.closest("tr"));
+                playerWrapper.addEventListener("input", function(e) {
+                    if (e.target.classList.contains("player-quantity")) {
+                        updatePlayerRowTotal(e.target.closest("tr"));
+                    }
+                });
+
+                playerWrapper.addEventListener("click", function(e) {
+                    if (e.target.classList.contains("remove-row")) {
+                        e.target.closest("tr").remove();
+                        updateGrandTotal();
+                    }
+                });
             }
-        });
 
-        playerWrapper.addEventListener("click", function(e) {
-            if (e.target.classList.contains("remove-row")) {
-                e.target.closest("tr").remove();
-                updateGrandTotal();
-            }
-        });
-    }
+            // =================== Guide Section ===================
+            const guideWrapper = document.getElementById("guide-details-wrapper");
+            const addGuideRowBtn = document.getElementById("addGuideRow");
 
-    // =================== Guide Section ===================
-    const guideWrapper = document.getElementById("guide-details-wrapper");
-    const addGuideRowBtn = document.getElementById("addGuideRow");
+            if (guideWrapper && addGuideRowBtn) {
+                function updateGuideRowTotal(row) {
+                    const qtyInput = row.querySelector(".guide-quantity");
+                    const totalInput = row.querySelector(".guide-total");
+                    const displaySpan = row.querySelector(".guide-total-display");
 
-    if (guideWrapper && addGuideRowBtn) {
-        function updateGuideRowTotal(row) {
-            const qtyInput = row.querySelector(".guide-quantity");
-            const totalInput = row.querySelector(".guide-total");
-            const displaySpan = row.querySelector(".guide-total-display");
+                    if (!qtyInput || !totalInput) return;
 
-            if (!qtyInput || !totalInput) return;
+                    const qty = parseFloat(qtyInput.value) || 0;
+                    const total = qty * BASE_PRICE;
 
-            const qty = parseFloat(qtyInput.value) || 0;
-            const total = qty * BASE_PRICE;
+                    totalInput.value = total.toFixed(2);
+                    if (displaySpan) displaySpan.innerText = total.toFixed(2);
 
-            totalInput.value = total.toFixed(2);
-            if (displaySpan) displaySpan.innerText = total.toFixed(2);
+                    updateGrandTotal();
+                }
 
-            updateGrandTotal();
-        }
-
-        addGuideRowBtn.addEventListener("click", function() {
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
+                addGuideRowBtn.addEventListener("click", function() {
+                    const newRow = document.createElement("tr");
+                    newRow.innerHTML = `
                 <td><input type="text" name="guide_name[]" class="form-control" required></td>
                 <td><input type="number" name="guide_number[]" class="form-control" min="0" value="0" required></td>
                 <td>
@@ -2071,33 +2089,33 @@ if (addRow) {
                 </td>
                 <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
             `;
-            guideWrapper.appendChild(newRow);
+                    guideWrapper.appendChild(newRow);
+                    updateGrandTotal();
+                });
+
+                guideWrapper.addEventListener("input", function(e) {
+                    if (e.target.classList.contains("guide-quantity")) {
+                        updateGuideRowTotal(e.target.closest("tr"));
+                    }
+                });
+
+                guideWrapper.addEventListener("click", function(e) {
+                    if (e.target.classList.contains("remove-row")) {
+                        e.target.closest("tr").remove();
+                        updateGrandTotal();
+                    }
+                });
+            }
+
+            // =================== Extra Options Watch ===================
+            document.querySelectorAll(".price-option").forEach(select => {
+                select.addEventListener("change", updateGrandTotal);
+            });
+
+            // ✅ Initial call
             updateGrandTotal();
         });
-
-        guideWrapper.addEventListener("input", function(e) {
-            if (e.target.classList.contains("guide-quantity")) {
-                updateGuideRowTotal(e.target.closest("tr"));
-            }
-        });
-
-        guideWrapper.addEventListener("click", function(e) {
-            if (e.target.classList.contains("remove-row")) {
-                e.target.closest("tr").remove();
-                updateGrandTotal();
-            }
-        });
-    }
-
-    // =================== Extra Options Watch ===================
-    document.querySelectorAll(".price-option").forEach(select => {
-        select.addEventListener("change", updateGrandTotal);
-    });
-
-    // ✅ Initial call
-    updateGrandTotal();
-});
-</script>
+    </script>
 
 
     @include('component.footer')

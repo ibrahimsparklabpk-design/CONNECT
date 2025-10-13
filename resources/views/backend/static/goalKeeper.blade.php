@@ -134,8 +134,7 @@
  </div>
  </div>
 
- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
-     @csrf
+ 
  <!-- Items List -->
  <div class="items-list" style="height: 36rem;">
      <!-- Shirts Tab -->
@@ -307,440 +306,546 @@
 
  <!-- FORM SECTION STARTS FROM HERE -->
  
-     <div class="head-box">
-         <p class="mainheading">CUSTOM SOCCER KIT</p>
-         <div class="m-pr">
-             <p class="s-pr">$39.00</p>
-             <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price -->
-             <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
-             <p class="str-r">5 reviews</p>
-         </div>
-     </div>
-     {{-- ================== Basic Kit ================== --}}
-
-     <div class="flex-form">
-         {{-- Fit Type --}}
-         <div class="form-column">
-             <label for="sleeves_length">Sleeves Length</label>
-             <select name="sleeves_length" id="sleeves_length"
-                 class="form-control @error('sleeves_length') is-invalid @enderror">
-                 <option value="">Select</option>
-                 @foreach(['short','long'] as $opt)
-                 <option value="{{ $opt }}" {{ old('sleeves_length')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
-             <label for="fit_type">Fit Type</label>
-             <select name="fit_type" id="fit_type" class="form-control @error('fit_type') is-invalid @enderror">
-                 <option value="">Select</option>
-                 @foreach(['men','women','youth'] as $opt)
-                 <option value="{{ $opt }}" {{ old('fit_type')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
-             @error('fit_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
-
-
-             {{-- Kit Type --}}
-             <div class="col-md-6">
-                 <div class="form-group">
-                     <label for="kit_type">Kit Type</label>
-                     <select name="kit_type" id="kit_type" class="form-control @error('kit_type') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['full','shirt','both'] as $opt)
-                         <option value="{{ $opt }}" {{ old('kit_type')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('kit_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-
-             {{-- Collar Type --}}
-             <div class="col-md-6">
-                 <div class="form-group">
-                     <label for="outfield_players_socks">Outfield Players Socks</label>
-                     <select name="outfield_players_socks" id="outfield_players_socks"
-                         class="form-control @error('outfield_players_socks') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['yes','no'] as $opt)
-                         <option value="{{ $opt }}" {{ old('outfield_players_socks')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('outfield_players_socks') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
+     <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+     @csrf
+         <div class="head-box">
+             <p class="mainheading">CUSTOM SOCCER KIT</p>
+             <div class="m-pr">
+                 <p class="s-pr" data-base="39.00">$39.00</p>
+                 {{-- <input type="hidden" name="price" class="row-total"> --}}
+                 {{-- <input type="hidden" id="base-price" name="price" value="39"> <!-- Hidden base price --> --}}
+                 <img src="{{ asset('assets/mystars.png') }}" style="width: 100px" alt="" />
+                 <p class="str-r">5 reviews</p>
              </div>
          </div>
-         {{-- Team Logo --}}
-         <div class="form-column">
-             <label for="team_logo">Team Logo</label>
-             <select name="team_logo" id="team_logo" class="form-control @error('team_logo') is-invalid @enderror">
-                 <option value="">Select</option>
-                 @foreach(['sublimated','embroidery'] as $opt)
-                 <option value="{{ $opt }}" {{ old('team_logo')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
-             @error('team_logo') <div class="invalid-feedback">{{ $message }}</div> @enderror
-
-
-
-             {{-- Outfield Players Socks --}}
-             <div class="col-md-6">
-                 <div class="form-group">
-                     <label for="collar_type">Collar Type</label>
-                     <select name="collar_type" id="collar_type"
-                         class="form-control @error('collar_type') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['v-neck','round-neck','polo-style'] as $opt)
-                         <option value="{{ $opt }}" {{ old('collar_type')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('collar_type') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-
-             {{-- Inside Shirt Collar --}}
-             <div class="col-md-6">
-                 <div class="form-group">
-                     <label for="inside_shirt_collar">Inside Shirt Collar</label>
-                     <select name="inside_shirt_collar" id="inside_shirt_collar"
-                         class="form-control @error('inside_shirt_collar') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['yes','no'] as $opt)
-                         <option value="{{ $opt }}" {{ old('inside_shirt_collar')==$opt ? 'selected' : '' }}>
-                             {{ ucfirst($opt) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('inside_shirt_collar') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-             <div class="col-md-6" id="socksColorWrapper" style="display: none;">
-                 <div class="form-group">
-                     <label for="socks-color">Select Socks Color</label>
-                     <select name="socks-color" id="socks-color"
-                         class="form-control @error('socks-color') is-invalid @enderror">
-                         <option value="">Select Color</option>
-                         <option value="black">Black</option>
-                         <option value="white">White</option>
-                         <option value="blue">Blue</option>
-                         <option value="red">Red</option>
-                         <option value="green">Green</option>
-                         <option value="yellow">Yellow</option>
-                         <option value="gray">Gray</option>
-                         <option value="pink">Pink</option>
-                         <option value="purple">Purple</option>
-                         <option value="orange">Orange</option>
-                         <option value="brown">Brown</option>
-                         <option value="beige">Beige</option>
-                         <option value="navy">Navy</option>
-                     </select>
-                     @error('socks-color') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-
-         </div>
-     </div>
-
-     {{-- ================== Player Info ================== --}}
-
-     <p class="size-guide"><i class="fa-solid fa-ruler"></i> Size Guide</p>
-
-     <div class="team-form-container">
-         <!-- Table -->
-         <div class="team-form-container">
-             <table class="table table-bordered team-roster-table" id="playersTable">
-                 <thead>
-                     <tr>
-                         <th>Player Name</th>
-                         <th>Number</th>
-                         <th>Shirt Size</th>
-                         <th>short Size</th>
-                         <th>Quantity</th>
-                         <th>Action</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <!-- First Row -->
-                     <tr>
-                         <td>
-                             <input type="text" name="name" class="form-control" placeholder="Enter name" required>
-                         </td>
-                         <td>
-                             <input type="number" name="number" class="form-control" placeholder="0" min="1" required>
-                         </td>
-                         <td>
-                             <select name="shirt_size" class="form-control" required>
-                                 <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-                         </td>
-                         <td class="hide-on-shirt-only">
-                             <select class="short-size" name="short_size" require>
-                                 <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-                         </td>
-                         <td>
-                             <input type="number" name="quantity" class="form-control" placeholder="0" min="1" required>
-                         </td>
-                         <td class="text-center">
-                             <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
-                                 style="padding: 7px;  background: red; color: white; border: none; border-radius: 6px;">
-                                 ✖
-                             </button>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-
-             <!-- Add Row Button -->
-             <button type="button" class="btn btn-primary" id="addRowBtn"
-                 style="    margin-top: 2rem; padding: 1rem; background: black; color: white;border-radius: 1rem;">+ Add
-                 Row</button>
-         </div>
-     </div>
-
-
-     {{-- ================== Goalkeeper Requirements ================== --}}
-     <div class="flex-form">
-         {{-- Goalkeeper Kit --}}
-         <div class="form-group" style="width: 100%;">
-             <label for="goalkeeper_kit">Add a Goalkeeper Kit?</label>
-             <select id="goalkeeper_kit" name="goalkeeper_kit"
-                 class="form-control @error('goalkeeper_kit') is-invalid @enderror" onchange="toggleGoalkeeperFields()">
-                 <option value="">Select</option>
-                 @foreach(['yes','no'] as $opt)
-                 <option value="{{ $opt }}" {{ old('goalkeeper_kit')==$opt ? 'selected' : '' }}>
-                     {{ ucfirst($opt) }}
-                 </option>
-                 @endforeach
-             </select>
-         </div>
-
-         {{-- Hidden Goalkeeper Fields --}}
-         <div id="goalkeeper_fields" style="display: none; margin-left: 3rem;">
-
-             <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                 <div class="form-group" style="flex: 1;">
-                     <label for="padded">Padded</label>
-                     <select name="padded" id="padded" class="form-control" style=" width: 21rem;">
-                         <option value="">Padded</option>
-                         <option value="Yes">Yes +$5</option>
-                         <option value="no">No</option>
-                     </select>
-                 </div>
-
-                 <div class="form-group" style="flex: 1;">
-                     <label for="goalkeeper_jersey_design">Jersey Design</label>
-                     <select name="goalkeeper_jersey_design" id="goalkeeper_jersey_design" style=" width: 21rem;"
-                         class="form-control @error('goalkeeper_jersey_design') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['same_as_player_uniform','custom_design'] as $opt)
-                         <option value="{{ $opt }}" {{ old('goalkeeper_jersey_design')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('goalkeeper_jersey_design') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-
-             <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-                 <div class="form-group" style="flex: 1;">
-                     <label for="goalkeeper_sleeves">Goalkeeper Sleeves</label>
-                     <select name="goalkeeper_sleeves" id="goalkeeper_sleeves"
-                         class="form-control @error('goalkeeper_sleeves') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['long','short','padded_elbows'] as $opt)
-                         <option value="{{ $opt }}" {{ old('goalkeeper_sleeves')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('goalkeeper_sleeves') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-
-                 <div class="form-group" style="flex: 1;">
-                     <label for="jersey_color">Jersey Color</label>
-                     <select name="jersey_color" id="jersey_color"
-                         class="form-control @error('jersey_color') is-invalid @enderror">
-                         <option value="">Select</option>
-                         @foreach(['same_as_top','same_as_pants','red','blue','black','white','other'] as $opt)
-                         <option value="{{ $opt }}" {{ old('jersey_color')==$opt ? 'selected' : '' }}>
-                             {{ ucwords(str_replace('_',' ', $opt)) }}
-                         </option>
-                         @endforeach
-                     </select>
-                     @error('jersey_color') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                 </div>
-             </div>
-
-         </div>
-
-     </div>
-
-     {{-- ================== Staff Size Guide ================== --}}
-
-     <div class="flex-form">
-         <div class="form-group" style="width: 100%;">
-             <label for="staff_other">Staff/Other</label>
-             <select id="staff-other" name="staff_other" onchange="toggleStaffFields()">
-                 <option value="">Select Option</option>
-                 <option value="yes">Yes</option>
-                 <option value="no">No</option>
-             </select>
-         </div>
-     </div>
-
-     <!-- Staff Section (Initially Hidden) -->
-     <div id="staff-section" style="display: none; margin-top: 1rem;">
+         {{-- ================== Basic Kit ================== --}}
 
          <div class="flex-form">
-             <!-- Left Column -->
+             {{-- Fit Type --}}
              <div class="form-column">
-                 <div class="form-group" id="playersTable">
-                     <label for="staff_kit_type">Staff Kit</label>
-                     <select id="staff-kit" name="staff_kit_type">
-                         <option value="">Select Kit Option</option>
-                         <option value="full">Full Kit</option>
-                         <option value="shirt">Shirt Only</option>
-                     </select>
+                 <label for="sleeves_length">Sleeves Length</label>
+                 <select name="sleeves_length" id="sleeves_length"
+                     class="form-control price-option @error('sleeves_length') is-invalid @enderror">
+                     <option value="">Select</option>
+                     <option value="short" {{ old('sleeves_length') == 'short' ? 'selected' : '' }}>Short</option>
+                     <option value="long" {{ old('sleeves_length') == 'long' ? 'selected' : '' }}>Long (+$2.00/pr kit)
+                     </option>
+                     <option value="mix" {{ old('sleeves_length') == 'mix' ? 'selected' : '' }}>Mix: Long/Short
+                     </option>
+                 </select>
+                 <label for="fit_type">Fit Type</label>
+                 <select name="fit_type" id="fit_type" class="form-control @error('fit_type') is-invalid @enderror">
+                     <option value="">Select</option>
+                     @foreach (['men', 'women', 'youth'] as $opt)
+                         <option value="{{ $opt }}" {{ old('fit_type') == $opt ? 'selected' : '' }}>
+                             {{ ucfirst($opt) }}
+                         </option>
+                     @endforeach
+                 </select>
+                 @error('fit_type')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                 @enderror
+
+
+                 {{-- Kit Type --}}
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="kit_type">Kit Type</label>
+                         <select name="kit_type" id="kit_type"
+                             class="form-control @error('kit_type') is-invalid @enderror">
+                             <option value="">Select</option>
+                             @foreach (['full', 'shirt', 'both'] as $opt)
+                                 <option value="{{ $opt }}" {{ old('kit_type') == $opt ? 'selected' : '' }}>
+                                     {{ ucfirst($opt) }}
+                                 </option>
+                             @endforeach
+                         </select>
+                         @error('kit_type')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
                  </div>
 
-                 <div class="form-group" id="playersTable">
-                     <label for="staff_fit_type">Staff Fit Type</label>
-                     <select id="staff-fit-type" name="staff_fit_type">
-                         <option value="">Select Fit Type</option>
-                         <option value="men">Men</option>
-                         <option value="women">Women</option>
-                         {{-- <option value="loose">Youth</option> --}}
-                     </select>
-                 </div>
-                 <div class="form-group" id="">
-                     <label for="staff_sleeves_length">Staff Sleeves Length</label>
-                     <select id="" name="staff_sleeves_length">
-                         <option value="">Staff Sleeves Length</option>
-                         <option value="short">Short</option>
-                         <option value="long">Long</option>
-                         <option value="both">Both</option>
-                     </select>
+                 {{-- Collar Type --}}
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="outfield_players_socks">Outfield Players Socks</label>
+                         <select name="outfield_players_socks" id="outfield_players_socks"
+                             class="form-control @error('outfield_players_socks') is-invalid @enderror">
+                             <option value="">Select</option>
+                             @foreach (['yes', 'no'] as $opt)
+                                 <option value="{{ $opt }}"
+                                     {{ old('outfield_players_socks') == $opt ? 'selected' : '' }}>
+                                     {{ ucfirst($opt) }}
+                                 </option>
+                             @endforeach
+                         </select>
+                         @error('outfield_players_socks')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
                  </div>
              </div>
-
-             <!-- Right Column -->
+             {{-- Team Logo --}}
              <div class="form-column">
-                 <div class="form-group" id="playersTable">
-                     <label for="staff_collar_type">Staff Collar Type</label>
-                     <select id="staff-collar-type" name="staff_collar_type">
-                         <option value="">Select Collar Type</option>
-                         <option value="round-neck">Round Neck</option>
-                         <option value="v-neck">V Neck</option>
-                         <option value="polo-style">Polo Style</option>
-                     </select>
+                 <label for="team_logo">Team Logo</label>
+                 <select name="team_logo" id="team_logo"
+                     class="form-control price-option @error('team_logo') is-invalid @enderror">
+                     <option value="">Select</option>
+                     <option value="sublimated" {{ old('team_logo') == 'sublimated' ? 'selected' : '' }}>Sublimated
+                     </option>
+                     <option value="embroidery" {{ old('team_logo') == 'embroidery' ? 'selected' : '' }}>Embroidery
+                         (+$1.00/pr
+                         kit)</option>
+                 </select>
+                 @error('team_logo')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                 @enderror
+
+
+
+                 {{-- Outfield Players Socks --}}
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="collar_type">Collar Type</label>
+                         <select name="collar_type" id="collar_type"
+                             class="form-control price-option @error('collar_type') is-invalid @enderror">
+                             <option value="">Select</option>
+                             <option value="v-neck" {{ old('collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck</option>
+                             <option value="round-neck" {{ old('collar_type') == 'round-neck' ? 'selected' : '' }}>
+                                 Round-Neck
+                             </option>
+                             <option value="polo-style" {{ old('collar_type') == 'polo-style' ? 'selected' : '' }}>
+                                 Polo-Style
+                                 (+$2.00/pr kit)</option>
+                         </select>
+                         @error('collar_type')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
                  </div>
+
+                 {{-- Inside Shirt Collar --}}
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="inside_shirt_collar">Inside Shirt Collar</label>
+                         <select name="inside_shirt_collar" id="inside_shirt_collar"
+                             class="form-control price-option @error('inside_shirt_collar') is-invalid @enderror">
+                             <option value="">Select</option>
+                             <option value="yes" {{ old('inside_shirt_collar') == 'yes' ? 'selected' : '' }}>Yes
+                                 (+$2.00/pr
+                                 kit)</option>
+                             <option value="no" {{ old('inside_shirt_collar') == 'no' ? 'selected' : '' }}>No</option>
+                         </select>
+                         @error('inside_shirt_collar')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
+                 </div>
+                 <div class="col-md-6" id="socksColorWrapper" style="display: none;">
+                     <div class="form-group">
+                         <label for="socks-color">Select Socks Color</label>
+                         <select name="socks-color" id="socks-color"
+                             class="form-control @error('socks-color') is-invalid @enderror">
+                             <option value="">Select Color</option>
+                             <option value="black">Black</option>
+                             <option value="white">White</option>
+                             <option value="blue">Blue</option>
+                             <option value="red">Red</option>
+                             <option value="green">Green</option>
+                             <option value="yellow">Yellow</option>
+                             <option value="gray">Gray</option>
+                             <option value="pink">Pink</option>
+                             <option value="purple">Purple</option>
+                             <option value="orange">Orange</option>
+                             <option value="brown">Brown</option>
+                             <option value="beige">Beige</option>
+                             <option value="navy">Navy</option>
+                         </select>
+                         @error('socks-color')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
+                 </div>
+
              </div>
-
-
          </div>
 
-         <!-- Table -->
+         {{-- ================== Player Info ================== --}}
+
+         <p class="size-guide"><i class="fa-solid fa-ruler"></i> Size Guide</p>
+
          <div class="team-form-container">
-             <table class="table table-bordered team-roster-table">
+
+             <!-- Table -->
+             <div class="team-form-container">
+                 <table class="table table-bordered team-roster-table">
+                     <thead>
+                         <tr>
+                             <th>Player Name</th>
+                             <th>Number</th>
+                             <th>Shirt Size</th>
+                             <th>Short Size</th>
+                             <th>Quantity</th>
+                             {{-- <th>Total ($)</th> --}}
+                             <th>Action</th>
+                         </tr>
+                     </thead>
+                     <tbody id="details-wrapper">
+                         <tr>
+                             <td><input type="text" name="name[]" class="form-control" required></td>
+                             <td><input type="number" name="number[]" class="form-control" min="1"
+                                     value="1" required></td>
+                             <td>
+                                 <select name="shirt_size[]" class="form-control" required>
+                                     <option value="">Select</option>
+                                     <option value="s">S</option>
+                                     <option value="m">M</option>
+                                     <option value="l">L</option>
+                                 </select>
+                             </td>
+                             <td>
+                                 <select name="short_size[]" class="form-control" required>
+                                     <option value="">Select</option>
+                                     <option value="s">S</option>
+                                     <option value="m">M</option>
+                                     <option value="l">L</option>
+                                 </select>
+                             </td>
+                             <td><input type="number" name="quantity[]" class="form-control player-quantity"
+                                     min="1" value="1"></td>
+
+                             <!-- Hidden fields for form -->
+                             <input type="hidden" name="price[]" class="player-price" value="39">
+                             <input type="hidden" name="total[]" class="player-total" value="39">
+
+                             <!-- Visible total display -->
+                             <td><span class="player-total-display" style="display:none;">39.00</span></td>
+
+
+
+                             <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <button style="
+        background-color: #000;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        margin-top:10px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    "
+                                    onmouseover="this.style.backgroundColor='#333'"
+                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
+             </div>
+
+             {{-- <table class="table table-bordered team-roster-table" id="details-wrapper">
                  <thead>
                      <tr>
                          <th>Player Name</th>
                          <th>Number</th>
                          <th>Shirt Size</th>
-                         <th>Pant Size</th>
-                         <th>guide Sleeves Length</th>
+                         <th>Short Size</th>
                          <th>Quantity</th>
                          <th>Action</th>
                      </tr>
                  </thead>
-                 <tbody class="players-body">
-                     <!-- First Row -->
+                 <tbody class="detail-row">
                      <tr>
+                         <td><input type="text" name="player_name[]" class="form-control" placeholder="Enter name"
+                                 required></td>
+                         <td><input type="number" name="player_number[]" class="form-control" placeholder="0"
+                                 min="1" required></td>
                          <td>
-                             <input type="text" name="guide_name" class="form-control" placeholder="Enter name"
-                                 required>
-                         </td>
-                         <td>
-                             <input type="number" name="guide_number" class="form-control" placeholder="0" min="1"
-                                 required>
-                         </td>
-                         <td>
-                             <select name="guide_shirt_size" class="form-control" required>
+                             <select name="player_shirt_size[]" class="form-control" required>
                                  <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-                         </td>
-                         <td class="hide-on-shirt-only">
-                             <select class="short-size" name="guide_pant_size" required>
-                                 <option value="">Select</option>
-                                 @foreach(['xs','s','m','l','xl','2xl','3xl'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
-                             </select>
-                         </td>
-                         <td class="hide-on-shirt-only">
-                             <select class="short-size" name="guide_sleeves_length" required>
-                                 <option value="">Select</option>
-                                 @foreach(['short','long'] as $opt)
-                                 <option value="{{ $opt }}">{{ strtoupper($opt) }}</option>
-                                 @endforeach
+                                 <option value="s">S</option>
+                                 <option value="m">M</option>
+                                 <option value="l">L</option>
+                                 <option value="xl">XL</option>
+                                 <option value="2xl">2XL</option>
+                                 <option value="3xl">3XL</option>
                              </select>
                          </td>
                          <td>
-                             <input type="number" name="guide_quantity" class="form-control" placeholder="0" min="1"
-                                 required>
+                             <select name="player_short_size[]" class="form-control" required>
+                                 <option value="">Select</option>
+                                 <option value="s">S</option>
+                                 <option value="m">M</option>
+                                 <option value="l">L</option>
+                                 <option value="xl">XL</option>
+                                 <option value="2xl">2XL</option>
+                                 <option value="3xl">3XL</option>
+                             </select>
                          </td>
-                         <td class="text-center">
-                             <button type="button" class="btn btn-danger btn-sm remove-player-row" title="Remove Row"
-                                 style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">
-                                 ✖
-                             </button>
+                         <td><input type="number" name="player_quantity[]" class="form-control" value="1"
+                                 min="1" required></td>
+                         <td>
+                             <button type="button" class="btn btn-danger btn-sm remove-player-row">✖</button>
                          </td>
                      </tr>
                  </tbody>
-             </table>
+             </table> --}}
 
-             <!-- Add Row Button -->
-             <button type="button" class="btn btn-primary add-player-row"
-                 style="margin-top: 2rem; padding: 1rem; background: black; color: white; border-radius: 1rem;">+ Add
-                 Row</button>
+             {{-- <button type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button> --}}
          </div>
 
-     </div>
-    <div class="form-column">
-
-    <input type="hidden" name="selected_shirt" id="selectedShirtInput">
+         </div>
 
 
+         {{-- ================== Goalkeeper Requirements ================== --}}
+         <div class="flex-form">
+             {{-- Goalkeeper Kit --}}
+             <div class="form-group" style="width: 100%;">
+                 <label for="goalkeeper_kit">Add a Goalkeeper Kit?</label>
+                 <select id="goalkeeper_kit" name="goalkeeper_kit"
+                     class="form-control @error('goalkeeper_kit') is-invalid @enderror"
+                     onchange="toggleGoalkeeperFields()">
+                     <option value="">Select</option>
+                     @foreach (['yes', 'no'] as $opt)
+                         <option value="{{ $opt }}" {{ old('goalkeeper_kit') == $opt ? 'selected' : '' }}>
+                             {{ ucfirst($opt) }}
+                         </option>
+                     @endforeach
+                 </select>
+             </div>
+
+             {{-- Hidden Goalkeeper Fields --}}
+             <div id="goalkeeper_fields" style="display: none; margin-left: 3rem;">
+
+                 <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                     <div class="form-group" style="flex: 1;">
+                         <label for="padded">Padded</label>
+                         <select name="padded" id="padded" class="form-control price-option" style="width: 21rem;">
+                             <option value="">Select</option>
+                             <option value="yes" {{ old('padded') == 'yes' ? 'selected' : '' }}>Yes (+$5)</option>
+                             <option value="no" {{ old('padded') == 'no' ? 'selected' : '' }}>No</option>
+                         </select>
+                     </div>
+
+                     <div class="form-group" style="flex: 1;">
+                         <label for="goalkeeper_jersey_design">Jersey Design</label>
+                         <select name="goalkeeper_jersey_design" id="goalkeeper_jersey_design" style=" width: 21rem;"
+                             class="form-control @error('goalkeeper_jersey_design') is-invalid @enderror">
+                             <option value="">Select</option>
+                             @foreach (['same_as_player_uniform', 'custom_design'] as $opt)
+                                 <option value="{{ $opt }}"
+                                     {{ old('goalkeeper_jersey_design') == $opt ? 'selected' : '' }}>
+                                     {{ ucwords(str_replace('_', ' ', $opt)) }}
+                                 </option>
+                             @endforeach
+                         </select>
+                         @error('goalkeeper_jersey_design')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
+                 </div>
+
+                 <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                     <div class="form-group" style="flex: 1;">
+                         <label for="goalkeeper_sleeves">Goalkeeper Sleeves</label>
+                         <select name="goalkeeper_sleeves" id="goalkeeper_sleeves"
+                             class="form-control @error('goalkeeper_sleeves') is-invalid @enderror">
+                             <option value="">Select</option>
+                             @foreach (['long', 'short', 'padded_elbows'] as $opt)
+                                 <option value="{{ $opt }}"
+                                     {{ old('goalkeeper_sleeves') == $opt ? 'selected' : '' }}>
+                                     {{ ucwords(str_replace('_', ' ', $opt)) }}
+                                 </option>
+                             @endforeach
+                         </select>
+                         @error('goalkeeper_sleeves')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
+
+                     <div class="form-group" style="flex: 1;">
+                         <label for="jersey_color">Jersey Color</label>
+                         <select name="jersey_color" id="jersey_color"
+                             class="form-control @error('jersey_color') is-invalid @enderror">
+                             <option value="">Select</option>
+                             @foreach (['same_as_top', 'same_as_pants', 'red', 'blue', 'black', 'white', 'other'] as $opt)
+                                 <option value="{{ $opt }}" {{ old('jersey_color') == $opt ? 'selected' : '' }}>
+                                     {{ ucwords(str_replace('_', ' ', $opt)) }}
+                                 </option>
+                             @endforeach
+                         </select>
+                         @error('jersey_color')
+                             <div class="invalid-feedback">{{ $message }}</div>
+                         @enderror
+                     </div>
+                 </div>
+
+             </div>
+
+         </div>
+
+         {{-- ================== Staff Size Guide ================== --}}
+
+         <div class="flex-form">
+             <div class="form-group" style="width: 100%;">
+                 <label for="staff_other">Staff/Other</label>
+                 <select id="staff-other" name="staff_other" onchange="toggleStaffFields()">
+                     <option value="">Select Option</option>
+                     <option value="yes">Yes</option>
+                     <option value="no">No</option>
+                 </select>
+             </div>
+         </div>
+
+         <!-- Staff Section (Initially Hidden) -->
+         <div id="staff-section" style="display: none; margin-top: 1rem;">
+
+             <div class="flex-form">
+                 <!-- Left Column -->
+                 <div class="form-column">
+                     <div class="form-group" id="playersTable">
+                         <label for="staff_kit_type">Staff Kit</label>
+                         <select id="staff-kit" name="staff_kit_type">
+                             <option value="">Select Kit Option</option>
+                             <option value="full">Full Kit</option>
+                             <option value="shirt">Shirt Only</option>
+                         </select>
+                     </div>
+
+                     <div class="form-group" id="playersTable">
+                         <label for="staff_fit_type">Staff Fit Type</label>
+                         <select id="staff-fit-type" name="staff_fit_type">
+                             <option value="">Select Fit Type</option>
+                             <option value="men">Men</option>
+                             <option value="women">Women</option>
+                             {{-- <option value="loose">Youth</option> --}}
+                         </select>
+                     </div>
+                     <div class="form-group" id="">
+                         <label for="staff_sleeves_length">Staff Sleeves Length</label>
+                         <select name="staff_sleeves_length" id="staff_sleeves_length" class="form-control price-option">
+                             <option value="">Select</option>
+                             <option value="short" {{ old('staff_sleeves_length') == 'short' ? 'selected' : '' }}>Short
+                             </option>
+                             <option value="long" {{ old('staff_sleeves_length') == 'long' ? 'selected' : '' }}>Long
+                                 (+$2.00/pr kit)</option>
+                             <option value="mix" {{ old('staff_sleeves_length') == 'mix' ? 'selected' : '' }}>Mix:
+                                 Long/Short</option>
+                         </select>
+                     </div>
+                 </div>
+
+                 <!-- Right Column -->
+                 <div class="form-column">
+                     <div class="form-group" id="playersTable">
+                         <label for="staff_collar_type">Staff Collar Type</label>
+                         <select name="staff_collar_type" id="staff_collar_type" class="form-control price-option">
+                             <option value="">Select</option>
+                             <option value="v-neck" {{ old('staff_collar_type') == 'v-neck' ? 'selected' : '' }}>V-Neck
+                             </option>
+                             <option value="round-neck" {{ old('staff_collar_type') == 'round-neck' ? 'selected' : '' }}>
+                                 Round-Neck</option>
+                             <option value="polo-style" {{ old('staff_collar_type') == 'polo-style' ? 'selected' : '' }}>
+                                 Polo-Style (+$2.00/pr kit)</option>
+                         </select>
+                     </div>
+                 </div>
 
 
-</div>
+             </div>
 
-     <div class="btn_box">
-         <button type="submit" class="addtocart_btn">Add to cart</button>
-     </div>
+             <!-- Table -->
+             <div class="team-form-container">
+                 <table class="table table-bordered team-roster-table">
+                     <thead>
+                         <tr>
+                             <th>Guide Name</th>
+                             <th>Number</th>
+                             <th>Shirt Size</th>
+                             <th>Pant Size</th>
+                             <th>Sleeves</th>
+                             <th>Quantity</th>
+                             {{-- <th>Total ($)</th> --}}
+                             <th>Action</th>
+                         </tr>
+                     </thead>
+                     <tbody id="guide-details-wrapper">
+                         <tr>
+                             <td><input type="text" name="guide_name[]" class="form-control" required></td>
+                             <td><input type="number" name="guide_number[]" class="form-control" min="1"
+                                     value="1" required></td>
+                             <td>
+                                 <select name="guide_shirt_size[]" class="form-control" required>
+                                     <option value="">Select</option>
+                                     <option value="s">S</option>
+                                     <option value="m">M</option>
+                                     <option value="l">L</option>
+                                 </select>
+                             </td>
+                             <td>
+                                 <select name="guide_pant_size[]" class="form-control" required>
+                                     <option value="">Select</option>
+                                     <option value="s">S</option>
+                                     <option value="m">M</option>
+                                     <option value="l">L</option>
+                                 </select>
+                             </td>
+                             <td>
+                                 <select name="guide_sleeves_length[]" class="form-control" required>
+                                     <option value="">Select</option>
+                                     <option value="short">SHORT</option>
+                                     <option value="long">LONG</option>
+                                 </select>
+                             </td>
+                             <td><input type="number" name="guide_quantity[]" class="form-control guide-quantity"
+                                     min="1" value="1"></td>
 
- </form>
+                             <!-- Hidden fields -->
+                             <input type="hidden" name="guide_price[]" class="guide-price" value="39">
+                             <input type="hidden" name="guide_total[]" class="guide-total" value="39">
+
+                             <!-- Visible total -->
+                             <td><span class="guide-total-display" style="display:none;">39.00</span></td>
+
+
+                             <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <button style="
+        background-color: #000;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        margin-top:10px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    "
+                                    onmouseover="this.style.backgroundColor='#333'"
+                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
+
+                 <div style="margin-top:1rem; text-align:right;">
+                     <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>
+                 </div>
+             </div>
+
+
+         </div>
+         <div class="form-column">
+             <input type="hidden" name="selected_shirt" id="selectedShirtInput">
+         </div>
+
+         {{-- sponsor bulk image task starts here --}}
+         {{-- <div class="btn_box">
+         <input type="file" name="image[]" class="form-control" required multiple accept="image/*">
+     </div> --}}
+
+         <div class="btn_box">
+             <button type="submit" class="addtocart_btn">Add to cart</button>
+         </div>
+     </form>
 
 
  @endsection

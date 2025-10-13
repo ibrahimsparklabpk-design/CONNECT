@@ -800,7 +800,18 @@
                          </tr>
                      </tbody>
                  </table>
-                 <button type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
+                 <button style="
+        background-color: #000;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    "
+                                    onmouseover="this.style.backgroundColor='#333'"
+                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
 
                  <div style="margin-top:1rem; text-align:right;">
                      <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>
