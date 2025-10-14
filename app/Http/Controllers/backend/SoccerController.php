@@ -5,12 +5,28 @@ namespace App\Http\Controllers\backend;
 use App\Models\sdk\Soccer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 
 class SoccerController extends Controller
 {
+
+    public function index()
+    {
+$business = Auth::guard('business')->user();
+
+    if (!$business) {
+        abort(403, 'You do not have permission to view this page.');
+    }
+
+    // ✅ Sirf logged-in business ke records lo
+    $soccers = Soccer::where('business_registrations_id', $business->id)
+        ->latest()
+        ->paginate(5);
+        return view('dashboard.products.static.soccer', compact('soccers'));
+    }
    public function view()
 {
     // Session se cart data lo

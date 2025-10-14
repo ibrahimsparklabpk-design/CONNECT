@@ -2,15 +2,32 @@
 
 namespace App\Http\Controllers\backend;
 
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
-use App\Models\sdk\CustomUniform;
 use Illuminate\Http\Request;
+use App\Models\sdk\CustomOrder;
+use App\Models\sdk\CustomUniform;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class CustomeUniformController extends Controller
 {
 
+   public function index()
+{
+    // Get logged-in business
+    $business = Auth::guard('business')->user();
+
+    if (!$business) {
+        abort(403, 'You do not have permission to view this page.');
+    }
+
+    $customUniform = CustomUniform::where('business_registrations_id', $business->id)
+        ->latest()
+        ->paginate(5);
+
+    return view('dashboard.products.custom.soccer', compact('customUniform'));
+}
     public function soccer()
     {
 
@@ -105,8 +122,15 @@ class CustomeUniformController extends Controller
         // =================== TOTAL CALCULATION ===================
         $grandTotal = array_sum($totals ?? []);
 
+
+        $business = Auth::guard('business')->user();
+
+    if (!$business) {
+        abort(403, 'You do not have permission to create this record.');
+    }
         // =================== SAVE TO DATABASE ===================
         $customeUniform = new CustomUniform();
+        $customeUniform->business_registrations_id = $business->id;
         $customeUniform->sleeves_length = $request->sleeves_length;
         $customeUniform->fit_type       = $request->fit_type;
         $customeUniform->kit_type       = $request->kit_type;
@@ -138,19 +162,19 @@ class CustomeUniformController extends Controller
         }
 
         // =================== SAVE TO SESSION ===================
-        $newItem = [
-            'id' => $customeUniform->id,
-            'name' => $bulkData[0]['name'] ?? 'N/A',
-            'number' => $bulkData[0]['number'] ?? '--',
-            'fit_type' => $customeUniform->fit_type,
-            'kit_type' => $customeUniform->kit_type,
-            'collar_type' => $customeUniform->collar_type,
-            'team_logo' => $customeUniform->team_logo,
-            'grand_total' => floatval($customeUniform->grand_total),
-            'image' => $customeUniform->image ?? null,
-            'bulk_data' => $bulkData, // save full bulkData, not flattened
-            'created_at' => $customeUniform->created_at,
-        ];
+       $newItem = [
+    'id' => $customeUniform->id,
+    'name' => $bulkData[0]['name'] ?? 'N/A',
+    'number' => $bulkData[0]['number'] ?? '--',
+    'fit_type' => $customeUniform->fit_type,
+    'kit_type' => $customeUniform->kit_type,
+    'collar_type' => $customeUniform->collar_type,
+    'team_logo' => $customeUniform->team_logo,
+    'grand_total' => floatval($customeUniform->grand_total),
+    'logo' => str_replace('public/', '', $customeUniform->logo ?? ''), // ✅
+    'bulk_data' => $bulkData,
+    'created_at' => $customeUniform->created_at,
+];
 
         // ✅ Purana cart le lo (agar session me already kuch items hain)
         $existingCart = session('custom_uniform_cart', []);

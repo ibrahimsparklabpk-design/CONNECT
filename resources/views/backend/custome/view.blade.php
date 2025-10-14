@@ -62,18 +62,19 @@
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>
-                                            @if (!empty($item['image']))
-                                                <img src="{{ asset($item['image']) }}" width="50" alt="Uniform Image"
-                                                    onerror="this.src='{{ asset('images/no-image.png') }}'">
-                                            @else
-                                                N/A
-                                            @endif
-                                        </td>
+    @if (!empty($item['logo']))
+        <img src="{{ asset('custom/logo/' . $item['logo']) }}" width="50" alt="Uniform Image"
+             onerror="this.src='{{ asset('custom/no-image.png') }}'">
+    @else
+        N/A
+    @endif
+    <br>
+    
                                         <td>{{ $item['name'] ?? 'N/A' }}</td>
                                         <td>{{ ucfirst($item['kit_type']) }}</td>
                                         <td>{{ ucfirst($item['team_logo']) }}</td>
-                                        <td>{{ isset($item['sleeves_length']) ? ucfirst($item['sleeves_length']) : 'N/A' }}</td>
-                                        <!-- Use grand_total if available -->
+
+                                        <td>{{ number_format($grandTotalItem, 2) }}</td>
                                         <td>
                                             {{ isset($item['created_at']) ? \Carbon\Carbon::parse($item['created_at'])->format('d M Y') : '--' }}
                                         </td>
@@ -105,9 +106,7 @@
                             </tfoot>
 
                         </table>
-                        <div class="d-flex justify-content-center" style="padding-top: 10px">
-                            {{ $customeUniform->links() }}
-                        </div>
+
 
                         <form action="{{ route('custome.cart.clear') }}" method="POST" style="padding-top: 10px"
                             onsubmit="return confirm('Are you sure you want to clear the cart?');">

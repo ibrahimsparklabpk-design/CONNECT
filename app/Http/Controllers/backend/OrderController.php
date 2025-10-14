@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\sdk\CustomUniform;
 use App\Http\Controllers\Controller;
 use App\Models\sdk\Soccer;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
 
+    public function index()
+    {
+        $orders = Order::latest()->paginate(5);
+        return view('dashboard.orders.static', compact('orders'));
+    }
     public function create()
     {
         $cart = session()->get('soccer_cart', []);

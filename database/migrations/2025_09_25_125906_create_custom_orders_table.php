@@ -15,7 +15,7 @@ class CreateCustomOrdersTable extends Migration
 {
     Schema::create('custom_orders', function (Blueprint $table) {
         $table->id();
-
+        $table->unsignedBigInteger('business_registrations_id')->nullable();
         // Contact Information
         $table->string('email');
         $table->boolean('news_offers')->default(false);

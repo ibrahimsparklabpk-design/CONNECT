@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\sdk\CustomUniform;
+use Illuminate\Foundation\Auth\User as Authenticatable; // ✅ Instead of Model
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class BusinessRegistration extends Model
+class BusinessRegistration extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
+
     protected $table = 'business_registrations';
+
     protected $fillable = [
         'BusinessName',
         'Industry',
@@ -26,4 +30,19 @@ class BusinessRegistration extends Model
         'profile_picture',
         'Password',
     ];
+
+    protected $hidden = ['Password']; // hide password when serialized
+
+    /**
+     * Tell Laravel which column is used for the password
+     */
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
+
+    public function customUniforms()
+    {
+        return $this->hasMany(CustomUniform::class, 'business_registrations_id');
+    }
 }

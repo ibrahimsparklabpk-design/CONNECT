@@ -14,9 +14,9 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 
 
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DirectoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\backend\auth\BusinessRegistrationController;
 use App\Http\Controllers\your_order_controller;
 use App\Http\Controllers\backend\CartController;
 use App\Http\Controllers\backend\OrderController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\TwoFactorAuthentication;
 use App\Http\Controllers\backend\PlayerController;
 use App\Http\Controllers\backend\SoccerController;
 use App\Http\Controllers\backend\CheckoutController;
+use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CustomorderController;
 use App\Http\Controllers\backend\CustomeUniformController;
 
@@ -107,6 +108,47 @@ Route::prefix('v2')->group(function () {
                 Route::get('cart/{id}', 'cart')->name('cart');   // /v2/backend/custome/index
                 Route::get('show', 'show')->name('show');   // /v2/backend/custome/index
                 Route::get('/remove/{id}', 'remove')->name('remove');   // /v2/backend/custome/index
+            });
+        });
+    });
+
+    Route::prefix('dashboard')->group(function () {
+        Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
+            Route::get('index', 'index')->name('index');
+        });
+
+        Route::prefix('admin')->group(function () {
+            Route::prefix('business-registration')->group(function () {
+                Route::controller(BusinessRegistrationController::class)->name('business-registration.')->group(function () {
+                    // Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                });
+            });
+        });
+
+        Route::prefix('vendor')->group(function () {
+            Route::prefix('order')->group(function () {
+                Route::controller(OrderController::class)->name('order.')->group(function () {
+                    Route::get('index', 'index')->name('index');
+                });
+            });
+            Route::prefix('custom-order')->group(function () {
+                Route::controller(CustomorderController::class)->name('custom-order.')->group(function () {
+                    Route::get('index', 'index')->name('index');
+                });
+            });
+
+            Route::prefix('products')->group(function () {
+                Route::prefix('custom')->group(function () {
+                    Route::controller(CustomeUniformController::class)->name('custom.')->group(function () {
+                        Route::get('index', 'index')->name('index');
+                    });
+                });
+                Route::prefix('static')->group(function () {
+                    Route::controller(SoccerController::class)->name('static.')->group(function () {
+                        Route::get('index', 'index')->name('index');
+                    });
+                });
             });
         });
     });

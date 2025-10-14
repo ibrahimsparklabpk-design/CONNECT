@@ -21,13 +21,13 @@ class WelcomeEmail extends Mailable
         $this->loginUrl = $loginUrl;
     }
 
-    public function build()
-    {
-        return $this->view('emails.welcome')
-            ->with([
-                'password' => $this->password,
-                'email' => $this->email, // Pass the email to the view
-                'loginUrl' => $this->loginUrl,
-            ]);
-    }
+   public function build()
+{
+    return $this->view('emails.welcome')
+        ->with([
+            'password' => $this->password,
+            'email' => $this->email,   // lowercase
+            'loginUrl' => $this->loginUrl,
+        ]);
+}
 }

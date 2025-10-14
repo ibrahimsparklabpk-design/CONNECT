@@ -2,8 +2,9 @@
 
 namespace App\Models\sdk;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BusinessRegistration;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Soccer extends Model
 {
@@ -18,4 +19,9 @@ class Soccer extends Model
     protected $casts = [
     'bulk_data' => 'array',
 ];
+
+public function businessRegistration()
+    {
+        return $this->belongsTo(BusinessRegistration::class, 'business_registrations_id');
+    }
 }

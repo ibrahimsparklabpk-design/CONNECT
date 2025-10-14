@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomorderController extends Controller
 {
+
+     public function index()
+    {
+        $customOrders = CustomOrder::latest()->paginate(5);
+        return view('dashboard.orders.custom', compact('customOrders'));
+    }
     // ✅ Checkout page show karna (sirf custom uniform cart)
    public function create()
 {

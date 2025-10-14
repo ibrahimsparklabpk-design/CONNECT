@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
 {
     Schema::create('orders', function (Blueprint $table) {
         $table->id();
-
+        $table->unsignedBigInteger('business_registrations_id')->nullable();
         // Contact Information
         $table->string('email');
         $table->boolean('news_offers')->default(false);

@@ -2,8 +2,9 @@
 
 namespace App\Models\sdk;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BusinessRegistration;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CustomUniform extends Model
 {
@@ -12,14 +13,19 @@ class CustomUniform extends Model
     protected $guarded = [];
 
     protected $casts = [
-    'bulk_data' => 'array',
-    'guide_bulk_data' => 'array',
-];
+        'bulk_data' => 'array',
+        'guide_bulk_data' => 'array',
+    ];
 
-     protected $appends = ['total_price'];
+    protected $appends = ['total_price'];
 
     public function getTotalPriceAttribute()
     {
         return $this->quantity * $this->price;
+    }
+
+    public function businessRegistration()
+    {
+        return $this->belongsTo(BusinessRegistration::class, 'business_registrations_id');
     }
 }

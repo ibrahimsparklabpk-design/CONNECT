@@ -63,7 +63,7 @@
                     <div class="profile-info">
                         <!-- <img src="profile-icon.png" alt="Profile Icon" class="profile-icon"> -->
                         <i class="fas fa-user profile-icon"></i>
-                        <span class="profile-name">{{ $user->BusinessName}}</span>
+                        {{-- <span class="profile-name">{{ $user->BusinessName}}</span> --}}
                         <span class="arrow" onclick="toggleLogoutBox()">&#9660;</span>
                     </div>
 

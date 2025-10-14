@@ -15,6 +15,8 @@ class CreateCustomUniformsTable extends Migration
     {
         Schema::create('custom_uniforms', function (Blueprint $table) {
             $table->id();
+            
+            $table->unsignedBigInteger('business_registrations_id')->nullable();
             $table->enum('fit_type', ['men', 'women', 'youth'])->default('men');
             $table->enum('kit_type', ['full', 'shirt', 'both'])->default('full');
             $table->enum('collar_type', ['v-neck', 'round-neck', 'polo-style'])->default('polo-style');
