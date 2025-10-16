@@ -10,19 +10,19 @@
 
     <!-- App favicon -->
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/Logo767.png">
+    <link rel="shortcut icon" href="{{ asset('assets/images/Logo767.png') }}">
 
     <!-- Theme Config Js -->
-    <script src="assets/js/config.js"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
 
     <!-- App css -->
-    <link href="assets/logincss/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('assets/logincss/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons css -->
-    <link href="assets/logincss/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/logincss/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 
-    <link rel="stylesheet" href="assets/logincss/d-directory.css">
+    <link rel="stylesheet" href="{{ asset('assets/logincss/d-directory.css') }}">
 
 
 </head>
@@ -47,17 +47,17 @@
                         style="height:120px; width: 120px; margin-top: 10px;">
                 </span>
                 <span class="logo-sm">
-                    <img src="./assets/images/logo-sm.png" alt="small logo">
+                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="small logo">
                 </span>
             </a>
 
             <!-- Brand Logo Dark -->
             <a href="index.html" class="logo logo-dark">
                 <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="dark logo">
                 </span>
                 <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
+                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="small logo">
                 </span>
             </a>
 
@@ -450,7 +450,6 @@
                                         <option value="">Select State</option>
                                         <option value="state1">Select State1</option>
                                         <option value="state2">Select State2</option>
-
                                     </select>
                                 </div>
                                 <div class="form-group">

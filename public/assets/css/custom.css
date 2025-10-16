@@ -1,0 +1,102 @@
+/* ===========================
+   Directory Form Styling Fix
+   =========================== */
+
+.directory-form {
+  background: #fff !important;
+  border-radius: 10px !important;
+  padding: 30px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  font-family: "Karla", sans-serif !important;
+  margin: 30px auto !important;
+  max-width: 100% !important;
+}
+
+.directory-form .form-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+}
+
+.directory-form .form-group {
+  flex: 1 !important;
+  min-width: 280px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.directory-form .form-group label {
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 8px !important;
+  font-size: 15px !important;
+}
+
+.directory-form .form-group input,
+.directory-form .form-group select,
+.directory-form .form-group textarea {
+  padding: 10px 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  background-color: #fafafa !important;
+  transition: border-color 0.2s ease-in-out !important;
+}
+
+.directory-form .form-group input:focus,
+.directory-form .form-group select:focus,
+.directory-form .form-group textarea:focus {
+  border-color: #007bff !important;
+  outline: none !important;
+  background-color: #fff !important;
+}
+
+.directory-form .custom-file-label {
+  display: inline-block !important;
+  background-color: #007bff !important;
+  color: white !important;
+  padding: 10px 15px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  width: fit-content !important;
+  transition: background 0.3s ease !important;
+}
+
+.directory-form .custom-file-label:hover {
+  background-color: #0056b3 !important;
+}
+
+.directory-form .custom-file-input {
+  display: none !important;
+}
+
+.directory-form .form-btn {
+  background: linear-gradient(90deg, #007bff, #00aaff) !important;
+  border: none !important;
+  color: white !important;
+  padding: 12px 25px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  margin-top: 15px !important;
+  transition: background 0.3s ease, transform 0.2s ease !important;
+}
+
+.directory-form .form-btn:hover {
+  background: linear-gradient(90deg, #0062cc, #0088cc) !important;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 768px) {
+  .directory-form {
+    padding: 20px !important;
+  }
+  .directory-form .form-row {
+    flex-direction: column !important;
+  }
+  .directory-form .form-group {
+    width: 100% !important;
+  }
+}

@@ -12,11 +12,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-
-
 use App\Http\Controllers\DirectoryController;
+
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\backend\auth\BusinessRegistrationController;
 use App\Http\Controllers\your_order_controller;
 use App\Http\Controllers\backend\CartController;
 use App\Http\Controllers\backend\OrderController;
@@ -25,8 +23,11 @@ use App\Http\Controllers\backend\PlayerController;
 use App\Http\Controllers\backend\SoccerController;
 use App\Http\Controllers\backend\CheckoutController;
 use App\Http\Controllers\backend\DashboardController;
+// use App\Http\Controllers\backend\DirectoryController;
 use App\Http\Controllers\backend\CustomorderController;
 use App\Http\Controllers\backend\CustomeUniformController;
+use App\Http\Controllers\backend\auth\BusinessRegistrationController;
+use App\Http\Controllers\backend\auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,7 @@ Route::prefix('v2')->group(function () {
             });
             Route::prefix('player')->group(function () {
                 Route::controller(PlayerController::class)->name('player.')->group(function () {
-                    Route::get('create', 'create')->name('create');   // /v2/backend/soccer/index
+                    Route::get('create', 'create')->name('create');
                     Route::post('store', 'store')->name('store');
                 });
             });
@@ -79,20 +80,20 @@ Route::prefix('v2')->group(function () {
 
         Route::prefix('custome')->group(function () {
             Route::controller(CustomeUniformController::class)->name('custome.')->group(function () {
-                Route::get('soccer', 'soccer')->name('index');   // /v2/backend/custome/index
-                Route::get('circket', 'circket')->name('circket');   // /v2/backend/custome/index
-                Route::get('view', 'view')->name('view');   // /v2/backend/custome/index  
-                Route::post('store', 'store')->name('store');  // /v2/backend/custome/store
-                Route::post('cart/clear', 'clearCart')->name('cart.clear');  // /v2/backend/custome/store
-                // Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  // /v2/backend/custome/store
+                Route::get('soccer', 'soccer')->name('index');
+                Route::get('circket', 'circket')->name('circket');
+                Route::get('view', 'view')->name('view');
+                Route::post('store', 'store')->name('store');
+                Route::post('cart/clear', 'clearCart')->name('cart.clear');
+                // Route::delete('/cart/remove/{index}', 'remove')->name('cart.remove');  
                 Route::delete('destroy/{id}', 'destroy')->name('destroy');
             });
         });
 
         Route::prefix('order')->group(function () {
             Route::controller(OrderController::class)->name('order.')->group(function () {
-                Route::get('create', 'create')->name('create');   // /v2/backend/custome/index
-                Route::post('store', 'store')->name('store');   // /v2/backend/custome/index
+                Route::get('create', 'create')->name('create');
+                Route::post('store', 'store')->name('store');
             });
         });
 
@@ -105,26 +106,50 @@ Route::prefix('v2')->group(function () {
 
         Route::prefix('cart')->group(function () {
             Route::controller(CartController::class)->name('cart.')->group(function () {
-                Route::get('cart/{id}', 'cart')->name('cart');   // /v2/backend/custome/index
-                Route::get('show', 'show')->name('show');   // /v2/backend/custome/index
-                Route::get('/remove/{id}', 'remove')->name('remove');   // /v2/backend/custome/index
+                Route::get('cart/{id}', 'cart')->name('cart');
+                Route::get('show', 'show')->name('show');
+                Route::get('/remove/{id}', 'remove')->name('remove');
             });
         });
     });
 
     Route::prefix('dashboard')->group(function () {
         Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
-            Route::get('index', 'index')->name('index');
+            Route::get('dashboard', 'dashboard')->name('dashboard');
+            Route::get('user-dashboard', 'userDashboard')->name('user.dashboard');
         });
 
         Route::prefix('admin')->group(function () {
+
+            Route::prefix('user')->group(function(){
+                Route::controller(UserController::class)->name('user.')->group(function(){
+                    Route::get('create', 'create')->name('create');
+                    Route::post('store', 'store')->name('store');
+                    Route::post('login', 'login')->name('login');
+                });
+            });
             Route::prefix('business-registration')->group(function () {
-                Route::controller(BusinessRegistrationController::class)->name('business-registration.')->group(function () {
-                    // Route::get('/create', 'create')->name('create');
-                    Route::post('/store', 'store')->name('store');
+
+                Route::controller(BusinessRegistrationController::class)
+                    ->name('business-registration.')
+                    ->group(function () {
+                        // Route::get('/create', 'create')->name('create');
+                        Route::post('store', 'store')->name('store');
+                        Route::get('edit', 'edit')->name('edit');
+                        Route::post('update', 'update')->name('update');
+                    });
+
+                Route::prefix('password')->group(function () {
+                    Route::controller(BusinessRegistrationController::class)
+                        ->name('password.')
+                        ->group(function () {
+                            Route::get('update', 'showUpdatePasswordForm')->name('update.form');
+                            Route::post('update', 'updatePassword')->name('update');
+                        });
                 });
             });
         });
+
 
         Route::prefix('vendor')->group(function () {
             Route::prefix('order')->group(function () {
@@ -150,6 +175,13 @@ Route::prefix('v2')->group(function () {
                     });
                 });
             });
+
+            // Route::prefix('directory')->group(function () {
+            //     Route::controller(DirectoryController::class)->name('directory.')->group(function () {
+            //         // Route::get('create', 'create')->name('create');
+            //         Route::post('/store', 'store')->name('store');
+            //     });
+            // });
         });
     });
 });

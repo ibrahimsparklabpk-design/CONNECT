@@ -3,11 +3,11 @@
          <a href="{{ route('index') }}" target="_blank">
              <img src=" {{ asset('assets/images/whitelogo2.png') }}" alt="Logo" class="logo-img">
          </a><!-- Add your logo here -->
-         <h2>Vendor Panel</h2>
+         <h2>User Name</h2>
          <button class="close-btn" id="close-btn">&times;</button>
      </div>
      <ul class="menu">
-         <li><a href=" {{ route('dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
+         <li><a href=" {{ route('user.dashboard') }}"><i class="fas fa-home"></i>Admin Dashboard</a></li>
          <li class="nav-item" tabindex="0">
              <a class="nav-link" href="javascript:void(0);">
                  <i class="fas fa-user"></i> Orders ▾

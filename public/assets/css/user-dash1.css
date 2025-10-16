@@ -337,3 +337,100 @@ body {
     }
 
 }
+
+/* ==== Fix for form overflow in dashboard-box-content ==== */
+.dashboard-box-content {
+  height: auto !important; /* Allow height to expand with form */
+  min-height: 81vh; /* Still keeps minimum card look */
+  padding: 40px 50px;
+  overflow-y: visible; /* Make sure content not cut off */
+}
+
+/* Optional — for long forms, if you want scroll instead of full page expansion */
+/*
+.dashboard-box-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+*/
+
+/* Keep form centered inside card */
+form {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+/* ====== Directory Form Styling (inside existing card) ====== */
+
+form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #0e2a47;
+  font-family: "Karla", sans-serif;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #144d82;
+  box-shadow: 0 0 5px rgba(20, 77, 130, 0.3);
+}
+
+textarea {
+  resize: none;
+}
+
+.custom-file-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.custom-file-input {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.form-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, #0e2a47, #144d82);
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  font-size: 17px;
+  margin-top: 20px;
+}
