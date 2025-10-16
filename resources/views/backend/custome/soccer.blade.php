@@ -51,49 +51,52 @@
 
                             <!-- Tab Contents -->
                             <div class="items-list" style="  height: 40rem;">
-                                <div class="tabcolor" id="colorpicker" style="display: none">
-                                    <div class="tabcontent" id="Shirts"
-                                        style="display:none; padding: 15px; font-family: 'Karla', sans-serif;">
-                                        <p style="font-weight: 600; font-size: 16px; margin-bottom: 15px;">Select shirt
-                                            options
-                                            here...</p>
+                               <div class="tabcolor" id="colorpicker" style="display: none">
+  <div class="tabcontent" id="Shirts"
+      style="display:none; padding: 15px; font-family: 'Karla', sans-serif;">
+      
+      <!-- 🟢 Updated heading -->
+      <p style="font-weight: 600; font-size: 16px; margin-bottom: 15px;">
+          Select Design Colors
+      </p>
 
-                                        <label class="color-picker-label" for="color-collar">
-                                            <span style="width: 120px; font-weight: 500;">Collar Color:</span>
-                                            <input type="color" id="color-collar" value="#ffffff" />
-                                        </label>
+      <!-- 🟢 Labels without 'Color' -->
+      <label class="color-picker-label" for="color-collar">
+          <span style="width: 120px; font-weight: 500;">Collar:</span>
+          <input type="color" id="color-collar" value="#ffffff" />
+      </label>
 
-                                        <label class="color-picker-label" for="color-body">
-                                            <span style="width: 120px; font-weight: 500;">Shirt Color:</span>
-                                            <input type="color" id="color-body" value="#ffffff" />
-                                        </label>
+      <label class="color-picker-label" for="color-body">
+          <span style="width: 120px; font-weight: 500;">Shirt:</span>
+          <input type="color" id="color-body" value="#ffffff" />
+      </label>
 
-                                        <label class="color-picker-label" for="color-sleeve">
-                                            <span style="width: 120px; font-weight: 500;">Sleeve Color:</span>
-                                            <input type="color" id="color-sleeve" value="#ffffff" />
-                                        </label>
+      <label class="color-picker-label" for="color-sleeve">
+          <span style="width: 120px; font-weight: 500;">Sleeve:</span>
+          <input type="color" id="color-sleeve" value="#ffffff" />
+      </label>
 
-                                        <label class="color-picker-label" for="color-trouser">
-                                            <span style="width: 120px; font-weight: 500;">Shorts Color:</span>
-                                            <input type="color" id="color-trouser" value="#ffffff" />
-                                        </label>
+      <label class="color-picker-label" for="color-trouser">
+          <span style="width: 120px; font-weight: 500;">Shorts:</span>
+          <input type="color" id="color-trouser" value="#ffffff" />
+      </label>
 
-                                        <label class="color-picker-label" for="color-shocks">
-                                            <span style="width: 120px; font-weight: 500;">Shocks Color:</span>
-                                            <input type="color" id="color-shocks" value="#ffffff" />
-                                        </label>
-                                        <label class="color-picker-label" for="color-artboard">
-                                            <span style="width: 120px; font-weight: 500;">strip Color:</span>
-                                            <input type="color" id="color-stripe" value="#ffffff" />
-                                        </label>
+      <label class="color-picker-label" for="color-shocks">
+          <span style="width: 120px; font-weight: 500;">Shocks:</span>
+          <input type="color" id="color-shocks" value="#ffffff" />
+      </label>
 
-                                        <label class="color-picker-label" for="color-strip">
-                                            <span style="width: 120px; font-weight: 500;">Pattern Color:</span>
-                                            <input type="color" id="color-artboard" value="#ffffff" />
-                                        </label>
-                                    </div>
+      <label class="color-picker-label" for="color-stripe">
+          <span style="width: 120px; font-weight: 500;">Strip:</span>
+          <input type="color" id="color-stripe" value="#ffffff" />
+      </label>
 
-                                </div>
+      <label class="color-picker-label" for="color-artboard">
+          <span style="width: 120px; font-weight: 500;">Pattern:</span>
+          <input type="color" id="color-artboard" value="#ffffff" />
+      </label>
+  </div>
+</div>
 
                                 <div class="tabcontent" id="Logos" style="display: none">
                                     <div class="logos-container"
@@ -282,93 +285,161 @@
                                     </div>
                                 </div>
 
-                                <div class="tabcontent" id="Text"
-                                    style="display:none; padding:25px; font-family:'Karla', sans-serif; background:#fff; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.1); max-width:420px; margin:auto;">
+<div class="tabcontent" id="Text"
+    style="display:none; padding:25px; font-family:'Karla', sans-serif; background:#fff; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.1); max-width:420px; margin:auto;">
 
-                                    <h2
-                                        style="font-weight:700; font-size:20px; margin-bottom:25px; color:#222; text-align:center;">
-                                        Customize Your Jersey
-                                    </h2>
+    <h2 style="font-weight:700; font-size:20px; margin-bottom:16px; color:#222; text-align:center;">
+        Customize Your Jersey
+    </h2>
 
-                                    <!-- Player Section -->
-                                    <div style="background:#f9f9f9; padding:15px; border-radius:12px; margin-bottom:20px;">
-                                        <h3 style="font-size:16px; font-weight:600; margin-bottom:15px; color:#333;">Player
-                                            Details</h3>
+    <!-- Global text styling toolbar -->
+    <div style="display:flex; align-items:center; gap:10px; background:#f3f3f3; padding:10px; border-radius:10px; margin-bottom:18px;">
+        <button type="button" id="text-bold"  style="padding:6px 10px; border:1px solid #ccc; border-radius:8px; background:#fff; cursor:pointer;">Bold</button>
+        <button type="button" id="text-italic" style="padding:6px 10px; border:1px solid #ccc; border-radius:8px; background:#fff; cursor:pointer;">Italic</button>
+        <label style="font-size:12px; color:#444; margin-left:auto;">Size</label>
+        <input type="range" id="text-size" min="10" max="90" value="30" style="width:140px;">
+    </div>
 
-                                        <div style="margin-bottom:12px;">
-                                            <label
-                                                style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Player
-                                                Name</label>
-                                            <input type="text" id="player-name" placeholder="Enter Name"
-                                                maxlength="12"
-                                                style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:14px;" />
-                                        </div>
+    <!-- Player Section -->
+    <div style="background:#f9f9f9; padding:15px; border-radius:12px; margin-bottom:20px;">
+        <h3 style="font-size:16px; font-weight:600; margin-bottom:15px; color:#333;">Player Details</h3>
 
-                                        <div style="margin-bottom:12px;">
-                                            <label
-                                                style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Name
-                                                Color</label>
-                                            <input type="color" id="player-name-color" value="#FFFFFF"
-                                                style="width:100%; height:40px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
+        <!-- Player Name -->
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Player Name</label>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                <input type="text" id="player-name" placeholder="Enter Name" maxlength="12"
+                    style="flex:1; padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:14px;" />
+                <input type="color" id="player-name-color" value="#FFFFFF"
+                    style="width:44px; height:40px; border:none; border-radius:8px; cursor:pointer;" />
+            </div>
+            <select class="font-family-select" data-text-type="playerName"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
 
-                                        <div style="margin-bottom:12px;">
-                                            <label
-                                                style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Player
-                                                Number</label>
-                                            <input type="text" id="player-number" placeholder="00" maxlength="3"
-                                                style="width:100%; padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:14px;" />
-                                        </div>
+        <!-- Player Number -->
+        <div>
+            <label style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Player Number</label>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                <input type="text" id="player-number" placeholder="00" maxlength="3"
+                    style="flex:1; padding:10px 12px; border-radius:8px; border:1px solid #ccc; font-size:14px;" />
+                <input type="color" id="player-number-color" value="#FFFFFF"
+                    style="width:44px; height:40px; border:none; border-radius:8px; cursor:pointer;" />
+            </div>
+            <select class="font-family-select" data-text-type="playerNumber"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
+    </div>
 
-                                        <div>
-                                            <label
-                                                style="display:block; font-size:13px; font-weight:500; margin-bottom:6px; color:#555;">Number
-                                                Color</label>
-                                            <input type="color" id="player-number-color" value="#FFFFFF"
-                                                style="width:100%; height:40px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
-                                    </div>
+    <!-- Extra Text Section -->
+    <div style="background:#f9f9f9; padding:15px; border-radius:12px;">
+        <h3 style="font-size:16px; font-weight:600; margin-bottom:15px; color:#333;">Extra Texts</h3>
 
-                                    <!-- Extra Text Section -->
-                                    <div style="background:#f9f9f9; padding:15px; border-radius:12px; margin-bottom:20px;">
-                                        <h3 style="font-size:16px; font-weight:600; margin-bottom:15px; color:#333;">Extra
-                                            Texts</h3>
+        <!-- Sleeve Left -->
+        <div style="margin-bottom:12px;">
+            <input type="text" id="sleeve-text-left" placeholder="Left  Sleeve " maxlength="10"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px; margin-bottom:8px;" />
+            <input type="color" id="sleeve-text-left-color" value="#FFFFFF"
+                style="width:100%; height:36px; border:none; border-radius:8px; cursor:pointer; margin-bottom:8px;" />
+            <select class="font-family-select" data-text-type="sleeveLeft"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
 
-                                        <div style="margin-bottom:12px; display:flex; gap:10px; align-items:center;">
-                                            <input type="text" id="sleeve-text-left" placeholder="Sleeve Left"
-                                                maxlength="10"
-                                                style="flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px;" />
-                                            <input type="color" id="sleeve-text-left-color" value="#FFFFFF"
-                                                style="width:40px; height:36px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
+        <!-- Sleeve Right -->
+        <div style="margin-bottom:12px;">
+            <input type="text" id="sleeve-text-right" placeholder="Right Sleeve" maxlength="10"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px; margin-bottom:8px;" />
+            <input type="color" id="sleeve-text-right-color" value="#FFFFFF"
+                style="width:100%; height:36px; border:none; border-radius:8px; cursor:pointer; margin-bottom:8px;" />
+            <select class="font-family-select" data-text-type="sleeveRight"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
 
-                                        <div style="margin-bottom:12px; display:flex; gap:10px; align-items:center;">
-                                            <input type="text" id="sleeve-text-right" placeholder="Sleeve Right"
-                                                maxlength="10"
-                                                style="flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px;" />
-                                            <input type="color" id="sleeve-text-right-color" value="#FFFFFF"
-                                                style="width:40px; height:36px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
+        <!-- Back Text -->
+        <div style="margin-bottom:12px;">
+            <input type="text" id="back-text" placeholder="Back Text" maxlength="15"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px; margin-bottom:8px;" />
+            <input type="color" id="back-text-color" value="#FFFFFF"
+                style="width:100%; height:36px; border:none; border-radius:8px; cursor:pointer; margin-bottom:8px;" />
+            <select class="font-family-select" data-text-type="backText"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
 
-                                        <div style="margin-bottom:12px; display:flex; gap:10px; align-items:center;">
-                                            <input type="text" id="back-text" placeholder="Back Text" maxlength="15"
-                                                style="flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px;" />
-                                            <input type="color" id="back-text-color" value="#FFFFFF"
-                                                style="width:40px; height:36px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
+        <!-- Front Text -->
+        <div style="margin-bottom:12px;">
+            <input type="text" id="front-text" placeholder="Front Text" maxlength="15"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px; margin-bottom:8px;" />
+            <input type="color" id="front-text-color" value="#FFFFFF"
+                style="width:100%; height:36px; border:none; border-radius:8px; cursor:pointer; margin-bottom:8px;" />
+            <select class="font-family-select" data-text-type="frontText"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
 
-                                        <div style="display:flex; gap:10px; align-items:center;">
-                                            <input type="text" id="front-text" placeholder="Front Text"
-                                                maxlength="15"
-                                                style="flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px;" />
-                                            <input type="color" id="front-text-color" value="#FFFFFF"
-                                                style="width:40px; height:36px; border:none; border-radius:8px; cursor:pointer;" />
-                                        </div>
-                                    </div>
+        <!-- NEW: Extra Name -->
+        <div style="margin-bottom:20px;">
+            <input type="text" id="extra-name" placeholder="Extra Name" maxlength="15"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ccc; font-size:13px; margin-bottom:8px;" />
+            <input type="color" id="extra-name-color" value="#FFFFFF"
+                style="width:100%; height:36px; border:none; border-radius:8px; cursor:pointer; margin-bottom:8px;" />
+            <select class="font-family-select" data-text-type="extraName"
+                style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:13px;">
+                <option value="Arial Black">Arial Black</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Oswald', sans-serif">Oswald</option>
+            </select>
+        </div>
+    </div>
 
-                                    <!-- Logos Section -->
-
-                                </div>
+    <!-- Separate Logo Upload Section -->
+    <div id="uploadtextlogo" style="margin-top: 1rem; text-align: center;">
+        <label for="upload-text-logo"
+            style="padding: 10px 20px; background: #000; color: #fff; border-radius: 8px; cursor: pointer; font-weight: 500; display: inline-block;">
+            <i class="fa fa-upload"></i> Upload Your Logo
+        </label>
+        <input type="file" id="upload-text-logo" style="display: none;" />
+        <div id="uploaded-text-logo"
+            style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; justify-content: center;">
+        </div>
+    </div>
+</div>
 
 
 
@@ -1375,42 +1446,65 @@
 
 
         // =================== PLAYER TEXT ===================
-        function drawPlayerText() {
-            if (!bodyImage.naturalWidth) return;
+      // =================== PLAYER TEXT (Body-masked except sleeves) ===================
+let showMask = true; // global toggle
 
-            // Draw each text element individually
-            Object.keys(textElements).forEach(key => {
-                if (textElements[key].text) {
-                    const scale = canvas.width / 600 * textElements[key].scale;
+function drawPlayerText() {
+  if (!bodyImage?.naturalWidth) return;
 
-                    ctx.save();
-                    ctx.translate(textElements[key].x, textElements[key].y);
-                    ctx.rotate(textElements[key].angle);
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "middle";
-                    ctx.fillStyle = textElements[key].color;
+  const tCanvas = document.createElement("canvas");
+  tCanvas.width = canvas.width;
+  tCanvas.height = canvas.height;
+  const tctx = tCanvas.getContext("2d");
 
-                    let fontSize = textElements[key].fontSize;
+  const MASKED_KEYS = ["playerName", "playerNumber", "backText", "frontText"];
+  const UNMASKED_KEYS = ["sleeveLeft", "sleeveRight"];
 
-                    // Build font string with style and weight
-                    const fontString =
-                        `${textElements[key].fontStyle} ${textElements[key].fontWeight} ${fontSize * scale}px ${textElements[key].fontFamily}`;
-                    ctx.font = fontString;
+  function drawSingleText(context, key) {
+    const el = textElements[key];
+    if (!el?.text) return;
 
-                    // Adjust text alignment for sleeve text
-                    if (key === "sleeveLeft") {
-                        ctx.textAlign = "left";
-                    } else if (key === "sleeveRight") {
-                        ctx.textAlign = "right";
-                    } else {
-                        ctx.textAlign = "center";
-                    }
+    const scale = canvas.width / 600 * el.scale;
+    const fontSize = el.fontSize;
+    const fontString = `${el.fontStyle} ${el.fontWeight} ${fontSize * scale}px ${el.fontFamily}`;
 
-                    ctx.fillText(textElements[key].text.toUpperCase(), 0, 0);
-                    ctx.restore();
-                }
-            });
-        }
+    context.save();
+    context.translate(el.x, el.y);
+    context.rotate(el.angle);
+    context.textBaseline = "middle";
+    context.fillStyle = el.color;
+    context.font = fontString;
+    context.textAlign = key.includes("sleeve") ? (key === "sleeveLeft" ? "left" : "right") : "center";
+    context.fillText(el.text.toUpperCase(), 0, 0);
+    context.restore();
+  }
+
+  // 1️⃣ masked text layer
+  MASKED_KEYS.forEach(k => drawSingleText(tctx, k));
+
+  // 2️⃣ mask apply only if showMask === true
+  if (showMask) {
+    tctx.globalCompositeOperation = "destination-in";
+    tctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+  }
+
+  ctx.drawImage(tCanvas, 0, 0);
+  UNMASKED_KEYS.forEach(k => drawSingleText(ctx, k));
+}
+
+function getDefaultTextPositions() {
+  return {
+    playerName: { x: canvas.width * 0.10, y: canvas.height * 0.18 }, // left upper back
+    playerNumber: { x: canvas.width * 0.5,  y: canvas.height * 0.35 }, // back middle
+    frontText:   { x: canvas.width * 0.5,  y: canvas.height * 0.45 }, // chest area
+    backText:    { x: canvas.width * 0.5,  y: canvas.height * 0.55 }, // back body
+    sleeveLeft:  { x: canvas.width * 0.25, y: canvas.height * 0.45 },
+    sleeveRight: { x: canvas.width * 0.75, y: canvas.height * 0.45 },
+  };
+}
+
+// 👇 After canvas and bodyImage load:
+const defaultTextPositions = getDefaultTextPositions();
 
         // =================== DRAW KIT ===================
         function drawKit() {
@@ -1657,6 +1751,8 @@
                 });
             }
 
+
+            
             // Pattern upload
             const uploadPatterns = document.getElementById("upload-patterns");
             if (uploadPatterns) {
@@ -1674,72 +1770,79 @@
             }
         }
 
-        function handleFileUpload(e, type) {
-            const file = e.target.files[0];
-            if (!file) return;
+       function handleFileUpload(e, type) {
+  const file = e.target.files[0];
+  if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const containerId = type === "logo" ? "uploaded-logos" :
-                    type === "pattern" ? "uploaded-pattern" :
-                    "player-logo-container";
+  const reader = new FileReader();
+  reader.onload = function(event) {
 
-                const container = document.getElementById(containerId);
-                if (!container) return;
+    // ✅ Centralized container mapping
+    const containerIdMap = {
+      "logo": "uploaded-logos",
+      "pattern": "uploaded-pattern",
+      "player-logo": "player-logo-container",
+      "text-logo": "uploaded-text-logo" // <- NEW
+    };
+    const containerId = containerIdMap[type];
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-                // Wrapper div for image + delete button
-                const wrap = document.createElement("div");
-                wrap.style.position = "relative";
-                wrap.style.width = "80px";
-                wrap.style.height = "80px";
-                wrap.style.margin = "5px";
+    // Wrapper
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.width = "80px";
+    wrap.style.height = "80px";
+    wrap.style.margin = "5px";
 
-                // Uploaded image
-                const img = document.createElement("img");
-                img.src = event.target.result;
-                img.style.width = "100%";
-                img.style.height = "100%";
-                img.style.objectFit = "contain";
-                img.style.cursor = "pointer";
-                img.style.border = "1px solid #ccc";
-                img.style.borderRadius = "8px";
-                wrap.appendChild(img);
+    // Thumb
+    const img = document.createElement("img");
+    img.src = event.target.result;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
+    img.style.cursor = "pointer";
+    img.style.border = "1px solid #ccc";
+    img.style.borderRadius = "8px";
+    wrap.appendChild(img);
 
-                // Delete button
-                const del = document.createElement("span");
-                del.innerHTML = "&times;";
-                del.style.position = "absolute";
-                del.style.top = "-5px";
-                del.style.right = "-5px";
-                del.style.background = "red";
-                del.style.color = "#fff";
-                del.style.width = "18px";
-                del.style.height = "18px";
-                del.style.display = "flex";
-                del.style.alignItems = "center";
-                del.style.justifyContent = "center";
-                del.style.borderRadius = "50%";
-                del.style.cursor = "pointer";
-                del.style.fontWeight = "bold";
-                del.onclick = () => wrap.remove();
-                wrap.appendChild(del);
+    // Delete (×)
+    const del = document.createElement("span");
+    del.innerHTML = "&times;";
+    del.style.position = "absolute";
+    del.style.top = "-5px";
+    del.style.right = "-5px";
+    del.style.background = "red";
+    del.style.color = "#fff";
+    del.style.width = "18px";
+    del.style.height = "18px";
+    del.style.display = "flex";
+    del.style.alignItems = "center";
+    del.style.justifyContent = "center";
+    del.style.borderRadius = "50%";
+    del.style.cursor = "pointer";
+    del.style.fontWeight = "bold";
+    del.onclick = () => wrap.remove();
+    wrap.appendChild(del);
 
-                // Click on image → add to kit
-                img.onclick = () => {
-                    if (type === "logo" || type === "player-logo") {
-                        selectLogo(img.src);
-                    } else if (type === "pattern") {
-                        selectPattern(img.src);
-                    }
-                };
+    // ✅ Click par canvas me add — text-logo ko bhi normal logo ki tarah treat karein
+    img.onclick = () => {
+      if (type === "pattern") {
+        selectPattern(img.src);
+      } else {
+        // "logo", "player-logo", "text-logo" sab yahan se jayenge
+        selectLogo(img.src);
+      }
+    };
 
-                container.appendChild(wrap);
-            };
-            reader.readAsDataURL(file);
+    container.appendChild(wrap);
+  };
+  reader.readAsDataURL(file);
 
-            // Reset input for uploading same file again
-            e.target.value = "";
-        }
+  // same file dobara upload karne ke liye reset
+  e.target.value = "";
+}
+
 
         // =================== SAVE DESIGN ===================
         function saveDesign() {
@@ -2097,6 +2200,152 @@ if (addRow) {
     // ✅ Initial call
     updateGrandTotal();
 });
+
+
+function setupFileUploads() {
+  // ...existing listeners...
+
+  // ✅ Text-logo upload (yehi wala section jo aap ne add kiya)
+  const uploadTextLogo = document.getElementById("upload-text-logo");
+  if (uploadTextLogo) {
+    uploadTextLogo.addEventListener("change", function(e) {
+      handleFileUpload(e, "text-logo");
+    });
+  }
+}
+
+
+</script>
+
+<script>
+// ===================== PATCH: Masked text ko LEFT anchor + sleeves unmasked =====================
+
+// 1) Globals/helpers
+const MASKED_KEYS = ["playerName", "playerNumber", "backText", "frontText"]; // body par clipped + left aligned
+const UNMASKED_KEYS = ["sleeveLeft", "sleeveRight"];                         // sleeves without mask
+
+function getLeftAnchorX() {
+  // Body ka safe left anchor (apni art/kit ke hisab se tweak kar sakte ho; 0.18 ~= 18% from left)
+  return Math.round(canvas.width * 0.18);
+}
+
+// User ne manually move na kiya ho to left anchor par chipka do (while typing)
+function anchorMaskedLeftIfDefault(key){
+  try {
+    const el = textElements[key];
+    if (!el || !canvas) return;
+    // Agar abhi roughly center ke aas-paas hai, to left par bhej do (user-drag ko respect karega)
+    if (Math.abs(el.x - canvas.width/2) < 60) {
+      el.x = getLeftAnchorX();
+    }
+  } catch(e){}
+}
+
+// 2) drawPlayerText override (left-align masked, unmasked sleeves as-is)
+window.drawPlayerText = function drawPlayerText() {
+  if (!bodyImage?.naturalWidth) return;
+
+  // Offscreen canvas for masked text (body)
+  const tCanvas = document.createElement("canvas");
+  tCanvas.width = canvas.width;
+  tCanvas.height = canvas.height;
+  const tctx = tCanvas.getContext("2d");
+
+  function drawSingleText(context, key) {
+    const el = textElements[key];
+    if (!el?.text) return;
+
+    const scale = canvas.width / 600 * el.scale;
+    const fontSize = el.fontSize;
+    const fontString = `${el.fontStyle} ${el.fontWeight} ${fontSize * scale}px ${el.fontFamily}`;
+
+    context.save();
+    context.translate(el.x, el.y);
+    context.rotate(el.angle);
+    context.textBaseline = "middle";
+    context.fillStyle = el.color;
+    context.font = fontString;
+
+    // Masked keys => left align; sleeves apna align; baaki center (backup)
+    if (MASKED_KEYS.includes(key)) {
+      context.textAlign = "left";
+    } else if (key === "sleeveLeft") {
+      context.textAlign = "left";
+    } else if (key === "sleeveRight") {
+      context.textAlign = "right";
+    } else {
+      context.textAlign = "center";
+    }
+
+    context.fillText(el.text.toUpperCase(), 0, 0);
+    context.restore();
+  }
+
+  // 1) masked texts offscreen
+  MASKED_KEYS.forEach(k => drawSingleText(tctx, k));
+
+  // 2) clip them to shirt body
+  tctx.globalCompositeOperation = "destination-in";
+  tctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+
+  // 3) bring masked layer to main
+  ctx.drawImage(tCanvas, 0, 0);
+
+  // 4) sleeves (unmasked) on main
+  UNMASKED_KEYS.forEach(k => drawSingleText(ctx, k));
+};
+
+// 3) First-load par masked texts ko left par shift karo (agar center pe the)
+(function applyLeftAnchorDefaultsOnce() {
+  // Thoda defer taake canvas size/images ready ho jayein
+  const tryApply = () => {
+    try {
+      if (!canvas || !bodyImage?.naturalWidth) { requestAnimationFrame(tryApply); return; }
+      if (window.__leftAnchoredOnce) return;
+
+      const leftX = getLeftAnchorX();
+      ["playerName","playerNumber","backText","frontText"].forEach(k => {
+        const el = textElements[k];
+        if (!el) return;
+        // Center ke aas-paas hain to left pe le aao
+        if (Math.abs(el.x - canvas.width/2) < 60) el.x = leftX;
+      });
+
+      window.__leftAnchoredOnce = true;
+      // Repaint after shifting
+      if (typeof drawKit === "function") drawKit();
+    } catch(e){}
+  };
+  requestAnimationFrame(tryApply);
+})();
+
+// 4) While typing: masked inputs par auto-left anchor (user-drag ko respect)
+(function patchTypingAnchors(){
+  const map = {
+    "player-name":   "playerName",
+    "player-number": "playerNumber",
+    "back-text":     "backText",
+    "front-text":    "frontText"
+  };
+  const attach = (id, key) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Extra listener (non-destructive) — existing handlers rahenge
+    el.addEventListener("input", function() {
+      anchorMaskedLeftIfDefault(key);
+      // Repaint — existing handler bhi drawKit() call karta hai; double paint harmless hai
+      if (typeof drawKit === "function") drawKit();
+    });
+  };
+  // DOM ready ho chuka hoga is script ke point par, phir bhi safe-guard:
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      Object.entries(map).forEach(([id,key]) => attach(id,key));
+    });
+  } else {
+    Object.entries(map).forEach(([id,key]) => attach(id,key));
+  }
+})();
 </script>
 
 
