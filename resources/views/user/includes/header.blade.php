@@ -15,7 +15,7 @@
                    <!-- Logout box -->
                     <div class="logout-box" id="logoutBox" style="display: none;">
                         
-                        <ul>
+                        {{-- <ul>
                             <li class="list-home">
                                  <a href="{{route('index')}}" class="logout-btn">Home</a>
                                 
@@ -24,7 +24,7 @@
                         <li class="list-logout">
                             <a href="{{route('logout')}}" class="logout-btn">Log Out</a>
                         </li>
-                        
+                         --}}
                         
                     </div>
                 </div>

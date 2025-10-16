@@ -89,7 +89,7 @@
         </div>
 
         <!-- Navigation Links -->
-        <ul class="nav-links">
+        {{-- <ul class="nav-links">
             <li><a href="{{ route('index') }}">HOME</a></li>
             <li><a href="{{ route('directoryadd') }}">DIRECTORY</a></li>
             <li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>
@@ -98,7 +98,7 @@
             <!--<li><a href= "{{ route('soccer') }}">CUSTOM UNIFORMS</a></li> -->
 
 
-        </ul>
+        </ul> --}}
 
         <!-- Check if user is logged in -->
         @if (session('user'))
@@ -116,14 +116,14 @@
                 </ul>
             </div>
         @else
-            <div class="auth-links" style="text-align: center;">
+            {{-- <div class="auth-links" style="text-align: center;">
                 <a href="{{ route('help') }}" class="help">Help</a>
 
                 <a href="{{ route('login') }}" class="auth-button">Log In</a>
 
                 <a href="{{ route('register') }}" class="auth-button">Sign Up</a>
 
-            </div>
+            </div> --}}
 
 
         @endif

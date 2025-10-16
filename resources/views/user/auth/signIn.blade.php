@@ -89,7 +89,7 @@
         </div>
 
         <!-- Navigation Links -->
-        <ul class="nav-links">
+        {{-- <ul class="nav-links">
             <li><a href="{{ route('index') }}">HOME</a></li>
             <li><a href="{{ route('directoryadd') }}">DIRECTORY</a></li>
             <li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>
@@ -98,10 +98,10 @@
             <!--<li><a href= "{{ route('soccer') }}">CUSTOM UNIFORMS</a></li> -->
 
 
-        </ul>
+        </ul> --}}
 
         <!-- Check if user is logged in -->
-        @if (session('user'))
+        {{-- @if (session('user'))
             <div class="dropdown">
                 <button class="profile-btn">
                     <i class="fa fa-user"></i> Profile &#9662;
@@ -126,7 +126,7 @@
             </div>
 
 
-        @endif
+        @endif --}}
     </nav>
 
     <!-- Header Session -->
@@ -191,8 +191,24 @@
 
 
 
-        <h2 class="reg-form-heading">Register</h2>
- @if ($errors->any())
+        <h2 class="reg-form-heading">SignIn</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('user.login') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -201,33 +217,11 @@
                     </ul>
                 </div>
             @endif
-       <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <input class="reg-input" type="text" name="name" placeholder="Full Name" required>
-    <input class="reg-input" type="email" name="email" placeholder="Email Address" required>
-    <input class="reg-input" type="password" name="password" placeholder="Password" required>
-    <input class="reg-input" type="password" name="password_confirmation" placeholder="Confirm Password" required>
-
-    <label for="profile_picture">Profile Picture:</label>
-    <input type="file" name="profile_picture" id="profile_picture" accept="image/*">
-
-    <button type="submit" class="reg-submit-btn">Register</button>
-</form>
+            <input class="reg-input" type="email" name="email" placeholder="Email Address" required>
+            <input class="reg-input" type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="reg-submit-btn">signin</button>
+        </form>
 
 
     </div>
@@ -251,13 +245,5 @@
             input.setSelectionRange(input.value.length, input.value.length); // Cursor ko code ke baad set kare
         });
     </script>
-
-
-
-
-
-
-
-
 
     @include('component.footer')

@@ -1,4 +1,4 @@
-   <div class="footer-wrapper">
+   {{-- <div class="footer-wrapper">
 
 
        <footer class="custom-footer">
@@ -51,7 +51,7 @@
                <!-- Third Div: Our Services -->
                <div class="footer-services">
                    <h4 class="footer-heading">OUR SERVICES</h4>
-                   <ul class="footer-links-list">
+                   {{-- <ul class="footer-links-list">
                        <li>
                            <a href="{{ route('services') }}#professional-networking">Professional Networking</a>
                        </li>
@@ -63,7 +63,7 @@
                         </li>
                        <li><a href="{{ route('services') }}#partnership-programs">Partnership Programs</a>
                         </li>
-                   </ul>
+                   </ul> --}}
                </div>
 
                <!-- Fourth Div: Information with Social Media Icons -->
@@ -113,7 +113,7 @@
    <!-- Copyright Section -->
    <div class="footer-copyright">
        <p style="font-size:16px !important;">&copy; Copyright 2024 Connect767 All Rights Reserved</p>
-   </div>
+   </div> --}}
 
 
    <!-- // Read more page select stars script -->
