@@ -1,70 +1,50 @@
 @extends('dashboard.app')
 
 @section('content')
-    <div class="dashboard-box-content">
-        <h1>Custom Orders</h1>
-        <p>Connecting you with Dominican Businesses Worldwide</p>
+<div class="dashboard-box-content">
+    <h1>Custom Orders</h1>
+    <p>Review all recent custom uniform orders</p>
 
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        {{-- <th>Order ID</th> --}}
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Amount($)</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($customOrders as $index => $order)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            {{-- <td>#{{ $order->id }}</td> --}}
-                            <td>{{ $order->first_name }} {{ $order->last_name }}</td>
-                            <td>{{ $order->email }}</td>
-                            <td>${{ number_format($order->amount, 2) }}</td>
-                            <td>{{ $order->country }}</td>
-                            <td>{{ $order->city }}</td>
-<td>{{ $order->created_at->format('M d Y') }}</td>                   </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center">No orders found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            {{-- ✅ Pagination links --}}
-            <div class="d-flex justify-content-center mt-3" style="font-weight:bold; color:#000;">
-                <style>
-                    .pagination .page-link {
-                        color: #000 !important;
-                        /* dark text */
-                        font-weight: bold !important;
-                        /* bold text */
-                        border: 1px solid #555 !important;
-                    }
+    <div class="orders-wrapper mt-4">
+        @forelse ($customOrders as $order)
+            <div class="order-card mb-4 p-3 border rounded shadow-sm bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fw-bold mb-0">Order #{{ $order->id }}</h5>
+                    <span class="text-muted">
+                        {{ $order->created_at ? $order->created_at->format('M d, Y') : '-' }}
+                    </span>
+                </div>
 
-                    .pagination .page-item.active .page-link {
-                        background-color: #000 !important;
-                        /* dark background for active */
-                        border-color: #000 !important;
-                        color: #fff !important;
-                        /* white text for active */
-                    }
+                <div class="row">
+                    <div class="col-md-6 mb-2"><strong>First Name:</strong> {{ $order->first_name }}</div>
+                    <div class="col-md-6 mb-2"><strong>Last Name:</strong> {{ $order->last_name }}</div>
+                    <div class="col-md-6 mb-2"><strong>Email:</strong> {{ $order->email }}</div>
+                    <div class="col-md-6 mb-2"><strong>Phone:</strong> {{ $order->phone }}</div>
+                    <div class="col-md-6 mb-2"><strong>Country:</strong> {{ $order->country }}</div>
+                    <div class="col-md-6 mb-2"><strong>City:</strong> {{ $order->city }}</div>
+                    <div class="col-md-6 mb-2"><strong>State:</strong> {{ $order->state }}</div>
+                    <div class="col-md-6 mb-2"><strong>ZIP Code:</strong> {{ $order->zip_code }}</div>
+                    <div class="col-md-6 mb-2"><strong>Address:</strong> {{ $order->address }}</div>
+                    <div class="col-md-6 mb-2"><strong>Account Holder:</strong> {{ $order->account_holder_name }}</div>
+                    <div class="col-md-6 mb-2"><strong>Total Amount:</strong> ${{ number_format($order->amount, 2) }}</div>
+                </div>
 
-                    .pagination .page-link:hover {
-                        background-color: #333 !important;
-                        color: #fff !important;
-                    }
-                </style>
-
-                {{ $customOrders->links('pagination::bootstrap-4') }}
+                <div class="mt-3">
+                    <a href="{{ route('download.pdf') }}" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-file-pdf"></i> Download PDF
+                    </a>
+                </div>
             </div>
-
-        </div>
+        @empty
+            <div class="text-center text-danger fw-bold p-4 border rounded bg-white">
+                No custom orders found.
+            </div>
+        @endforelse
     </div>
+
+    {{-- ✅ Pagination --}}
+    <div class="d-flex justify-content-center mt-3" style="font-weight:bold; color:#000;">
+        {{ $customOrders->links('pagination::bootstrap-4') }}
+    </div>
+</div>
 @endsection

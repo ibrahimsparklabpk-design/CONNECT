@@ -16,4 +16,10 @@ class CustomOrder extends Model
     {
         return $this->belongsTo(BusinessRegistration::class, 'business_registrations_id');
     }
+
+    public function customUniforms()
+{
+    return $this->hasMany(CustomUniform::class, 'business_registrations_id', 'business_registrations_id');
+}
+
 }

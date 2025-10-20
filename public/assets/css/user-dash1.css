@@ -434,3 +434,70 @@ textarea {
   font-size: 17px;
   margin-top: 20px;
 }
+
+
+.logo {
+    padding: 10px 15px;
+    background-color: transparent; /* transparent, navbar ka color le lega */
+    color: #fff;
+    text-align: left; /* left align kar diya */
+    position: relative;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* thoda gap logo image aur text me */
+    height: 60px; /* navbar ke height ke mutabiq */
+    overflow: hidden;
+}
+
+.logo-img {
+    width: 50px;  /* chhota kiya */
+    height: 50px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.logo h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    white-space: nowrap; /* text wrap na ho */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto; /* right side le jao */
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #fff;
+    box-shadow: 0 0 3px rgba(255,255,255,0.3);
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-left: 15px;
+    align-self: center;
+}
+
+.close-btn:hover {
+    color: #ff5555;
+}

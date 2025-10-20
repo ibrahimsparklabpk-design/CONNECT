@@ -37,7 +37,8 @@
                 <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-home"></i> Dashboard</a></li>
                 <!--<li><a href="{{route('vendor_data')}}"><i class="fas fa-user"></i> User Details</a></li>-->
                 <li><a href="{{route('admin_listing')}}"><i class="fas fa-list"></i> Listing</a></li>
-                <li><a href="#"><i class="fas fa-box"></i> Custom Order</a></li>
+                <li><a href="{{ route('custome_order')}}"><i class="fas fa-box"></i> Custom Order</a></li>
+                                <li><a href="{{ route('static.order')}}"><i class="fas fa-box"></i> Static Order</a></li>
                 <li><a href="#"><i class="fas fa-plus"></i> Add Product</a></li>
                 <li><a href="{{route('index')}}"><i class="fa-solid fa-house-user"></i></i> Home</a></li>
                 <li><a href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li>

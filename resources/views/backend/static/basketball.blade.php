@@ -4,173 +4,191 @@
 
 
 
- <style>
-.team-form-container {
-    margin-top: 20px;
-    overflow-x: auto;
-}
+     <style>
+         .team-form-container {
+             margin-top: 20px;
+             overflow-x: auto;
+         }
 
-.team-roster-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Poppins', sans-serif;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-}
+         .team-roster-table {
+             width: 100%;
+             border-collapse: collapse;
+             font-family: 'Poppins', sans-serif;
+             background: #fff;
+             border-radius: 10px;
+             overflow: hidden;
+             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+         }
 
-.team-roster-table thead {
-    background: #007bff;
-    color: #fff;
-    text-align: center;
-}
+         .team-roster-table thead {
+             background: #007bff;
+             color: #fff;
+             text-align: center;
+         }
 
-.team-roster-table th,
-.team-roster-table td {
-    padding: 12px 15px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-}
+         .team-roster-table th,
+         .team-roster-table td {
+             padding: 12px 15px;
+             text-align: center;
+             border-bottom: 1px solid #ddd;
+             vertical-align: middle;
+         }
 
-.team-roster-table tbody tr:nth-child(even) {
-    background: #f9f9f9;
-}
+         .team-roster-table tbody tr:nth-child(even) {
+             background: #f9f9f9;
+         }
 
-.team-roster-table tbody tr:hover {
-    background: #eef5ff;
-}
+         .team-roster-table tbody tr:hover {
+             background: #eef5ff;
+         }
 
-/* Input & Select Styling */
-.team-roster-table input[type="text"],
-.team-roster-table input[type="number"],
-.team-roster-table select {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease;
-}
+         /* Input & Select Styling */
+         .team-roster-table input[type="text"],
+         .team-roster-table input[type="number"],
+         .team-roster-table select {
+             width: 100%;
+             padding: 8px 10px;
+             border: 1px solid #ccc;
+             border-radius: 6px;
+             font-size: 14px;
+             outline: none;
+             transition: all 0.3s ease;
+         }
 
-.team-roster-table input:focus,
-.team-roster-table select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
+         .team-roster-table input:focus,
+         .team-roster-table select:focus {
+             border-color: #007bff;
+             box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+         }
 
-/* Responsive for mobile */
-@media (max-width: 768px) {
-    .team-roster-table thead {
-        display: none;
-    }
+         /* Responsive for mobile */
+         @media (max-width: 768px) {
+             .team-roster-table thead {
+                 display: none;
+             }
 
-    .team-roster-table,
-    .team-roster-table tbody,
-    .team-roster-table tr,
-    .team-roster-table td {
-        display: block;
-        width: 100%;
-    }
+             .team-roster-table,
+             .team-roster-table tbody,
+             .team-roster-table tr,
+             .team-roster-table td {
+                 display: block;
+                 width: 100%;
+             }
 
-    .team-roster-table tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-    }
+             .team-roster-table tr {
+                 margin-bottom: 15px;
+                 border: 1px solid #ddd;
+                 border-radius: 8px;
+                 padding: 10px;
+             }
 
-    .team-roster-table td {
-        text-align: left;
-        padding: 10px 5px;
-        border: none;
-    }
+             .team-roster-table td {
+                 text-align: left;
+                 padding: 10px 5px;
+                 border: none;
+             }
 
-    .team-roster-table td:before {
-        content: attr(data-label);
-        font-weight: 600;
-        display: block;
-        margin-bottom: 5px;
-        color: #007bff;
-    }
-}
- </style>
+             .team-roster-table td:before {
+                 content: attr(data-label);
+                 font-weight: 600;
+                 display: block;
+                 margin-bottom: 5px;
+                 color: #007bff;
+             }
+         }
+     </style>
 
 
 
- <!-- MAIN SECTION STARTS FROM HERE -->
+     <!-- MAIN SECTION STARTS FROM HERE -->
 
- <div class="main-section">
-     <!-- Left Section -->
-     <div class="left-section">
-         <div class="icon-list">
-             <div class="icon" onclick="openTab('categories')">
-                 <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
-             </div>
-             <div class="icon" onclick="openTab('Shirts')">
-                 <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
-             </div>
+     <div class="main-section">
+         <!-- Left Section -->
+         <div class="left-section">
+             <div class="icon-list">
+                 <div class="icon" onclick="openTab('categories')" style="text-align:center">
+                     <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
+                     <label class="icon-label">Categories</label>
+                 </div>
 
-             {{-- <div class="icon" onclick="openTab('Logos')">
+                 <a href="{{ route('custome.index') }}" style="text-decoration: none; color: inherit;">
+                     <div class="icon" style="text-align:center; cursor:pointer;">
+                         <img src="{{ asset('assets/jpg shirt-01.png') }}" alt="Custom Design" class="tab-icon"
+                             width="50px" />
+                         <label class="icon-label">Custom Design</label>
+                     </div>
+                 </a>
+
+                 <div class="icon" onclick="openTab('Shirts')" style="text-align:center">
+                     <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
+                     <label class="icon-label">Shirts</label>
+                 </div>
+
+                 {{-- <div class="icon" onclick="openTab('Logos')">
                 <img src="{{ asset('assets/c-logo.png') }}" alt="Logos" class="tab-icon" width="50px" />
          </div> --}}
 
-         {{-- <div class="icon" onclick="openTab('Text')">
-                <img src="{{ asset('assets/text.png') }}" alt="Text" class="tab-icon" width="50px" />
-     </div> --}}
-
-     {{-- <div class="icon" onclick="openTab('colorpicker')">
+                 {{-- <div class="icon" onclick="openTab('colorpicker')">
                 <img src="{{ asset('assets/colorbucketicon.png') }}" alt="Color Picker" class="tab-icon" width="50px"
      />
  </div> --}}
- {{-- <div class="icon" onclick="openTab('Patterns')">
+                 {{-- <div class="icon" onclick="openTab('Patterns')">
                 <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
  </div> --}}
 
- <div class="icon" onclick="captureFullRightSection()">
-     <img src="{{ asset('assets/savedesignicon.png') }}" alt="Save Design" class="tab-icon" width="50px" />
- </div>
- </div>
+                 <div class="icon" onclick="captureFullRightSection()">
+                     <img src="{{ asset('assets/savedesignicon.png') }}" alt="Save Design" class="tab-icon"
+                         width="50px" />
+                 </div>
+             </div>
 
- {{-- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+             {{-- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
      @csrf --}}
- <!-- Items List -->
- <div class="items-list" style="height: 36rem;">
-     <!-- Shirts Tab -->
-     <div class="tabcontent" id="Shirts">
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-1.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-1.png') }}')" alt="Shirt 1" width="100"/>
+             <!-- Items List -->
+             <div class="items-list" style="height: 36rem;">
+                 <!-- Shirts Tab -->
+                 <div class="tabcontent" id="Shirts">
+                     <img src="{{ asset('assets/basketball/basket01.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket01.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-2.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-2.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket02.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket02.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-3.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-3.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket03.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket03.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-4.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-4.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket04.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket04.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-5.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-5.png') }}')" alt="Shirt 1" width="100"/>
-                
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-6.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-6.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket05.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket05.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-7.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-7.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket08.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket08.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-8.png') }}" class="shirt"
-                 onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-8.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket07.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket07.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-9.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-9.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket06.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket06.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-10.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-10.png') }}')" alt="Shirt 1" width="100"/>
+                     <img src="{{ asset('assets/basketball/basket09.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket09.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-            <img src="{{ asset('assets/basketball-kit/basketball-kit-11.png') }}" class="shirt"
+                     <img src="{{ asset('assets/basketball/basket10.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/basketball/basket10.png') }}')" alt="Shirt 1"
+                         width="100" />
+
+                     {{-- <img src="{{ asset('assets/basketball-kit/basketball-kit-11.png') }}" class="shirt"
                 onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-11.png') }}')" alt="Shirt 1" width="100"/>
 
              <img src="{{ asset('assets/basketball-kit/basketball-kit-12.png') }}" class="shirt"
@@ -183,14 +201,14 @@
                 onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-14.png') }}')" alt="Shirt 1" width="100"/>
 
             <img src="{{ asset('assets/basketball-kit/basketball-kit-15.png') }}" class="shirt"
-                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-15.png') }}')" alt="Shirt 1" width="100"/>
+                onclick="selectShirt('{{ asset('assets/basketball-kit/basketball-kit-15.png') }}')" alt="Shirt 1" width="100"/> --}}
 
 
-           
-        </div>
 
-     <!-- Logos Tab -->
-     {{-- <div class="tabcontent" id="Logos" style="display: none">
+                 </div>
+
+                 <!-- Logos Tab -->
+                 {{-- <div class="tabcontent" id="Logos" style="display: none">
                 @for ($i = 1; $i <= 18; $i++)
                     <img src="{{ asset('assets/Logos/p-logo' . $i . '.png') }}" class="logo"
      onclick="selectLogo('{{ asset('assets/Logos/p-logo' . $i . '.png') }}')"
@@ -198,8 +216,8 @@
      @endfor
  </div> --}}
 
- <!-- Text Tab -->
- {{-- <div class="tabcontent" id="Text" style="display: none">
+                 <!-- Text Tab -->
+                 {{-- <div class="tabcontent" id="Text" style="display: none">
                 <label for="custom-text">Enter Your Text</label>
                 <textarea id="custom-text" rows="4" cols="36"></textarea><br><br>
 
@@ -228,39 +246,39 @@
                 <button id="update-text" style="margin-top: 10px;">Update Text</button>
             </div> --}}
 
- <!-- Categories Tab -->
- <div class="tabcontent" id="categories" style="display: none">
-     <div class="cat-row">
-         <div class="cat-col">
-             <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
-             <h1>Soccer</h1>
-         </div>
-         <div class="cat-col">
-             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
-             <h1>Cricket</h1>
-         </div>
-         <div class="cat-col">
-             <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
-             <h1>Basketball</h1>
-         </div>
-          <div class="cat-col">
-            <a href="basketball"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
-             <h1>Goal Keeper</h1>
-         </div>
-     </div>
-     <div class="cat-row">
-         <div class="cat-col">
-             <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
-             <h1>Goal Keeper</h1>
-         </div>
-         <div class="cat-col">
-             <h1>Other / Staff / Management</h1>
-         </div>
-     </div>
- </div>
+                 <!-- Categories Tab -->
+                 <div class="tabcontent" id="categories" style="display: none">
+                     <div class="cat-row">
+                         <div class="cat-col">
+                             <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
+                             <h1>Soccer</h1>
+                         </div>
+                         <div class="cat-col">
+                             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
+                             <h1>Cricket</h1>
+                         </div>
+                         <div class="cat-col">
+                             <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
+                             <h1>Basketball</h1>
+                         </div>
+                         <div class="cat-col">
+                             <a href="basketball"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                             <h1>Goal Keeper</h1>
+                         </div>
+                     </div>
+                     <div class="cat-row">
+                         <div class="cat-col">
+                             <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                             <h1>Goal Keeper</h1>
+                         </div>
+                         <div class="cat-col">
+                             <h1>Other / Staff / Management</h1>
+                         </div>
+                     </div>
+                 </div>
 
- <!-- Color Picker -->
- {{-- <div class="tabcontent" id="colorpicker" style="display: none">
+                 <!-- Color Picker -->
+                 {{-- <div class="tabcontent" id="colorpicker" style="display: none">
                 <div class="picker-div">
                     <label for="color-picker">Choose Shirt Color:</label>
                     <input type="color" id="color-picker" onchange="updateShirtColor(this.value)">
@@ -271,8 +289,8 @@
                 </div>
             </div> --}}
 
- <!-- Patterns Tab -->
- {{-- <div class="tabcontent" id="Patterns" style="display: none;">
+                 <!-- Patterns Tab -->
+                 {{-- <div class="tabcontent" id="Patterns" style="display: none;">
                 <div class="pattern-options">
                     @for ($i = 1; $i <= 18; $i++)
                         <img src="{{ asset('assets/soccer-shirts/pattern' . $i . '.png') }}"
@@ -281,48 +299,49 @@
  @endfor
  </div>
  </div> --}}
- </div>
- </div>
+             </div>
+         </div>
 
- <!-- Right Section -->
-<div class="right-section">
-    <div class="item-display" style="position: relative;">
-        <div id="text-display" style="position: absolute; z-index: 5;"></div>
-        <!-- Base shirt hamesha dikh rahi hai -->
-        <img id="selected-shirt" src="{{ asset('assets/basketball-kit/basketball-kit-1.png') }}" alt="Selected Shirt" />
-        <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay" style="display: none;" />
-    </div>
+         <!-- Right Section -->
+         <div class="right-section">
+             <div class="item-display" style="position: relative;">
+                 <div id="text-display" style="position: absolute; z-index: 5;"></div>
+                 <!-- Base shirt hamesha dikh rahi hai -->
+                 <img id="selected-shirt" src="{{ asset('assets/basketball/basket01.png') }}" alt="Selected Shirt" />
+                 <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay"
+                     style="display: none;" />
+             </div>
 
-    <!-- Hidden input to store selected shirt path for database -->
-   
-    
-    <!-- Optional: Preview of selected shirt -->
-    <div id="shirtPreview" style="margin-top: 10px;"></div>
-</div>
+             <!-- Hidden input to store selected shirt path for database -->
 
 
- </div>
+             <!-- Optional: Preview of selected shirt -->
+             <div id="shirtPreview" style="margin-top: 10px;"></div>
+         </div>
 
- <!-- MAIN SECTION ENDS HERE -->
 
+     </div>
 
-
+     <!-- MAIN SECTION ENDS HERE -->
 
 
 
- @if ($errors->any())
- <div class="alert alert-danger">
-     <ul>
-         @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-         @endforeach
-     </ul>
- </div>
- @endif
 
- <!-- FORM SECTION STARTS FROM HERE -->
- 
- <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+
+
+     @if ($errors->any())
+         <div class="alert alert-danger">
+             <ul>
+                 @foreach ($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                 @endforeach
+             </ul>
+         </div>
+     @endif
+
+     <!-- FORM SECTION STARTS FROM HERE -->
+
+     <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
          @csrf
          <div class="head-box">
              <p class="mainheading">CUSTOM SOCCER KIT</p>
@@ -595,7 +614,8 @@
                  </tbody>
              </table> --}}
 
-             <button style="
+             <button
+                 style="
         background-color: #000;
         color: #fff;
         font-weight: bold;
@@ -606,8 +626,8 @@
         cursor: pointer;
         transition: 0.3s;
     "
-                                    onmouseover="this.style.backgroundColor='#333'"
-                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
+                 onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
+                 type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
          </div>
 
          </div>
@@ -828,7 +848,8 @@
                          </tr>
                      </tbody>
                  </table>
-                 <button style="
+                 <button
+                     style="
         background-color: #000;
         color: #fff;
         font-weight: bold;
@@ -839,8 +860,8 @@
         cursor: pointer;
         transition: 0.3s;
     "
-                                    onmouseover="this.style.backgroundColor='#333'"
-                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
+                     onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
+                     type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
 
                  <div style="margin-top:1rem; text-align:right;">
                      <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>

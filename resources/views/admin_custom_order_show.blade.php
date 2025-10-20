@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/admin-listing.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-     <link rel="stylesheet" href="{{ asset('assets/css/customOrder.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/customOrder.css') }}">
     <!--<link rel="stylesheet" href="customOrder.css">-->
 
 
@@ -32,15 +32,17 @@
         <aside class="sidebar" id="sidebar">
             <div class="logo">
                 <a href="{{ route('index') }}" target="_blank">
-                    <img src="assets/images/whitelogo2.png" alt="Logo" class="logo-img"></a> <!-- Add your logo here -->
+                    <img src="assets/images/whitelogo2.png" alt="Logo" class="logo-img"></a>
+                <!-- Add your logo here -->
                 <h2>Admin Panel</h2>
                 <button class="close-btn" id="close-btn">&times;</button>
             </div>
-            <ul class="menu">
+             <ul class="menu">
                 <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-home"></i> Dashboard</a></li>
                 <!--<li><a href="{{route('vendor_data')}}"><i class="fas fa-user"></i> User Details</a></li>-->
                 <li><a href="{{route('admin_listing')}}"><i class="fas fa-list"></i> Listing</a></li>
-                <li><a href="#"><i class="fas fa-box"></i> Custom Order</a></li>
+                <li><a href="{{ route('custome_order')}}"><i class="fas fa-box"></i> Custom Order</a></li>
+                                <li><a href="{{ route('static.order')}}"><i class="fas fa-box"></i> Static Order</a></li>
                 <li><a href="#"><i class="fas fa-plus"></i> Add Product</a></li>
                 <li><a href="{{route('index')}}"><i class="fa-solid fa-house-user"></i></i> Home</a></li>
                 <li><a href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li>
@@ -54,315 +56,134 @@
 
             </div>
             <div class="dashboard-content">
-                 
-
-
-                <div class="dashboard-box-content">
-                    @foreach($products as $product)
-                    @php
-                       $productId = $product->id;
-
-                    $productCustomerId = $product->customer_id;
-                    @endphp
-                   
-                    <h1 class="order-head">
-                        Order
-                    </h1>
-                    <!-- top price box -->
-                    <div class="price-box">
-                         @foreach($customePayments as $customePayment)
-                        @if($customePayment->customer_id == $productCustomerId)
-                        <div class="price-h">
-                           <p>Price :Price:&nbsp;&nbsp;<br>{{ $customePayment->price }}
-                           </p>
-                        </div>
-                        <div class="price-h">
-                             <p>Quantity :&nbsp;&nbsp;<br>{{ $customePayment->total_quantity }}
-                             </p>
-                        </div>
-                        <div class="price-h">
-                            <p>Total Price::&nbsp;&nbsp;<br>{{ $customePayment->payment }}</p>
-                        </div>
-                            @endif
-                        @endforeach
-
-
-                    </div>
-                    <div class="order-area">
-                        <div class="order-img">
-                            
-                           <img src="{{ asset('storage/uploads/' . basename($product->custom_image)) }}" width="300" height="300">
-                         
-
-                        </div>
-
-                    </div>
-                    <div class="uper-table-h">
-                        <h3 class="u-t-h">
-                            CUSTOM SOCCER JERSEY
-                        </h3>
-
-                    </div>
-                    <div class="table-1">
-                           <table>
-                                    <tr>
-                                        <td>Sleeve Length:&nbsp;&nbsp; {{ $product->sleeve_length }}</td>
-                                        <td>Team Logo:&nbsp;&nbsp; {{ $product->team_logo }}</td>
-                                        <td>Collar Type:&nbsp;&nbsp; {{ $product->collar_type }}</td>
-                                        <td>Kit:&nbsp;&nbsp; {{ $product->kit }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fit Type:&nbsp;&nbsp;{{ $product->fit_type }}</td>
-                                        <td>Inside Collar Message:&nbsp;&nbsp;{{ $product->inside_collar_message }}</td>
-                                        <td>Your Collar Message:&nbsp;&nbsp;{{ $product->collar_text }}</td>
-                                        <td>Add a Goalkeeper Kit?:&nbsp;&nbsp;{{ $product->goalkeeper_kit }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Padded:&nbsp;&nbsp;{{ $product->padded }}</td>
-                                        <td>Goalkeeper Sleeve:&nbsp;&nbsp;{{ $product->goalkeeper_sleeve }}</td>
-                                        <td>Goalkeeper Jersey
-                                            Design:&nbsp;&nbsp;{{ $product->goalkeeper_jersey_design }}</td>
-                                        <td>Jersey Color: &nbsp;&nbsp;{{ $product->jersey_color }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Staff/Other:&nbsp;&nbsp; {{ $product->staff_other }}</td>
-                                        <td>Staff Kit:&nbsp;&nbsp;{{ $product->staff_kit }}</td>
-                                        <td>Staff Collar Type:&nbsp;&nbsp;{{ $product->staff_collar_type }}</td>
-                                        <td>Staff Fit Type:&nbsp;&nbsp;{{ $product->staff_fit_type }}</td>
-                                    </tr>
-                                </table>
-                    </div>
-                    <div class="uper-table-h">
-                        <h3 class="u-t-h">
-                            ROSTER INFORMATION KIT INFORMATION
-                        </h3>
-
-                    </div>
-
-                    <div class="table-1">
-                        @foreach($sizeGuides as $sizeGuide)
-                        @if($sizeGuide->customer_id == $productCustomerId)
-                        <table>
-                            <tr>
-                                <td>Roster Name:&nbsp;&nbsp;{{ $sizeGuide->size_guide_name }}</td>
-                                <td>R-No:&nbsp;&nbsp;{{ $sizeGuide->size_guide_number }}</td>
-                                <td>R-Shirt Size:&nbsp;&nbsp;{{ $sizeGuide->size_guide_shirt_size }}
-                                </td>
-                                <td>R-Short Size:&nbsp;&nbsp;{{ $sizeGuide->size_guide_short_size }}
-                                </td>
-                                <td>Quantity:&nbsp;&nbsp;{{ $sizeGuide->size_guide_quantity }}
-                                </td>
-                            </tr>
-
-                        </table>
-                        @endif
-                        @endforeach
-
-
-                    </div>
-
-                    <div class="uper-table-h">
-                        <h3 class="u-t-h">
-                            STAFF KIT INFORMATION
-                        </h3>
-
-                    </div>
-                    <div class="table-1">
-                        @foreach($sizeStaffs as $sizeStaff)
-                        @if($sizeStaff->customer_id == $productCustomerId)
-                        <table>
-                            <tr>
-                                <td>Roster Name:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_name }}
-                                </td>
-                                <td>
-
-                                    Sleeves
-                                    Length:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_sleeves_length }}
-                                </td>
-                                <td>
-                                    Pants
-                                    Length:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_pants_length }}
-                                </td>
-
-                                <td>Shirt Size:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_shirt_size }}
-                                </td>
-                                <td>Pants Size:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_pants_size }}
-                                </td>
-                                <td>Quantity:&nbsp;&nbsp;<br>{{ $sizeStaff->staff_quantity }}</td>
-                            </tr>
 
 
 
-                        </table>
-                        @endif
-                        @endforeach
+<div class="dashboard-box-content">
+<h1 class="u-t-h">CUSTOM SOCCER JERSEY</h1>    
+@foreach ($products as $product)
 
-                    </div>
+        @php
+            $productTotalQuantity = 0;
+            $bulkData = json_decode($product->bulk_data, true);
 
-                    <div class="uper-table-h">
-                        <h3 class="u-t-h">
-                            PAYMENT INFORMATIO
-                        </h3>
+            if (is_array($bulkData)) {
+                foreach ($bulkData as $item) {
+                    $qty = isset($item['quantity']) ? (int) $item['quantity'] : 0;
+                    $productTotalQuantity += $qty;
+                }
+            }
 
+            $productGrandTotal = $product->grand_total;
+        @endphp
 
-                    </div>
-                    <div class="table-1">
-                        @foreach($customePayments as $customePayment)
-                        @if($customePayment->customer_id == $productCustomerId)
-                        <table>
-                            <tr>
-                                <h3>
-                                    Delivery
-                                </h3>
-                                <td>
-                                    Email:&nbsp;&nbsp;<br>{{ $customePayment->p_email }}
-                                </td>
-                                <td>
+        <h1 class="order-head">Order</h1>
 
-                                    Country:&nbsp;&nbsp;<br>{{ $customePayment->delivery_country }}
-                                </td>
-                                <td>
-                                    First
-                                    name:&nbsp;&nbsp;<br>{{ $customePayment->delivery_first_name }}
-                                </td>
+        <div class="price-box">
+            <div class="price-h">
+                <p><strong>Total Quantity (This Product):</strong><br>{{ $productTotalQuantity }}</p>
+            </div>
+            <div class="price-h">
+                <p><strong>Grand Total (This Product):</strong><br>$ {{ $productGrandTotal }}</p>
+            </div>
+        </div>
 
-                                <td>
-                                    Last
-                                    name:&nbsp;&nbsp;<br>{{ $customePayment->delivery_last_name }}
-                                </td>
+        <div class="order-area">
+            <div class="order-img" style="margin-top: 20px;">
+                @if (!empty($product->logo))
+                    <img src="{{ asset('custom/logo/' . basename($product->logo)) }}" alt="Logo" width="300" height="300" class="rounded border">
+                @else
+                    No logo
+                @endif
+            </div>
+        </div>
 
-                            </tr>
-                            <tr>
+        <div class="uper-table-h">
+            <h3 class="u-t-h">CUSTOM SOCCER JERSEY</h3>
+        </div>
 
-                                <td>
-                                    Company:&nbsp;&nbsp;<br>{{ $customePayment->delivery_company }}
-                                </td>
-                                <td colspan="2">
-                                    Address:&nbsp;&nbsp;<br>{{ $customePayment->delivery_address }}
-                                </td>
-                                <td>
-                                    Apartment:&nbsp;&nbsp;<br>{{ $customePayment->delivery_apartment }}
-                                </td>
+        <div class="table-1">
+            <table>
+                <tr>
+                    <td>Sleeve Length: {{ $product->sleeves_length }}</td>
+                    <td>Team Logo: {{ $product->team_logo }}</td>
+                    <td>Collar Type: {{ $product->collar_type }}</td>
+                </tr>
+                <tr>
+                    <td>Fit Type: {{ $product->fit_type }}</td>
+                    <td>Inside Collar Message: {{ $product->inside_shirt_collar }}</td>
+                    <td>Your Collar Message: {{ $product->outfield_players_socks }}</td>
+                </tr>
+                <tr>
+                    <td>Goalkeeper Sleeve: {{ $product->goalkeeper_sleeve }}</td>
+                    <td>Goalkeeper Jersey Design: {{ $product->goalkeeper_jersey_design }}</td>
+                    <td>Jersey Color: {{ $product->jersey_color }}</td>
+                </tr>
+            </table>
+        </div>
 
+        {{-- CUSTOMER / ORDER DETAILS --}}
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    City:&nbsp;&nbsp;<br>{{ $customePayment->delivery_city }}
-                                </td>
-                                <td>
-                                    State:&nbsp;&nbsp;<br>{{ $customePayment->delivery_state }}
-                                </td>
+        @if ($product->customOrder)
+            <div class="uper-table-h" style="margin-top: 20px;">
+                <h3 class="u-t-h">CUSTOMER / ORDER DETAILS</h3>
+            </div>
 
-                                <td>
-                                    ZIP
-                                    code:&nbsp;&nbsp;<br>{{ $customePayment->delivery_zip_code }}
-                                </td>
-                                <td>
-                                    Phone:&nbsp;&nbsp;<br>{{ $customePayment->delivery_phone }}
-                                </td>
-                            </tr>
+            <div class="table-1">
+                <table>
+                    <tr>
+                        <td><strong>First Name:</strong> {{ $product->customOrder->first_name }}</td>
+                        <td><strong>Last Name:</strong> {{ $product->customOrder->last_name }}</td>
+                        <td><strong>Email:</strong> {{ $product->customOrder->email }}</td>
+                        <td><strong>Phone:</strong> {{ $product->customOrder->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Country:</strong> {{ $product->customOrder->country }}</td>
+                        <td><strong>State:</strong> {{ $product->customOrder->state }}</td>
+                        <td><strong>City:</strong> {{ $product->customOrder->city }}</td>
+                        <td><strong>ZIP Code:</strong> {{ $product->customOrder->zip_code }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>Address:</strong> {{ $product->customOrder->address }}</td>
+                    </tr>
+                </table>
+            </div>
+        @endif
 
-                        </table>
-                        <table>
-                            <tr>
-                                <h3>
-                                    Payment
-                                </h3>
-                                <td>
+        <div class="uper-table-h">
+            <h3 class="u-t-h">ROSTER INFORMATION KIT INFORMATION</h3>
+        </div>
 
-                                    Account Holder
-                                    Name:&nbsp;&nbsp;<br>{{ $customePayment->account_holder_name }}
-                                </td>
-                                <td>
+        <div class="table-1">
+            @if (is_array($bulkData))
+                @foreach ($bulkData as $player)
+                    <table border="1" cellpadding="5" cellspacing="0" style="margin-bottom: 15px;">
+                        <tr>
+                            <td><strong>Roster Name:</strong> {{ $player['name'] ?? 'N/A' }}</td>
+                            <td><strong>R-No:</strong> {{ $player['number'] ?? 'N/A' }}</td>
+                            <td><strong>R-Shirt Size:</strong> {{ $player['shirt_size'] ?? 'N/A' }}</td>
+                            <td><strong>R-Short Size:</strong> {{ $player['short_size'] ?? 'N/A' }}</td>
+                            <td><strong>Quantity:</strong> {{ $player['quantity'] ?? 'N/A' }}</td>
+                        </tr>
+                    </table>
+                @endforeach
+            @else
+                <p style="color: red;">Invalid bulk_data format for product: {{ $product->name }}</p>
+            @endif
+        </div>
 
-                                    Price:&nbsp;&nbsp;<br>{{ $customePayment->price }}
-                                </td>
-                                <td>
-                                    Quantity:&nbsp;&nbsp;<br>{{ $customePayment->total_quantity }}
-                                </td>
+<a href="{{ route('download.pdf') }}" class="pdf-download-btn">Download PDF</a>
 
-                                <td>
-                                    Total
-                                    Price:&nbsp;&nbsp;<br>{{ $customePayment->payment }}
-                                </td>
+        <hr>
 
-                            </tr>
+    @endforeach
 
-
-                        </table>
-
-                        <table>
-                            <tr>
-                                <h3>
-                                    Billing Address
-                                </h3>
-                                <td>
-                                    First
-                                    name:&nbsp;&nbsp;<br>{{ $customePayment->billing_first_name }}
-                                </td>
-                                <td>
-
-                                    Last
-                                    name:&nbsp;&nbsp;<br>{{ $customePayment->billing_last_name }}
-                                </td>
-                                <td colspan="2">
-                                    Address:&nbsp;&nbsp;<br>{{ $customePayment->billing_address }}
-                                </td>
-
-
-
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    Apartment:&nbsp;&nbsp;<br>{{ $customePayment->billing_apartment }}
-                                </td>
-                                <td>
-
-                                    City:&nbsp;&nbsp;<br>{{ $customePayment->billing_city }}
-                                </td>
-                                <td>
-
-
-                                    State:&nbsp;&nbsp;<br>{{ $customePayment->billing_state }}
-                                </td>
-
-                                <td>
-
-
-                                    ZIP code:&nbsp;&nbsp;<br>{{ $customePayment->billing_zip_code }}
-                                </td>
+</div>
 
 
 
-                            </tr>
 
 
-                        </table>
-                        @endif
-                        @endforeach
-
-                    </div>
-                    
-                  
-                
-                    
-                    
-                     <a href="{{ route('download.pdf') }}" class="pdf-download-btn">Download PDF</a>
-                     <!--{{$productId}}-->
-                 <!--<a href="{{ route('download.pdf', $productId) }}" class="pdf-download-btn">Download PDF</a>-->
-                
-                     
-                     
-                     
-                    <hr>
-                    
-                    
-
-                    @endforeach
-                </div>
-               
 
 
 

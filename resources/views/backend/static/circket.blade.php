@@ -106,11 +106,22 @@
          <!-- Left Section -->
          <div class="left-section">
              <div class="icon-list">
-                 <div class="icon" onclick="openTab('categories')">
+                 <div class="icon" onclick="openTab('categories')" style="text-align:center">
                      <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
+                     <label class="icon-label">Categories</label>
                  </div>
-                 <div class="icon" onclick="openTab('Shirts')">
+
+                 <a href="{{ route('custome.cricket') }}" style="text-decoration: none; color: inherit;">
+                     <div class="icon" style="text-align:center; cursor:pointer;">
+                         <img src="{{ asset('assets/jpg shirt-01.png') }}" alt="Custom Design" class="tab-icon"
+                             width="50px" />
+                         <label class="icon-label">Custom Design</label>
+                     </div>
+                 </a>
+
+                 <div class="icon" onclick="openTab('Shirts')" style="text-align:center">
                      <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
+                     <label class="icon-label">Shirts</label>
                  </div>
 
                  {{-- <div class="icon" onclick="openTab('Logos')">
@@ -135,77 +146,51 @@
                  </div>
              </div>
 
-             
-                 <!-- Items List -->
-                 <div class="items-list" style="height: 36rem;">
-                     <!-- Shirts Tab -->
-                     <div class="tabcontent" id="Shirts">
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-1.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-1.png') }}')" alt="Shirt 1"
-                             width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-2.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-2.png') }}')" alt="Shirt 1"
-                             width="100" />
+             <!-- Items List -->
+             <div class="items-list" style="height: 36rem;">
+                 <!-- Shirts Tab -->
+                 <div class="tabcontent" id="Shirts">
+                     <img src="{{ asset('assets/cricket/cricket01.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket01.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-3.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-3.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/02.jpg') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket02.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-4.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-4.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket03.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket03.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-5.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-5.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket04.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket04.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-6.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-6.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket05.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket05.png') }}')" alt="Shirt 1"
+                         width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-7.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-7.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket06.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket06.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-8.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-8.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket07.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket07.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-9.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-9.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket08.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket08.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-10.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-10.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket09.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket09.png') }}')" alt="Shirt 1" width="100" />
 
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-11.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-11.png') }}')" alt="Shirt 1"
-                             width="100" />
-
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-12.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-12.png') }}')" alt="Shirt 1"
-                             width="100" />
-
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-13.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-13.png') }}')" alt="Shirt 1"
-                             width="100" />
-
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-14.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-14.png') }}')" alt="Shirt 1"
-                             width="100" />
-
-                         <img src="{{ asset('assets/cricket-kit/cricket-kit-15.png') }}" class="shirt"
-                             onclick="selectShirt('{{ asset('assets/cricket-kit/cricket-kit-15.png') }}')" alt="Shirt 1"
-                             width="100" />
+                     <img src="{{ asset('assets/cricket/cricket001.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/cricket/cricket001.png') }}')" alt="Shirt 1"
+                         width="100" />
 
 
 
-                     </div>
+                 </div>
 
-                     <!-- Logos Tab -->
-                     {{-- <div class="tabcontent" id="Logos" style="display: none">
+                 <!-- Logos Tab -->
+                 {{-- <div class="tabcontent" id="Logos" style="display: none">
                 @for ($i = 1; $i <= 18; $i++)
                     <img src="{{ asset('assets/Logos/p-logo' . $i . '.png') }}" class="logo"
      onclick="selectLogo('{{ asset('assets/Logos/p-logo' . $i . '.png') }}')"
@@ -213,8 +198,8 @@
      @endfor
  </div> --}}
 
-                     <!-- Text Tab -->
-                     {{-- <div class="tabcontent" id="Text" style="display: none">
+                 <!-- Text Tab -->
+                 {{-- <div class="tabcontent" id="Text" style="display: none">
                 <label for="custom-text">Enter Your Text</label>
                 <textarea id="custom-text" rows="4" cols="36"></textarea><br><br>
 
@@ -243,39 +228,39 @@
                 <button id="update-text" style="margin-top: 10px;">Update Text</button>
             </div> --}}
 
-                     <!-- Categories Tab -->
-                     <div class="tabcontent" id="categories" style="display: none">
-                         <div class="cat-row">
-                             <div class="cat-col">
-                                 <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
-                                 <h1>Soccer</h1>
-                             </div>
-                             <div class="cat-col">
-                                 <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
-                                 <h1>Cricket</h1>
-                             </div>
-                             <div class="cat-col">
-                                 <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
-                                 <h1>Basketball</h1>
-                             </div>
-                             <div class="cat-col">
-                                 <a href="basketball"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
-                                 <h1>Goal Keeper</h1>
-                             </div>
+                 <!-- Categories Tab -->
+                 <div class="tabcontent" id="categories" style="display: none">
+                     <div class="cat-row">
+                         <div class="cat-col">
+                             <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
+                             <h1>Soccer</h1>
                          </div>
-                         <div class="cat-row">
-                             <div class="cat-col">
-                                 <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
-                                 <h1>Goal Keeper</h1>
-                             </div>
-                             <div class="cat-col">
-                                 <h1>Other / Staff / Management</h1>
-                             </div>
+                         <div class="cat-col">
+                             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
+                             <h1>Cricket</h1>
+                         </div>
+                         <div class="cat-col">
+                             <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
+                             <h1>Basketball</h1>
+                         </div>
+                         <div class="cat-col">
+                             <a href="basketball"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                             <h1>Goal Keeper</h1>
                          </div>
                      </div>
+                     <div class="cat-row">
+                         <div class="cat-col">
+                             <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                             <h1>Goal Keeper</h1>
+                         </div>
+                         <div class="cat-col">
+                             <h1>Other / Staff / Management</h1>
+                         </div>
+                     </div>
+                 </div>
 
-                     <!-- Color Picker -->
-                     {{-- <div class="tabcontent" id="colorpicker" style="display: none">
+                 <!-- Color Picker -->
+                 {{-- <div class="tabcontent" id="colorpicker" style="display: none">
                 <div class="picker-div">
                     <label for="color-picker">Choose Shirt Color:</label>
                     <input type="color" id="color-picker" onchange="updateShirtColor(this.value)">
@@ -286,8 +271,8 @@
                 </div>
             </div> --}}
 
-                     <!-- Patterns Tab -->
-                     {{-- <div class="tabcontent" id="Patterns" style="display: none;">
+                 <!-- Patterns Tab -->
+                 {{-- <div class="tabcontent" id="Patterns" style="display: none;">
                 <div class="pattern-options">
                     @for ($i = 1; $i <= 18; $i++)
                         <img src="{{ asset('assets/soccer-shirts/pattern' . $i . '.png') }}"
@@ -296,7 +281,7 @@
  @endfor
  </div>
  </div> --}}
-                 </div>
+             </div>
          </div>
 
          <!-- Right Section -->
@@ -304,8 +289,7 @@
              <div class="item-display" style="position: relative;">
                  <div id="text-display" style="position: absolute; z-index: 5;"></div>
                  <!-- Base shirt hamesha dikh rahi hai -->
-                 <img id="selected-shirt" src="{{ asset('assets/cricket-kit/cricket-kit-1.png') }}"
-                     alt="Selected Shirt" />
+                 <img id="selected-shirt" src="{{ asset('assets/cricket/01 FINAL.jpg') }}" alt="Selected Shirt" />
                  <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay"
                      style="display: none;" />
              </div>
@@ -338,9 +322,9 @@
      @endif
 
      <!-- FORM SECTION STARTS FROM HERE -->
-<form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
-                 @csrf
-        <div class="head-box">
+     <form action="{{ route('static.store') }}" method="POST" enctype="multipart/form-data">
+         @csrf
+         <div class="head-box">
              <p class="mainheading">CUSTOM SOCCER KIT</p>
              <div class="m-pr">
                  <p class="s-pr" data-base="39.00">$39.00</p>
@@ -611,7 +595,8 @@
                  </tbody>
              </table> --}}
 
-             <button style="
+             <button
+                 style="
         background-color: #000;
         color: #fff;
         font-weight: bold;
@@ -622,8 +607,8 @@
         cursor: pointer;
         transition: 0.3s;
     "
-                                    onmouseover="this.style.backgroundColor='#333'"
-                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
+                 onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
+                 type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
          </div>
 
          </div>
@@ -844,7 +829,8 @@
                          </tr>
                      </tbody>
                  </table>
-                 <button style="
+                 <button
+                     style="
         background-color: #000;
         color: #fff;
         font-weight: bold;
@@ -855,8 +841,8 @@
         cursor: pointer;
         transition: 0.3s;
     "
-                                    onmouseover="this.style.backgroundColor='#333'"
-                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
+                     onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
+                     type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
 
                  <div style="margin-top:1rem; text-align:right;">
                      <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>

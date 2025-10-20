@@ -61,16 +61,16 @@
         </div>
 
         <!-- Navigation Links -->
-        {{-- <ul class="nav-links">
+        <ul class="nav-links">
             <li><a href="{{route('index')}}">HOME</a></li>
             <li><a href="{{route('directoryadd')}}">DIRECTORY</a></li>
             <li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>
                <!--<li><a href="{{route('shop')}}">SHOP</a></li>-->
             <!--<li><a href="{{route('services')}}">SERVICES</a></li>-->
-            <!--<li><a href= "{{route('soccer')}}">CUSTOM UNIFORMS</a></li> -->
+            <li><a href= "{{route('static.soccer')}}">CUSTOM UNIFORMS</a></li> 
             
            
-        </ul> --}}
+        </ul>
 
         <!-- Check if user is logged in -->
         @if(session('user'))
@@ -92,11 +92,11 @@
 
 
         <div class="auth-links" style="text-align: center;">
-            {{-- <a href="{{route('help')}}" class="help">Help</a> --}}
+            <a href="{{route('help')}}" class="help">Help</a>
 
-            {{-- <a href="{{ route('login') }}" class="auth-button">Log In</a> --}}
+            <a href="{{ route('login') }}" class="auth-button">Log In</a>
 
-            <a href="{{ route('user.show.Form') }}" class="auth-button">Sign Up</a>
+            <a href="{{ route('register') }}" class="auth-button">Sign Up</a>
 
         </div>
 
@@ -133,7 +133,7 @@
 
 
         <!-- Search by Text Field -->
-        {{-- <form action="{{ route('search_bytext') }}" method="GET">
+        <form action="{{ route('search_bytext') }}" method="GET">
             @csrf
             <div class="search-text-field" id="text-field">
 
@@ -148,7 +148,7 @@
                     <!-- <button class="search-btn">Search</button> -->
                 </div>
             </div>
-        </form> --}}
+        </form>
         <script>
             const searchField = document.getElementById('searchField');
 

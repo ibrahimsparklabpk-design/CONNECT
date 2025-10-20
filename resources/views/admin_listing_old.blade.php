@@ -99,6 +99,12 @@
                             <span>Custom Order</span>
                         </a>
                     </li>
+                    <li class="side-nav-item">
+                        <a href="{{route('custome_order')}}" class="side-nav-link">
+                            <i class="ri-donut-chart-fill"></i>
+                            <span>Static Order</span>
+                        </a>
+                    </li>
 
                     <li class="side-nav-item">
                         <a href="{{route('create_product')}}" class="side-nav-link">

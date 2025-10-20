@@ -226,11 +226,11 @@
         <!-- Navigation Links -->
         <ul class="nav-links">
             <li><a href="index">HOME</a></li>
-            <li><a href="directoryadd">DIRECTORY</a></li>
+            <li><a href="{{route('directoryadd')}}">DIRECTORY</a></li>
             <!--<li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>-->
-            <li><a href="shop">SHOP</a></li>
+            <li><a href="{{ route('shop')}}">SHOP</a></li>
             <!--<li><a href="services">SERVICES</a></li>-->
-            <li><a href="{{ route('static.index') }}">CUSTOM UNIFORMS</a></li>
+            <li><a href="{{ route('static.soccer') }}">CUSTOM UNIFORMS</a></li>
 
 
         </ul>
@@ -245,7 +245,7 @@
                     @if (session('role') === 'admin')
                         <li><a href="admin_dashboard">Admin Dashboard</a></li>
                     @else
-                        <li><a href="dashboard">Dashboard</a></li>
+                        <li><a href="{{ route('dashboard')}}">Dashboard</a></li>
                     @endif
                     <li><a href="logout">Logout</a></li>
                 </ul>
@@ -254,7 +254,7 @@
             <div class="auth-links" style="text-align: center;">
                 <a href="#" class="help">Help</a>
 
-                <a href="login" class="auth-button">Login</a>
+                <a href="{{ route('login') }}" class="auth-button">Login</a>
 
                 <a href="register" class="auth-button">Sign Up</a>
 

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Models\BusinessRegistration;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\BusinessRegistration;
 use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
@@ -52,49 +51,41 @@ class LoginController extends Controller
 
 
 
-  public function login(Request $request)
+   public function login(Request $request)
 {
-    // ✅ Validate login form input
+    // Validate the login form input
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    // ✅ Try logging in as business (via Auth guard)
-    $credentials = [
-        'Email' => $request->email,
-        'password' => $request->password,
-    ];
-
-    if (Auth::guard('business')->attempt($credentials)) {
-        return redirect()->route('dashboard.index')
-            ->with('success', 'Business logged in successfully!');
-    }
-
-    // ✅ If business login fails, try regular user (manual check)
+    // Check if the login email belongs to a regular user first
     $user = DB::table('business_registrations')
         ->where('Email', $request->email)
         ->first();
 
+    // If regular user found, verify password
     if ($user && Hash::check($request->password, $user->Password)) {
         session(['user' => $user, 'role' => 'regular']);
-        return redirect()->route('dashboard.index');
+        return redirect()->route('dashboard'); 
     }
 
-    // ✅ If still not found, try admin login
-    $admin = DB::table('admin')
-        ->where('email_address', $request->email)
-        ->first();
+    // If no regular user found, check if it's an admin
+    if (!$user) {
+        $user = DB::table('admin')
+            ->where('email_address', $request->email)
+            ->first();
 
-    if ($admin && $admin->password === $request->password) {
-        session(['user' => $admin, 'role' => 'admin']);
-        return redirect()->route('admin_dashboard');
+        // Fix: Use Hash::check for admin password
+        if ($user && $user->password === $request->password) {
+            session(['user' => $user, 'role' => 'admin']); 
+            return redirect()->route('admin_dashboard');
+        }
     }
 
-    // ❌ Invalid credentials
+    // If authentication fails, redirect back with an error
     return back()->with('error', 'Invalid email or password.');
 }
-
 
 
 

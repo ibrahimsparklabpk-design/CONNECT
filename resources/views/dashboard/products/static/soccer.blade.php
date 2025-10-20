@@ -2,93 +2,83 @@
 
 @section('content')
     <div class="dashboard-box-content">
-        <h1>Static Products</h1>
+        <h1>Custom Products</h1>
         <p>Connecting you with Dominican Businesses Worldwide</p>
 
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Image</th>
-                        <th>Player Name</th>
-                        <th>Numbers</th>
-                        <th>Qauntity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th>Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($soccers as $index => $order)
-                        @php
-                            $bulkData = json_decode($order->bulk_data, true);
-                            $firstPlayer = $bulkData[0] ?? null;
-                        @endphp
-                        <tr>
+        <div class="orders-wrapper mt-4">
 
-                            <td>{{ $soccers->firstItem() + $index }}</td>
-                            <td>
-                                @if (!empty($order->image) && file_exists(public_path('selected-shirts/' . basename($order->image))))
-                                    <img src="{{ asset('selected-shirts/' . basename($order->image)) }}" alt="Logo"
-                                        width="80" height="80" class="rounded border">
-                                @else
-                                    No logo
-                                @endif
-                            </td>
-                            <td>
-                                {{ $firstPlayer['name'] ?? '-' }}
-                            </td>
-                            <td>
-                                {{ $firstPlayer['number'] ?? '-' }}
-                            </td>
-                            <td>
-                                {{ $firstPlayer['quantity'] ?? '-' }}
-                            </td>
-                            <td>
-                                {{ !empty($firstPlayer['price']) ? $firstPlayer['price'] : 'Price Unavailable' }}
-                            </td>
-                            <td>
-                                {{ !empty($firstPlayer['total']) ? $firstPlayer['total'] : 'Total Unavailable' }}
-                            </td>
+            @forelse($soccers as $index => $order)
+                @php
+                    $bulkData = json_decode($order->bulk_data, true);
+                @endphp
 
-                            <td>{{ $order->created_at ? $order->created_at->format('M d, Y') : '-' }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center">No custom product found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                <div class="order-card mb-4 p-3 border rounded shadow-sm bg-white">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="fw-bold mb-0">#{{ $soccers->firstItem() + $index }}</h5>
+                        <span class="text-muted">
+                            {{ $order->created_at ? $order->created_at->format('M d, Y') : '-' }}
+                        </span>
+                    </div>
 
+                    <div class="d-flex align-items-center mb-3">
+                        @if (!empty($order->logo))
+                            <img src="{{ asset('custom/logo/' . basename($order->logo)) }}" alt="Logo" width="100"
+                                height="100" class="rounded border me-3">
+                        @else
+                            <div class="border rounded p-3 text-center" style="width:100px;height:100px;">No Logo</div>
+                        @endif
 
+                        <div>
+                            {{-- <p class="mb-1"><strong>Product ID:</strong> {{ $order->id }}</p> --}}
+                            <p class="mb-1"><strong>Products:</strong> {{ is_array($bulkData) ? count($bulkData) : 0 }}
+                            </p>
 
-            {{-- ✅ Pagination links --}}
+                            @php
+                                // ✅ Total quantity calculation
+                                $totalQuantity = 0;
+                                if (is_array($bulkData)) {
+                                    foreach ($bulkData as $item) {
+                                        $qty = isset($item['quantity']) ? (int) $item['quantity'] : 0;
+                                        $totalQuantity += $qty;
+                                    }
+                                }
+                            @endphp
+
+                            <p class="mb-1"><strong>Quantities:</strong> {{ $totalQuantity }}</p>
+                        </div>
+                    </div>
+
+                    {{-- Players Details --}}
+                    @if (is_array($bulkData) && count($bulkData) > 0)
+                        <div class="players-box border-top pt-3">
+                            @foreach ($bulkData as $player)
+                                <div class="player-row border p-2 mb-2 rounded bg-light">
+                                    <div class="row">
+                                        <div class="col-md-3"><strong>Name:</strong> {{ $player['name'] ?? '-' }}</div>
+                                        <div class="col-md-2"><strong>No:</strong> {{ $player['number'] ?? '-' }}</div>
+                                        <div class="col-md-2"><strong>Qty:</strong> {{ $player['quantity'] ?? '-' }}</div>
+                                        <div class="col-md-2"><strong>Price:</strong> {{ $player['price'] ?? '-' }}</div>
+                                        <div class="col-md-3"><strong>Total:</strong> {{ $player['total'] ?? '-' }}</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-danger">Invalid or empty data.</p>
+                    @endif
+                </div>
+
+            @empty
+                <div class="text-center text-danger fw-bold p-4 border rounded bg-white">
+                    No custom product found.
+                </div>
+            @endforelse
+
+            {{-- ✅ Pagination --}}
             <div class="d-flex justify-content-center mt-3" style="font-weight:bold; color:#000;">
-                <style>
-                    .pagination .page-link {
-                        color: #000 !important;
-                        font-weight: bold !important;
-                        border: 1px solid #555 !important;
-                    }
-
-                    .pagination .page-item.active .page-link {
-                        background-color: #000 !important;
-                        border-color: #000 !important;
-                        color: #fff !important;
-                    }
-
-                    .pagination .page-link:hover {
-                        background-color: #333 !important;
-                        color: #fff !important;
-                    }
-                </style>
-
                 {{ $soccers->links('pagination::bootstrap-4') }}
             </div>
-
-
         </div>
+
     </div>
 @endsection

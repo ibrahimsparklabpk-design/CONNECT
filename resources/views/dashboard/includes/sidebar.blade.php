@@ -31,6 +31,6 @@
          <li><a href="{{ route('password.update.form') }}"><i class="fas fa-box"></i>Change Password</a></li>
 
          <li><a href="{{ route('index') }}"><i class="fa-solid fa-house-user"></i></i> Home</a></li>
-         {{-- <li><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li> --}}
+         <li><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
      </ul>
  </aside>

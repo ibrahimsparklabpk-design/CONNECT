@@ -28,4 +28,10 @@ class CustomUniform extends Model
     {
         return $this->belongsTo(BusinessRegistration::class, 'business_registrations_id');
     }
+
+    public function customOrder()
+{
+    return $this->belongsTo(CustomOrder::class, 'business_registrations_id', 'business_registrations_id');
+}
+
 }

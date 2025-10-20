@@ -441,9 +441,7 @@
     </div>
 </div>
 
-
-
-                                <div class="tabcontent" id="capture" style="display: none">
+  <div class="tabcontent" id="capture" style="display: none">
                                     <div class="pattern-container">
                                         <h3>Saved Designs</h3>
                                         <div id="saved-designs" accept="image/*"

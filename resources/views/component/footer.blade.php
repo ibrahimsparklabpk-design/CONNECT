@@ -1,4 +1,4 @@
-   {{-- <div class="footer-wrapper">
+  <div class="footer-wrapper">
 
 
        <footer class="custom-footer">
@@ -35,15 +35,13 @@
                <div class="footer-quick-links">
                    <h4 class="footer-heading">QUICK LINKS</h4>
                    <ul class="footer-links-list">
-                       <li><a href="{{route('index')}}">Home</a></li>
-
-
+                       <li><a href="#">Home</a></li>
                        <li><a href="https://shop.connect767.com/">Shop</a></li>
-                       <!-- <li><a href="{{route('services')}}">Services</a></li> -->
-                       <!-- <li><a href="{{route('basketball')}}">Custom Uniforms</a></li> -->
-                       <li><a href="{{route('services')}}#about">About Us</a></li>
-                          <!--<li><a href="{{route('faqs')}}">FAQs</a></li>-->
-                            <li><a href="{{route('help')}}#faqs">FAQs</a></li>
+                       <!-- <li><a href="#">Services</a></li> -->
+                       <!-- <li><a href="#">Custom Uniforms</a></li> -->
+                       <li><a href="#">About Us</a></li>
+                          <!--<li><a href="#">FAQs</a></li>-->
+                            <li><a href="#">FAQs</a></li>
 
                    </ul>
                </div>
@@ -51,19 +49,19 @@
                <!-- Third Div: Our Services -->
                <div class="footer-services">
                    <h4 class="footer-heading">OUR SERVICES</h4>
-                   {{-- <ul class="footer-links-list">
+                   <ul class="footer-links-list">
                        <li>
-                           <a href="{{ route('services') }}#professional-networking">Professional Networking</a>
+                           <a href="#">Professional Networking</a>
                        </li>
                        <li>
-                           <a href="{{ route('services') }}#consulting-services">Consulting Services</a>
+                           <a href="#">Consulting Services</a>
                         </li>
                        <li>
-                           <a href="{{ route('services') }}#manufacturing-services">Manufacturing Services</a>
+                           <a href="#">Manufacturing Services</a>
                         </li>
-                       <li><a href="{{ route('services') }}#partnership-programs">Partnership Programs</a>
+                       <li><a href="#">Partnership Programs</a>
                         </li>
-                   </ul> --}}
+                   </ul>
                </div>
 
                <!-- Fourth Div: Information with Social Media Icons -->
@@ -113,7 +111,7 @@
    <!-- Copyright Section -->
    <div class="footer-copyright">
        <p style="font-size:16px !important;">&copy; Copyright 2024 Connect767 All Rights Reserved</p>
-   </div> --}}
+   </div> 
 
 
    <!-- // Read more page select stars script -->

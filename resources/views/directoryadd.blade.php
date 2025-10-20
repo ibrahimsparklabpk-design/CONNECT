@@ -64,7 +64,7 @@
             <li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>
                <!--<li><a href="{{route('shop')}}">SHOP</a></li>-->
             <!--<li><a href="{{route('services')}}">SERVICES</a></li>-->
-            <!--<li><a href= "{{route('soccer')}}">CUSTOM UNIFORMS</a></li> -->
+            <li><a href= "{{route('static.soccer')}}">CUSTOM UNIFORMS</a></li> 
             
            
         </ul>

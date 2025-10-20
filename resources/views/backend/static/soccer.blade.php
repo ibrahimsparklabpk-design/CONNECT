@@ -106,11 +106,22 @@
          <!-- Left Section -->
          <div class="left-section">
              <div class="icon-list">
-                 <div class="icon" onclick="openTab('categories')">
+                 <div class="icon" onclick="openTab('categories')" style="text-align:center">
                      <img src="{{ asset('assets/categories-icon.png') }}" alt="Categories" class="tab-icon" width="50px" />
+                     <label class="icon-label">Categories</label>
                  </div>
-                 <div class="icon" onclick="openTab('Shirts')">
+
+                 <a href="{{ route('custome.index') }}" style="text-decoration: none; color: inherit;">
+                     <div class="icon" style="text-align:center; cursor:pointer;">
+                         <img src="{{ asset('assets/jpg shirt-01.png') }}" alt="Custom Design" class="tab-icon"
+                             width="50px" />
+                         <label class="icon-label">Custom Design</label>
+                     </div>
+                 </a>
+
+                 <div class="icon" onclick="openTab('Shirts')" style="text-align:center">
                      <img src="{{ asset('assets/style.png') }}" alt="Shirts" class="tab-icon" width="50px" />
+                     <label class="icon-label">Shirts</label>
                  </div>
 
                  {{-- <div class="icon" onclick="openTab('Logos')">
@@ -129,9 +140,10 @@
                 <img src="{{ asset('assets/pattern-icon.png') }}" alt="Patterns" class="tab-icon" width="50px" />
  </div> --}}
 
-                 <div class="icon" onclick="captureFullRightSection()">
+                 <div class="icon" onclick="captureFullRightSection()" style="text-align: center">
                      <img src="{{ asset('assets/savedesignicon.png') }}" alt="Save Design" class="tab-icon"
                          width="50px" />
+                     <label class="icon-label">Save</label>
                  </div>
              </div>
 
@@ -141,44 +153,39 @@
              <div class="items-list" style="height: 36rem;">
                  <!-- Shirts Tab -->
                  <div class="tabcontent" id="Shirts">
-                     <img src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/FRONTPNG.png') }}')" alt="Shirt 1"
+                     <img src="{{ asset('assets/soccer/soccer01.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer01.png') }}')" alt="Shirt 1" width="100" />
+
+                     <img src="{{ asset('assets/soccer/soccer02.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer02.png') }}')" alt="Shirt 4"
                          width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt4.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt4.png') }}')" alt="Shirt 4"
+                     <img src="{{ asset('assets/soccer/soccer03.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer03.png') }}')" alt="Shirt 5"
                          width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt5.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt5.png') }}')" alt="Shirt 5"
+                     <img src="{{ asset('assets/soccer/soccer05.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer05.png') }}')" alt="Shirt 6"
                          width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt6.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt6.png') }}')" alt="Shirt 6"
+                     <img src="{{ asset('assets/soccer/soccer06.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer06.png') }}')" alt="Shirt 7" width="100" />
+
+                     <img src="{{ asset('assets/soccer/soccer07.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer07.png') }}')" alt="Shirt 8"
                          width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt7.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt7.png') }}')" alt="Shirt 7"
-                         width="100" />
+                     <img src="{{ asset('assets/soccer/soccer08.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer08.png') }}')" alt="Shirt 9" width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt8.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt8.png') }}')" alt="Shirt 8"
-                         width="100" />
+                     <img src="{{ asset('assets/soccer/soccer09.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer09.png') }}')" alt="Shirt 10" width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt9.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt9.png') }}')" alt="Shirt 9"
-                         width="100" />
+                     <img src="{{ asset('assets/soccer/soccer04.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer04.png') }}')" alt="Shirt 11" width="100" />
 
-                     <img src="{{ asset('assets/soccer-shirts/shirt10.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt10.png') }}')" alt="Shirt 10"
-                         width="100" />
-
-                     <img src="{{ asset('assets/soccer-shirts/shirt11.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt11.png') }}')" alt="Shirt 11"
-                         width="100" />
-
-                     <img src="{{ asset('assets/soccer-shirts/shirt12.png') }}" class="shirt"
-                         onclick="selectShirt('{{ asset('assets/soccer-shirts/shirt12.png') }}')" alt="Shirt 12"
+                     <img src="{{ asset('assets/soccer/soccer001.png') }}" class="shirt"
+                         onclick="selectShirt('{{ asset('assets/soccer/soccer001.png') }}')" alt="Shirt 12"
                          width="100" />
                  </div>
 
@@ -278,7 +285,7 @@
              <div class="item-display" style="position: relative;">
                  <div id="text-display" style="position: absolute; z-index: 5;"></div>
                  <!-- Base shirt hamesha dikh rahi hai -->
-                 <img id="selected-shirt" src="{{ asset('assets/soccer-shirts/FRONTPNG.png') }}" alt="Selected Shirt" />
+                 <img id="selected-shirt" src="{{ asset('assets/soccer/soccer01.png') }}" alt="Selected Shirt" />
                  <img id="selected-pattern" src="" alt="Pattern Overlay" class="pattern-overlay"
                      style="display: none;" />
              </div>
@@ -800,7 +807,8 @@
                          </tr>
                      </tbody>
                  </table>
-                 <button style="
+                 <button
+                     style="
         background-color: #000;
         color: #fff;
         font-weight: bold;
@@ -810,8 +818,8 @@
         cursor: pointer;
         transition: 0.3s;
     "
-                                    onmouseover="this.style.backgroundColor='#333'"
-                                    onmouseout="this.style.backgroundColor='#000'" type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
+                     onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
+                     type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
 
                  <div style="margin-top:1rem; text-align:right;">
                      <strong>Grand Total: $<span id="grandTotal">39.00</span></strong>
@@ -834,7 +842,7 @@
          </div>
      </form>
 
-  
+
 
      <script>
          let playerRowCount = 1;

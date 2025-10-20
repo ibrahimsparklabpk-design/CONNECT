@@ -16,16 +16,17 @@ class CustomeUniformController extends Controller
    public function index()
 {
     // Get logged-in business
-    $business = Auth::guard('business')->user();
+    // $business = Auth::guard('business')->user();
 
-    if (!$business) {
-        abort(403, 'You do not have permission to view this page.');
-    }
+    // if (!$business) {
+    //     abort(403, 'You do not have permission to view this page.');
+    // }
 
-    $customUniform = CustomUniform::where('business_registrations_id', $business->id)
-        ->latest()
-        ->paginate(5);
+    // $customUniform = CustomUniform::where('business_registrations_id', $business->id)
+    //     ->latest()
+    //     ->paginate(5);
 
+    $customUniform = CustomUniform::all();
     return view('dashboard.products.custom.soccer', compact('customUniform'));
 }
     public function soccer()
@@ -36,7 +37,7 @@ class CustomeUniformController extends Controller
         return view('backend.custome.soccer', compact('customImage'));
     }
 
-    public function circket()
+    public function cricket()
     {
         return view('backend.custome.circket');
     }
