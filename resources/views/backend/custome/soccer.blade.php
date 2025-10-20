@@ -1,9 +1,9 @@
-@extends('backend.layout.master')
+@extends('layouts.master')
 
 
 @section('main-content')
     <div class="container-fluid">
-        <form action="{{ route('custome.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="#" method="POST" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-lg-12 col-md-6">
@@ -180,7 +180,7 @@
                                 <div class="tabcontent" id="categories">
                                     <div class="cat-row">
                                         <div class="cat-col">
-                                            <a href="{{ route('custome.index') }}"><img
+                                            <a href="#"><img
                                                     src="{{ asset('assets/soccer-icon.png') }}" /></a>
                                             <h1>Soccer</h1>
                                         </div>
@@ -776,1580 +776,929 @@
 
 
 @section('script')
-    <script>
-        // =================== TAB SWITCH ===================
-        function openTab(tabName) {
-            document.querySelectorAll(".tabcolor, .tabcontent").forEach(tab => tab.style.display = "none");
-            const tabEl = document.getElementById(tabName);
-            if (tabEl) tabEl.style.display = "block";
-            tabEl.querySelectorAll(".tabcontent").forEach(child => child.style.display = "block");
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            openTab("Shirts");
-            initCanvas();
-            setupColorPickers();
-            setupTextListeners();
-            setupFileUploads();
-            setupTextStylingControls();
-        });
-
-        // =================== CANVAS INIT ===================
-        let canvas, ctx;
-
-        // LOGO & PATTERN - Now supporting multiple logos
-        let logos = []; // Array to store multiple logos
-        let selectedLogoIndex = -1; // Currently selected logo index
-        let logoX = 300,
-            logoY = 200,
-            logoScale = 1,
-            logoAngle = 0;
-
-        let selectedPattern = null,
-            patternX = 300,
-            patternY = 200,
-            patternScale = 1,
-            patternAngle = 0;
-
-        // TEXT ELEMENTS - Now each text element has its own properties
-        const textElements = {
-            playerName: {
-                text: "",
-                x: 300,
-                y: 150,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 30
-            },
-            playerNumber: {
-                text: "",
-                x: 300,
-                y: 250,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 60
-            },
-            sleeveLeft: {
-                text: "",
-                x: 100,
-                y: 300,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 18
-            },
-            sleeveRight: {
-                text: "",
-                x: 500,
-                y: 300,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 18
-            },
-            backText: {
-                text: "",
-                x: 300,
-                y: 100,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 22
-            },
-            frontText: {
-                text: "",
-                x: 300,
-                y: 400,
-                scale: 1,
-                angle: 0,
-                color: "#000000",
-                active: false,
-                fontFamily: "Arial Black",
-                fontWeight: "normal",
-                fontStyle: "normal",
-                fontSize: 22
-            }
-        };
-
-        // ACTION HANDLERS
-        let activeSelection = null;
-        let dragStart = {
-                x: 0,
-                y: 0
-            },
-            isDragging = false,
-            isResizing = false,
-            currentAction = null;
-
-        const colors = {
-            collar: "#ffffff",
-            body: "#ffffff",
-            sleeve: "#ffffff",
-            trouser: "#ffffff",
-            shocks: "#ffffff",
-            shoes: "#ffffff",
-            pattern: "#ffffff",
-            strip: "#ffffff" // Added strip color
-        };
-
-        const recycleBin = new Image();
-        recycleBin.src = "https://img.icons8.com/ios-filled/50/000000/recycle-bin.png";
-
-        // =================== INIT CANVAS ===================
-        function initCanvas() {
-            canvas = document.getElementById("shirt-canvas");
-            ctx = canvas.getContext("2d");
-
-            collarImage = document.getElementById("shirt-collar");
-            bodyImage = document.getElementById("shirt-body");
-            sleeveImage = document.getElementById("shirt-sleeve");
-            trouserImage = document.getElementById("shirt-trouser");
-            shocksImage = document.getElementById("shirt-shocks");
-            shoesImage = document.getElementById("shirt-shoes");
-
-            // Strip images
-            shirtStripImage = document.getElementById("shirt-strip");
-            sleeveStripImage = document.getElementById("shirt-sleeve-strip");
-            trouserStripImage = document.getElementById("shirt-trouser-strip");
-
-            // Array of all images
-            const imgs = [collarImage, bodyImage, sleeveImage, trouserImage, shocksImage, shoesImage,
-                shirtStripImage, sleeveStripImage, trouserStripImage
-            ];
-
-            let loaded = 0;
-
-            function initCanvasAfterLoad() {
-                const TARGET_W = 600;
-                const scale = TARGET_W / bodyImage.naturalWidth; // calculate scale based on body width
-                const TARGET_H = Math.round(bodyImage.naturalHeight * scale);
-
-                canvas.width = TARGET_W;
-                canvas.height = TARGET_H;
-
-                // Store scale globally for drawing other parts correctly
-                window.kitScale = scale;
-
-                drawKit(); // Draw everything once canvas is ready
-            }
-
-            // Check if all images are loaded
-            imgs.forEach(img => {
-                if (img.complete) {
-                    loaded++;
-                } else {
-                    img.onload = () => {
-                        loaded++;
-                        if (loaded === imgs.length) initCanvasAfterLoad();
-                    };
-                }
-            });
-
-            // In case all images were already loaded
-            if (loaded === imgs.length) initCanvasAfterLoad();
-
-
-            canvas.addEventListener("mousedown", startAction);
-            canvas.addEventListener("mousemove", performAction);
-            canvas.addEventListener("mouseup", endAction);
-            canvas.addEventListener("mouseleave", endAction);
-
-            canvas.addEventListener("wheel", e => {
-                if (activeSelection === "logo" && selectedLogoIndex >= 0) {
-                    const logo = logos[selectedLogoIndex];
-                    e.ctrlKey ? logo.angle += e.deltaY * 0.01 : logo.scale = Math.max(0.2, logo.scale + e.deltaY * -
-                        0.001);
-                    drawKit();
-                }
-                if (activeSelection === "pattern" && selectedPattern) {
-                    e.ctrlKey ? patternAngle += e.deltaY * 0.01 : patternScale = Math.max(0.2, patternScale + e
-                        .deltaY * -0.001);
-                    drawKit();
-                }
-                if (activeSelection && activeSelection.startsWith("text-")) {
-                    const textType = activeSelection.replace("text-", "");
-                    if (textElements[textType]) {
-                        e.ctrlKey ? textElements[textType].angle += e.deltaY * 0.01 : textElements[textType].scale =
-                            Math.max(0.2, textElements[textType].scale + e.deltaY * -0.001);
-                        drawKit();
-                    }
-                }
-                e.preventDefault();
-            });
-        }
-
-        // =================== HELPER FUNCTIONS ===================
-        function isInsideHandle(px, py, objX, objY, w, h, handleSize = 12) {
-            const handleX = objX + w / 2;
-            const handleY = objY + h / 2;
-            return Math.hypot(px - handleX, py - handleY) <= handleSize;
-        }
-
-        function rotatePoint(px, py, cx, cy, angle) {
-            const s = Math.sin(-angle),
-                c = Math.cos(-angle);
-            px -= cx;
-            py -= cy;
-            const xnew = px * c - py * s;
-            const ynew = px * s + py * c;
-            return {
-                x: xnew + cx,
-                y: ynew + cy
-            };
-        }
-
-        // =================== ACTION HANDLERS ===================
-        function startAction(e) {
-            dragStart = {
-                x: e.offsetX,
-                y: e.offsetY
-            };
-            let clicked = false;
-
-            // Reset all text active states
-            Object.keys(textElements).forEach(key => {
-                textElements[key].active = false;
-            });
-
-            const items = [];
-
-            // Add logos to items
-            logos.forEach((logo, index) => {
-                items.push({
-                    type: "logo",
-                    index: index,
-                    img: logo.image,
-                    x: logo.x,
-                    y: logo.y,
-                    getSize: () => getLogoSize(index),
-                    angle: logo.angle,
-                    scale: logo.scale
-                });
-            });
-
-            // Add pattern
-            items.push({
-                type: "pattern",
-                img: selectedPattern,
-                x: patternX,
-                y: patternY,
-                getSize: getPatternSize,
-                angle: patternAngle
-            });
-
-            // Add text elements to items
-            Object.keys(textElements).forEach(key => {
-                if (textElements[key].text) {
-                    items.push({
-                        type: `text-${key}`,
-                        img: true,
-                        x: textElements[key].x,
-                        y: textElements[key].y,
-                        getSize: () => getTextSize(key),
-                        angle: textElements[key].angle,
-                        textType: key
-                    });
-                }
-            });
-
-            for (let item of items) {
-                if (!item.img && item.type !== "text") continue;
-                const {
-                    w,
-                    h
-                } = item.getSize();
-                const relX = e.offsetX - item.x;
-                const relY = e.offsetY - item.y;
-
-                // DELETE ICON (top-center)
-                const iconX = 0;
-                const iconY = -h / 2 - 20;
-                if (Math.hypot(relX - iconX, relY - iconY) <= 12) {
-                    if (item.type === "logo") {
-                        logos.splice(item.index, 1);
-                        selectedLogoIndex = -1;
-                    } else if (item.type === "pattern") {
-                        selectedPattern = null;
-                    } else if (item.type.startsWith("text-")) {
-                        const textType = item.type.replace("text-", "");
-                        textElements[textType].text = "";
-                        // Clear the corresponding input field
-                        document.getElementById(getInputIdForTextType(textType)).value = "";
-                    }
-                    activeSelection = null;
-                    drawKit();
-                    return;
-                }
-
-                // RESIZE HANDLE (bottom-right)
-                const handleX = w / 2;
-                const handleY = h / 2;
-                if (Math.hypot(relX - handleX, relY - handleY) <= 8) {
-                    currentAction = "resize";
-                    activeSelection = item.type;
-                    if (item.type.startsWith("text-")) {
-                        const textType = item.type.replace("text-", "");
-                        textElements[textType].active = true;
-                    }
-                    if (item.type === "logo") {
-                        selectedLogoIndex = item.index;
-                    }
-                    isResizing = true;
-                    clicked = true;
-                    return;
-                }
-
-                // DRAG (inside object)
-                if (relX >= -w / 2 && relX <= w / 2 && relY >= -h / 2 && relY <= h / 2) {
-                    currentAction = "move";
-                    activeSelection = item.type;
-                    if (item.type.startsWith("text-")) {
-                        const textType = item.type.replace("text-", "");
-                        textElements[textType].active = true;
-                        updateTextStylingControls(textType);
-                    }
-                    if (item.type === "logo") {
-                        selectedLogoIndex = item.index;
-                    }
-                    isDragging = true;
-                    clicked = true;
-                    return;
-                }
-            }
-
-            if (!clicked) {
-                activeSelection = null;
-                selectedLogoIndex = -1;
-                drawKit();
-            }
-        }
-
-        function performAction(e) {
-            const dx = e.offsetX - dragStart.x,
-                dy = e.offsetY - dragStart.y;
-            if (currentAction === "move") {
-                if (activeSelection === "logo" && isDragging && selectedLogoIndex >= 0) {
-                    logos[selectedLogoIndex].x += dx;
-                    logos[selectedLogoIndex].y += dy;
-                }
-                if (activeSelection === "pattern" && isDragging) {
-                    patternX += dx;
-                    patternY += dy;
-                }
-                if (activeSelection && activeSelection.startsWith("text-") && isDragging) {
-                    const textType = activeSelection.replace("text-", "");
-                    textElements[textType].x += dx;
-                    textElements[textType].y += dy;
-                }
-                dragStart = {
-                    x: e.offsetX,
-                    y: e.offsetY
-                };
-                drawKit();
-            }
-            if (currentAction === "resize") {
-                if (activeSelection === "logo" && isResizing && selectedLogoIndex >= 0) {
-                    logos[selectedLogoIndex].scale = Math.max(0.2, logos[selectedLogoIndex].scale + dx * 0.005);
-                }
-                if (activeSelection === "pattern" && isResizing) {
-                    patternScale = Math.max(0.2, patternScale + dx * 0.005);
-                }
-                if (activeSelection && activeSelection.startsWith("text-") && isResizing) {
-                    const textType = activeSelection.replace("text-", "");
-                    textElements[textType].scale = Math.max(0.2, textElements[textType].scale + dx * 0.005);
-                }
-                dragStart = {
-                    x: e.offsetX,
-                    y: e.offsetY
-                };
-                drawKit();
-            }
-        }
-
-        function endAction() {
-            isDragging = false;
-            isResizing = false;
-            currentAction = null;
-        }
-
-        // =================== SELECTION BOXES ===================
-        function drawSelections() {
-            const items = [];
-
-            // Add logos to items
-            logos.forEach((logo, index) => {
-                items.push({
-                    type: "logo",
-                    index: index,
-                    img: logo.image,
-                    x: logo.x,
-                    y: logo.y,
-                    getSize: () => getLogoSize(index),
-                    angle: logo.angle,
-                    active: index === selectedLogoIndex
-                });
-            });
-
-            // Add pattern
-            items.push({
-                type: "pattern",
-                img: selectedPattern,
-                x: patternX,
-                y: patternY,
-                getSize: getPatternSize,
-                angle: patternAngle,
-                active: activeSelection === "pattern"
-            });
-
-            // Add text elements to items
-            Object.keys(textElements).forEach(key => {
-                if (textElements[key].text) {
-                    items.push({
-                        type: `text-${key}`,
-                        img: true,
-                        x: textElements[key].x,
-                        y: textElements[key].y,
-                        getSize: () => getTextSize(key),
-                        angle: textElements[key].angle,
-                        textType: key,
-                        active: textElements[key].active
-                    });
-                }
-            });
-
-            items.forEach(item => {
-                if (item.img) {
-                    const {
-                        w,
-                        h
-                    } = item.getSize();
-                    ctx.save();
-                    ctx.translate(item.x, item.y);
-                    if (item.type !== "text") ctx.rotate(item.angle);
-
-                    // Draw selection box only if active
-                    if (item.active || item.type === "logo" && item.index === selectedLogoIndex) {
-                        ctx.strokeStyle = "#4A90E2";
-                        ctx.lineWidth = 2;
-                        ctx.setLineDash([5, 5]);
-                        ctx.strokeRect(-w / 2, -h / 2, w, h);
-                        ctx.setLineDash([]);
-
-                        // DELETE ICON (top-center)
-                        ctx.fillStyle = "#FF3B30";
-                        ctx.beginPath();
-                        ctx.arc(0, -h / 2 - 20, 12, 0, Math.PI * 2);
-                        ctx.fill();
-                        ctx.drawImage(recycleBin, -12, -h / 2 - 32, 24, 24);
-
-                        // RESIZE HANDLE (bottom-right)
-                        ctx.fillStyle = "#4A90E2";
-                        ctx.beginPath();
-                        ctx.arc(w / 2, h / 2, 8, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        // ROTATE HANDLE (top-right)
-                        ctx.fillStyle = "#34C759";
-                        ctx.beginPath();
-                        ctx.arc(w / 2, -h / 2 - 10, 8, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-
-                    ctx.restore();
-                }
-            });
-        }
-
-        // =================== SELECT LOGO/PATTERN ===================
-        function selectLogo(path) {
-            if (!bodyImage.naturalWidth) return;
-            const newLogo = {
-                image: new Image(),
-                x: 150,
-                y: 200,
-                scale: 1,
-                angle: 0
-            };
-
-            newLogo.image.src = path;
-            newLogo.image.onload = () => {
-                logos.push(newLogo);
-                selectedLogoIndex = logos.length - 1;
-                activeSelection = "logo";
-                drawKit();
-            };
-        }
-
-        function selectPattern(path) {
-            if (!bodyImage.naturalWidth) return;
-            selectedPattern = new Image();
-            selectedPattern.src = path;
-            selectedPattern.onload = () => {
-                patternX = 150;
-                patternY = 200;
-                patternScale = 1;
-                patternAngle = 0;
-                activeSelection = "pattern";
-                drawKit();
-            };
-        }
-
-        // =================== COLOR CANVAS HELPER ===================
-        function createColoredCanvas(img, color, w, h) {
-            const c = document.createElement("canvas");
-            c.width = w;
-            c.height = h;
-            const cctx = c.getContext("2d");
-            cctx.drawImage(img, 0, 0, w, h);
-            cctx.globalCompositeOperation = "multiply";
-            cctx.fillStyle = color;
-            cctx.fillRect(0, 0, w, h);
-            cctx.globalCompositeOperation = "destination-in";
-            cctx.drawImage(img, 0, 0, w, h);
-            return c;
-        }
-
-        // =================== SIZE HELPERS ===================
-        function getLogoSize(index) {
-            if (index < 0 || index >= logos.length || !logos[index].image) return {
-                w: 0,
-                h: 0
-            };
-            const logo = logos[index];
-            const w = canvas.width * 0.25 * logo.scale;
-            const h = logo.image.height * (w / logo.image.width);
-            return {
-                w,
-                h
-            };
-        }
-
-        function getPatternSize() {
-            if (!selectedPattern) return {
-                w: 0,
-                h: 0
-            };
-            const w = canvas.width * 0.4 * patternScale;
-            const h = selectedPattern.height * (w / selectedPattern.width);
-            return {
-                w,
-                h
-            };
-        }
-
-        function getTextSize(textType) {
-            const scale = canvas.width / 600 * textElements[textType].scale;
-            const ctxTemp = document.createElement("canvas").getContext("2d");
-
-            let text = textElements[textType].text;
-            let fontSize = textElements[textType].fontSize;
-
-            // Build font string
-            const fontString =
-                `${textElements[textType].fontStyle} ${textElements[textType].fontWeight} ${fontSize * scale}px ${textElements[textType].fontFamily}`;
-            ctxTemp.font = fontString;
-
-            const w = ctxTemp.measureText(text).width + 20;
-            const h = fontSize * scale + 10;
-            return {
-                w,
-                h
-            };
-        }
-
-        // =================== DRAW FUNCTIONS ===================
-        function drawPatternMasked() {
-            if (!selectedPattern) return;
-            const {
-                w,
-                h
-            } = getPatternSize();
-            const pCanvas = document.createElement("canvas");
-            pCanvas.width = canvas.width;
-            pCanvas.height = canvas.height;
-            const pctx = pCanvas.getContext("2d");
-            pctx.save();
-            pctx.translate(patternX, patternY);
-            pctx.rotate(patternAngle);
-            const coloredPattern = createColoredCanvas(selectedPattern, colors.pattern, w, h);
-            pctx.drawImage(coloredPattern, -w / 2, -h / 2, w, h);
-            pctx.restore();
-            pctx.globalCompositeOperation = "destination-in";
-            pctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
-            ctx.drawImage(pCanvas, 0, 0);
-        }
-
-        function drawLogoMasked() {
-            if (logos.length === 0) return;
-
-            // Create a combined mask
-            const maskCanvas = document.createElement("canvas");
-            maskCanvas.width = canvas.width;
-            maskCanvas.height = canvas.height;
-            const mctx = maskCanvas.getContext("2d");
-
-            // Draw all kit parts as mask
-            [bodyImage, sleeveImage, trouserImage].forEach(img => {
-                if (img.complete) mctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            });
-
-            logos.forEach((logo, index) => {
-                if (!logo.image) return;
-                const {
-                    w,
-                    h
-                } = getLogoSize(index);
-
-                const logoCanvas = document.createElement("canvas");
-                logoCanvas.width = canvas.width;
-                logoCanvas.height = canvas.height;
-                const lctx = logoCanvas.getContext("2d");
-
-                // Draw logo
-                lctx.save();
-                lctx.translate(logo.x, logo.y);
-                lctx.rotate(logo.angle);
-                lctx.drawImage(logo.image, -w / 2, -h / 2, w, h);
-                lctx.restore();
-
-                // Apply combined mask
-                lctx.globalCompositeOperation = "destination-in";
-                lctx.drawImage(maskCanvas, 0, 0);
-
-                // Draw on main canvas
-                ctx.drawImage(logoCanvas, 0, 0);
-            });
-        }
-
-
-
-        // =================== PLAYER TEXT ===================
-      // =================== PLAYER TEXT (Body-masked except sleeves) ===================
-let showMask = true; // global toggle
+<script>
+// ============== TAB SWITCH ==============
+function openTab(tabName) {
+  document.querySelectorAll(".tabcolor, .tabcontent").forEach(el => el.style.display = "none");
+  const tabEl = document.getElementById(tabName);
+  if (!tabEl) return;
+  tabEl.style.display = "block";
+  tabEl.querySelectorAll(".tabcontent").forEach(child => child.style.display = "block");
+}
+
+// ============== GLOBALS ==============
+let canvas, ctx;
+let collarImage, bodyImage, sleeveImage, trouserImage, shocksImage, shoesImage;
+let shirtStripImage, sleeveStripImage, trouserStripImage;
+
+// LOGOS (multiple)
+let logos = []; // {image,x,y,scale,angle}
+let selectedLogoIndex = -1;
+
+// PATTERN (single)
+let selectedPattern = null;
+let patternX = 300, patternY = 200, patternScale = 1, patternAngle = 0;
+
+// TEXT ELEMENTS (with playerShortNumber + extraName)
+const textElements = {
+  playerName:        { text:"", x:430, y: 70,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:28 },
+  playerNumber:      { text:"", x:430, y:150,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:60 },
+  playerShortNumber: { text:"", x:185, y:290,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"bold",   fontStyle:"normal", fontSize:30 },
+  sleeveLeft:        { text:"", x:100, y:300,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:18 },
+  sleeveRight:       { text:"", x:500, y:300,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:18 },
+  backText:          { text:"", x:300, y:100,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:22 },
+  frontText:         { text:"", x:155, y:150,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:22 },
+  extraName:         { text:"", x:300, y:520,  scale:1, angle:0, color:"#000000", active:false, fontFamily:"Arial Black", fontWeight:"normal", fontStyle:"normal", fontSize:24 }
+};
+
+// FRONT/BACK toggles (change defaults as you want)
+const showOn = {
+  playerName:        { front: true,  back: true  },
+  playerNumber:      { front: false, back: true  },
+  playerShortNumber: { front: false, back: false },
+  frontText:         { front: true,  back: false },
+  backText:          { front: false, back: true  },
+  sleeveLeft:        { front: true,  back: true  },
+  sleeveRight:       { front: true,  back: true  },
+  extraName:         { front: true,  back: true  },
+};
+
+// Per-side positions (600px width reference)
+const positions = {
+  front: {
+    playerName:        { x: 300, y: 120 },
+    playerNumber:      { x: 300, y: 240 },
+    playerShortNumber: { x: 185, y: 290 },
+    frontText:         { x: 300, y: 420 },
+    backText:          { x: 300, y: 460 },
+    sleeveLeft:        { x: 180, y: 300 },
+    sleeveRight:       { x: 420, y: 300 },
+    extraName:         { x: 300, y: 520 },
+  },
+  back: {
+    playerName:        { x: 430, y: 70  },
+    playerNumber:      { x: 430, y: 150 },
+    playerShortNumber: { x: 185, y: 290 },
+    frontText:         { x: 300, y: 420 },
+    backText:          { x: 300, y: 460 },
+    sleeveLeft:        { x: 100, y: 300 },
+    sleeveRight:       { x: 500, y: 300 },
+    extraName:         { x: 300, y: 520 },
+  }
+};
+
+// ACTION/STATE
+let activeSelection = null; // "logo" | "pattern" | "text-<key>" | null
+let dragStart = {x:0, y:0}, isDragging = false, isResizing = false, currentAction = null;
+
+// Colors
+const colors = {
+  collar:  "#ffffff",
+  body:    "#ffffff",
+  sleeve:  "#ffffff",
+  trouser: "#ffffff",
+  shocks:  "#ffffff",
+  shoes:   "#ffffff",
+  pattern: "#ffffff",
+  strip:   "#ffffff"
+};
+
+const recycleBin = new Image();
+recycleBin.src = "https://img.icons8.com/ios-filled/50/000000/recycle-bin.png";
+
+let showMask = true; // mask text to body (sleeves unmasked)
+
+// ============== DOM READY ==============
+document.addEventListener("DOMContentLoaded", function () {
+  openTab("Shirts");
+  initCanvas();
+  setupColorPickers();
+  setupTextListeners();
+  setupTextStylingControls();
+  setupPositionButtons();
+  setupFileUploads();
+  initPricingAndTables();
+  setupSideToggles(); // bind front/back checkboxes if present
+});
+
+// ============== (ADD) SIDE-AWARE TEXT HELPERS ==============
+const activeTextSide = {}; // { key: "front" | "back" }
+
+function enabledSidesFor(key){
+  const vis = showOn[key] || {front:false, back:false};
+  const sides = [];
+  if (vis.front) sides.push("front");
+  if (vis.back)  sides.push("back");
+  return sides;
+}
+function getSidePos(key, side){
+  const pos = (positions[side] && positions[side][key]) ? positions[side][key] : textElements[key];
+  return { x: pos.x, y: pos.y, side };
+}
+function getEffectivePos(key, clickX=null, clickY=null){
+  const sides = enabledSidesFor(key);
+  if (sides.length === 0) return { x:textElements[key].x, y:textElements[key].y, side:null };
+  if (clickX != null && clickY != null){
+    let best = null, bestD = Infinity;
+    for (const s of sides){
+      const p = getSidePos(key, s);
+      const d = Math.hypot(clickX - p.x, clickY - p.y);
+      if (d < bestD){ bestD = d; best = p; }
+    }
+    return best;
+  }
+  const pref = activeTextSide[key] || (sides.includes("front") ? "front" : "back");
+  return getSidePos(key, pref);
+}
+function unrotate(relX, relY, angle){
+  const c = Math.cos(-angle), s = Math.sin(-angle);
+  return { x: relX*c - relY*s, y: relX*s + relY*c };
+}
+
+// ============== CANVAS INIT ==============
+function initCanvas() {
+  canvas = document.getElementById("shirt-canvas");
+  if (!canvas) return;
+  ctx = canvas.getContext("2d");
+
+  collarImage  = document.getElementById("shirt-collar");
+  bodyImage    = document.getElementById("shirt-body");
+  sleeveImage  = document.getElementById("shirt-sleeve");
+  trouserImage = document.getElementById("shirt-trouser");
+  shocksImage  = document.getElementById("shirt-shocks");
+  shoesImage   = document.getElementById("shirt-shoes");
+
+  shirtStripImage   = document.getElementById("shirt-strip");
+  sleeveStripImage  = document.getElementById("shirt-sleeve-strip");
+  trouserStripImage = document.getElementById("shirt-trouser-strip");
+
+  const imgs = [collarImage, bodyImage, sleeveImage, trouserImage, shocksImage, shoesImage, shirtStripImage, sleeveStripImage, trouserStripImage];
+  let loaded = 0;
+
+  function initCanvasAfterLoad() {
+    const TARGET_W = 600;
+    const scale = TARGET_W / bodyImage.naturalWidth;
+    const TARGET_H = Math.round(bodyImage.naturalHeight * scale);
+    canvas.width = TARGET_W; canvas.height = TARGET_H;
+    window.kitScale = scale;
+    drawKit();
+  }
+
+  imgs.forEach(img => {
+    if (!img) return;
+    if (img.complete) {
+      loaded++;
+    } else {
+      img.onload = () => { loaded++; if (loaded === imgs.length) initCanvasAfterLoad(); };
+    }
+  });
+  if (loaded === imgs.length) initCanvasAfterLoad();
+
+  // Pointer Events
+  canvas.addEventListener("mousedown", startAction);
+  canvas.addEventListener("mousemove", performAction);
+  canvas.addEventListener("mouseup", endAction);
+  canvas.addEventListener("mouseleave", endAction);
+
+  // Wheel: scale or rotate (Ctrl)
+  canvas.addEventListener("wheel", e => {
+    if (activeSelection === "logo" && selectedLogoIndex >= 0) {
+      const logo = logos[selectedLogoIndex];
+      if (e.ctrlKey) logo.angle += e.deltaY * 0.01; else logo.scale = Math.max(0.2, logo.scale + e.deltaY * -0.001);
+      drawKit();
+    } else if (activeSelection === "pattern" && selectedPattern) {
+      if (e.ctrlKey) patternAngle += e.deltaY * 0.01; else patternScale = Math.max(0.2, patternScale + e.deltaY * -0.001);
+      drawKit();
+    } else if (activeSelection?.startsWith("text-")) {
+      const key = activeSelection.replace("text-", "");
+      if (textElements[key]) {
+        if (e.ctrlKey) textElements[key].angle += e.deltaY * 0.01; else textElements[key].scale = Math.max(0.2, textElements[key].scale + e.deltaY * -0.001);
+        drawKit();
+      }
+    }
+    e.preventDefault();
+  });
+}
+
+// ============== HELPERS ==============
+function createColoredCanvas(img, color, w, h) {
+  const c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  const cctx = c.getContext("2d");
+  cctx.drawImage(img, 0, 0, w, h);
+  cctx.globalCompositeOperation = "multiply";
+  cctx.fillStyle = color;
+  cctx.fillRect(0, 0, w, h);
+  cctx.globalCompositeOperation = "destination-in";
+  cctx.drawImage(img, 0, 0, w, h);
+  return c;
+}
+
+function getLogoSize(index) {
+  if (index < 0 || index >= logos.length || !logos[index].image) return { w:0, h:0 };
+  const logo = logos[index];
+  const w = canvas.width * 0.25 * logo.scale;
+  const h = logo.image.height * (w / logo.image.width);
+  return { w, h };
+}
+
+function getPatternSize() {
+  if (!selectedPattern) return { w:0, h:0 };
+  const w = canvas.width * 0.4 * patternScale;
+  const h = selectedPattern.height * (w / selectedPattern.width);
+  return { w, h };
+}
+
+function fontStringFor(el, scaleMul=1) {
+  return `${el.fontStyle} ${el.fontWeight} ${Math.max(1, el.fontSize * scaleMul)}px ${el.fontFamily}`;
+}
+
+function getTextSize(key) {
+  const el = textElements[key];
+  const s = (canvas.width / 600) * el.scale;
+  const ctxTemp = document.createElement("canvas").getContext("2d");
+  ctxTemp.font = fontStringFor(el, s);
+  const w = ctxTemp.measureText((el.text || "").toUpperCase()).width + 20;
+  const h = el.fontSize * s + 10;
+  return { w, h };
+}
+
+function drawTextAt(context, key, pos) {
+  const el = textElements[key];
+  if (!el?.text) return;
+  const s = (canvas.width / 600) * el.scale;
+  context.save();
+  context.translate(pos.x, pos.y);
+  context.rotate(el.angle);
+  context.textBaseline = "middle";
+  context.fillStyle = el.color;
+  context.font = fontStringFor(el, s);
+  context.textAlign = key.includes("sleeve") ? (key === "sleeveLeft" ? "left" : "right") : "center";
+  context.fillText(el.text.toUpperCase(), 0, 0);
+  context.restore();
+}
+
+// ============== POINTER ACTIONS (PATCHED) ==============
+function startAction(e) {
+  dragStart = { x: e.offsetX, y: e.offsetY };
+  let clicked = false;
+
+  // reset actives
+  Object.keys(textElements).forEach(k => (textElements[k].active = false));
+
+  const items = [];
+  // logos
+  logos.forEach((logo, idx) => {
+    items.push({ type:"logo", index:idx, img:logo.image, x:logo.x, y:logo.y, getSize:() => getLogoSize(idx), angle:logo.angle, scale:logo.scale });
+  });
+  // pattern
+  items.push({ type:"pattern", img:selectedPattern, x:patternX, y:patternY, getSize:getPatternSize, angle:patternAngle });
+  // texts (side-aware: nearest side to click)
+  Object.keys(textElements).forEach(key => {
+    if (!textElements[key].text) return;
+    const pos = getEffectivePos(key, e.offsetX, e.offsetY);
+    items.push({ type:`text-${key}`, img:true, x:pos.x, y:pos.y, side:pos.side, getSize:() => getTextSize(key), angle:textElements[key].angle, textType:key });
+  });
+
+  for (let item of items) {
+    if (!item.img) continue;
+    const { w, h } = item.getSize();
+    // local space
+    let relX = e.offsetX - item.x;
+    let relY = e.offsetY - item.y;
+    // rotation-aware hit test
+    const p = unrotate(relX, relY, item.angle || 0);
+    relX = p.x; relY = p.y;
+
+    // delete icon (top-center)
+    if (Math.hypot(relX - 0, relY - (-h/2 - 20)) <= 12) {
+      if (item.type === "logo") {
+        logos.splice(item.index, 1); selectedLogoIndex = -1;
+      } else if (item.type === "pattern") {
+        selectedPattern = null;
+      } else if (item.type.startsWith("text-")) {
+        const t = item.type.replace("text-", "");
+        textElements[t].text = "";
+        const inputId = getInputIdForTextType(t);
+        const input = document.getElementById(inputId);
+        if (input) input.value = "";
+      }
+      activeSelection = null; drawKit(); return;
+    }
+
+    // resize handle (bottom-right)
+    if (Math.hypot(relX - (w/2), relY - (h/2)) <= 8) {
+      currentAction = "resize"; activeSelection = item.type; isResizing = true; clicked = true;
+      if (item.type.startsWith("text-")) {
+        const t = item.type.replace("text-", "");
+        textElements[t].active = true;
+        if (item.side) activeTextSide[t] = item.side; // lock side to the one clicked
+        updateTextStylingControls(t);
+      }
+      if (item.type === "logo") selectedLogoIndex = item.index;
+      return;
+    }
+
+    // drag inside bbox
+    if (relX >= -w/2 && relX <= w/2 && relY >= -h/2 && relY <= h/2) {
+      currentAction = "move"; activeSelection = item.type; isDragging = true; clicked = true;
+      if (item.type.startsWith("text-")) {
+        const t = item.type.replace("text-", "");
+        textElements[t].active = true;
+        if (item.side) activeTextSide[t] = item.side;
+        updateTextStylingControls(t);
+      }
+      if (item.type === "logo") selectedLogoIndex = item.index;
+      return;
+    }
+  }
+
+  if (!clicked) { activeSelection = null; selectedLogoIndex = -1; drawKit(); }
+}
+
+function performAction(e) {
+  const dx = e.offsetX - dragStart.x, dy = e.offsetY - dragStart.y;
+  if (currentAction === "move") {
+    if (activeSelection === "logo" && isDragging && selectedLogoIndex >= 0) {
+      logos[selectedLogoIndex].x += dx; logos[selectedLogoIndex].y += dy;
+    } else if (activeSelection === "pattern" && isDragging) {
+      patternX += dx; patternY += dy;
+    } else if (activeSelection?.startsWith("text-") && isDragging) {
+      const key  = activeSelection.replace("text-", "");
+      const side = activeTextSide[key] || (showOn[key]?.front ? "front" : "back");
+      const pos  = (positions[side] && positions[side][key]) ? positions[side][key] : textElements[key];
+      pos.x += dx; pos.y += dy; // (PATCH) side position update
+    }
+    dragStart = { x: e.offsetX, y: e.offsetY }; drawKit();
+  }
+  if (currentAction === "resize") {
+    if (activeSelection === "logo" && isResizing && selectedLogoIndex >= 0) {
+      logos[selectedLogoIndex].scale = Math.max(0.2, logos[selectedLogoIndex].scale + dx * 0.005);
+    } else if (activeSelection === "pattern" && isResizing) {
+      patternScale = Math.max(0.2, patternScale + dx * 0.005);
+    } else if (activeSelection?.startsWith("text-") && isResizing) {
+      const key = activeSelection.replace("text-", "");
+      textElements[key].scale = Math.max(0.2, textElements[key].scale + dx * 0.005);
+    }
+    dragStart = { x: e.offsetX, y: e.offsetY }; drawKit();
+  }
+}
+
+function endAction() { isDragging = false; isResizing = false; currentAction = null; }
+
+// ============== DRAW ==============
+function drawPatternMasked() {
+  if (!selectedPattern) return;
+  const { w, h } = getPatternSize();
+  const pCanvas = document.createElement("canvas"); pCanvas.width = canvas.width; pCanvas.height = canvas.height;
+  const pctx = pCanvas.getContext("2d");
+  pctx.save(); pctx.translate(patternX, patternY); pctx.rotate(patternAngle);
+  const colored = createColoredCanvas(selectedPattern, colors.pattern, w, h);
+  pctx.drawImage(colored, -w/2, -h/2, w, h);
+  pctx.restore();
+  pctx.globalCompositeOperation = "destination-in";
+  pctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(pCanvas, 0, 0);
+}
+
+function drawLogoMasked() {
+  if (!logos.length) return;
+  const maskCanvas = document.createElement("canvas"); maskCanvas.width = canvas.width; maskCanvas.height = canvas.height;
+  const mctx = maskCanvas.getContext("2d");
+  [bodyImage, sleeveImage, trouserImage].forEach(img => { if (img?.complete) mctx.drawImage(img, 0, 0, canvas.width, canvas.height); });
+
+  logos.forEach((logo, idx) => {
+    const { w, h } = getLogoSize(idx);
+    const lCan = document.createElement("canvas"); lCan.width = canvas.width; lCan.height = canvas.height;
+    const lctx = lCan.getContext("2d");
+    lctx.save(); lctx.translate(logo.x, logo.y); lctx.rotate(logo.angle);
+    lctx.drawImage(logo.image, -w/2, -h/2, w, h);
+    lctx.restore();
+    lctx.globalCompositeOperation = "destination-in";
+    lctx.drawImage(maskCanvas, 0, 0);
+    ctx.drawImage(lCan, 0, 0);
+  });
+}
+
+const MASKED_KEYS   = ["playerName","playerNumber","playerShortNumber","frontText","backText","extraName"];
+const UNMASKED_KEYS = ["sleeveLeft","sleeveRight"];
 
 function drawPlayerText() {
+  // --- SINGLE-INSTANCE GUARD (Player Name) ---
+  if (textElements.playerName?.text && showOn.playerName?.front && showOn.playerName?.back) {
+    showOn.playerName.front = false; // sirf BACK par dikhao
+  }
+  // -------------------------------------------
+
   if (!bodyImage?.naturalWidth) return;
 
-  const tCanvas = document.createElement("canvas");
-  tCanvas.width = canvas.width;
-  tCanvas.height = canvas.height;
-  const tctx = tCanvas.getContext("2d");
-
-  const MASKED_KEYS = ["playerName", "playerNumber", "backText", "frontText"];
-  const UNMASKED_KEYS = ["sleeveLeft", "sleeveRight"];
-
-  function drawSingleText(context, key) {
-    const el = textElements[key];
-    if (!el?.text) return;
-
-    const scale = canvas.width / 600 * el.scale;
-    const fontSize = el.fontSize;
-    const fontString = `${el.fontStyle} ${el.fontWeight} ${fontSize * scale}px ${el.fontFamily}`;
-
-    context.save();
-    context.translate(el.x, el.y);
-    context.rotate(el.angle);
-    context.textBaseline = "middle";
-    context.fillStyle = el.color;
-    context.font = fontString;
-    context.textAlign = key.includes("sleeve") ? (key === "sleeveLeft" ? "left" : "right") : "center";
-    context.fillText(el.text.toUpperCase(), 0, 0);
-    context.restore();
-  }
-
-  // 1️⃣ masked text layer
-  MASKED_KEYS.forEach(k => drawSingleText(tctx, k));
-
-  // 2️⃣ mask apply only if showMask === true
+  // FRONT masked
+  const frontCanvas = document.createElement("canvas");
+  frontCanvas.width = canvas.width; frontCanvas.height = canvas.height;
+  const fctx = frontCanvas.getContext("2d");
+  Object.keys(textElements).forEach(key => {
+    if (!showOn[key]) return;
+    if (showOn[key].front && MASKED_KEYS.includes(key)) {
+      const pos = positions.front[key] || textElements[key];
+      drawTextAt(fctx, key, pos);
+    }
+  });
   if (showMask) {
-    tctx.globalCompositeOperation = "destination-in";
-    tctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+    fctx.globalCompositeOperation = "destination-in";
+    fctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(frontCanvas, 0, 0);
+
+  // FRONT unmasked sleeves
+  UNMASKED_KEYS.forEach(key => { if (showOn[key]?.front) drawTextAt(ctx, key, positions.front[key] || textElements[key]); });
+
+  // BACK masked
+  const backCanvas = document.createElement("canvas");
+  backCanvas.width = canvas.width; backCanvas.height = canvas.height;
+  const bctx = backCanvas.getContext("2d");
+  Object.keys(textElements).forEach(key => {
+    if (!showOn[key]) return;
+    if (showOn[key].back && MASKED_KEYS.includes(key)) {
+      const pos = positions.back[key] || textElements[key];
+      drawTextAt(bctx, key, pos);
+    }
+  });
+  if (showMask) {
+    bctx.globalCompositeOperation = "destination-in";
+    bctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(backCanvas, 0, 0);
+
+  // BACK unmasked sleeves
+  UNMASKED_KEYS.forEach(key => { if (showOn[key]?.back) drawTextAt(ctx, key, positions.back[key] || textElements[key]); });
+}
+
+function drawSelections() {
+  const items = [];
+  // logos
+  logos.forEach((logo, idx) => items.push({ type:"logo", index:idx, img:logo.image, x:logo.x, y:logo.y, getSize:() => getLogoSize(idx), angle:logo.angle, active: idx === selectedLogoIndex }));
+  // pattern
+  items.push({ type:"pattern", img:selectedPattern, x:patternX, y:patternY, getSize:getPatternSize, angle:patternAngle, active: activeSelection === "pattern" });
+  // texts (PATCH: use side positions + rotate selection box)
+  Object.keys(textElements).forEach(k => {
+    const el = textElements[k];
+    if (!el.text) return;
+    const side = activeTextSide[k] || (showOn[k]?.front ? "front" : (showOn[k]?.back ? "back" : null));
+    const pos = (side && positions[side][k]) ? positions[side][k] : el;
+    items.push({ type:`text-${k}`, img:true, x:pos.x, y:pos.y, getSize:() => getTextSize(k), angle:el.angle, textType:k, active: el.active });
+  });
+
+  items.forEach(item => {
+    if (!item.img) return;
+    const { w, h } = item.getSize();
+    ctx.save();
+    ctx.translate(item.x, item.y);
+    ctx.rotate(item.angle || 0); // (PATCH) text selection bhi rotate hoga
+    if (item.active || (item.type === "logo" && item.index === selectedLogoIndex)) {
+      ctx.strokeStyle = "#4A90E2"; ctx.lineWidth = 2; ctx.setLineDash([5,5]);
+      ctx.strokeRect(-w/2, -h/2, w, h); ctx.setLineDash([]);
+      // delete icon
+      ctx.fillStyle = "#FF3B30"; ctx.beginPath(); ctx.arc(0, -h/2 - 20, 12, 0, Math.PI*2); ctx.fill();
+      ctx.drawImage(recycleBin, -12, -h/2 - 32, 24, 24);
+      // resize
+      ctx.fillStyle = "#4A90E2"; ctx.beginPath(); ctx.arc(w/2, h/2, 8, 0, Math.PI*2); ctx.fill();
+      // rotate handle (visual)
+      ctx.fillStyle = "#34C759"; ctx.beginPath(); ctx.arc(w/2, -h/2 - 10, 8, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  });
+}
+
+function drawKit() {
+  if (!bodyImage?.naturalWidth) return;
+  const TARGET_W = 600;
+  const scale = TARGET_W / bodyImage.naturalWidth;
+  const TARGET_H = Math.round(bodyImage.naturalHeight * scale);
+  canvas.width = TARGET_W; canvas.height = TARGET_H;
+
+  const bodyC    = createColoredCanvas(bodyImage,    colors.body,    TARGET_W, TARGET_H);
+  const sleeveC  = createColoredCanvas(sleeveImage,  colors.sleeve,  TARGET_W, TARGET_H);
+  const collarC  = createColoredCanvas(collarImage,  colors.collar,  TARGET_W, TARGET_H);
+  const trouserC = createColoredCanvas(trouserImage, colors.trouser, TARGET_W, TARGET_H);
+  const shocksC  = createColoredCanvas(shocksImage,  colors.shocks,  TARGET_W, TARGET_H);
+  const shoesC   = createColoredCanvas(shoesImage,   colors.shoes,   TARGET_W, TARGET_H);
+
+  const shirtStripC   = createColoredCanvas(shirtStripImage,   colors.strip, TARGET_W, TARGET_H);
+  const sleeveStripC  = createColoredCanvas(sleeveStripImage,  colors.strip, TARGET_W, TARGET_H);
+  const trouserStripC = createColoredCanvas(trouserStripImage, colors.strip, TARGET_W, TARGET_H);
+
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.drawImage(shoesC,   0,0);
+  ctx.drawImage(shocksC,  0,0);
+  ctx.drawImage(trouserC, 0,0);
+  ctx.drawImage(bodyC,    0,0);
+  ctx.drawImage(sleeveC,  0,0);
+  ctx.drawImage(collarC,  0,0);
+
+  ctx.drawImage(shirtStripC,   0,0);
+  ctx.drawImage(sleeveStripC,  0,0);
+  ctx.drawImage(trouserStripC, 0,0);
+
+  drawPatternMasked();
+  drawLogoMasked();
+  drawPlayerText();
+  drawSelections();
+}
+
+// ============== SELECT LOGO/PATTERN ==============
+function selectLogo(path) {
+  if (!bodyImage?.naturalWidth) return;
+  const newLogo = { image: new Image(), x:150, y:200, scale:1, angle:0 };
+  newLogo.image.src = path;
+  newLogo.image.onload = () => { logos.push(newLogo); selectedLogoIndex = logos.length - 1; activeSelection = "logo"; drawKit(); };
+}
+
+function selectPattern(path) {
+  if (!bodyImage?.naturalWidth) return;
+  selectedPattern = new Image(); selectedPattern.src = path;
+  selectedPattern.onload = () => { patternX = 150; patternY = 200; patternScale = 1; patternAngle = 0; activeSelection = "pattern"; drawKit(); };
+}
+
+// ============== COLOR PICKERS ==============
+// Required inputs: #color-collar, #color-body, #color-sleeve, #color-trouser, #color-shocks, #color-shoes, #color-artboard, #color-stripe
+function setupColorPickers() {
+  ["collar","body","sleeve","trouser","shocks","shoes","pattern","strip"].forEach(p => {
+    const el = p === "pattern" ? document.getElementById("color-artboard") : (p === "strip" ? document.getElementById("color-stripe") : document.getElementById(`color-${p}`));
+    if (!el) return;
+    el.addEventListener("input", e => { colors[p] = e.target.value; drawKit(); });
+  });
+}
+
+// ============== TEXT INPUTS & COLORS ==============
+// Required inputs: player-name(+ -color), front-text(+ -color), back-text(+ -color), sleeve-text-left(+ -color), sleeve-text-right(+ -color), extra-name(+ -color), player-number(+ -color), player-short-number(+ -color)
+function bindTextField(textInputId, colorInputId, key) {
+  const t = document.getElementById(textInputId);
+  const c = document.getElementById(colorInputId);
+  if (t) t.addEventListener("input", e => { textElements[key].text = e.target.value; drawKit(); });
+  if (c) c.addEventListener("input", e => { textElements[key].color = e.target.value; drawKit(); });
+}
+
+function setupTextListeners() {
+  bindTextField("player-name",       "player-name-color",       "playerName");
+  bindTextField("front-text",        "front-text-color",        "frontText");
+  bindTextField("back-text",         "back-text-color",         "backText");
+  bindTextField("sleeve-text-left",  "sleeve-text-left-color",  "sleeveLeft");
+  bindTextField("sleeve-text-right", "sleeve-text-right-color", "sleeveRight");
+  bindTextField("extra-name",        "extra-name-color",        "extraName");
+
+  // Player Number (0–99)
+  const pn = document.getElementById("player-number");
+  if (pn) {
+    pn.setAttribute("maxlength", "2");
+    pn.addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "");
+      if (v.length > 2) v = v.slice(0, 2);
+      if (v !== "") { let n = parseInt(v, 10); if (n > 99) n = 99; if (n < 0) n = 0; v = String(n); }
+      e.target.value = v;
+      textElements.playerNumber.text = v; drawKit();
+    });
+    const pnColor = document.getElementById("player-number-color");
+    if (pnColor) pnColor.addEventListener("input", e => { textElements.playerNumber.color = e.target.value; drawKit(); });
   }
 
-  ctx.drawImage(tCanvas, 0, 0);
-  UNMASKED_KEYS.forEach(k => drawSingleText(ctx, k));
+  // Shorts Number (0–99)
+  const psn = document.getElementById("player-short-number");
+  if (psn) {
+    psn.setAttribute("maxlength", "2");
+    psn.addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "");
+      if (v.length > 2) v = v.slice(0, 2);
+      if (v !== "") { let n = parseInt(v, 10); if (n > 99) n = 99; if (n < 0) n = 0; v = String(n); }
+      e.target.value = v;
+      textElements.playerShortNumber.text = v; drawKit();
+    });
+    const psnColor = document.getElementById("player-short-number-color");
+    if (psnColor) psnColor.addEventListener("input", e => { textElements.playerShortNumber.color = e.target.value; drawKit(); });
+  }
 }
 
-function getDefaultTextPositions() {
-  return {
-    playerName: { x: canvas.width * 0.10, y: canvas.height * 0.18 }, // left upper back
-    playerNumber: { x: canvas.width * 0.5,  y: canvas.height * 0.35 }, // back middle
-    frontText:   { x: canvas.width * 0.5,  y: canvas.height * 0.45 }, // chest area
-    backText:    { x: canvas.width * 0.5,  y: canvas.height * 0.55 }, // back body
-    sleeveLeft:  { x: canvas.width * 0.25, y: canvas.height * 0.45 },
-    sleeveRight: { x: canvas.width * 0.75, y: canvas.height * 0.45 },
+// Map for clearing input when delete icon pressed
+function getInputIdForTextType(textType) {
+  const mapping = {
+    playerName: "player-name",
+    playerNumber: "player-number",
+    playerShortNumber: "player-short-number",
+    sleeveLeft: "sleeve-text-left",
+    sleeveRight: "sleeve-text-right",
+    backText: "back-text",
+    frontText: "front-text",
+    extraName: "extra-name"
   };
+  return mapping[textType];
 }
 
-// 👇 After canvas and bodyImage load:
-const defaultTextPositions = getDefaultTextPositions();
+// ============== TEXT STYLING (B/I/Size/Font) ==============
+// Required controls: #text-bold, #text-italic, #text-size (range), .font-family-select[data-text-type="playerName"]
+function setupTextStylingControls() {
+  // Per-field font family
+  document.querySelectorAll(".font-family-select").forEach(select => {
+    select.addEventListener("change", function() {
+      const key = this.dataset.textType;
+      if (textElements[key]) { textElements[key].fontFamily = this.value; drawKit(); }
+    });
+  });
 
-        // =================== DRAW KIT ===================
-        function drawKit() {
-            if (!bodyImage.naturalWidth) return;
-            const TARGET_W = 600,
-                scale = TARGET_W / bodyImage.naturalWidth,
-                TARGET_H = Math.round(bodyImage.naturalHeight * scale);
-            canvas.width = TARGET_W;
-            canvas.height = TARGET_H;
+  const boldBtn = document.getElementById("text-bold");
+  if (boldBtn) boldBtn.addEventListener("click", function() {
+    const key = getActiveTextType(); if (!key) return;
+    const el = textElements[key]; el.fontWeight = (el.fontWeight === "bold" ? "normal" : "bold");
+    drawKit(); updateTextStylingControls(key);
+  });
 
-            const bodyC = createColoredCanvas(bodyImage, colors.body, TARGET_W, TARGET_H);
-            const sleeveC = createColoredCanvas(sleeveImage, colors.sleeve, TARGET_W, TARGET_H);
-            const collarC = createColoredCanvas(collarImage, colors.collar, TARGET_W, TARGET_H);
-            const trouserC = createColoredCanvas(trouserImage, colors.trouser, TARGET_W, TARGET_H);
-            const shocksC = createColoredCanvas(shocksImage, colors.shocks, TARGET_W, TARGET_H);
-            const shoesC = createColoredCanvas(shoesImage, colors.shoes, TARGET_W, TARGET_H);
+  const italicBtn = document.getElementById("text-italic");
+  if (italicBtn) italicBtn.addEventListener("click", function() {
+    const key = getActiveTextType(); if (!key) return;
+    const el = textElements[key]; el.fontStyle = (el.fontStyle === "italic" ? "normal" : "italic");
+    drawKit(); updateTextStylingControls(key);
+  });
 
-            // Strip canvases
-            const shirtStripC = createColoredCanvas(shirtStripImage, colors.strip, TARGET_W, TARGET_H);
-            const sleeveStripC = createColoredCanvas(sleeveStripImage, colors.strip, TARGET_W, TARGET_H);
-            const trouserStripC = createColoredCanvas(trouserStripImage, colors.strip, TARGET_W, TARGET_H);
+  const sizeSlider = document.getElementById("text-size");
+  if (sizeSlider) sizeSlider.addEventListener("input", function(e) {
+    const key = getActiveTextType(); if (!key) return;
+    const val = parseInt(e.target.value || "0", 10);
+    if (!isNaN(val) && val > 0) { textElements[key].fontSize = val; drawKit(); }
+  });
+}
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+function updateTextStylingControls(textType) {
+  const el = textElements[textType]; if (!el) return;
+  const fontSelect = document.querySelector(`.font-family-select[data-text-type="${textType}"]`);
+  if (fontSelect) fontSelect.value = el.fontFamily;
+  const boldBtn = document.getElementById("text-bold"); if (boldBtn) boldBtn.classList.toggle("active", el.fontWeight === "bold");
+  const italicBtn = document.getElementById("text-italic"); if (italicBtn) italicBtn.classList.toggle("active", el.fontStyle === "italic");
+  const sizeSlider = document.getElementById("text-size"); if (sizeSlider) sizeSlider.value = el.fontSize;
+}
 
-            // Layer order (shoes & shocks pehle, baaki upar)
-            ctx.drawImage(shoesC, 0, 0);
-            ctx.drawImage(shocksC, 0, 0);
-            ctx.drawImage(trouserC, 0, 0);
-            ctx.drawImage(bodyC, 0, 0);
-            ctx.drawImage(sleeveC, 0, 0);
-            ctx.drawImage(collarC, 0, 0);
+function getActiveTextType() { return (activeSelection && activeSelection.startsWith("text-")) ? activeSelection.replace("text-", "") : null; }
+function getActiveTextElement() { const k = getActiveTextType(); return k ? textElements[k] : null; }
 
-            // Draw strips on top
-            ctx.drawImage(shirtStripC, 0, 0);
-            ctx.drawImage(sleeveStripC, 0, 0);
-            ctx.drawImage(trouserStripC, 0, 0);
+// ============== KEYBOARD & BUTTON MOVE (PATCHED) ==============
+function moveActiveText(dx, dy) {
+  const key = getActiveTextType();
+  if (!key) return;
+  const side = activeTextSide[key] || (showOn[key]?.front ? "front" : "back");
+  const pos  = (positions[side] && positions[side][key]) ? positions[side][key] : textElements[key];
+  pos.x += dx; pos.y += dy; // side-aware move
+  drawKit();
+}
 
-            drawPatternMasked();
-            drawLogoMasked();
-            drawPlayerText();
-            drawSelections();
-        }
+// Arrow keys nudging
+document.addEventListener("keydown", e => {
+  if (!window.activeSelection || !activeSelection.startsWith("text-")) return;
+  const step = e.shiftKey ? 5 : 1;
+  if (["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)) {
+    e.preventDefault();
+    if (e.key === "ArrowLeft")  moveActiveText(-step, 0);
+    if (e.key === "ArrowRight") moveActiveText(step, 0);
+    if (e.key === "ArrowUp")    moveActiveText(0, -step);
+    if (e.key === "ArrowDown")  moveActiveText(0, step);
+  }
+});
 
-        // =================== COLOR PICKERS ===================
-        function setupColorPickers() {
-            ["collar", "body", "sleeve", "trouser", "shocks", "shoes", "pattern", "strip"].forEach(p => {
-                // Strip ke liye id "color-stripe" hai, pattern ke liye "color-artboard"
-                const el = p === "pattern" ?
-                    document.getElementById("color-artboard") :
-                    p === "strip" ?
-                    document.getElementById("color-stripe") :
-                    document.getElementById(`color-${p}`);
+// Optional UI buttons with IDs: btn-left, btn-right, btn-up, btn-down
+function setupPositionButtons() {
+  const map = { "btn-left":[-5,0], "btn-right":[5,0], "btn-up":[0,-5], "btn-down":[0,5] };
+  Object.keys(map).forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener("click", () => moveActiveText(map[id][0], map[id][1]));
+  });
+}
 
-                if (el) {
-                    el.addEventListener("input", e => {
-                        colors[p] = e.target.value;
-                        drawKit();
-                    });
-                }
-            });
-        }
+// ============== FRONT/BACK TOGGLES ==============
+// Optional checkboxes (if you add): toggle-name-front/back, toggle-num-front/back, toggle-extra-front/back
+function setupSideToggles() {
+  const map = [
+    { id:"toggle-name-front",  key:"playerName",        side:"front" },
+    { id:"toggle-name-back",   key:"playerName",        side:"back"  },
+    { id:"toggle-num-front",   key:"playerNumber",      side:"front" },
+    { id:"toggle-num-back",    key:"playerNumber",      side:"back"  },
+    { id:"toggle-extra-front", key:"extraName",         side:"front" },
+    { id:"toggle-extra-back",  key:"extraName",         side:"back"  },
+  ];
+  map.forEach(({id,key,side}) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("change", e => {
+      if (!showOn[key]) showOn[key] = { front:false, back:false };
+      showOn[key][side] = !!e.target.checked;
+      drawKit();
+    });
+    el.checked = !!showOn[key]?.[side];
+  });
+}
 
-        // =================== TEXT LISTENERS ===================
-        function setupTextListeners() {
-            // Player name
-            document.getElementById("player-name").addEventListener("input", function(e) {
-                textElements.playerName.text = e.target.value;
-                textElements.playerName.color = document.getElementById("player-name-color").value;
-                drawKit();
-            });
+// ============== FILE UPLOADS ==============
+// Required containers: #uploaded-logos, #uploaded-pattern, #player-logo-container, #uploaded-text-logo
+// Required inputs: #upload-logo, #upload-patterns, #player-logo, #upload-text-logo
+function setupFileUploads() {
+  const uploadLogo = document.getElementById("upload-logo");
+  if (uploadLogo) uploadLogo.addEventListener("change", e => handleFileUpload(e, "logo"));
 
-            // Player number
-            document.getElementById("player-number").addEventListener("input", function(e) {
-                textElements.playerNumber.text = e.target.value;
-                textElements.playerNumber.color = document.getElementById("player-number-color").value;
-                drawKit();
-            });
+  const uploadPatterns = document.getElementById("upload-patterns");
+  if (uploadPatterns) uploadPatterns.addEventListener("change", e => handleFileUpload(e, "pattern"));
 
-            // Sleeve left
-            document.getElementById("sleeve-text-left").addEventListener("input", function(e) {
-                textElements.sleeveLeft.text = e.target.value;
-                textElements.sleeveLeft.color = document.getElementById("sleeve-text-left-color").value;
-                drawKit();
-            });
+  const playerLogo = document.getElementById("player-logo");
+  if (playerLogo) playerLogo.addEventListener("change", e => handleFileUpload(e, "player-logo"));
 
-            // Sleeve right
-            document.getElementById("sleeve-text-right").addEventListener("input", function(e) {
-                textElements.sleeveRight.text = e.target.value;
-                textElements.sleeveRight.color = document.getElementById("sleeve-text-right-color").value;
-                drawKit();
-            });
+  const uploadTextLogo = document.getElementById("upload-text-logo");
+  if (uploadTextLogo) uploadTextLogo.addEventListener("change", e => handleFileUpload(e, "text-logo"));
+}
 
-            // Back text
-            document.getElementById("back-text").addEventListener("input", function(e) {
-                textElements.backText.text = e.target.value;
-                textElements.backText.color = document.getElementById("back-text-color").value;
-                drawKit();
-            });
-
-            // Front text
-            document.getElementById("front-text").addEventListener("input", function(e) {
-                textElements.frontText.text = e.target.value;
-                textElements.frontText.color = document.getElementById("front-text-color").value;
-                drawKit();
-            });
-
-            // Color pickers for text
-            document.getElementById("player-name-color").addEventListener("input", function(e) {
-                textElements.playerName.color = e.target.value;
-                drawKit();
-            });
-
-            document.getElementById("player-number-color").addEventListener("input", function(e) {
-                textElements.playerNumber.color = e.target.value;
-                drawKit();
-            });
-
-            document.getElementById("sleeve-text-left-color").addEventListener("input", function(e) {
-                textElements.sleeveLeft.color = e.target.value;
-                drawKit();
-            });
-
-            document.getElementById("sleeve-text-right-color").addEventListener("input", function(e) {
-                textElements.sleeveRight.color = e.target.value;
-                drawKit();
-            });
-
-            document.getElementById("back-text-color").addEventListener("input", function(e) {
-                textElements.backText.color = e.target.value;
-                drawKit();
-            });
-
-            document.getElementById("front-text-color").addEventListener("input", function(e) {
-                textElements.frontText.color = e.target.value;
-                drawKit();
-            });
-        }
-
-        // =================== TEXT STYLING CONTROLS ===================
-        function setupTextStylingControls() {
-            // Font family selectors
-            document.querySelectorAll(".font-family-select").forEach(select => {
-                select.addEventListener("change", function(e) {
-                    const textType = this.dataset.textType;
-                    if (textElements[textType]) {
-                        textElements[textType].fontFamily = this.value;
-                        drawKit();
-                    }
-                });
-            });
-
-            // Bold button
-            document.getElementById("text-bold").addEventListener("click", function() {
-                const activeText = getActiveTextElement();
-                if (activeText) {
-                    activeText.fontWeight = activeText.fontWeight === "bold" ? "normal" : "bold";
-                    drawKit();
-                    updateTextStylingControls(getActiveTextType());
-                }
-            });
-
-            // Italic button
-            document.getElementById("text-italic").addEventListener("click", function() {
-                const activeText = getActiveTextElement();
-                if (activeText) {
-                    activeText.fontStyle = activeText.fontStyle === "italic" ? "normal" : "italic";
-                    drawKit();
-                    updateTextStylingControls(getActiveTextType());
-                }
-            });
-
-            // Font size slider
-            document.getElementById("text-size").addEventListener("input", function(e) {
-                const activeText = getActiveTextElement();
-                if (activeText) {
-                    activeText.fontSize = parseInt(e.target.value);
-                    drawKit();
-                }
-            });
-        }
-
-        function updateTextStylingControls(textType) {
-            if (!textType) return;
-
-            const textElement = textElements[textType];
-
-            // Update font family
-            const fontSelect = document.querySelector(`.font-family-select[data-text-type="${textType}"]`);
-            if (fontSelect) {
-                fontSelect.value = textElement.fontFamily;
-            }
-
-            // Update bold button
-            const boldBtn = document.getElementById("text-bold");
-            if (boldBtn) {
-                boldBtn.classList.toggle("active", textElement.fontWeight === "bold");
-            }
-
-            // Update italic button
-            const italicBtn = document.getElementById("text-italic");
-            if (italicBtn) {
-                italicBtn.classList.toggle("active", textElement.fontStyle === "italic");
-            }
-
-            // Update font size slider
-            const sizeSlider = document.getElementById("text-size");
-            if (sizeSlider) {
-                sizeSlider.value = textElement.fontSize;
-            }
-        }
-
-        function getActiveTextElement() {
-            const activeTextType = getActiveTextType();
-            return activeTextType ? textElements[activeTextType] : null;
-        }
-
-        function getActiveTextType() {
-            if (activeSelection && activeSelection.startsWith("text-")) {
-                return activeSelection.replace("text-", "");
-            }
-            return null;
-        }
-
-        // Helper function to get input ID for text type
-        function getInputIdForTextType(textType) {
-            const mapping = {
-                playerName: "player-name",
-                playerNumber: "player-number",
-                sleeveLeft: "sleeve-text-left",
-                sleeveRight: "sleeve-text-right",
-                backText: "back-text",
-                frontText: "front-text"
-            };
-            return mapping[textType];
-        }
-
-        // =================== FILE UPLOADS ===================
-        function setupFileUploads() {
-            // Logo upload
-            const uploadLogo = document.getElementById("upload-logo");
-            if (uploadLogo) {
-                uploadLogo.addEventListener("change", function(e) {
-                    handleFileUpload(e, "logo");
-                });
-            }
-
-
-            
-            // Pattern upload
-            const uploadPatterns = document.getElementById("upload-patterns");
-            if (uploadPatterns) {
-                uploadPatterns.addEventListener("change", function(e) {
-                    handleFileUpload(e, "pattern");
-                });
-            }
-
-            // Player logo upload
-            const playerLogo = document.getElementById("player-logo");
-            if (playerLogo) {
-                playerLogo.addEventListener("change", function(e) {
-                    handleFileUpload(e, "player-logo");
-                });
-            }
-        }
-
-       function handleFileUpload(e, type) {
-  const file = e.target.files[0];
-  if (!file) return;
-
+function handleFileUpload(e, type) {
+  const file = e.target.files?.[0]; if (!file) return;
   const reader = new FileReader();
-  reader.onload = function(event) {
-
-    // ✅ Centralized container mapping
-    const containerIdMap = {
-      "logo": "uploaded-logos",
-      "pattern": "uploaded-pattern",
-      "player-logo": "player-logo-container",
-      "text-logo": "uploaded-text-logo" // <- NEW
-    };
+  reader.onload = function(ev) {
+    const containerIdMap = { "logo":"uploaded-logos", "pattern":"uploaded-pattern", "player-logo":"player-logo-container", "text-logo":"uploaded-text-logo" };
     const containerId = containerIdMap[type];
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Wrapper
     const wrap = document.createElement("div");
-    wrap.style.position = "relative";
-    wrap.style.width = "80px";
-    wrap.style.height = "80px";
-    wrap.style.margin = "5px";
+    Object.assign(wrap.style, { position:"relative", width:"80px", height:"80px", margin:"5px" });
 
-    // Thumb
     const img = document.createElement("img");
-    img.src = event.target.result;
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "contain";
-    img.style.cursor = "pointer";
-    img.style.border = "1px solid #ccc";
-    img.style.borderRadius = "8px";
+    Object.assign(img.style, { width:"100%", height:"100%", objectFit:"contain", cursor:"pointer", border:"1px solid #ccc", borderRadius:"8px" });
+    img.src = ev.target.result;
     wrap.appendChild(img);
 
-    // Delete (×)
-    const del = document.createElement("span");
-    del.innerHTML = "&times;";
-    del.style.position = "absolute";
-    del.style.top = "-5px";
-    del.style.right = "-5px";
-    del.style.background = "red";
-    del.style.color = "#fff";
-    del.style.width = "18px";
-    del.style.height = "18px";
-    del.style.display = "flex";
-    del.style.alignItems = "center";
-    del.style.justifyContent = "center";
-    del.style.borderRadius = "50%";
-    del.style.cursor = "pointer";
-    del.style.fontWeight = "bold";
+    const del = document.createElement("span"); del.innerHTML = "&times;";
+    Object.assign(del.style, { position:"absolute", top:"-5px", right:"-5px", background:"red", color:"#fff", width:"18px", height:"18px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"50%", cursor:"pointer", fontWeight:"bold" });
     del.onclick = () => wrap.remove();
     wrap.appendChild(del);
 
-    // ✅ Click par canvas me add — text-logo ko bhi normal logo ki tarah treat karein
-    img.onclick = () => {
-      if (type === "pattern") {
-        selectPattern(img.src);
-      } else {
-        // "logo", "player-logo", "text-logo" sab yahan se jayenge
-        selectLogo(img.src);
-      }
-    };
-
+    img.onclick = () => { if (type === "pattern") selectPattern(img.src); else selectLogo(img.src); };
     container.appendChild(wrap);
   };
   reader.readAsDataURL(file);
-
-  // same file dobara upload karne ke liye reset
-  e.target.value = "";
+  e.target.value = ""; // allow re-upload same file
 }
 
+// ============== SAVE DESIGN THUMB + HIDDEN ==============
+function saveDesign() {
+  drawKit();
+  const dataURL = canvas.toDataURL("image/png");
+  const left = document.getElementById("saved-designs"); if (!left) return;
 
-        // =================== SAVE DESIGN ===================
-        function saveDesign() {
-            drawKit();
-            const dataURL = canvas.toDataURL("image/png");
-            const left = document.getElementById("saved-designs");
-            if (!left) return;
+  const wrap = document.createElement("div");
+  Object.assign(wrap.style, { position:"relative", display:"inline-block", margin:"5px" });
 
-            const wrap = document.createElement("div");
-            wrap.style.position = "relative";
-            wrap.style.display = "inline-block";
-            wrap.style.margin = "5px";
+  const img = document.createElement("img"); img.src = dataURL; img.style.width = "100px"; img.style.display = "block";
+  const del = document.createElement("span"); del.innerHTML = "&times;";
+  Object.assign(del.style, { position:"absolute", top:"0", right:"0", background:"red", color:"#fff", cursor:"pointer", display:"none" });
 
-            const img = document.createElement("img");
-            img.src = dataURL;
-            img.style.width = "100px";
-            img.style.display = "block";
+  wrap.addEventListener("mouseenter", () => (del.style.display = "block"));
+  wrap.addEventListener("mouseleave", () => (del.style.display = "none"));
+  del.onclick = () => wrap.remove();
 
-            const del = document.createElement("span");
-            del.innerHTML = "&times;";
-            del.style.position = "absolute";
-            del.style.top = "0";
-            del.style.right = "0";
-            del.style.background = "red";
-            del.style.color = "#fff";
-            del.style.cursor = "pointer";
-            del.style.display = "none";
+  wrap.appendChild(img); wrap.appendChild(del); left.appendChild(wrap);
 
-            wrap.addEventListener("mouseenter", () => del.style.display = "block");
-            wrap.addEventListener("mouseleave", () => del.style.display = "none");
-            del.onclick = () => wrap.remove();
-
-            wrap.appendChild(img);
-            wrap.appendChild(del);
-            left.appendChild(wrap);
-
-            // ✅ Hidden input for form submission
-            let hiddenInput = document.getElementById("selectedShirtInput");
-            if (!hiddenInput) {
-                hiddenInput = document.createElement("input");
-                hiddenInput.type = "hidden";
-                hiddenInput.name = "selected_shirt";
-                hiddenInput.id = "selectedShirtInput";
-                document.querySelector("form").appendChild(hiddenInput);
-            }
-            hiddenInput.value = dataURL; // Base64 image assign
-
-            openTab("capture");
-        }
-
-        // =================== FORM FUNCTIONALITY ===================
-        document.addEventListener("DOMContentLoaded", function() {
-            // Price calculation
-            const priceElement = document.querySelector(".s-pr");
-            const hiddenInput = document.querySelector("input[name='price']");
-            const basePrice = parseFloat(priceElement.dataset.base);
-            const selects = document.querySelectorAll("select.price-option");
-
-            function updatePrice() {
-                let total = basePrice;
-
-                selects.forEach(select => {
-                    const selectedText = select.options[select.selectedIndex]?.text || "";
-                    const match = selectedText.match(/\+ ?\$?(\d+(\.\d+)?)/);
-                    if (match) {
-                        total += parseFloat(match[1]);
-                    }
-                });
-
-                // Screen pe update
-                priceElement.textContent = `$${total.toFixed(2)}`;
-
-                // Hidden input update
-                if (hiddenInput) {
-                    hiddenInput.value = total.toFixed(2);
-                }
-            }
-
-            // Init on load
-            updatePrice();
-
-            // Event listeners
-            selects.forEach(select => {
-                select.addEventListener("change", updatePrice);
-            });
-
-            // Add row functionality
-            const addRowBtn = document.getElementById("addRowBtn");
-            if (addRowBtn) {
-                addRowBtn.addEventListener("click", function() {
-                    const table = document.getElementById("playersTable").getElementsByTagName('tbody')[0];
-                    const newRow = table.insertRow();
-
-                    newRow.innerHTML = `
-                    <td>
-                        <input type="text" name="name" class="form-control" placeholder="Enter name" style="padding: 9px">
-                    </td>
-                    <td>
-                        <input type="number" name="number" class="form-control" placeholder="0" min="1" style="padding: 9px">
-                    </td>
-                    <td>
-                        <select name="shirt_size" class="form-control" style="padding: 9px">
-                            <option value="">Select</option>
-                            ${['xs', 's', 'm', 'l', 'xl', '2xl', '3xl'].map(opt => 
-                                `<option value="${opt}">${opt.toUpperCase()}</option>`
-                            ).join('')}
-                        </select>
-                    </td>
-                    <td class="hide-on-shirt-only">
-                        <select class="short-size" name="short_size">
-                            <option value="">Select</option>
-                            ${['xs', 's', 'm', 'l', 'xl', '2xl', '3xl'].map(opt => 
-                                `<option value="${opt}">${opt.toUpperCase()}</option>`
-                            ).join('')}
-                        </select>
-                    </td>
-                    <td>
-                        <input type="number" name="quantity" class="form-control quantity-input" placeholder="0" min="1" value="1">
-                    </td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm remove-row" title="Remove Row"
-                            style="padding: 7px; background: red; color: white; border: none; border-radius: 6px;">
-                            ✖
-                        </button>
-                    </td>
-                `;
-
-                    // Add remove functionality to new row
-                    newRow.querySelector('.remove-row').addEventListener('click', function() {
-                        table.deleteRow(newRow.rowIndex);
-                    });
-                });
-            }
-
-            // Remove row functionality
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('remove-row')) {
-                    const row = e.target.closest('tr');
-                    if (row) row.remove();
-                }
-            });
-
-            // Toggle goalkeeper fields
-            const goalkeeperKit = document.getElementById("goalkeeper_kit");
-            if (goalkeeperKit) {
-                goalkeeperKit.addEventListener("change", function() {
-                    const goalkeeperFields = document.getElementById("goalkeeper_fields");
-                    if (goalkeeperFields) {
-                        goalkeeperFields.style.display = this.value === "yes" ? "block" : "none";
-                    }
-                });
-            }
-
-            // Toggle staff fields
-            const staffOther = document.getElementById("staff-other");
-            if (staffOther) {
-                staffOther.addEventListener("change", function() {
-                    const staffSection = document.getElementById("staff-section");
-                    if (staffSection) {
-                        staffSection.style.display = this.value === "yes" ? "block" : "none";
-                    }
-                });
-            }
-
-            // Toggle socks color based on outfield players socks selection
-            const outfieldPlayersSocks = document.getElementById("outfield_players_socks");
-            const socksColorWrapper = document.getElementById("socksColorWrapper");
-            if (outfieldPlayersSocks && socksColorWrapper) {
-                outfieldPlayersSocks.addEventListener("change", function() {
-                    socksColorWrapper.style.display = this.value === "yes" ? "block" : "none";
-                });
-            }
-        });
-    </script>
-    {{-- custome code for  --}}
-    <!-- ✅ SCRIPT after all HTML -->
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const BASE_PRICE = 39.00;
-
-    // =================== Helper ===================
-    function getExtrasTotal() {
-        let extraTotal = 0;
-        document.querySelectorAll(".price-option").forEach(select => {
-            const selectedText = select.options[select.selectedIndex]?.text || "";
-            const match = selectedText.match(/\+\$(\d+(\.\d+)?)/);
-            if (match) extraTotal += parseFloat(match[1]);
-        });
-        return extraTotal;
-    }
-
-    function updateGrandTotal() {
-        let grand = 0;
-        document.querySelectorAll(".player-total, .guide-total").forEach(input => {
-            grand += parseFloat(input.value) || 0;
-        });
-
-        // ✅ Add extras from main options
-        grand += getExtrasTotal();
-
-        document.getElementById("grandTotal").innerText = grand.toFixed(2);
-    }
-
-    // =================== Player Section ===================
-    const playerWrapper = document.getElementById("details-wrapper");
-    const addRow = document.getElementById("addRow");
-
-    if (playerWrapper && addRow) {
-        function updatePlayerRowTotal(row) {
-            const qty = parseFloat(row.querySelector(".player-quantity")?.value) || 0;
-            const total = qty * BASE_PRICE;
-            row.querySelector(".player-total").value = total.toFixed(2);
-            row.querySelector(".player-total-display").innerText = total.toFixed(2);
-            updateGrandTotal();
-        }
-
-       const addRow = document.getElementById("addRow");
-const playerWrapper = document.getElementById("details-wrapper");
-const BASE_PRICE = 39;
-
-if (addRow) {
-  // Remove any existing listeners first
-  addRow.replaceWith(addRow.cloneNode(true));
-  const newAddRow = document.getElementById("addRow");
-
-  newAddRow.addEventListener("click", function() {
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-      <td><input type="text" name="name[]" class="form-control" required></td>
-      <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
-      <td>
-        <select name="shirt_size[]" class="form-control" required>
-          <option value="">Select</option>
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-        </select>
-      </td>
-      <td>
-        <select name="short_size[]" class="form-control" required>
-          <option value="">Select</option>
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-        </select>
-      </td>
-      <td><input type="number" name="quantity[]" class="form-control player-quantity" min="1" value="1"></td>
-      <td style="display:none;">
-        <input type="hidden" name="price[]" class="player-price" value="${BASE_PRICE}">
-        <input type="hidden" name="total[]" class="player-total" value="${BASE_PRICE}">
-        <span class="player-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
-      </td>
-      <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
-    `;
-
-    playerWrapper.appendChild(newRow);
-    updateGrandTotal();
-  });
+  let hiddenInput = document.getElementById("selectedShirtInput");
+  if (!hiddenInput) {
+    hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden"; hiddenInput.name = "selected_shirt"; hiddenInput.id = "selectedShirtInput";
+    const form = document.querySelector("form"); if (form) form.appendChild(hiddenInput);
+  }
+  hiddenInput.value = dataURL;
+  openTab("capture");
 }
 
-        playerWrapper.addEventListener("input", function(e) {
-            if (e.target.classList.contains("player-quantity")) {
-                updatePlayerRowTotal(e.target.closest("tr"));
-            }
-        });
+// ============== PRICING & TABLE ROWS ==============
+// Required: .s-pr[data-base], input[name="price"], selects with .price-option
+// Player table: #details-wrapper, #addRow (+ .player-quantity, .player-total, .player-total-display)
+// Guide table: #guide-details-wrapper, #addGuideRow (+ .guide-quantity, .guide-total, .guide-total-display)
+function initPricingAndTables() {
+  // Price from options
+  const priceElement = document.querySelector(".s-pr");
+  const hiddenInput = document.querySelector("input[name='price']");
+  const basePrice = priceElement ? parseFloat(priceElement.dataset.base) : 39.0;
+  const selects = document.querySelectorAll("select.price-option");
 
-        playerWrapper.addEventListener("click", function(e) {
-            if (e.target.classList.contains("remove-row")) {
-                e.target.closest("tr").remove();
-                updateGrandTotal();
-            }
-        });
-    }
+  function updatePrice() {
+    let total = basePrice;
+    selects.forEach(select => {
+      const txt = select.options[select.selectedIndex]?.text || "";
+      const m = txt.match(/\+ ?\$?(\d+(\.\d+)?)/);
+      if (m) total += parseFloat(m[1]);
+    });
+    if (priceElement) priceElement.textContent = `$${total.toFixed(2)}`;
+    if (hiddenInput) hiddenInput.value = total.toFixed(2);
+  }
+  updatePrice(); selects.forEach(s => s.addEventListener("change", updatePrice));
 
-    // =================== Guide Section ===================
-    const guideWrapper = document.getElementById("guide-details-wrapper");
-    const addGuideRowBtn = document.getElementById("addGuideRow");
-
-    if (guideWrapper && addGuideRowBtn) {
-        function updateGuideRowTotal(row) {
-            const qtyInput = row.querySelector(".guide-quantity");
-            const totalInput = row.querySelector(".guide-total");
-            const displaySpan = row.querySelector(".guide-total-display");
-
-            if (!qtyInput || !totalInput) return;
-
-            const qty = parseFloat(qtyInput.value) || 0;
-            const total = qty * BASE_PRICE;
-
-            totalInput.value = total.toFixed(2);
-            if (displaySpan) displaySpan.innerText = total.toFixed(2);
-
-            updateGrandTotal();
-        }
-
-        addGuideRowBtn.addEventListener("click", function() {
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><input type="text" name="guide_name[]" class="form-control" required></td>
-                <td><input type="number" name="guide_number[]" class="form-control" min="0" value="0" required></td>
-                <td>
-                    <select name="guide_shirt_size[]" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="guide_pant_size[]" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="guide_sleeves_length[]" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="short">SHORT</option>
-                        <option value="long">LONG</option>
-                    </select>
-                </td>
-                <td><input type="number" name="guide_quantity[]" class="form-control guide-quantity" min="0" value="0"></td>
-                <td style="display:none;">
-                    <input type="hidden" name="guide_price[]" class="guide-price" value="${BASE_PRICE}">
-                    <input type="hidden" name="guide_total[]" class="guide-total" value="${BASE_PRICE}">
-                    <span class="guide-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
-                </td>
-                <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>
-            `;
-            guideWrapper.appendChild(newRow);
-            updateGrandTotal();
-        });
-
-        guideWrapper.addEventListener("input", function(e) {
-            if (e.target.classList.contains("guide-quantity")) {
-                updateGuideRowTotal(e.target.closest("tr"));
-            }
-        });
-
-        guideWrapper.addEventListener("click", function(e) {
-            if (e.target.classList.contains("remove-row")) {
-                e.target.closest("tr").remove();
-                updateGrandTotal();
-            }
-        });
-    }
-
-    // =================== Extra Options Watch ===================
+  // Grand total (players + guides + extras)
+  function getExtrasTotal() {
+    let extraTotal = 0;
     document.querySelectorAll(".price-option").forEach(select => {
-        select.addEventListener("change", updateGrandTotal);
+      const t = select.options[select.selectedIndex]?.text || "";
+      const m = t.match(/\+\$(\d+(\.\d+)?)/);
+      if (m) extraTotal += parseFloat(m[1]);
     });
+    return extraTotal;
+  }
+  function updateGrandTotal() {
+    let grand = 0;
+    document.querySelectorAll(".player-total, .guide-total").forEach(input => (grand += parseFloat(input.value) || 0));
+    grand += getExtrasTotal();
+    const tgt = document.getElementById("grandTotal"); if (tgt) tgt.innerText = grand.toFixed(2);
+  }
 
-    // ✅ Initial call
+  // Player rows
+  const playerWrapper = document.getElementById("details-wrapper");
+  const addRowBtn = document.getElementById("addRow");
+  const BASE_PRICE = 39.0;
+
+  function updatePlayerRowTotal(row) {
+    const qty = parseFloat(row.querySelector(".player-quantity")?.value) || 0;
+    const total = qty * BASE_PRICE;
+    const totalInput = row.querySelector(".player-total");
+    const display = row.querySelector(".player-total-display");
+    if (totalInput) totalInput.value = total.toFixed(2);
+    if (display) display.innerText = total.toFixed(2);
     updateGrandTotal();
-});
-
-
-function setupFileUploads() {
-  // ...existing listeners...
-
-  // ✅ Text-logo upload (yehi wala section jo aap ne add kiya)
-  const uploadTextLogo = document.getElementById("upload-text-logo");
-  if (uploadTextLogo) {
-    uploadTextLogo.addEventListener("change", function(e) {
-      handleFileUpload(e, "text-logo");
-    });
   }
+
+  if (addRowBtn && playerWrapper) {
+    // prevent duplicate listeners
+    const clone = addRowBtn.cloneNode(true); addRowBtn.parentNode.replaceChild(clone, addRowBtn);
+    clone.addEventListener("click", function() {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td><input type="text" name="name[]" class="form-control" required></td>
+        <td><input type="number" name="number[]" class="form-control" min="1" value="1" required></td>
+        <td>
+          <select name="shirt_size[]" class="form-control" required>
+            <option value="">Select</option>
+            <option value="s">S</option><option value="m">M</option><option value="l">L</option>
+          </select>
+        </td>
+        <td>
+          <select name="short_size[]" class="form-control" required>
+            <option value="">Select</option>
+            <option value="s">S</option><option value="m">M</option><option value="l">L</option>
+          </select>
+        </td>
+        <td><input type="number" name="quantity[]" class="form-control player-quantity" min="1" value="1"></td>
+        <td style="display:none;">
+          <input type="hidden" name="price[]" class="player-price" value="${BASE_PRICE}">
+          <input type="hidden" name="total[]" class="player-total" value="${BASE_PRICE}">
+          <span class="player-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span>
+        </td>
+        <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>`;
+      playerWrapper.appendChild(newRow);
+      updateGrandTotal();
+    });
+
+    playerWrapper.addEventListener("input", function(e){ if (e.target.classList.contains("player-quantity")) updatePlayerRowTotal(e.target.closest("tr")); });
+    playerWrapper.addEventListener("click", function(e){ if (e.target.classList.contains("remove-row")) { e.target.closest("tr").remove(); updateGrandTotal(); } });
+  }
+
+  // Guide rows
+  const guideWrapper = document.getElementById("guide-details-wrapper");
+  const addGuideRowBtn = document.getElementById("addGuideRow");
+
+  function updateGuideRowTotal(row) {
+    const qty = parseFloat(row.querySelector(".guide-quantity")?.value) || 0;
+    const total = qty * BASE_PRICE;
+    const totalInput = row.querySelector(".guide-total");
+    const display = row.querySelector(".guide-total-display");
+    if (totalInput) totalInput.value = total.toFixed(2);
+    if (display) display.innerText = total.toFixed(2);
+    updateGrandTotal();
+  }
+
+  if (guideWrapper && addGuideRowBtn) {
+    addGuideRowBtn.addEventListener("click", function(){
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td><input type="text" name="guide_name[]" class="form-control" required></td>
+        <td><input type="number" name="guide_number[]" class="form-control" min="0" value="0" required></td>
+        <td><select name="guide_shirt_size[]" class="form-control" required><option value="">Select</option><option value="s">S</option><option value="m">M</option><option value="l">L</option></select></td>
+        <td><select name="guide_pant_size[]" class="form-control" required><option value="">Select</option><option value="s">S</option><option value="m">M</option><option value="l">L</option></select></td>
+        <td><select name="guide_sleeves_length[]" class="form-control" required><option value="">Select</option><option value="short">SHORT</option><option value="long">LONG</option></select></td>
+        <td><input type="number" name="guide_quantity[]" class="form-control guide-quantity" min="0" value="0"></td>
+        <td style="display:none;"><input type="hidden" name="guide_price[]" class="guide-price" value="${BASE_PRICE}"><input type="hidden" name="guide_total[]" class="guide-total" value="${BASE_PRICE}"><span class="guide-total-display" style="display:none;">${BASE_PRICE.toFixed(2)}</span></td>
+        <td><button type="button" class="btn btn-danger btn-sm remove-row">✖</button></td>`;
+      guideWrapper.appendChild(newRow); updateGrandTotal();
+    });
+    guideWrapper.addEventListener("input", function(e){ if (e.target.classList.contains("guide-quantity")) updateGuideRowTotal(e.target.closest("tr")); });
+    guideWrapper.addEventListener("click", function(e){ if (e.target.classList.contains("remove-row")) { e.target.closest("tr").remove(); updateGrandTotal(); } });
+  }
+
+  // toggles
+  const goalkeeperKit = document.getElementById("goalkeeper_kit");
+  if (goalkeeperKit) goalkeeperKit.addEventListener("change", function(){ const el = document.getElementById("goalkeeper_fields"); if (el) el.style.display = this.value === "yes" ? "block" : "none"; });
+
+  const staffOther = document.getElementById("staff-other");
+  if (staffOther) staffOther.addEventListener("change", function(){ const el = document.getElementById("staff-section"); if (el) el.style.display = this.value === "yes" ? "block" : "none"; });
+
+  const outfieldPlayersSocks = document.getElementById("outfield_players_socks");
+  const socksColorWrapper = document.getElementById("socksColorWrapper");
+  if (outfieldPlayersSocks && socksColorWrapper) outfieldPlayersSocks.addEventListener("change", function(){ socksColorWrapper.style.display = this.value === "yes" ? "block" : "none"; });
 }
-
-
 </script>
-
-<script>
-// ===================== PATCH: Masked text ko LEFT anchor + sleeves unmasked =====================
-
-// 1) Globals/helpers
-const MASKED_KEYS = ["playerName", "playerNumber", "backText", "frontText"]; // body par clipped + left aligned
-const UNMASKED_KEYS = ["sleeveLeft", "sleeveRight"];                         // sleeves without mask
-
-function getLeftAnchorX() {
-  // Body ka safe left anchor (apni art/kit ke hisab se tweak kar sakte ho; 0.18 ~= 18% from left)
-  return Math.round(canvas.width * 0.18);
-}
-
-// User ne manually move na kiya ho to left anchor par chipka do (while typing)
-function anchorMaskedLeftIfDefault(key){
-  try {
-    const el = textElements[key];
-    if (!el || !canvas) return;
-    // Agar abhi roughly center ke aas-paas hai, to left par bhej do (user-drag ko respect karega)
-    if (Math.abs(el.x - canvas.width/2) < 60) {
-      el.x = getLeftAnchorX();
-    }
-  } catch(e){}
-}
-
-// 2) drawPlayerText override (left-align masked, unmasked sleeves as-is)
-window.drawPlayerText = function drawPlayerText() {
-  if (!bodyImage?.naturalWidth) return;
-
-  // Offscreen canvas for masked text (body)
-  const tCanvas = document.createElement("canvas");
-  tCanvas.width = canvas.width;
-  tCanvas.height = canvas.height;
-  const tctx = tCanvas.getContext("2d");
-
-  function drawSingleText(context, key) {
-    const el = textElements[key];
-    if (!el?.text) return;
-
-    const scale = canvas.width / 600 * el.scale;
-    const fontSize = el.fontSize;
-    const fontString = `${el.fontStyle} ${el.fontWeight} ${fontSize * scale}px ${el.fontFamily}`;
-
-    context.save();
-    context.translate(el.x, el.y);
-    context.rotate(el.angle);
-    context.textBaseline = "middle";
-    context.fillStyle = el.color;
-    context.font = fontString;
-
-    // Masked keys => left align; sleeves apna align; baaki center (backup)
-    if (MASKED_KEYS.includes(key)) {
-      context.textAlign = "left";
-    } else if (key === "sleeveLeft") {
-      context.textAlign = "left";
-    } else if (key === "sleeveRight") {
-      context.textAlign = "right";
-    } else {
-      context.textAlign = "center";
-    }
-
-    context.fillText(el.text.toUpperCase(), 0, 0);
-    context.restore();
-  }
-
-  // 1) masked texts offscreen
-  MASKED_KEYS.forEach(k => drawSingleText(tctx, k));
-
-  // 2) clip them to shirt body
-  tctx.globalCompositeOperation = "destination-in";
-  tctx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
-
-  // 3) bring masked layer to main
-  ctx.drawImage(tCanvas, 0, 0);
-
-  // 4) sleeves (unmasked) on main
-  UNMASKED_KEYS.forEach(k => drawSingleText(ctx, k));
-};
-
-// 3) First-load par masked texts ko left par shift karo (agar center pe the)
-(function applyLeftAnchorDefaultsOnce() {
-  // Thoda defer taake canvas size/images ready ho jayein
-  const tryApply = () => {
-    try {
-      if (!canvas || !bodyImage?.naturalWidth) { requestAnimationFrame(tryApply); return; }
-      if (window.__leftAnchoredOnce) return;
-
-      const leftX = getLeftAnchorX();
-      ["playerName","playerNumber","backText","frontText"].forEach(k => {
-        const el = textElements[k];
-        if (!el) return;
-        // Center ke aas-paas hain to left pe le aao
-        if (Math.abs(el.x - canvas.width/2) < 60) el.x = leftX;
-      });
-
-      window.__leftAnchoredOnce = true;
-      // Repaint after shifting
-      if (typeof drawKit === "function") drawKit();
-    } catch(e){}
-  };
-  requestAnimationFrame(tryApply);
-})();
-
-// 4) While typing: masked inputs par auto-left anchor (user-drag ko respect)
-(function patchTypingAnchors(){
-  const map = {
-    "player-name":   "playerName",
-    "player-number": "playerNumber",
-    "back-text":     "backText",
-    "front-text":    "frontText"
-  };
-  const attach = (id, key) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    // Extra listener (non-destructive) — existing handlers rahenge
-    el.addEventListener("input", function() {
-      anchorMaskedLeftIfDefault(key);
-      // Repaint — existing handler bhi drawKit() call karta hai; double paint harmless hai
-      if (typeof drawKit === "function") drawKit();
-    });
-  };
-  // DOM ready ho chuka hoga is script ke point par, phir bhi safe-guard:
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      Object.entries(map).forEach(([id,key]) => attach(id,key));
-    });
-  } else {
-    Object.entries(map).forEach(([id,key]) => attach(id,key));
-  }
-})();
-</script>
-
-
-    @include('component.footer')
-
-    <!-- FOOTER ENDS HERE -->
 @endsection
