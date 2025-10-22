@@ -691,7 +691,7 @@
 
 
     <div class="btn_box">
-        <button type="submit" class="addtocart_btn">Add to cart</button>
+        <button style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;" type="submit" class="addtocart_btn">Add to cart</button>
     </div>
 
     </form>

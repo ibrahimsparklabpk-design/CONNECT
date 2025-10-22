@@ -22,4 +22,8 @@ class CustomOrder extends Model
     return $this->hasMany(CustomUniform::class, 'business_registrations_id', 'business_registrations_id');
 }
 
+public function uniforms()
+{
+    return $this->hasMany(CustomUniform::class, 'orders_id');
+}
 }

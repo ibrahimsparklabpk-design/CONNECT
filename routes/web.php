@@ -82,6 +82,8 @@ Route::prefix('v2')->group(function () {
             Route::controller(CustomeUniformController::class)->name('custome.')->group(function () {
                 Route::get('soccer', 'soccer')->name('index');
                 Route::get('cricket', 'cricket')->name('cricket');
+                Route::get('goalkeeper', 'goalkeeper')->name('goalkeeper');   // /v2/backend/custome/index
+                 Route::get('basketball', 'basketball')->name('basketball');   // /v2/backend/custome/index
                 Route::get('view', 'view')->name('view');
                 Route::post('store', 'store')->name('store');
                 Route::post('cart/clear', 'clearCart')->name('cart.clear');
@@ -162,6 +164,8 @@ Route::prefix('v2')->group(function () {
             Route::prefix('custom-order')->group(function () {
                 Route::controller(CustomorderController::class)->name('custom-order.')->group(function () {
                     Route::get('index', 'index')->name('index');
+                    Route::get('index', 'index')->name('index');
+                    Route::get('/download-pdf/{order_id}', 'downloadPDF')->name('download.pdf');
                 });
             });
 

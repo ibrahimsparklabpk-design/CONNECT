@@ -13,22 +13,22 @@ use Illuminate\Support\Facades\Validator;
 class CustomeUniformController extends Controller
 {
 
-   public function index()
-{
-    // Get logged-in business
-    // $business = Auth::guard('business')->user();
+    public function index()
+    {
+        // Get logged-in business
+        // $business = Auth::guard('business')->user();
 
-    // if (!$business) {
-    //     abort(403, 'You do not have permission to view this page.');
-    // }
+        // if (!$business) {
+        //     abort(403, 'You do not have permission to view this page.');
+        // }
 
-    // $customUniform = CustomUniform::where('business_registrations_id', $business->id)
-    //     ->latest()
-    //     ->paginate(5);
+        // $customUniform = CustomUniform::where('business_registrations_id', $business->id)
+        //     ->latest()
+        //     ->paginate(5);
 
-    $customUniform = CustomUniform::all();
-    return view('dashboard.products.custom.soccer', compact('customUniform'));
-}
+        $customUniform = CustomUniform::paginate(10);
+        return view('dashboard.products.custom.soccer', compact('customUniform'));
+    }
     public function soccer()
     {
 
@@ -42,18 +42,27 @@ class CustomeUniformController extends Controller
         return view('backend.custome.circket');
     }
 
+    public function basketball()
+    {
+        return view('backend.custome.basketball');
+    }
+    public function goalkeeper()
+    {
+        return view('backend.custome.goalkeeper');
+    }
+
 
 
     public function view()
     {
- // DB se uniforms lo (for listing)
-    $customeUniform = CustomUniform::orderBy('id', 'desc')->paginate(3);
+        // DB se uniforms lo (for listing)
+        $customeUniform = CustomUniform::orderBy('id', 'desc')->paginate(3);
 
-    // ✅ Session se cart items lo
-    $sessionCart = session('custom_uniform_cart', []);
+        // ✅ Session se cart items lo
+        $sessionCart = session('custom_uniform_cart', []);
 
-    // View me dono bhejo
-    return view('backend.custome.view', compact('customeUniform', 'sessionCart'));
+        // View me dono bhejo
+        return view('backend.custome.view', compact('customeUniform', 'sessionCart'));
     }
 
 
@@ -91,6 +100,26 @@ class CustomeUniformController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+
+        // ================= SAVE LOGO BASE64 =================
+        $imageData = $request->logo_base64;
+
+        // Split Base64 string
+        list($type, $imageData) = explode(';', $imageData);
+        list(, $imageData) = explode(',', $imageData);
+        $imageData = base64_decode($imageData);
+
+        // ✅ Ensure directory exists
+        $directory = public_path('images/base64/logos');
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        // Save file
+        $file_name = 'logo' . time() . '.png';
+        $path = $directory . '/' . $file_name;
+        file_put_contents($path, $imageData);
+
         // ================= FILE UPLOADS =================
         $pattern = time() . '_pattern.' . $request->pattern->getClientOriginalExtension();
         $request->pattern->move(public_path('custom/pattern'), $pattern);
@@ -126,12 +155,12 @@ class CustomeUniformController extends Controller
 
         $business = Auth::guard('business')->user();
 
-    if (!$business) {
-        abort(403, 'You do not have permission to create this record.');
-    }
+        // if (!$business) {
+        //     abort(403, 'You do not have permission to create this record.');
+        // }
         // =================== SAVE TO DATABASE ===================
         $customeUniform = new CustomUniform();
-        $customeUniform->business_registrations_id = $business->id;
+        $customeUniform->business_registrations_id = $business ? $business->id : null;
         $customeUniform->sleeves_length = $request->sleeves_length;
         $customeUniform->fit_type       = $request->fit_type;
         $customeUniform->kit_type       = $request->kit_type;
@@ -141,6 +170,7 @@ class CustomeUniformController extends Controller
         $customeUniform->inside_shirt_collar    = $request->inside_shirt_collar;
         // $customeUniform->padded = $request->padded;
 
+        $customeUniform->image     = $file_name;
         $customeUniform->logo     = $logo;
         $customeUniform->pattern  = $pattern;
         $customeUniform->bulk_data = json_encode($bulkData); // ✅ Fixed here
@@ -163,19 +193,19 @@ class CustomeUniformController extends Controller
         }
 
         // =================== SAVE TO SESSION ===================
-       $newItem = [
-    'id' => $customeUniform->id,
-    'name' => $bulkData[0]['name'] ?? 'N/A',
-    'number' => $bulkData[0]['number'] ?? '--',
-    'fit_type' => $customeUniform->fit_type,
-    'kit_type' => $customeUniform->kit_type,
-    'collar_type' => $customeUniform->collar_type,
-    'team_logo' => $customeUniform->team_logo,
-    'grand_total' => floatval($customeUniform->grand_total),
-    'logo' => str_replace('public/', '', $customeUniform->logo ?? ''), // ✅
-    'bulk_data' => $bulkData,
-    'created_at' => $customeUniform->created_at,
-];
+        $newItem = [
+            'id' => $customeUniform->id,
+            'name' => $bulkData[0]['name'] ?? 'N/A',
+            'number' => $bulkData[0]['number'] ?? '--',
+            'fit_type' => $customeUniform->fit_type,
+            'kit_type' => $customeUniform->kit_type,
+            'collar_type' => $customeUniform->collar_type,
+            'team_logo' => $customeUniform->team_logo,
+            'grand_total' => floatval($customeUniform->grand_total),
+            'logo' => str_replace('public/', '', $customeUniform->logo ?? ''), // ✅
+            'bulk_data' => $bulkData,
+            'created_at' => $customeUniform->created_at,
+        ];
 
         // ✅ Purana cart le lo (agar session me already kuch items hain)
         $existingCart = session('custom_uniform_cart', []);
@@ -197,27 +227,27 @@ class CustomeUniformController extends Controller
         return redirect()->back()->with('success', 'Cart cleared successfully.');
     }
 
-   public function destroy($index)
-{
-    // Session se cart fetch karo
-    $sessionCart = session()->get('custom_uniform_cart', []);
+    public function destroy($index)
+    {
+        // Session se cart fetch karo
+        $sessionCart = session()->get('custom_uniform_cart', []);
 
-    // Check karo index exist karta hai ya nahi
-    if (isset($sessionCart[$index])) {
-        unset($sessionCart[$index]); // item hata do
+        // Check karo index exist karta hai ya nahi
+        if (isset($sessionCart[$index])) {
+            unset($sessionCart[$index]); // item hata do
 
-        // Session ko update karo (reindex karna zaroori hai)
-        $sessionCart = array_values($sessionCart);
-        session()->put('custom_uniform_cart', $sessionCart);
+            // Session ko update karo (reindex karna zaroori hai)
+            $sessionCart = array_values($sessionCart);
+            session()->put('custom_uniform_cart', $sessionCart);
 
+            return redirect()
+                ->route('custome.view')
+                ->with('success', 'Item removed from session cart successfully!');
+        }
+
+        // Agar item exist nahi karta
         return redirect()
             ->route('custome.view')
-            ->with('success', 'Item removed from session cart successfully!');
+            ->with('error', 'Item not found in cart.');
     }
-
-    // Agar item exist nahi karta
-    return redirect()
-        ->route('custome.view')
-        ->with('error', 'Item not found in cart.');
-}
 }

@@ -250,25 +250,25 @@
                  <div class="tabcontent" id="categories" style="display: none">
                      <div class="cat-row">
                          <div class="cat-col">
-                             <a href="soccer"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
+                             <a href="{{ route('static.soccer')}}"><img src="{{ asset('assets/soccer-icon.png') }}" /></a>
                              <h1>Soccer</h1>
                          </div>
                          <div class="cat-col">
-                             <a href="circket"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
+                             <a href="{{ route('static.cricket')}}"><img src="{{ asset('assets/Cricketkit.png') }}" /></a>
                              <h1>Cricket</h1>
                          </div>
                          <div class="cat-col">
-                             <a href="basketball"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
+                             <a href="{{ route('static.basketball')}}"><img src="{{ asset('assets/basketball-kit.png') }}" /></a>
                              <h1>Basketball</h1>
                          </div>
-                         <div class="cat-col">
+                         {{-- <div class="cat-col">
                              <a href="basketball"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
                              <h1>Goal Keeper</h1>
-                         </div>
+                         </div> --}}
                      </div>
                      <div class="cat-row">
                          <div class="cat-col">
-                             <a href="goalKeeper"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
+                             <a href="{{ route('static.goalKeeper')}}"><img src="{{ asset('assets/goalkeeper-1.png') }}" /></a>
                              <h1>Goal Keeper</h1>
                          </div>
                          <div class="cat-col">
@@ -563,7 +563,7 @@
                          </tr>
                      </tbody>
                  </table>
-                 <button type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
+                 <button style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;" type="button" id="addRow" class="btn btn-primary">+ Add Row</button>
              </div>
 
              {{-- <table class="table table-bordered team-roster-table" id="details-wrapper">
@@ -614,7 +614,7 @@
                  </tbody>
              </table> --}}
 
-             <button
+             {{-- <button
                  style="
         background-color: #000;
         color: #fff;
@@ -627,7 +627,7 @@
         transition: 0.3s;
     "
                  onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
-                 type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button>
+                 type="button" id="addPlayerRow" class="btn btn-primary">+ Add Player Row</button> --}}
          </div>
 
          </div>
@@ -849,17 +849,7 @@
                      </tbody>
                  </table>
                  <button
-                     style="
-        background-color: #000;
-        color: #fff;
-        font-weight: bold;
-        border: none;
-        margin-top:10px;
-        padding: 10px 20px;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.3s;
-    "
+                     style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;"
                      onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='#000'"
                      type="button" id="addGuideRow" class="btn btn-primary">+ Add Row</button>
 
@@ -880,7 +870,7 @@
      </div> --}}
 
          <div class="btn_box">
-             <button type="submit" class="addtocart_btn">Add to cart</button>
+             <button style="background: linear-gradient(45deg, #002266, #000436); border: none; padding: 8px 18px; border-radius: 6px; color: white; font-weight: 500; margin-top: 8px;" type="submit" class="addtocart_btn">Add to cart</button>
          </div>
      </form>
 

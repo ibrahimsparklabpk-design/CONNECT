@@ -225,7 +225,7 @@
 
         <!-- Navigation Links -->
         <ul class="nav-links">
-            <li><a href="index">HOME</a></li>
+            <li><a href="{{ route('index') }}">HOME</a></li>
             <li><a href="{{route('directoryadd')}}">DIRECTORY</a></li>
             <!--<li><a href="https://shop.connect767.com/" target="_blank">SHOP</a></li>-->
             <li><a href="{{ route('shop')}}">SHOP</a></li>

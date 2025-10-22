@@ -17,6 +17,7 @@ class CreateCustomUniformsTable extends Migration
             $table->id();
             
             $table->unsignedBigInteger('business_registrations_id')->nullable();
+            $table->unsignedBigInteger('orders_id')->nullable();
             $table->enum('fit_type', ['men', 'women', 'youth'])->default('men');
             $table->enum('kit_type', ['full', 'shirt', 'both'])->default('full');
             $table->enum('collar_type', ['v-neck', 'round-neck', 'polo-style'])->default('polo-style');

@@ -98,6 +98,35 @@
         color: #2d862d;
         border: 1px solid #b2e0b2;
     }
+    .order-card {
+    transition: 0.3s ease;
+}
+.order-card:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-3px);
+}
+.uniform-card {
+    border-left: 5px solid #0d6efd;
+}
+.uniform-card h6 {
+    border-bottom: 1px dashed #0d6efd;
+    padding-bottom: 4px;
+}
+
+</style>
+
+<style>
+    <style>
+    .order-card h4,
+    .uniform-card h5 {
+        font-size: 1.3rem; /* Thoda bada text */
+    }
+
+    .uniform-card h5.text-secondary {
+        font-size: 1.2rem;
+    }
+</style>
+
 </style>
 </style>
 

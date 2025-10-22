@@ -22,10 +22,9 @@
                             </li>
                         </ul>
                         <li class="list-logout">
-                            <a href="{{route('logout')}}" class="logout-btn">Log Out</a>
+                            <a href="{{ route('logout') }}" class="logout-btn">Log Out</a>
                         </li>
-                        
-                        
+                      
                     </div>
                 </div>
             </div>
